@@ -1,0 +1,38 @@
+root: landing-page
+format: jb-book
+parts:
+- caption: Preliminaries
+  chapters:
+  - file: 01-Intro-to-Python
+  - file: 02A-Git-Jupyter
+  - file: 02B-Pandas
+  - file: 04-Linear-Algebra-Refresher
+  - file: 03-Probability-and-Statistics-Refresher 
+- caption: Clustering
+  chapters:
+  - file: 05-Distances-Timeseries
+  - file: 06-Clustering-I-kmeans
+  - file: 07-Clustering-II-in-practice
+  - file: 08-Clustering-III-hierarchical
+  - file: 09-Clustering-IV-GMM-EM
+- caption: Classification
+  chapters:
+  - file: 13-Learning-From-Data
+  - file: 14-Classification-I-Decision-Trees
+  - file: 15-Classification-II-kNN
+  - file: 16-Classification-III-NB-SVM
+- caption: Dimensionality Reduction
+  chapters: 
+  - file: 10-Low-Rank-and-SVD
+  - file: 11-Dimensionality-Reduction-SVD-II
+- caption: Regression
+  chapters: 
+  - file: 17-Regression-I-Linear
+  - file: 18-Regression-II-Logistic
+  - file: 19-Regression-III-More-Linear
+- caption: Selected Topics
+  chapters:
+  - file: 20-Recommender-Systems
+  - file: 21-Networks-I
+  - file: 22-Networks-II-Centrality-Clustering
+  - file: 23-Gradient-Descent
