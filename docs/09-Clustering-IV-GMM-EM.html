@@ -1,0 +1,1198 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Gaussian Mixture Models &#8212; Tools for Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '09-Clustering-IV-GMM-EM';</script>
+    <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Learning From Data" href="13-Learning-From-Data.html" />
+    <link rel="prev" title="Hierarchical Clustering" href="08-Clustering-III-hierarchical.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="landing-page.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="landing-page.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02B-Pandas.html">Essential Tools: Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">Probability and Statistics Refresher</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Gaussian Mixture Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20-Recommender-Systems.html">Recommender Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23-Gradient-Descent.html">Gradient Descent</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/09-Clustering-IV-GMM-EM.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Gaussian Mixture Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-hard-to-soft-clustering">From Hard to Soft Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixtures-of-gaussians">Mixtures of Gaussians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-parameters-of-a-gmm">Learning the Parameters of a GMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilities-we-will-use">Probabilities We Will Use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-for-gmm-the-algorithm">Expectation Maximization for GMM – The Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiating-em-with-the-gaussian-model">Instantiating EM with the Gaussian Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-many-parameters-are-estimated">How many parameters are estimated?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="gaussian-mixture-models">
+<h1>Gaussian Mixture Models<a class="headerlink" href="#gaussian-mixture-models" title="Permalink to this heading">#</a></h1>
+<center>
+<a class="reference internal image-reference" href="_images/L09-MultivariateNormal.png"><img alt="_images/L09-MultivariateNormal.png" src="_images/L09-MultivariateNormal.png" style="width: 70%;" /></a>
+</center><section id="from-hard-to-soft-clustering">
+<h2>From Hard to Soft Clustering<a class="headerlink" href="#from-hard-to-soft-clustering" title="Permalink to this heading">#</a></h2>
+<p><strong>So far,</strong> we have seen how to cluster objects using <span class="math notranslate nohighlight">\(k\)</span>-means:</p>
+<ol class="arabic simple">
+<li><p>start with an initial set of cluster centers,</p></li>
+<li><p>assign each object to its closest cluster center, and</p></li>
+<li><p>recompute the centers of the new clusters.</p></li>
+<li><p>Repeat 2 <span class="math notranslate nohighlight">\(\rightarrow\)</span> 3 until convergence.</p></li>
+</ol>
+<p><strong>Note</strong> that in <span class="math notranslate nohighlight">\(k\)</span>-means, every object is assigned to a <strong>single</strong> cluster.</p>
+<p>This is called <strong>hard</strong> assignment.</p>
+<p>However, there may be cases were we either <strong>cannot</strong> use hard assignments or we do not <strong>want</strong> to do it!</p>
+<p>In particular, we may believe that the best description of the data is a set of <strong>overlapping</strong> clusters.</p>
+<p>For example:</p>
+<p>Imagine that we believe society consists of just <strong>two</strong> kinds of individuals: poor, or rich.</p>
+<p>Let’s think about how we might model society as a mixture of poor and rich, when viewed in terms of age.</p>
+<p>Say we sample 20,000 rich individuals, and 20,000 poor individuals, and get the following histograms:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># original inspiration for this example from</span>
+<span class="c1"># https://www.cs.cmu.edu/~./awm/tutorials/gmm14.pdf</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">37</span><span class="p">,</span> <span class="mi">45</span><span class="p">]),</span> <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">196</span><span class="p">,</span> <span class="mi">121</span><span class="p">]),</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">20000</span><span class="p">),</span>
+                   <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;poor&#39;</span><span class="p">,</span> <span class="s1">&#39;rich&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/2f073a78dbf70fd772dec5675da56ebecc52f3aceecb9bd7409f4e17a98934f9.png" src="_images/2f073a78dbf70fd772dec5675da56ebecc52f3aceecb9bd7409f4e17a98934f9.png" />
+</div>
+</div>
+<p>We find that ages of the poor set have mean 37 with standard deviation 14,</p>
+<p>while the ages of the rich set have mean 45 with standard deviation 11.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;poor&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span><span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;rich&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">70</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distributions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/1bd1c1a5e1e98c3f44a5486d586c301f70f6ebf1053eba515f95269120ac2166.png" src="_images/1bd1c1a5e1e98c3f44a5486d586c301f70f6ebf1053eba515f95269120ac2166.png" />
+</div>
+</div>
+<p>Clearly, viewed along the age dimension, there are two clusters that overlap.</p>
+<p>Furthermore, given some particular individual at a given age, say 25, we cannot say for sure which cluster they belong to.</p>
+<p>Rather, we will use <em>probability</em> to quantify our uncertainty about the cluster that any single individual belongs to.</p>
+<p>Thus, we could say that a given individual (“John Smith”, age 25) belongs to the <em>rich</em> cluster with some probability, and the <em>poor</em> cluster with some different probability.</p>
+<p>Naturally we expect the probabilities for John Smith to sum up to 1.</p>
+<p>This is called <strong>soft assignment,</strong> and a clustering using this principle is called <strong>soft clustering.</strong></p>
+<p>More formally, we say that an object can belong to each particular cluster with some probability, such that the sum of the probabilities adds up to 1 for each object.</p>
+<p>For example, assuming that we have two clusters <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span>, we can have that an object <span class="math notranslate nohighlight">\(x_1\)</span> belongs to <span class="math notranslate nohighlight">\(C_1\)</span> with probability <span class="math notranslate nohighlight">\(0.3\)</span> and to <span class="math notranslate nohighlight">\(C_2\)</span> with probability <span class="math notranslate nohighlight">\(0.7\)</span>.</p>
+<p>Note that the distribution over <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> only refers to object <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+<p>Thus, it is a <strong>conditional</strong> probability:</p>
+<div class="math notranslate nohighlight">
+\[P(C_1 \,|\, x_1) = 0.3\]</div>
+<div class="math notranslate nohighlight">
+\[P(C_2 \,|\, x_1) = 0.7\]</div>
+<p>And to return to our previous example:</p>
+<div class="math notranslate nohighlight">
+\[P(\text{rich}\,|\,\text{age 25}) + P(\text{poor}\,|\,\text{age 25}) = 1 \]</div>
+</section>
+<section id="mixtures-of-gaussians">
+<h2>Mixtures of Gaussians<a class="headerlink" href="#mixtures-of-gaussians" title="Permalink to this heading">#</a></h2>
+<p>We’re going to consider a particular model for each cluster: the Gaussian (or Normal) distribution.</p>
+<div class="math notranslate nohighlight">
+\[{\displaystyle f(x\;|\;\mu ,\sigma ^{2})={\frac {1}{\sqrt {2\sigma ^{2}\pi }}}\;exp({-{\frac {(x-\mu )^{2}}{2\sigma ^{2}}}}})\]</div>
+<center>
+<a class="reference internal image-reference" href="_images/L09-Normal_Distribution_PDF.png"><img alt="_images/L09-Normal_Distribution_PDF.png" src="_images/L09-Normal_Distribution_PDF.png" style="width: 60%;" /></a>
+</center><p>By <a href="//commons.wikimedia.org/wiki/User:Inductiveload" title="User:Inductiveload">Inductiveload</a> - self-made, Mathematica, Inkscape, Public Domain, <a href="https://commons.wikimedia.org/w/index.php?curid=3817954">https://commons.wikimedia.org/w/index.php?curid=3817954</a></p>
+<p>You can see that, for example, this is a reasonable model for the distribution of ages in each of the two population groups (rich and poor).</p>
+<p>In the case of the population example, we have a single feature: age.</p>
+<p>How do we use a Gaussian when we have multiple features?</p>
+<p>The answer is that we use a <strong>multivariate Gaussian.</strong></p>
+<center>
+<a class="reference internal image-reference" href="_images/L09-MultivariateNormal.png"><img alt="_images/L09-MultivariateNormal.png" src="_images/L09-MultivariateNormal.png" style="width: 70%;" /></a>
+</center><p>By <a href="//commons.wikimedia.org/wiki/User:Bscan" title="User:Bscan">Bscan</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" title="Creative Commons Zero, Public Domain Dedication">CC0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=25235145">https://commons.wikimedia.org/w/index.php?curid=25235145</a></p>
+<p>Now each point is a vector in <span class="math notranslate nohighlight">\(n\)</span> dimensions: <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, \dots, x_n)^T\)</span>.</p>
+<p>As a reminder, the multivariate Gaussian has a pdf (density) function of:</p>
+<div class="math notranslate nohighlight">
+\[f(x_{1},\ldots ,x_{n})={\frac  {1}{{\sqrt  {(2\pi )^{{n}}
+\Vert{\boldsymbol  \Sigma }\Vert}}}}\exp \left(-{\frac  {1}{2}}({{\mathbf  x}}-{{\boldsymbol  \mu }})^{{\mathrm  {T}}}{{\boldsymbol  \Sigma }}^{{-1}}({{\mathbf  x}}-{{\boldsymbol  \mu }})\right)
+\]</div>
+<p>Recall also that the shape of a multivariate Gaussian – the direction of its axes and the width along each axis – is determined by the <strong>covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span></strong>.</p>
+<p>The covariance matrix is the multidimensional analog of the variance.   It determines the extent to which vector components are correlated.</p>
+<p>For example, let’s say we are looking to classify cars based on their model year and miles per gallon (mpg).</p>
+<p>To illustrate a particular model, let us consider the properties of cars produced in the US, Europe, and Asia.</p>
+<!-- image credit: https://www.cs.cmu.edu/~./awm/tutorials/gmm14.pdf -->
+<center>
+<a class="reference internal image-reference" href="_images/L09-multivariate-example.png"><img alt="_images/L09-multivariate-example.png" src="_images/L09-multivariate-example.png" style="width: 90%;" /></a>
+</center><p>It seems that the data can be described (roughly) as a mixture of <strong>three</strong> <strong>multivariate</strong> Gaussian distributions.</p>
+<p>The general situation is that we assume the data was generated according to a collection of arbitrary Gaussian distributions.</p>
+<p>This is called a <strong>Gaussian Mixture Model.</strong></p>
+<p>Aka a “GMM”.</p>
+<!-- image credit: http://autonlab.org/_media/tutorials/gmm14.pdf  and
+https://web.iitd.ac.in/~sumeet/GMM_said_crv10_tutorial.pdf -->
+<div style = "float: left; width: 45%; text-align: center;">
+<img src="figs/L09-general-GMM.png" width="45%">
+Ellipsoid Representation
+</div>
+<div style = "float: left; width: 55%; text-align: center;">
+<img src="figs/L09-GMM-density.png"  style="width:55%">
+Density
+</div><p>A Gaussian Mixture Model is defined by:</p>
+<div class="math notranslate nohighlight">
+\[ w_i, \mu_i, \Sigma_i,\;\; i = 1,\dots,k\]</div>
+<p>Where <span class="math notranslate nohighlight">\(w_i\)</span> is the prior probability (weight) of the <span class="math notranslate nohighlight">\(i\)</span>th Gaussian, such that</p>
+<div class="math notranslate nohighlight">
+\[\sum_i w_i = 1,\;\;\; 0\leq w_i\leq 1.\]</div>
+<p>Intuitively, <span class="math notranslate nohighlight">\(w_i\)</span> tells us “what fraction of the data comes from Gaussian <span class="math notranslate nohighlight">\(i\)</span>.”</p>
+<p>Then the probability density at any point <span class="math notranslate nohighlight">\(x\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[ p(x) = \sum_i w_i \cdot \mathcal{N}(x\,|\, \mu_i, \Sigma_i) \]</div>
+</section>
+<section id="learning-the-parameters-of-a-gmm">
+<h2>Learning the Parameters of a GMM<a class="headerlink" href="#learning-the-parameters-of-a-gmm" title="Permalink to this heading">#</a></h2>
+<p>This model is all very well, but how do we learn the parameters of such a model, given some data?</p>
+<p>That is, assume we are told there are <span class="math notranslate nohighlight">\(k\)</span> clusters.</p>
+<p>For each <span class="math notranslate nohighlight">\(i\)</span> in <span class="math notranslate nohighlight">\(1, \dots, k\)</span>, how do we estimate the</p>
+<ul class="simple">
+<li><p>cluster probability <span class="math notranslate nohighlight">\(w_i\)</span>,</p></li>
+<li><p>cluster mean <span class="math notranslate nohighlight">\(\mu_i\)</span>, and</p></li>
+<li><p>cluster covariance  <span class="math notranslate nohighlight">\(\Sigma_i\)</span>?</p></li>
+</ul>
+<p>There are a variety of ways of finding the best <span class="math notranslate nohighlight">\((w_i, \mu_i, \Sigma_i)\;\;\;i = 1,\dots,k\)</span>.</p>
+<p>We will consider the most popular method:  <strong>Expectation Maximization (EM).</strong></p>
+<p>This is another famous algorithm, in the same “super-algorithm” league as <span class="math notranslate nohighlight">\(k\)</span>-means.</p>
+<p>EM is formulated using a probabilistic model for data.   It can solve a problem like:</p>
+<blockquote>
+<div><p>Given a set of data points and a parameter <span class="math notranslate nohighlight">\(k\)</span>, find the <span class="math notranslate nohighlight">\((w_i, \mu_i, \Sigma_i)\;\;i = 1,\dots,k\)</span> that <strong>maximizes the likelihood of the data</strong> assuming a GMM with those parameters.</p>
+</div></blockquote>
+<p>(It can also solve lots of other problems involving maximizing likelihood of data under a model.)</p>
+<p>However, note that problems of this type are often NP-hard.</p>
+<p>EM only guarantees that it will find a <strong>local</strong> optimum of the objective function.</p>
+</section>
+<section id="probabilities-we-will-use">
+<h2>Probabilities We Will Use<a class="headerlink" href="#probabilities-we-will-use" title="Permalink to this heading">#</a></h2>
+<p>At a high level, EM for the GMM problem has strong similarities to <span class="math notranslate nohighlight">\(k\)</span>-means.</p>
+<p>However, there are two main differences:</p>
+<ol class="arabic simple">
+<li><p>The <span class="math notranslate nohighlight">\(k\)</span>-means problem posits a <strong>hard</strong> assignment of objects to clusters, while GMM uses <strong>soft</strong> assignment.</p></li>
+<li><p>The parameters of the soft assignment are chosed based on a <strong>probability model</strong> for the data.</p></li>
+</ol>
+<p>Let’s start by reviewing the situation probabilistically.</p>
+<p>Assume a set data points  <span class="math notranslate nohighlight">\(x_1, x_2,\ldots,x_n\)</span> in  a <span class="math notranslate nohighlight">\(d\)</span> dimensional space.</p>
+<p>Also assume a set of <span class="math notranslate nohighlight">\(k\)</span> clusters <span class="math notranslate nohighlight">\(C_1, C_2, \ldots, C_k\)</span>.   Each cluster is assumed to follow a Gaussian distribution:</p>
+<div class="math notranslate nohighlight">
+\[ C_i \sim {\mathcal N}({\mathbf \mu_i},{\mathbf \Sigma_i}) \]</div>
+<p>We will be working with conditional probabilities.</p>
+<p>First,</p>
+<p><span class="math notranslate nohighlight">\(P(x_i\,|\,C_j)\)</span> is the probability of seeing data point <span class="math notranslate nohighlight">\(x_i\)</span> when sampling from cluster <span class="math notranslate nohighlight">\(C_j\)</span>.</p>
+<p>That is, it is the value of a Gaussian pdf at the point <span class="math notranslate nohighlight">\(x_i\)</span>, for a Gaussian with parameters <span class="math notranslate nohighlight">\(({\mathbf \mu_j},{\mathbf \Sigma_j})\)</span>.</p>
+<p>Clearly, if I give you the cluster parameters, it is a straightforward thing to compute this conditional probability.</p>
+<p>In our example: <span class="math notranslate nohighlight">\(P(\text{age 25}\,|\,\text{rich})\)</span></p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;poor&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span><span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;rich&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">70</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distributions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/d37cf30c20ee6c30d718aee8887b26e463e03a83399f734597544bdb4e0ad69f.png" src="_images/d37cf30c20ee6c30d718aee8887b26e463e03a83399f734597544bdb4e0ad69f.png" />
+</div>
+</div>
+<p>We will also work with <span class="math notranslate nohighlight">\(P(C_j\,|\,x_i)\)</span>.</p>
+<p>This is the probability that a data point at <span class="math notranslate nohighlight">\(x_i\)</span> was drawn from cluster <span class="math notranslate nohighlight">\(C_j\)</span>.</p>
+<p>That is, the data point could have been drawn from any of the <span class="math notranslate nohighlight">\(k\)</span> clusters – what is the probability it was drawn from <span class="math notranslate nohighlight">\(C_j\)</span> in particular?</p>
+<p>In our example: <span class="math notranslate nohighlight">\(P(\text{rich}\,|\,\text{age 25})\)</span></p>
+<p>How can we compute <span class="math notranslate nohighlight">\(P(C_j\,|\,x_i)\)</span>?</p>
+<p>Note that the reverse conditional probability is easy to compute – so this is a job for <strong>Bayes’ Rule!</strong></p>
+<div class="math notranslate nohighlight">
+\[ P(C_j\,|\,x_i)=\frac{P(x_i\,|\,C_j)}{P(x_i)}P(C_j)\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;poor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">14</span><span class="p">),</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span><span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;rich&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">70</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distributions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/3791578b0a78415a5fc7284a6670b3ba91e5250c3e2e57c97356da22202a172e.png" src="_images/3791578b0a78415a5fc7284a6670b3ba91e5250c3e2e57c97356da22202a172e.png" />
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[ P(\text{rich}\,|\,\text{age 25}) = \frac{\text{red}}{\text{red} \cdot P(\text{rich}) + \text{black} \cdot P(\text{poor})} \cdot P(\text{rich}) \]</div>
+<p>Finally, we will also need to estimate the parameters of each Gaussian, given some data.</p>
+<p>This is also an easy problem.</p>
+<p>For example, the best estimate for the mean of a Gaussian, given some data, is the <strong>average</strong> of the data points.</p>
+<p>Likewise, there is a simple formula for the covariance.</p>
+<p>These are called <strong>Maximum Likelihood Estimates</strong> (MLE) of the parameters.</p>
+<p>Often we use <span class="math notranslate nohighlight">\(\mathbf \theta\)</span> to denote “all the parameters of the model.”</p>
+<p>In this case <span class="math notranslate nohighlight">\(\mathbf \theta_i = (w_i, {\mathbf \mu_i},{\mathbf \Sigma_i})\)</span>.</p>
+</section>
+<section id="expectation-maximization-for-gmm-the-algorithm">
+<h2>Expectation Maximization for GMM – The Algorithm<a class="headerlink" href="#expectation-maximization-for-gmm-the-algorithm" title="Permalink to this heading">#</a></h2>
+<p>OK, now we have all the necessary pieces.   Here is the algorithm.</p>
+<p><strong>Initialization</strong>:</p>
+<p>Start with an initial set of clusters  <span class="math notranslate nohighlight">\(C_1^1, C_2^1, \ldots, C_k^1\)</span> and the initial probabilities that a random point belongs to each cluster <span class="math notranslate nohighlight">\(P(C_1), P(C_2), \ldots, P(C_k)\)</span>.</p>
+<p>The result will be sensitive to this choice, so a good (and fast) initialization procedure is <span class="math notranslate nohighlight">\(k\)</span>-means.</p>
+<!-- Source http://bengio.abracadoudou.com/lectures/gmm.pdf -->
+<center>
+<a class="reference internal image-reference" href="_images/L09-EM-E-step.png"><img alt="_images/L09-EM-E-step.png" src="_images/L09-EM-E-step.png" style="width: 60%;" /></a>
+</center><p><em>Step 1</em> (<strong>Expectation</strong>): For each point <span class="math notranslate nohighlight">\(x_i\)</span>, compute the probability that it belongs to each cluster <span class="math notranslate nohighlight">\(C_j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ P(C_j\,|\,x_i)=\frac{P(x_i\,|\,C_j)}{P(x_i)}\,P(C_j)\]</div>
+<p>(Thank you, Rev. Bayes!)</p>
+<p>This is called the <em>posterior</em> probability of <span class="math notranslate nohighlight">\(C_j\)</span> given <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>We know how to compute everything on the right.</p>
+<p>Note that: <span class="math notranslate nohighlight">\(P(x_i) = \sum_{j=1}^k P(x_i\,|\,C_j)\,P(C_j)\)</span></p>
+<!-- Source http://bengio.abracadoudou.com/lectures/gmm.pdf -->
+<center>
+<a class="reference internal image-reference" href="_images/L09-EM-M-step.png"><img alt="_images/L09-EM-M-step.png" src="_images/L09-EM-M-step.png" style="width: 60%;" /></a>
+</center><p><em>Step 2</em> <strong>(Maximization)</strong>: Using the cluster membership probabilities computed in the previous step, compute new clusters (parameters) and cluster probabilities.</p>
+<p>This is easy, using maximum likelihood estimates of the parameters <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[w_j = P(C_j) = \frac{1}{n}\sum_{i=1}^n P(C_j\,|\,x_i)\]</div>
+<p>Likewise, compute new parameters for the clusters <span class="math notranslate nohighlight">\(C_1, C_2, \ldots, C_n\)</span> using MLE.</p>
+<p><strong>Repeat</strong> Steps 1 and 2 until stabilization.</p>
+<p>Let’s pause for a minute and compare GMM/EM with <span class="math notranslate nohighlight">\(k\)</span>-means.</p>
+<p>GMM/EM:</p>
+<ol class="arabic simple">
+<li><p>Initialize randomly or using some rule</p></li>
+<li><p>Compute the probability that each point belongs in each cluster</p></li>
+<li><p>Update the clusters (weights, means and variances).</p></li>
+<li><p>Repeat 2-3 until convergence.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(k\)</span>-means:</p>
+<ol class="arabic simple">
+<li><p>Initialize randomly or using some rule</p></li>
+<li><p>Assign each point to a single cluster</p></li>
+<li><p>Update the clusters (means).</p></li>
+<li><p>Repeat 2-3 until convergence.</p></li>
+</ol>
+<p>From a practical standpoint, the main difference is that in GMM, data points do not belong to a <strong>single</strong> cluster, but have some probability of belonging to <strong>each</strong> cluster.</p>
+<p>In other words, GMM uses soft assignment.</p>
+<p>For that reason, GMM is also sometimes called <strong>soft <span class="math notranslate nohighlight">\(k\)</span>-means.</strong></p>
+<p>However, there is also an important conceptual difference.</p>
+<p>The GMM starts by making an <strong>explicit assumption</strong> about how the data were generated.</p>
+<p>It says: “the data came from a collection of multivariate Gaussians.”</p>
+<p>Note that we made no such assumption when we came up with the <span class="math notranslate nohighlight">\(k\)</span>-means problem.   In that case, we simply defined an objective function and declared that it was a good one.</p>
+<p>Nonetheless, it appears that we were making a sort of Gaussian assumption when we formulated the <span class="math notranslate nohighlight">\(k\)</span>-means objective function.   However, <strong>we didn’t explicitly state it.</strong></p>
+<p>The point is that because the GMM makes its assumptions explicit, we can</p>
+<ul class="simple">
+<li><p>examine them and think about whether they are valid</p></li>
+<li><p>replace them with different assumptions if we wish</p></li>
+</ul>
+<p>This sort of assumption is called a “prior” on the data.</p>
+<p>Philosophically, <strong>exposing</strong> this assumption is the heart of Bayesian statistics.</p>
+<p>For example, it is perfectly possible to replace the Gaussian assumption with some other probility distribution.   As long as we can estimate the parameters of such distributions from data (eg, have MLEs), we can use EM in that case as well.</p>
+</section>
+<section id="instantiating-em-with-the-gaussian-model">
+<h2>Instantiating EM with the Gaussian Model<a class="headerlink" href="#instantiating-em-with-the-gaussian-model" title="Permalink to this heading">#</a></h2>
+<p>If we model each cluster as a multi-dimensional Gaussian, then we can instatiate every part of
+the algorithm.</p>
+<p>This is the GMM (Gaussian Mixture Model) algorithm implemented in <em>sklearn.mixture</em> module.</p>
+<p>In that case <span class="math notranslate nohighlight">\(C_i\)</span> is represented by <span class="math notranslate nohighlight">\((\mu_i, \Sigma_i)\)</span> and in EM Step 1 we compute:</p>
+<div class="math notranslate nohighlight">
+\[ P(x_i|C_j) = \frac{1}{\sqrt{(2\pi)^d |\Sigma_j|}} exp (-\frac{1}{2}(x_i-\mu_j)^T\Sigma_j^{-1}(x_i-\mu_j))\]</div>
+<p>In EM Step 2, we estimate the parameters of the Gaussian using the appropriate MLEs:</p>
+<div class="math notranslate nohighlight">
+\[\mu_j'=\frac{\sum_{i=1}^n P(C_j|x_i) x_i}{\sum_{i=1}^n P(C_j|x_i)}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\Sigma_j = \frac{\sum_{i=1}^n P(C_j|x_i) (x_i-\mu_j')(x_i-\mu_j')^T}{\sum_{i=1}^n P(C_j|x_i)}\]</div>
+<p>A final statement about EM generally.   EM is a versatile algorithm that can be used in many other settings.  What is the main idea behind it?</p>
+<p>Notice that the problem definition only required that we find the clusters, <span class="math notranslate nohighlight">\(C_i\)</span>, meaning that we were to find the <span class="math notranslate nohighlight">\((\mu_i, \Sigma_i)\)</span>.</p>
+<p>However, the EM algorithm posited that we should find as well the <span class="math notranslate nohighlight">\(P(C_j|x_i)\)</span>, that is, the probability that each point is a member of each cluster.</p>
+<p>This is the true heart of what EM does.</p>
+<p>The idea is called “data augmentation.”</p>
+<p>By <strong>adding parameters</strong> to the problem, it actually finds a way to make the problem solvable!</p>
+<p>These parameters don’t show up in the solution.  They are sometimes called “hidden parameters.”</p>
+<p>So the basic strategy for using EM is: think up some <strong>additional</strong> information which, if you had it, would make the problem solvable.</p>
+<p>Figure out how to estimate the additional information from a solved problem, and put the two steps into a loop.</p>
+<p>Here is an example using <strong>GMM</strong>.</p>
+<p>We’re going to create two clusters, one spherical, and one highly skewed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of samples of larger component</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># C is a transfomation that will make a heavily skewed 2-D Gaussian</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">.4</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The covariance matrix of our skewed cluster will be:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">T</span><span class="nd">@C</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The covariance matrix of our skewed cluster will be:
+ [[2.9  0.67]
+ [0.67 0.17]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make the sample deterministic</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># now we construct a data matrix that has n_samples from the skewed distribution,</span>
+<span class="c1"># and n_samples/2 from a symmetric distribution offset to position (-4, 2)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">@</span> <span class="n">C</span><span class="p">),</span>
+          <span class="mf">.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/b997ea30b13845ca97ddf7253a2e7c155efb17d73c5b3b57facf8dcefd473e5d.png" src="_images/b997ea30b13845ca97ddf7253a2e7c155efb17d73c5b3b57facf8dcefd473e5d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a mixture of Gaussians with EM using two components</span>
+<span class="kn">import</span> <span class="nn">sklearn.mixture</span>
+<span class="n">gmm</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">mixture</span><span class="o">.</span><span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                                      <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> 
+                                      <span class="n">init_params</span> <span class="o">=</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bg&#39;</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Clustering via GMM&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c575d91a30724ec61c99ffa0a2f980fb31e512c0b6b20d94ab9fcc27d9c87887.png" src="_images/c575d91a30724ec61c99ffa0a2f980fb31e512c0b6b20d94ab9fcc27d9c87887.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">clus</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">clus</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; weight: </span><span class="si">{</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights_</span><span class="p">[</span><span class="n">clus</span><span class="p">]</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; mean: </span><span class="si">{</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[</span><span class="n">clus</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; cov: </span><span class="se">\n</span><span class="si">{</span><span class="n">gmm</span><span class="o">.</span><span class="n">covariances_</span><span class="p">[</span><span class="n">clus</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cluster 0:
+ weight: 0.667
+ mean: [-0.01895709 -0.00177815]
+ cov: 
+[[2.79024354 0.64760422]
+ [0.64760422 0.16476598]]
+
+Cluster 1:
+ weight: 0.333
+ mean: [-4.05403279  1.9822596 ]
+ cov: 
+[[0.464702   0.02385764]
+ [0.02385764 0.42700883]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn.cluster</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">init</span> <span class="o">=</span> <span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_init</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_pred_kmeans</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bg&#39;</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">y_pred_kmeans</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Clustering via $k$-means</span><span class="se">\n</span><span class="s1">$k$-means centers: red, GMM centers: black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ko&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/244d032a648602b0b90cfcb359897a54c08a7a195ae8b945521cecf23677b376.png" src="_images/244d032a648602b0b90cfcb359897a54c08a7a195ae8b945521cecf23677b376.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">clus</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">clus</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; center: </span><span class="si">{</span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">[</span><span class="n">clus</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cluster 0:
+ center: [0.28341737 0.06741478]
+
+Cluster 1:
+ center: [-3.88381453  1.56532945]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s construct <strong>overlapping</strong> clusters.  What will happen?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span>
+          <span class="mf">0.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">gmm</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">mixture</span><span class="o">.</span><span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
+<span class="n">y_pred_over</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bgrky&#39;</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">y_pred_over</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GMM for overlapping clusters</span><span class="se">\n</span><span class="s1">Note they have nearly the same center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/2e230008d8a1790943b1628f2809f02358f007ad19666bad6048352ec43e54bf.png" src="_images/2e230008d8a1790943b1628f2809f02358f007ad19666bad6048352ec43e54bf.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">clus</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">clus</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; weight: </span><span class="si">{</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights_</span><span class="p">[</span><span class="n">clus</span><span class="p">]</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; mean: </span><span class="si">{</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[</span><span class="n">clus</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># print(f&#39; cov: \n{gmm.covariances_[clus]}\n&#39;)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cluster 0:
+ weight: 0.507
+ mean: [0.00881243 0.00217253]
+
+Cluster 1:
+ weight: 0.493
+ mean: [ 0.00346227 -0.00250677]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-many-parameters-are-estimated">
+<h2>How many parameters are estimated?<a class="headerlink" href="#how-many-parameters-are-estimated" title="Permalink to this heading">#</a></h2>
+<p>Most of the parameters in the model are contained in the covariance matrices.</p>
+<p>In the most general case, for <span class="math notranslate nohighlight">\(k\)</span> clusters of points in <span class="math notranslate nohighlight">\(n\)</span> dimensions, there are <span class="math notranslate nohighlight">\(k\)</span> covariance matrices each of size <span class="math notranslate nohighlight">\(n \times n\)</span>.</p>
+<p>So we need <span class="math notranslate nohighlight">\(kn^2\)</span> parameters to specify this model.</p>
+<p>It can happen that you may not have enough data to estimate so many parameters.</p>
+<p>Also, it can happen that you believe that clusters should have some constraints on their shapes.</p>
+<p>Here is where the GMM assumptions become <strong>really</strong> useful.</p>
+<p>Let’s say you believe all the clusters should have the same shape, but the shape can be arbitrary.</p>
+<p>Then you only need to estimate <strong>one</strong> covariance matrix - just <span class="math notranslate nohighlight">\(n^2\)</span> parameters.</p>
+<p>This is specified by the GMM parameter <code class="docutils literal notranslate"><span class="pre">covariance_type='tied'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">C</span><span class="p">),</span>
+          <span class="mf">0.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">gmm</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">mixture</span><span class="o">.</span><span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;tied&#39;</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bgrky&#39;</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Covariance type = tied&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ok&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ec68bf0e7eaff4fbc8d448b68322fe75bb3787493c776f7cb55783e915cf0b32.png" src="_images/ec68bf0e7eaff4fbc8d448b68322fe75bb3787493c776f7cb55783e915cf0b32.png" />
+</div>
+</div>
+<p>Perhaps you believe in even more restricted shapes: all clusters should have their axes aligned with the coordinate axes.</p>
+<p>That is, clusters are not skewed.</p>
+<p>Then you only need to estimate the diagonals of the covariance matrices - just <span class="math notranslate nohighlight">\(kn\)</span> parameters.</p>
+<p>This is specified by the GMM parameter <code class="docutils literal notranslate"><span class="pre">covariance_type='diag'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">C</span><span class="p">),</span>
+          <span class="mf">0.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="n">gmm</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">mixture</span><span class="o">.</span><span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;diag&#39;</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bgrky&#39;</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;oc&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/8e084dc98429a85a1c61f33fbe1a22e27bcbc9934a640ac1c79e80cac6049011.png" src="_images/8e084dc98429a85a1c61f33fbe1a22e27bcbc9934a640ac1c79e80cac6049011.png" />
+</div>
+</div>
+<p>Finally, if you believe that all clusters should be round, then you only need to estimate the <span class="math notranslate nohighlight">\(k\)</span> variances.</p>
+<p>This is specified by the GMM parameter <code class="docutils literal notranslate"><span class="pre">covariance_type='spherical'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">C</span><span class="p">),</span>
+          <span class="mf">0.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="n">gmm</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">mixture</span><span class="o">.</span><span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;spherical&#39;</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bgrky&#39;</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;oc&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ace5619804de4111a82ef709f3ca39db35852c613f01e13c7bbab6ac8f4fe0bc.png" src="_images/ace5619804de4111a82ef709f3ca39db35852c613f01e13c7bbab6ac8f4fe0bc.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08-Clustering-III-hierarchical.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hierarchical Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="13-Learning-From-Data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Learning From Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-hard-to-soft-clustering">From Hard to Soft Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixtures-of-gaussians">Mixtures of Gaussians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-parameters-of-a-gmm">Learning the Parameters of a GMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilities-we-will-use">Probabilities We Will Use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-for-gmm-the-algorithm">Expectation Maximization for GMM – The Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiating-em-with-the-gaussian-model">Instantiating EM with the Gaussian Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-many-parameters-are-estimated">How many parameters are estimated?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Crovella
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

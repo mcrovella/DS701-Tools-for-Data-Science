@@ -1,0 +1,2117 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Probability and Statistics Refresher &#8212; Tools for Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03-Probability-and-Statistics-Refresher';</script>
+    <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Distances and Timeseries" href="05-Distances-Timeseries.html" />
+    <link rel="prev" title="Linear Algebra Refresher" href="04-Linear-Algebra-Refresher.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="landing-page.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="landing-page.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02B-Pandas.html">Essential Tools: Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability and Statistics Refresher</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-Clustering-IV-GMM-EM.html">Gaussian Mixture Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20-Recommender-Systems.html">Recommender Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23-Gradient-Descent.html">Gradient Descent</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03-Probability-and-Statistics-Refresher.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probability and Statistics Refresher</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-and-conditioning">Probability and Conditioning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterizing-random-variables">Characterizing Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-and-high-variability">Low and High Variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-random-variables">Important Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-binary-trials">Independent Binary Trials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometric-distribution">The Geometric Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-distribution">The Exponential Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uniform-distribution">The Uniform Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gaussian-distribution">The Gaussian Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heavy-tails">Heavy Tails</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pareto-distribution">The Pareto Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate Random Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables-as-vectors">Random Variables as Vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multivariate-gaussian">The Multivariate Gaussian</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-rule">Bayes’ Rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">Confidence Intervals for the Mean</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format=&#39;retina&#39;
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display_html</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span><span class="p">,</span> <span class="n">HTML</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="probability-and-statistics-refresher">
+<h1>Probability and Statistics Refresher<a class="headerlink" href="#probability-and-statistics-refresher" title="Permalink to this heading">#</a></h1>
+<p>Today we’ll review the essentials of probability and statistics that we’ll need for this course.</p>
+<section id="probability">
+<h2>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h2>
+<p>What is probability?</p>
+<p>We all have a general sense of what is meant by probability.</p>
+<p>However, when we look closely, we see that there are at least two different ways to interpret the notion of “the probability of an event.”</p>
+<p>The first view is summarized by this quote from the first pages of a probability textbook:</p>
+<blockquote>
+<div><p>Suppose an experiment under consideration can be repeated any number of times, so that, in principle at least, we can produce a whole series of “independent trials under identical conditions” in each of which, depending on chance, a particular event <span class="math notranslate nohighlight">\(A\)</span> of interest either occurs or does not occur.</p>
+</div></blockquote>
+<blockquote>
+<div><p>Let <span class="math notranslate nohighlight">\(n\)</span> be the total number of experiments in the whole series of trials, and let <span class="math notranslate nohighlight">\(n(A)\)</span> be the number of experiement in which <span class="math notranslate nohighlight">\(A\)</span> occurs. Then the ratio <span class="math notranslate nohighlight">\(n(A)/n\)</span> is called the relative frequency of the event <span class="math notranslate nohighlight">\(A.\)</span></p>
+</div></blockquote>
+<blockquote>
+<div><p>It turns out that the relative frequencies observed in different series of trials are virtually the same for large <span class="math notranslate nohighlight">\(n,\)</span> clustering about some constant <span class="math notranslate nohighlight">\(P[A],\)</span> which is called the <strong>probability of the event <span class="math notranslate nohighlight">\(A.\)</span></strong></p>
+</div></blockquote>
+<p>Y. A. Rozanov. Probability Theory: A Concise Course. Dover Publications, Inc., 1969.</p>
+<p>This is called the <strong>frequentist</strong> intepretation of probability.</p>
+<p>You can think of it as treating each event as a sort of idealized coin-flip.</p>
+<p>The key idea in the above definition is to be able to:</p>
+<blockquote>
+<div><p>produce a whole series of “independent trials under identical conditions”</p>
+</div></blockquote>
+<p>However, we often use probability in another setting.</p>
+<p>On a visit to the doctor, we may ask, “What is the probability that I have disease X?”</p>
+<p>Or, before digging a well, we may ask, “What is the probability that I will strike water?”</p>
+<p>These questions are <strong>totally incompatible</strong> with the notion of “independent trials under identical conditions”!</p>
+<p>Rather, it seems that we are really asking:</p>
+<blockquote>
+<div><p>“How certain should I be that I have disease X?”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“How certain should I be that I will strike water?”</p>
+</div></blockquote>
+<p>In this setting, we are using probability to encode “degree of belief” or a “state of knowledge.”</p>
+<p>This is called the <strong>Bayesian</strong> interpretation of probability.</p>
+<p>Somewhat amazingly, it turns out that whichever way we think of probability (frequentist or Bayesian),</p>
+<p>… the <strong>rules</strong> that we use for computing probabilities should be <strong>exactly the same.</strong></p>
+<p>In most cases in this course we will use frequentist language and examples when talking about probability.</p>
+<p>But in point of fact, it’s often really a “state of knowledge” that we are really talking about when we use probability models in this course.</p>
+<blockquote>
+<div><p>A thing appears random only through the incompleteness of our knowledge</p>
+</div></blockquote>
+<p>– Spinoza</p>
+<p>In other words, we use probability as an abstraction that <strong>hides details</strong> we don’t want to deal with.</p>
+<p>(This is a time-honored use of probability.)</p>
+<p>So it’s important to recognize that both frequentist and Bayesian views are <strong>valid</strong> and <strong>useful</strong> views of probability.</p>
+<center>
+<a class="reference internal image-reference" href="_images/Bayes-Frequentism.png"><img alt="_images/Bayes-Frequentism.png" src="_images/Bayes-Frequentism.png" style="width: 500px;" /></a>
+</center><p>So, now, let’s talk about rules for computing probabilities.</p>
+<section id="probability-and-conditioning">
+<h3>Probability and Conditioning<a class="headerlink" href="#probability-and-conditioning" title="Permalink to this heading">#</a></h3>
+<p><strong>Definition.</strong>  Consider a set <span class="math notranslate nohighlight">\(\Omega\)</span>, referred to as the
+<em>sample space.</em>  A <em>probability
+measure</em> on <span class="math notranslate nohighlight">\(\Omega\)</span> is a function <span class="math notranslate nohighlight">\(P[\cdot]\)</span> defined on all the subsets of <span class="math notranslate nohighlight">\(\Omega\)</span> (the
+<em>events</em>) such that:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(P[\Omega] = 1\)</span></p></li>
+<li><p>For any event <span class="math notranslate nohighlight">\(A \subset \Omega\)</span>, <span class="math notranslate nohighlight">\(P[A] \geq 0.\)</span></p></li>
+<li><p>For any events <span class="math notranslate nohighlight">\(A, B \subset \Omega\)</span> where <span class="math notranslate nohighlight">\(A \cap B =
+ \emptyset\)</span>, <span class="math notranslate nohighlight">\(P[A \cup B] = P[A] + P[B]\)</span>.</p></li>
+</ol>
+<p>Often we want to ask how a probability measure changes if we restrict the sample space to be some subset of <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+<p>This is called <strong>conditioning.</strong></p>
+<p><strong>Definition.</strong> The <em>conditional probability</em> of an event <span class="math notranslate nohighlight">\(A\)</span> given that
+event <span class="math notranslate nohighlight">\(B\)</span> (having positive probability) is known to occur, is</p>
+<div class="math notranslate nohighlight">
+\[ P[A|B] = \frac{P[A \cap B]}{P[B]}  \mbox{ where } P[B] &gt; 0 \]</div>
+<p>The function <span class="math notranslate nohighlight">\(P[\cdot|B]\)</span> is a probability measure over the sample space
+<span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>Note that in the expression <span class="math notranslate nohighlight">\(P[A|B]\)</span>, <span class="math notranslate nohighlight">\(A\)</span> is random but <span class="math notranslate nohighlight">\(B\)</span> is fixed.</p>
+<p>Now if <span class="math notranslate nohighlight">\(B\)</span> is a proper subset of <span class="math notranslate nohighlight">\(\Omega,\)</span> then <span class="math notranslate nohighlight">\(P[B] &lt; 1\)</span>.   So <span class="math notranslate nohighlight">\(P[\cdot|B]\)</span> is a rescaling of the quantity <span class="math notranslate nohighlight">\(P[A\cap B]\)</span> so that <span class="math notranslate nohighlight">\(P[B|B] = 1.\)</span></p>
+<p>The sample space <span class="math notranslate nohighlight">\(\Omega\)</span> may be continuous or discrete, and bounded or unbounded.</p>
+<p><strong>Independent Events.</strong></p>
+<p><strong>Definition.</strong> Two events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are <strong>independent</strong> if <span class="math notranslate nohighlight">\(P[A\cap B] = P[A] \cdot P[B].\)</span></p>
+<p>This is exactly the same as saying that <span class="math notranslate nohighlight">\(P[A|B] = P[A].\)</span></p>
+<p>So we can see that the intuitive notion of independence is that “if one event occurs, that does not change the probability of the other event.”</p>
+</section>
+</section>
+<section id="random-variables">
+<h2>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
+<p>We are usually interested in numeric values associated with events.</p>
+<p>When a random event has a numeric value we refer to it as a random variable.</p>
+<p>Notationally, we use CAPITAL LETTERS for random variables and lowercase for non-random quantities.</p>
+<p>To collect information about what values of the random variable are more probable than others, we have some more definitions.</p>
+<p><strong>Definition.</strong> The cumulative distribution function (CDF) F for a random
+variable <span class="math notranslate nohighlight">\(X\)</span> is equal to the probability measure for the event that
+consists of all possible outcomes with a value of the random variable <span class="math notranslate nohighlight">\(X\)</span>
+less than or equal to <span class="math notranslate nohighlight">\(x\)</span>, that is, <span class="math notranslate nohighlight">\(F(x) = P[X \leq x].\)</span></p>
+<p><strong>Example.</strong>  Consider the roll of a single die.  The random variable here is the number of points showing.  What is the CDF?</p>
+<a class="reference internal image-reference" href="_images/single-die.png"><img alt="Die" src="_images/single-die.png" style="width: 100px;" /></a>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="mf">.08</span><span class="p">],</span> <span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="mi">6</span><span class="p">],</span><span class="s1">&#39;-b&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;ob&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;ob&#39;</span><span class="p">,</span> <span class="n">fillstyle</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Distribution Function (CDF)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$ (Number of points showing)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X\leq x]$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/219188f40c988854b326f219ee5a6a757459ee6aca5e0e7230fe0fdc998f0820.png" src="_images/219188f40c988854b326f219ee5a6a757459ee6aca5e0e7230fe0fdc998f0820.png" />
+</div>
+</div>
+<p>Now, consider this CDF of some random variable:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Distribution Function (CDF)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X\leq x]$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/2e3cbfa9bebd0dba0dba1dcb0f4128ef79f18f1c15231ceb75f818f419dec73d.png" src="_images/2e3cbfa9bebd0dba0dba1dcb0f4128ef79f18f1c15231ceb75f818f419dec73d.png" />
+</div>
+</div>
+<p>What does it mean when the slope is steeper for some <span class="math notranslate nohighlight">\(x\)</span> values?</p>
+<p>The slope tells us how likely values are in a particular range.</p>
+<p>This is important enough that we define a function to capture it.</p>
+<p><strong>Definition.</strong> The <em>probability density function</em> (pdf) is the derivative of the CDF, when that is defined.</p>
+<div class="math notranslate nohighlight">
+\[ f(x) = \frac{dF(x)}{dx}.\]</div>
+<p>Often we will go the other way as well:</p>
+<div class="math notranslate nohighlight">
+\[ F(x) = \int_{-\infty}^{x} f(t)\; dt \]</div>
+<p>You should be able to see that:</p>
+<div class="math notranslate nohighlight">
+\[ \int_{-\infty}^{+\infty} f(x)\; dx = 1 \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[      f(x) \geq 0 \]</div>
+<p>Now, for a discrete random variable, the CDF is not differentiable (because the CDF is a step function).</p>
+<p>For the PDF of discrete RVs, we simply plot the probability function of
+each value.  That is, we plot <span class="math notranslate nohighlight">\(P[X = x]\)</span> for the various values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Another way to think of the PDF is that it consists of impulses at the
+points of discontinuity of the CDF.</p>
+<p>For our example of the single die:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">6</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mf">6.</span><span class="p">],</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">6.</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;x (Number of points showing)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X = x]$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/aa74e2468f1a07926d535197e3eeac59ac5d9bfb4bf733a74caba8536f3ae4fb.png" src="_images/aa74e2468f1a07926d535197e3eeac59ac5d9bfb4bf733a74caba8536f3ae4fb.png" />
+</div>
+</div>
+</section>
+<section id="characterizing-random-variables">
+<h2>Characterizing Random Variables<a class="headerlink" href="#characterizing-random-variables" title="Permalink to this heading">#</a></h2>
+<p><strong>Definition.</strong> The <em>expected value</em> <span class="math notranslate nohighlight">\(E[X]\)</span> of a random
+variable <span class="math notranslate nohighlight">\(X\)</span> is the probability-weighted sum or integral of all possible values of
+the R.V.</p>
+<p>For a discrete random variable, this is:</p>
+<div class="math notranslate nohighlight">
+\[ E[X] \equiv \sum_{-\infty}^{+\infty} x\; P[X=x] \]</div>
+<p>and for a continuous random variable with pdf <span class="math notranslate nohighlight">\(p():\)</span></p>
+<div class="math notranslate nohighlight">
+\[ E[X] \equiv \int_{-\infty}^{+\infty} x\; p(x)\; dx \]</div>
+<p>The expected value is also called the average or the mean, although we
+prefer to reserve those terms for empirical statistics (actual
+measurements, not idealizations like these formulas).</p>
+<p>The expected value is in some sense the “center of mass” of the random
+variable.   It is often denoted <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>The mean is usually a quite useful characterization of the random variable.</p>
+<p>However, be careful: in some cases, the mean may not be very informative, or important.</p>
+<p>In some cases a
+random variable may not ever take on the mean as a possible value.  (Consider again the single die, whose mean is 3.5)</p>
+<p>In other cases the notion of average isn’t useful, as for the person
+with their head in the oven and feet in the freezer who claims “on
+average I feel fine.”</p>
+<p>In other words, the mean may not be very informative when
+observations are highly variable.</p>
+<p>In fact, the variability of random quantities is crucially important to characterize.</p>
+<p>For this we use <strong>variance,</strong> the mean squared difference of the random variable from its mean.</p>
+<p><strong>Definition.</strong> The variance of a random variable <span class="math notranslate nohighlight">\(X\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[ \mbox{Var} (X) \equiv E[(X - E[X])^2]. \]</div>
+<p>For example, given a discrete R.V. with <span class="math notranslate nohighlight">\(E[X] = \mu\)</span> this would be:</p>
+<div class="math notranslate nohighlight">
+\[ \mbox{Var} (X) = \sum_{x=-\infty}^{+\infty} (x-\mu)^2\; P[X=x]. \]</div>
+<p>We use the symbol <span class="math notranslate nohighlight">\(\sigma^2\)</span> to denote variance.</p>
+<p>The units of variance are the square of the units of the mean.</p>
+<p>So to compare variance and mean in the same units, we take the square root of the variance.</p>
+<p>This is called the <strong>standard deviation</strong> and is denoted <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>Next, let’s recall the case of the Tesla and Yelp returns from the last lecture:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+
+<span class="n">stocks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;YELP&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">stocks</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2014-01-01&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;2014-12-31&#39;</span><span class="p">,</span> <span class="n">progress</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+
+<span class="n">rets</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">rets</span><span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;YELP&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" src="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" />
+</div>
+</div>
+<p>Treating these two timeseries as random variables, we are interested in how they vary <strong>together</strong>.</p>
+<p>This is captured by the concept of <strong>covariance.</strong></p>
+<p><strong>Definition.</strong> For two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, their <em>covariance</em> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\text{Cov}(X,Y) = E\left[(X-\mu_X)(Y-\mu_Y)\right]\]</div>
+<p>If covariance is positive, this tells us that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> tend to be both above their means together, and both below their means together.</p>
+<p>We will often denote <span class="math notranslate nohighlight">\(\text{Cov}(X,Y)\)</span> as <span class="math notranslate nohighlight">\(\sigma_{XY}\)</span></p>
+<p>If we are interested in asking “how similar” are two random variables, we want to normalize covariance by the amount of variance shown by the random variables.</p>
+<p>The tool for this purpose is <strong>correlation</strong>, ie, normalized covariance:</p>
+<div class="math notranslate nohighlight">
+\[\rho(X,Y) = \frac{E\left[(X-\mu_X)(Y-\mu_Y)\right]}{\sigma_X \sigma_Y}\]</div>
+<p><span class="math notranslate nohighlight">\(\rho(X, Y)\)</span> takes on values between -1 and 1.</p>
+<p>If <span class="math notranslate nohighlight">\(\rho(X, Y) = 0\)</span> then <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <strong>uncorrelated</strong>.   Note that this is not the same thing as being independent!</p>
+<p><span class="math notranslate nohighlight">\(\rho\)</span> is sometimes called “Pearson <span class="math notranslate nohighlight">\(r\)</span>” after Karl Pearson who popularized it.</p>
+<p>Let’s look at our example again:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rets</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">rets</span><span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;YELP&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" src="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TSLA</th>
+      <th>YELP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TSLA</th>
+      <td>3.830274</td>
+      <td>3.187969</td>
+    </tr>
+    <tr>
+      <th>YELP</th>
+      <td>3.187969</td>
+      <td>139.851859</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In the case of Tesla (<span class="math notranslate nohighlight">\(X\)</span>) and Yelp (<span class="math notranslate nohighlight">\(Y\)</span>) above, we find that</p>
+<div class="math notranslate nohighlight">
+\[\text{Cov}(X,Y) = 9.53\]</div>
+<p>Is that a big number? small number?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TSLA</th>
+      <th>YELP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TSLA</th>
+      <td>1.000000</td>
+      <td>0.137742</td>
+    </tr>
+    <tr>
+      <th>YELP</th>
+      <td>0.137742</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>So:</p>
+<div class="math notranslate nohighlight">
+\[\rho(X,Y) = 0.137\]</div>
+<p>Apparently, not a big number!</p>
+</section>
+<section id="low-and-high-variability">
+<h2>Low and High Variability<a class="headerlink" href="#low-and-high-variability" title="Permalink to this heading">#</a></h2>
+<p>Historically, most sources of random variation that have concerned
+statisticians are instances of low variability.</p>
+<p>The original roots of
+probability in the study of games of chance, and later in the study of
+biology and medicine, have mainly studied objects with low variability.</p>
+<p>(Note that by “low variability” I don’t mean that such variability is unimportant.)</p>
+<p>Some examples of random variation in this category are:</p>
+<ul class="simple">
+<li><p>the heights of adult humans</p></li>
+<li><p>the number of trees per unit area in a mature forest</p></li>
+<li><p>the sum of 10 rolls of a die</p></li>
+<li><p>the time between emission of subatomic particles from a radioactive material.</p></li>
+</ul>
+<p>In each of these cases, there are a range of values that are
+“typical,” and there is a clear threshold above what is typical, that essentially never occurs.</p>
+<p>On the other hand, there are some situations in which variability is
+quite different.</p>
+<p>In these cases, there is no real “typical” range of
+values, and arbitrarily large values can occur with non-negligible
+frequency.</p>
+<p>Some examples in this category are</p>
+<ul class="simple">
+<li><p>the distribution of wealth among individuals in society</p></li>
+<li><p>the sizes of human settlements</p></li>
+<li><p>the areas burnt in forest fires</p></li>
+<li><p>the runs of gains and losses in various financial markets over time</p></li>
+<li><p>and the number of collaborators a scholar has over her lifetime.</p></li>
+</ul>
+<blockquote>
+<div><p>The banking system (betting against rare events) just lost [more than] 1
+Trillion dollars (so far) on a single error, more than was ever earned
+in the history of banking.</p>
+</div></blockquote>
+<p>Nassim Nicholas Taleb, September 2008</p>
+<p><img alt="" src="_images/derivatives-portfolio-variation.png" /></p>
+<p>An example of a run of observations showing high variability.   This figure shows the daily
+variations in a derivatives portfolio over the timeframe 1988-2008.
+About 99% of the variation over the 20 years occurs in a single day
+(the day the European Monetary System collapsed).</p>
+</section>
+<section id="important-random-variables">
+<h2>Important Random Variables<a class="headerlink" href="#important-random-variables" title="Permalink to this heading">#</a></h2>
+<p>Now we will review certain random variables that come up over and over again in typical situations.</p>
+<section id="independent-binary-trials">
+<h3>Independent Binary Trials<a class="headerlink" href="#independent-binary-trials" title="Permalink to this heading">#</a></h3>
+<p>Here is our canonical experiment: flipping a weighted coin.</p>
+<p>The coin
+comes up “heads” (aka “success”) with probability <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>We use the standard notation that the corresponding probability (“tails”, “failure”) is denoted <span class="math notranslate nohighlight">\(q\)</span>
+(i.e., <span class="math notranslate nohighlight">\(q = 1-p\)</span>).</p>
+<p>These are called <em>Bernoulli trials</em>.</p>
+<p>One can think of each trial as a timestep so these are about <em>discrete
+time</em>.</p>
+<p>Notice that by definition, Bernoulli trials are <strong>independent events.</strong></p>
+<p>Now we will extend this notion to continuous time.</p>
+<p>To start with, imagine that you flip the coin once per second.</p>
+<p>So we expect to observe <span class="math notranslate nohighlight">\(p\)</span> successes per second.</p>
+<p>Now, imagine that you “speed up” the coin flipping so that instead of flipping a coin once per second,
+you flip it <span class="math notranslate nohighlight">\(m &gt; 1\)</span> times per second,</p>
+<p>… and you simultaneously decrease the
+probability of success to <span class="math notranslate nohighlight">\(p/m\)</span>.</p>
+<p>Then you expect the same number of
+successes per second (i.e., <span class="math notranslate nohighlight">\(p\)</span>) … but events can happen at finer time
+intervals.</p>
+<p>Now imagine the limit as <span class="math notranslate nohighlight">\(m \rightarrow \infty\)</span>.</p>
+<p>This is a
+mathematical abstraction in which</p>
+<ul class="simple">
+<li><p>an event can happen at <em>any</em> time instant</p></li>
+<li><p>an event at any time instant is equally likely</p></li>
+<li><p>and an event at any time instant is independent of any other time instant (it’s still a coin with no memory).</p></li>
+</ul>
+<p>In this setting, we can think of events happening at some <em>rate</em> <span class="math notranslate nohighlight">\(\lambda\)</span> that is
+equal to <span class="math notranslate nohighlight">\(p\)</span> per second.</p>
+<p>Note that <span class="math notranslate nohighlight">\(\lambda\)</span> has units of inverse time, e.g., sec<span class="math notranslate nohighlight">\(^{-1}\)</span>.</p>
+<p>Thus we have defined two kinds of coin-flipping:</p>
+<ul class="simple">
+<li><p>in discrete time (Bernoulli trials with success probability <span class="math notranslate nohighlight">\(p\)</span>)</p></li>
+<li><p>and in continuous time (with success rate <span class="math notranslate nohighlight">\(\lambda\)</span>)</p></li>
+</ul>
+<p>For each of these two cases (discrete and continuous time) there are two questions we can ask:</p>
+<ol class="arabic simple">
+<li><p>Given that an event has just occured, how long until the next
+success?</p></li>
+<li><p>In a fixed number of trials or amount of time, how many events
+occur?</p></li>
+</ol>
+<p>These four cases define four commonly-used random variables.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p># Trials or Time Until Event</p></th>
+<th class="head text-center"><p>Number of Events in Fixed Time</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Discrete Trials</strong></p></td>
+<td class="text-center"><p>Geometric</p></td>
+<td class="text-center"><p>Binomial</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Continuous Rate</strong></p></td>
+<td class="text-center"><p>Exponential</p></td>
+<td class="text-center"><p>Poisson</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each one has an associated distribution.</p>
+<section id="the-geometric-distribution">
+<h4>The Geometric Distribution<a class="headerlink" href="#the-geometric-distribution" title="Permalink to this heading">#</a></h4>
+<p>The geometric distribution concerns Bernoulli trials.</p>
+<p>It answers the question: “what is the probability it takes <span class="math notranslate nohighlight">\(k\)</span> trials to obtain the first success?”</p>
+<p>Its PDF is given by:</p>
+<div class="math notranslate nohighlight">
+\[ P[X = k] = p(1-p)^{k-1}. \;\; k \geq 1\]</div>
+<p>Its mean is <span class="math notranslate nohighlight">\(\mu = \frac{1}{p}\)</span> and its variance is <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1-p}{p^2}\)</span>.</p>
+<p>Its pdf looks like:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">geom</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">geom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.995</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;geom pmf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Geometric PDF, $p$ = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X = k]$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/f368328824e5bc78c4441fe8cfecfe1a81f357bc661c83844e0cda281d7b0f3b.png" src="_images/f368328824e5bc78c4441fe8cfecfe1a81f357bc661c83844e0cda281d7b0f3b.png" />
+</div>
+</div>
+</section>
+<section id="the-binomial-distribution">
+<h4>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this heading">#</a></h4>
+<p>The Binomial also concerns Bernoulli trials.</p>
+<p>In this experiment there are precisely <span class="math notranslate nohighlight">\(N\)</span> coin flips, and <span class="math notranslate nohighlight">\(p\)</span> is still
+the probability of a success.</p>
+<p>Now we ask: what is the probability there
+will be <span class="math notranslate nohighlight">\(k\)</span> successes?</p>
+<p>For any <strong>given</strong> sequence of <span class="math notranslate nohighlight">\(k\)</span> successes and <span class="math notranslate nohighlight">\(N-k\)</span> failures, the probability is <span class="math notranslate nohighlight">\(p^k \;(1-p)^{N-k}\)</span>.</p>
+<p>But there are many different such sequences: <span class="math notranslate nohighlight">\(\binom{N}{k}\)</span> of them in fact.</p>
+<p>So this distribution is <span class="math notranslate nohighlight">\(P[X=k] = \binom{N}{k}\; p^k\; (1-p)^{N-k}.\)</span></p>
+<p>Its mean is <span class="math notranslate nohighlight">\(pN\)</span>, and its variance is <span class="math notranslate nohighlight">\(pqN\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">binom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">binom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.9995</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;binom pmf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Binomial PDF, $p$ = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">, $N$ = 10&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X = k]$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/b03ff12701dd23c1d0462cf924ad912722a7c358ae3935c5577baba041cd5ba9.png" src="_images/b03ff12701dd23c1d0462cf924ad912722a7c358ae3935c5577baba041cd5ba9.png" />
+</div>
+</div>
+</section>
+<section id="the-exponential-distribution">
+<h4>The Exponential Distribution<a class="headerlink" href="#the-exponential-distribution" title="Permalink to this heading">#</a></h4>
+<p>Now we shift to a situation where successes occur at a fixed <strong>rate.</strong></p>
+<p>The Exponential random variable is the analog of the geometric in the continuous case,
+<em>i.e.,</em> the situation in which a success happens at some rate
+<span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>This RV can be thought of as measuring the <strong>time</strong> until a success occurs.</p>
+<p>Its pdf is:</p>
+<div class="math notranslate nohighlight">
+\[ p(x) = \lambda e^{- \lambda x}\]</div>
+<p>The mean is <span class="math notranslate nohighlight">\(1/\lambda\)</span>, and the variance is <span class="math notranslate nohighlight">\(1/\lambda^2\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">expon</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">),</span> <span class="n">expon</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.995</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expon pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exponential PDF, $\lambda$ = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">14</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/5c5f89f23ad14bfeb86faa604b0968f78a44cefba84f667cb276c432b7d9f178.png" src="_images/5c5f89f23ad14bfeb86faa604b0968f78a44cefba84f667cb276c432b7d9f178.png" />
+</div>
+</div>
+<p>Notice how the Exponential is the <strong>continuous analog</strong> of the Geometric:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span> 
+<span class="n">lam</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">lam</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">expon</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lam</span><span class="p">),</span> <span class="n">expon</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.995</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lam</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lam</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exponential&#39;</span><span class="p">)</span>
+<span class="n">xg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">geom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.995</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">xg</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xg</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xg</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">ms</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Geometric&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Geometric and Exponential CDFs&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\lambda = 0.3; \;\;\; p = 1-e^{-\lambda} =$&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X \leq x]$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/54937bb4d83e35c88a6eb0f7ac38e251f41f263ad9c340e5a3c6e1c777f9d06c.png" src="_images/54937bb4d83e35c88a6eb0f7ac38e251f41f263ad9c340e5a3c6e1c777f9d06c.png" />
+</div>
+</div>
+</section>
+<section id="the-poisson-distribution">
+<h4>The Poisson Distribution<a class="headerlink" href="#the-poisson-distribution" title="Permalink to this heading">#</a></h4>
+<p>When we ask the question</p>
+<p>“How many successes occur in a fixed amount of time?”,</p>
+<p>…we get the Poisson distribution.</p>
+<p>The Poisson Distribution is the limiting form of binomial, when the
+number of trials goes to infinity, happening at some rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ P[k \mbox{ successes in time } T] = (\lambda T)^k \frac{e^{- \lambda T}}{k!}\]</div>
+<p>It answers the question: when events happen indepdently at some fixed rate, how many will occur in a given fixed interval?</p>
+<p>Its mean is <span class="math notranslate nohighlight">\(\lambda T\)</span> and its variance is <span class="math notranslate nohighlight">\(\lambda T\)</span> as well.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">poisson</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="n">poisson</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.9995</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span>
+<span class="c1"># plt.ylim([0,1])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymax</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;poisson pmf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Poisson PDF.  $\lambda T$ = </span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;P[X = k]&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/1f89ed03d2fda95197740dbffff521b43bbb9dbc85066715291647ed57954e60.png" src="_images/1f89ed03d2fda95197740dbffff521b43bbb9dbc85066715291647ed57954e60.png" />
+</div>
+</div>
+<p>The Poisson distribution has an interesting role in our perception of randomness (which you can read more about <a class="reference external" href="http://www.empiricalzeal.com/2012/12/21/what-does-randomness-look-like/#more-2450">here</a>).</p>
+<p>The classic example comes from history.  From the above site:</p>
+<blockquote>
+<div><p>In 1898 Ladislaus Bortkiewicz, a Russian statistician of Polish descent, was trying to understand why, in some years,
+an unusually large number of soldiers in the Prussian army were dying due to horse-kicks. In a single army corp,
+there were sometimes 4 such deaths in a single year. Was this just coincidence?</p>
+</div></blockquote>
+<p>To assess whether horse-kicks were random (not following any pattern) Bortkiewicz simply compared the number per year to what would be predicted by the Poisson distribution.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note that this data is available in &#39;data/HorseKicks.txt&#39;</span>
+<span class="n">horse_kicks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">108.67</span><span class="p">,</span> <span class="mi">109</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">66.29</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">20.22</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mf">4.11</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.63</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Number of Deaths Per Year&quot;</span><span class="p">,</span><span class="s2">&quot;Predicted Instances (Poisson)&quot;</span><span class="p">,</span><span class="s2">&quot;Observed Instances&quot;</span><span class="p">])</span>
+<span class="n">horse_kicks</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number of Deaths Per Year</th>
+      <th>Predicted Instances (Poisson)</th>
+      <th>Observed Instances</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>108.67</td>
+      <td>109.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>66.29</td>
+      <td>65.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>20.22</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.0</td>
+      <td>4.11</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.0</td>
+      <td>0.63</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.0</td>
+      <td>0.08</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6.0</td>
+      <td>0.01</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">horse_kicks</span><span class="p">[[</span><span class="s2">&quot;Predicted Instances (Poisson)&quot;</span><span class="p">,</span><span class="s2">&quot;Observed Instances&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Deaths Per Year&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/05e192828e845e0a311541d4ace8d4432ac19dcdba7ef22919ca72c7455a174a.png" src="_images/05e192828e845e0a311541d4ace8d4432ac19dcdba7ef22919ca72c7455a174a.png" />
+</div>
+</div>
+<p>The message here is that when events occur at random, we actually tend to perceive them as clustered.</p>
+<p>Here is another example:</p>
+<p><img alt="" src="_images/pinker-glow-worms-and-stars-plot.jpg" /></p>
+<p>Which of these was generated by a random process ocurring equally likely everywhere?</p>
+<p>These images are from Steven Pinker’s book, <em>The Better Angels of our Nature.</em></p>
+<p>In the left figure, the number of dots falling into regions of a given size follows the Poisson distribution.</p>
+</section>
+<section id="the-uniform-distribution">
+<h4>The Uniform Distribution<a class="headerlink" href="#the-uniform-distribution" title="Permalink to this heading">#</a></h4>
+<p>The uniform distribution models the case in which all outcomes are equally probable.</p>
+<p>It can be a discrete or continuous distribution.</p>
+<p>We have already seen the uniform distribution in the case of rolls of a fair die:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">6</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mf">6.</span><span class="p">],</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">6.</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;x (Number of points showing)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X = x]$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/aa74e2468f1a07926d535197e3eeac59ac5d9bfb4bf733a74caba8536f3ae4fb.png" src="_images/aa74e2468f1a07926d535197e3eeac59ac5d9bfb4bf733a74caba8536f3ae4fb.png" />
+</div>
+</div>
+<p>There is an important relationship between the uniform and Poisson distributions.</p>
+<p><strong>When the time an event occurs is uniformly distributed, the number of events in a time interval is Poisson distributed.</strong></p>
+<p>You can replace “time” with “location”, and so on.</p>
+<p>Also, the reverse statment is true as well.</p>
+<p>So a simple way to generate a picture like the scattered points above is to select the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates of each point uniformly distributed over the picture size.</p>
+</section>
+</section>
+<section id="the-gaussian-distribution">
+<h3>The Gaussian Distribution<a class="headerlink" href="#the-gaussian-distribution" title="Permalink to this heading">#</a></h3>
+<p>The Gaussian Distribution is also called the Normal Distribution.</p>
+<p>We will make <strong>extensive</strong> use of Gaussian distribution, for a number of reasons.</p>
+<center>
+<a class="reference internal image-reference" href="_images/Gauss-on-Deutschemark.png"><img alt="_images/Gauss-on-Deutschemark.png" src="_images/Gauss-on-Deutschemark.png" style="width: 600px;" /></a>
+</center><p>One of reasons we will use it so much is that it is a good guess for how errors are distributed in data.</p>
+<p>This comes from the celebrated <strong>Central Limit Theorem</strong>.   Informally,</p>
+<blockquote>
+<div><p><em>The sum of a large number of independent observations from any
+distribution with finite variance tends to have a Gaussian
+distribution.</em></p>
+</div></blockquote>
+<center>
+<a class="reference internal image-reference" href="_images/Galton-Bean-Machine.png"><img alt="_images/Galton-Bean-Machine.png" src="_images/Galton-Bean-Machine.png" style="width: 350px;" /></a>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> Francis Galton&#39;s &quot;Bean Machine&quot;
+</pre></div>
+</div>
+</center>
+<p>As a special case, the sum of <span class="math notranslate nohighlight">\(n\)</span> independent Gaussian variates is Gaussian.</p>
+<p>Thus Gaussian processes remain Gaussian after passing through linear
+systems.</p>
+<p>If <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> are Gaussian, then <span class="math notranslate nohighlight">\(X_3 = aX_1 + bX_2\)</span> is Gaussian.</p>
+<p>Thus we can see that one way of thinking of the Gaussian is that it is the
+limit of the Binomial when <span class="math notranslate nohighlight">\(n\)</span> is large, that is, the limit of
+the sum of many Bernoulli trials.</p>
+<p>However many other
+sums of random variables (not just Bernoulli trials) converge to the
+Gaussian as well.</p>
+<p>The <em>standard Gaussian</em> distribution has mean zero and a variance (and standard deviation)
+of 1.   The pdf of the standard Gaussian is:</p>
+<div class="math notranslate nohighlight">
+\[ p(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2/2}. \]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Standard Gaussian PDF.  $\mu = 0, \sigma = 1$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/e3d303a1e6a0f7add3b48f21ef837535a009c40ba659c6d11bb8f6dd4915c30f.png" src="_images/e3d303a1e6a0f7add3b48f21ef837535a009c40ba659c6d11bb8f6dd4915c30f.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Standard Gaussian CDF.  $\mu = 0, \sigma = 1$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$P[X\leq x]$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c32d8574a95f59799edadc319e2dfc1dba9e762598d82a8cd9db8b1e19baeee1.png" src="_images/c32d8574a95f59799edadc319e2dfc1dba9e762598d82a8cd9db8b1e19baeee1.png" />
+</div>
+</div>
+<p>For an arbitrary Gaussian distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance
+<span class="math notranslate nohighlight">\(\sigma^2\)</span>, the pdf is simply the standard Gaussian that is relocated to
+have its center at <span class="math notranslate nohighlight">\(\mu\)</span> and its width scaled by <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ p_{\mu,\sigma}(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}. \]</div>
+</section>
+<section id="heavy-tails">
+<h3>Heavy Tails<a class="headerlink" href="#heavy-tails" title="Permalink to this heading">#</a></h3>
+<p>Earlier we discussed high- and low-variability.</p>
+<p>All of the distributions we have discussed so far have “light tails”, meaning that they show low variability.</p>
+<p>In other words, extremely large observations are essentially impossible.</p>
+<p>However in other cases, extremely large observations can occur.   Distributions that capture this property are called “heavy tailed”.</p>
+<p>Some examples of data that can be often modeled using heavy-tailed distributions:</p>
+<ul class="simple">
+<li><p>The sizes of files in a file system</p></li>
+<li><p>The sizes of objects transferred over the Internet</p></li>
+<li><p>The execution time of jobs on a computer system</p></li>
+<li><p>The degree of nodes in a network (eg, social network).</p></li>
+</ul>
+<p>In practice, random variables that follow heavy tailed distributions
+are characterized as exhibiting many small observations mixed in with
+a few large observations.</p>
+<p>In such datasets, most of the observations
+are small, but most of the contribution to the sample mean or variance
+comes from the rare, large observations.</p>
+<section id="the-pareto-distribution">
+<h4>The Pareto Distribution<a class="headerlink" href="#the-pareto-distribution" title="Permalink to this heading">#</a></h4>
+<p>The Pareto distribution is the simplest continuous heavy-tailed
+distribution.</p>
+<p>Pareto was an Italian economist who studied income distributions.
+(In fact, income distributions typically show heavy tails.)</p>
+<p>Its pdf is:</p>
+<div class="math notranslate nohighlight">
+\[ p(x) = \alpha k^{\alpha} x^{-\alpha-1}\;\;\; k \leq x,\; \;0 &lt; \alpha
+\leq 2. \]</div>
+<p>It takes on values in the range <span class="math notranslate nohighlight">\([k, \infty]\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pareto</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pareto</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.005</span><span class="p">,</span><span class="n">alpha</span><span class="p">),</span> <span class="n">pareto</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.995</span><span class="p">,</span><span class="n">alpha</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pareto</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">alpha</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pareto pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Pareto PDF.  $\alpha$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alpha</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;p(x)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c0302353c43eb1c5f3ebad69906caef48847671b05121c412cd57201e58ec113.png" src="_images/c0302353c43eb1c5f3ebad69906caef48847671b05121c412cd57201e58ec113.png" />
+</div>
+</div>
+<p>The variance of the Pareto distribution is infinite.  (The corresponding
+integral diverges.)</p>
+<p>In practice, this means that a new observation that significantly
+changes the sample variance is <em>always</em> possible, no matter how many samples
+of the random variable have already been taken.</p>
+<p>The mean of the Pareto is <span class="math notranslate nohighlight">\(\frac{k\alpha}{\alpha-1}\)</span>, for <span class="math notranslate nohighlight">\(\alpha &gt; 1\)</span>.</p>
+<p>But
+note that as <span class="math notranslate nohighlight">\(\alpha\)</span> decreases, the variability of the Pareto
+increases.</p>
+<p>In fact, for <span class="math notranslate nohighlight">\(\alpha \leq 1\)</span>, the Pareto distribution has
+<em>infinite mean.</em>  Again, in practice this means that a swamping
+observation for the mean is always possible.</p>
+<p>Hence the running average
+of a series of Pareto observations with <span class="math notranslate nohighlight">\(\alpha \leq 1\)</span> will never
+converge to a fixed value, and the mean itself is not a useful
+statistic in this case.</p>
+</section>
+</section>
+<section id="multivariate-random-variables">
+<h3>Multivariate Random Variables<a class="headerlink" href="#multivariate-random-variables" title="Permalink to this heading">#</a></h3>
+<p>A <strong>multivariate random variable</strong> is a vector of random variables.</p>
+<p>We often simply say a “random vector”.</p>
+<p>That is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \mathbf{X} = \left[\begin{array}{c}X_1 \\ X_2 \\ \vdots \\ X_n\end{array}\right] \end{split}\]</div>
+<p>The expected value of a random vector is obtained by taking the expected value of each component random variable:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} E[\mathbf{X}] = \mathbf{\mu_X} = \left[\begin{array}{c}E[X_1] \\ E[X_2] \\ \vdots \\ E[X_n]\end{array}\right] \end{split}\]</div>
+<p>To properly characterize the variability of a random vector, we need to specify all the covariances of pairs of components.</p>
+<p>We organize these values into a <strong>covariance matrix:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \text{Cov}[X] = \left[\begin{array}{cccc}
+\text{Var}[X_1] &amp; \text{Cov}[X_1, X_2] &amp; \dots &amp; \text{Cov}[X_1, X_n]\\
+\text{Cov}[X_2, X_1] &amp; \text{Var}[X_2] &amp; \dots &amp; \text{Cov}[X_2, X_n]\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\text{Cov}[X_n,X_1] &amp; \text{Cov}[X_n, X_2] &amp; \dots &amp; \text{Var}[X_n]\\
+\end{array}\right] \end{split}\]</div>
+<p>A couple things to note about a covariance matrix.</p>
+<ol class="arabic simple">
+<li><p>The covariance matrix is symmetric (because <span class="math notranslate nohighlight">\(\text{Cov}(X_i, X_j) = \text{Cov}(X_j, X_i)\)</span>)</p></li>
+<li><p>The covariance matrix is <strong>positive semidefinite</strong>.</p></li>
+</ol>
+</section>
+<section id="random-variables-as-vectors">
+<h3>Random Variables as Vectors<a class="headerlink" href="#random-variables-as-vectors" title="Permalink to this heading">#</a></h3>
+<p>When working with data, we will often treat multiple observations of some feature as samples of a random variable.</p>
+<p>We will also typically organize the observations into a vector.</p>
+<p>For example, consider our stock data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TSLA</th>
+      <th>YELP</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2014-01-02</th>
+      <td>10.006667</td>
+      <td>67.919998</td>
+    </tr>
+    <tr>
+      <th>2014-01-03</th>
+      <td>9.970667</td>
+      <td>67.660004</td>
+    </tr>
+    <tr>
+      <th>2014-01-06</th>
+      <td>9.800000</td>
+      <td>71.720001</td>
+    </tr>
+    <tr>
+      <th>2014-01-07</th>
+      <td>9.957333</td>
+      <td>72.660004</td>
+    </tr>
+    <tr>
+      <th>2014-01-08</th>
+      <td>10.085333</td>
+      <td>78.419998</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2014-12-23</th>
+      <td>14.731333</td>
+      <td>53.360001</td>
+    </tr>
+    <tr>
+      <th>2014-12-24</th>
+      <td>14.817333</td>
+      <td>53.000000</td>
+    </tr>
+    <tr>
+      <th>2014-12-26</th>
+      <td>15.188000</td>
+      <td>52.939999</td>
+    </tr>
+    <tr>
+      <th>2014-12-29</th>
+      <td>15.047333</td>
+      <td>53.009998</td>
+    </tr>
+    <tr>
+      <th>2014-12-30</th>
+      <td>14.815333</td>
+      <td>54.240002</td>
+    </tr>
+  </tbody>
+</table>
+<p>251 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>Each column can be treated as a vector.</p>
+<p>So:</p>
+<ul class="simple">
+<li><p>Let’s say that our data frame <code class="docutils literal notranslate"><span class="pre">df</span></code> is represented as a matrix <span class="math notranslate nohighlight">\(D\)</span>,</p></li>
+<li><p>and that <code class="docutils literal notranslate"><span class="pre">df['TSLA']</span></code> are observations of some random variable <span class="math notranslate nohighlight">\(X\)</span>,</p></li>
+<li><p>and <code class="docutils literal notranslate"><span class="pre">df['YELP']</span></code> are observations of some random variable <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+</ul>
+<p>Let <span class="math notranslate nohighlight">\(D\)</span> have <span class="math notranslate nohighlight">\(n\)</span> rows (ie, <span class="math notranslate nohighlight">\(n\)</span> observations).</p>
+<p>Now, let us subtract from each column its mean, to form a new matrix <span class="math notranslate nohighlight">\(\tilde{D}\)</span>.</p>
+<p>In the new matrix <span class="math notranslate nohighlight">\(\tilde{D}\)</span>, every column has zero mean.</p>
+<p>Then notice the following: the Covariance matrix of <span class="math notranslate nohighlight">\((X, Y)\)</span> is simply <span class="math notranslate nohighlight">\(\frac{1}{n}\; \tilde{D}^T\tilde{D}\)</span>.</p>
+<p>For example,</p>
+<div class="math notranslate nohighlight">
+\[ \text{Cov}(X,Y) = E\left[(X-\mu_X)(Y-\mu_Y)\right] \]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{1}{n} \sum_i (\tilde{D}_{i1} \cdot \tilde{D}_{i2}) \]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{1}{n}\;\tilde{d}_1^T\tilde{d}_2\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{d}_1\)</span> and <span class="math notranslate nohighlight">\(\tilde{d}_2\)</span> are the columns of <span class="math notranslate nohighlight">\(\tilde{D}\)</span>.</p>
+<p>This shows that <strong>covariance is actually an inner product</strong> between normalized observation vectors.</p>
+</section>
+<section id="the-multivariate-gaussian">
+<h3>The Multivariate Gaussian<a class="headerlink" href="#the-multivariate-gaussian" title="Permalink to this heading">#</a></h3>
+<p>The most common multivariate distribution we will work with is the multivariate Gaussian.</p>
+<p>The multivariate normal distribution of a random vector <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, \dots, X_k)^T\)</span> is denoted:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X} \sim \mathcal{N}(\mathbf{\mu}, \Sigma)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{\mu} = E[\mathbf{X}] = (E[X_1], \dots, E[X_k])^T\)</span></p>
+<p>and <span class="math notranslate nohighlight">\(\Sigma\)</span> is the <span class="math notranslate nohighlight">\(k \times k\)</span> covariance matrix where <span class="math notranslate nohighlight">\(\Sigma_{i,j} = \text{Cov}(X_i, X_j)\)</span>.</p>
+<p>Here are some examples.</p>
+<p>We’ll consider two-component random vectors:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \mathbf{X} = \begin{bmatrix}X_1\\X_2\end{bmatrix} \end{split}\]</div>
+<p>And our first example will be a simple one:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \mathbf{\mu} = \begin{bmatrix}1\\1\end{bmatrix}\;\;\;\;\Sigma = \begin{bmatrix}1 &amp; 0\\0 &amp; 1\end{bmatrix} \end{split}\]</div>
+<p>We see that the variance (and standard deviation) of each component is 1.</p>
+<p>However the covariances are zero – the components are uncorrelated.</p>
+<p>We will take 600 samples from this distribution.</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">600</span><span class="p">),</span>
+                  <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/0357933c52f34720ff727f2c43dcba96b9c6da5bde2deeac3e5601a0adeb9959.png" src="_images/0357933c52f34720ff727f2c43dcba96b9c6da5bde2deeac3e5601a0adeb9959.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/0a870146c0f8dd982d1fd9ca19cf7b662a98d1c26b73972aeb60bf370e4f74cc.png" src="_images/0a870146c0f8dd982d1fd9ca19cf7b662a98d1c26b73972aeb60bf370e4f74cc.png" />
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span> 
+                                           <span class="n">size</span> <span class="o">=</span> <span class="mi">600</span><span class="p">),</span>
+                  <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Next, we look at the case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \mathbf{\mu} = \begin{bmatrix}1\\1\end{bmatrix}\;\;\;\;\Sigma = \begin{bmatrix}1 &amp; 0.8\\0.8 &amp; 1\end{bmatrix} \end{split}\]</div>
+<p>Notice that <span class="math notranslate nohighlight">\(\text{Cov}(X_1, X_2) = 0.8\)</span>.</p>
+<p>We say that the components are <strong>positively correlated.</strong></p>
+<p>Nonetheless, <strong>the marginals are still Gaussian.</strong></p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/396b2f9a132bf31f871d1187b684efc536f585df115e341dc9681c0fceb4a125.png" src="_images/396b2f9a132bf31f871d1187b684efc536f585df115e341dc9681c0fceb4a125.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/6b3de9f36c3392fe075a73dba39cbcda79097fabbb73506cd298d8ee01c0b60b.png" src="_images/6b3de9f36c3392fe075a73dba39cbcda79097fabbb73506cd298d8ee01c0b60b.png" />
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span> 
+                                           <span class="n">size</span> <span class="o">=</span> <span class="mi">600</span><span class="p">),</span>
+                  <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Next, we look at the case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \mathbf{\mu} = \begin{bmatrix}1\\1\end{bmatrix}\;\;\;\;\Sigma = \begin{bmatrix}1 &amp; -0.8\\-0.8 &amp; 1\end{bmatrix} \end{split}\]</div>
+<p>Notice that <span class="math notranslate nohighlight">\(\text{Cov}(X_1, X_2) = -0.8\)</span>.   We say that the components are <strong>negatively correlated</strong> or <strong>anticorrelated.</strong></p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/6200265cff88269c77efb73736dd016cedee87f89ea9f5704f412645b49d88ed.png" src="_images/6200265cff88269c77efb73736dd016cedee87f89ea9f5704f412645b49d88ed.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/38402ef821d37a6600648c0dc176f46eea6ce388ebdccac49748743675f63f9d.png" src="_images/38402ef821d37a6600648c0dc176f46eea6ce388ebdccac49748743675f63f9d.png" />
+</div>
+</div>
+<p>Finally, let’s look at our stock data:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;YELP&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;YELP&#39;</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/6b44375d6b65ba3f708a6d67ca70b346a70792b2c4e639cfe04e6864ac30f614.png" src="_images/6b44375d6b65ba3f708a6d67ca70b346a70792b2c4e639cfe04e6864ac30f614.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;YELP&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;YELP&#39;</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/0edcb54b49baccf23bfcc3c4312430d062e98a564b0cc29f395b2f613be7cdf4.png" src="_images/0edcb54b49baccf23bfcc3c4312430d062e98a564b0cc29f395b2f613be7cdf4.png" />
+</div>
+</div>
+<p>Recall that the correlation between these two stocks was about 0.137.</p>
+<p>That is, the stocks are positively correlated, but not highly so.</p>
+</section>
+<section id="bayes-rule">
+<h3>Bayes’ Rule<a class="headerlink" href="#bayes-rule" title="Permalink to this heading">#</a></h3>
+<p>Bayes’ Rule is a simple way of manipulating conditional probabilities in a way that can be very useful.</p>
+<p>Start with a situation in which we are interested in two events, <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span>.</p>
+<p>These are exhaustive, meaning that in any experiment either <span class="math notranslate nohighlight">\(A_1\)</span> or <span class="math notranslate nohighlight">\(A_2\)</span> must occur.   (That is, they form a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>.)</p>
+<p>Now, according to the rules of probability:</p>
+<div class="math notranslate nohighlight">
+\[ P[A_1|B] = \frac{P[A_1 \cap B]}{P[B]}\]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{P[A_1 \cap B]}{P[B|A_1] + P[B|A_2]}\]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{P[B|A_1]\,P[A_1]}{P[B|A_1] + P[B|A_2]}\]</div>
+<p>(This is easy to extend to the case where <span class="math notranslate nohighlight">\(A_1, A_2, ..., A_n\)</span> form a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>.)</p>
+<p>This formula is useful because often the probabilities <span class="math notranslate nohighlight">\(P[B|A_i]\)</span> can be
+estimated, while the probabilties <span class="math notranslate nohighlight">\(P[A_i|B]\)</span> may be hard to estimate.</p>
+<p>Or perhaps <span class="math notranslate nohighlight">\(P[B]\)</span> itself (which is really the denominator) is easy to estimate.</p>
+<p>We interpret this transformation as updating our estimate of the probability of each <span class="math notranslate nohighlight">\(A_i\)</span>
+based on new information, namely, that <span class="math notranslate nohighlight">\(B\)</span> is true.</p>
+<p>This update
+transforms the <strong>prior</strong> probabilities <span class="math notranslate nohighlight">\(P[A_i]\)</span> into the
+<strong>posterior</strong> probabilities <span class="math notranslate nohighlight">\(P[A_i|B]\)</span>.</p>
+<p><strong>Example.</strong></p>
+<p>Empirical evidence suggests that amongs sets of twins,
+about 1/3 are identical.</p>
+<p>Assume therefore that probability of a pair of
+twins being identical to be 1/3.</p>
+<p>Now, consider how a couple might
+update this probability after they get an ultrasound that shows that the
+twins are of the same gender.</p>
+<p>What is their new estimate of the
+probability that their twins are identical?</p>
+<p>Let <span class="math notranslate nohighlight">\(I\)</span> be the event that the twins are identical.  Let <span class="math notranslate nohighlight">\(G\)</span> be the event
+that gender is the same via ultrasound.</p>
+<p>The prior probabilities here
+is <span class="math notranslate nohighlight">\(P[I]\)</span>.</p>
+<p>What we want to calculate is the
+posterior probability <span class="math notranslate nohighlight">\(P[I\,|\,G]\)</span>.</p>
+<p>First, we note:</p>
+<div class="math notranslate nohighlight">
+\[P[G\,|\,I] = 1 \]</div>
+<p>(Surprisingly, people are sometimes confused about that fact!)</p>
+<p>Note that this conditional probability is easy to estimate.</p>
+<p>Also,
+we assume that if the twins are not identical, they are like any two
+siblings, <em>i.e.,</em> their probability of being same gender is 1/2:</p>
+<div class="math notranslate nohighlight">
+\[P[G\,|\,\bar{I}] = 1/2 \]</div>
+<p>Again, easy to estimate.</p>
+<p>And we know from observing the population at large that among all sets
+of twins, about 1/3 are identical:</p>
+<div class="math notranslate nohighlight">
+\[ P[I] = 1/3 \]</div>
+<p>Note that this statistic is easy to obtain from data.</p>
+<p>Then:</p>
+<div class="math notranslate nohighlight">
+\[ P[I\,|\,G] = \frac{P[G\,|\,I]\; P[I]}{P[G\,|\,I]\,P[I] + P[G\,|\,\bar{I}]\,P[\bar{I}]} \]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{1 \cdot 1/3}{(1 \cdot 1/3) + (1/2 \cdot 2/3)} = \frac{1}{2}\]</div>
+<p>So we have updated our estimate of the twins being identical from 1/3
+(prior probability) to 1/2 (posterior probability).</p>
+<p>We did this in a way that used quantities that were relatively easy to obtain or measure.</p>
+</section>
+<section id="confidence-intervals">
+<h3>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h3>
+<p>Say you are concerned with some data that we take as coming from a random process.</p>
+<p>You want to characterize it as accurately as possible.   You measure it, yielding a
+single value.</p>
+<p>How much does that value tell you?   Can you rely on it as a description of the random process?</p>
+<p>Let’s say you have a dataset and you compute its average value.</p>
+<p>How certain are you that the average would be the same if you took another dataset from the same source (i.e., the same random process)?</p>
+<p>We think of the hypothetical data source as a random variable with a true mean <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>(Note that we are using frequentist style thinking here.)</p>
+<p>We would like to find a range within which we are 90% sure that the
+true mean <span class="math notranslate nohighlight">\(\mu\)</span> lies.</p>
+<p>In other words, we want the probability that the true mean lies in
+the interval to be 0.9.</p>
+<p>This interval is then called the 90% confidence interval.</p>
+<p>To be more precise:  A confidence interval at level <span class="math notranslate nohighlight">\(\gamma\)</span> for a fixed
+but unknown parameter <span class="math notranslate nohighlight">\(m\)</span> is an interval <span class="math notranslate nohighlight">\((a,b)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ P[A &lt; m &lt; B] \geq \gamma. \]</div>
+<p>Note that <span class="math notranslate nohighlight">\(m\)</span> is fixed — it is not random.</p>
+<p>What is random is the
+interval <span class="math notranslate nohighlight">\((A, B)\)</span>.</p>
+<p>This interval is constructed based on the
+data, which (by assumption) are random.</p>
+<p><img alt="" src="_images/confidence-intervals.png" /></p>
+</section>
+<section id="confidence-intervals-for-the-mean">
+<h3>Confidence Intervals for the Mean<a class="headerlink" href="#confidence-intervals-for-the-mean" title="Permalink to this heading">#</a></h3>
+<p>Imagine we have a set of <span class="math notranslate nohighlight">\(n\)</span> samples of a random variable,
+<span class="math notranslate nohighlight">\(x_1, x_2, ..., x_n\)</span> Let’s assume that the random variable has mean
+<span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<p>An estimate of <span class="math notranslate nohighlight">\(\mu\)</span> is the empirical average of the samples, <span class="math notranslate nohighlight">\(\bar{x}\)</span>.</p>
+<p>Now, the Central Limit Theorem tells us that the sum of a
+large number <span class="math notranslate nohighlight">\(n\)</span> of random variables, each with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance
+<span class="math notranslate nohighlight">\(\sigma^2\)</span>, yields a Gaussian random variable with mean
+<span class="math notranslate nohighlight">\(n\mu\)</span> and variance <span class="math notranslate nohighlight">\(n \sigma^2\)</span>.</p>
+<p>So the distribution of the average of <span class="math notranslate nohighlight">\(n\)</span> samples
+is normal with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2 / n\)</span>.  That
+is,</p>
+<div class="math notranslate nohighlight">
+\[ \bar{x} \sim \mathcal{N}(\mu, \sigma/\sqrt{n}) \]</div>
+<p>We usually assume that the number of samples should be 30 or more for
+the CLT to hold.</p>
+<p>While the specific value 30 is a bit arbitrary, we will usually be
+using very large samples (datasets) in this course for which this assumption is
+valid.</p>
+<p>The standard deviation of the sample mean is called the standard error.</p>
+<p>Notice that the standard error decreases as we increase the sample size, according to <span class="math notranslate nohighlight">\(1/\sqrt{n}.\)</span></p>
+<p>So it will turn out that using <span class="math notranslate nohighlight">\(\bar{x}\)</span>, we can get
+increasingly “tight” estimates of <span class="math notranslate nohighlight">\(\mu\)</span> as we increase the number of
+samples <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Now, remember that the true mean <span class="math notranslate nohighlight">\(\mu\)</span> is a constant, while the
+empirical mean <span class="math notranslate nohighlight">\(\bar{x}\)</span> is a random variable.</p>
+<p>Let us assume for a
+moment that we know the true <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, and that we accept that
+<span class="math notranslate nohighlight">\(\bar{x}\)</span> has a <span class="math notranslate nohighlight">\(N(\mu, \sigma/\sqrt{n})\)</span> distribution.</p>
+<p>Then it is
+true that</p>
+<div class="math notranslate nohighlight">
+\[ P[\mu-k\sigma/\sqrt{n} &lt; \bar{x} &lt; \mu+k\sigma/\sqrt{n}] = P[-k &lt; S &lt;
+k]\]</div>
+<p>where <span class="math notranslate nohighlight">\(S\)</span> is the standard Gaussian random variable (having distribution <span class="math notranslate nohighlight">\(N(0,1)\)</span>).</p>
+<p>We write <span class="math notranslate nohighlight">\(z_{1-\alpha/2}\)</span> to be the <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> quantile of the
+unit normal.  That is,</p>
+<div class="math notranslate nohighlight">
+\[ P[-z_{1-\alpha/2} &lt; S &lt; z_{1-\alpha/2}] = 1-\alpha.\]</div>
+<p>So to form a 90% probability interval for <span class="math notranslate nohighlight">\(S\)</span> (centered on
+zero) we choose <span class="math notranslate nohighlight">\(k = z_{0.95}\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x90</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.95</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x90</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;90</span><span class="si">% r</span><span class="s1">egion for Standard Gaussian&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/432b2dfc7808e4a4de89f8e4e1fe6a92cccb4ae10cf683f8135d52632cde14e8.png" src="_images/432b2dfc7808e4a4de89f8e4e1fe6a92cccb4ae10cf683f8135d52632cde14e8.png" />
+</div>
+</div>
+<p>Turning back to <span class="math notranslate nohighlight">\(\bar{x}\)</span>, the
+90% probability interval on <span class="math notranslate nohighlight">\(\bar{x}\)</span> would be:</p>
+<div class="math notranslate nohighlight">
+\[ \mu-z_{0.95}\sigma/\sqrt{n} &lt; \bar{x} &lt;
+\mu+z_{0.95}\sigma/\sqrt{n}. \]</div>
+<p>The last step: by a simple argument, we can show that the sample mean is
+in some fixed-size interval centered on the true mean, if and only if the true
+mean is also in
+a fixed-size interval (of the same size) centered on the sample mean.</p>
+<p>This means that:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{eqnarray*}
+  1-\alpha &amp; = &amp; P[\mu-z_{1-\alpha/2}\sigma/\sqrt{N} &lt; \bar{x} &lt;
+\mu+z_{1-\alpha/2}\sigma/\sqrt{N}]\\
+&amp; = &amp; P[\bar{x}-k\sigma\sqrt{N} &lt; \mu &lt; \bar{x}+k\sigma/\sqrt{N}].
+\end{eqnarray*}\]</div>
+<p>This latter expression defines the <strong><span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval
+for the mean.</strong></p>
+<p>We are done, except for estimating <span class="math notranslate nohighlight">\(\sigma\)</span>.  We do this
+directly from the data: <span class="math notranslate nohighlight">\(\hat{\sigma} = s\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(s\)</span> is the sample standard deviation, that is,
+<span class="math notranslate nohighlight">\(s = \sqrt{1/(n-1) \sum (x_i - \bar{x})^2}\)</span>.</p>
+<p>To summarize: by the argument presented here, a 100(1-<span class="math notranslate nohighlight">\(\alpha\)</span>)%
+confidence interval for the population mean is given by</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} \pm  z_{1-\alpha/2} \, \frac{s}{\sqrt{n}}. \]</div>
+<p>As an example, a 95% confidence interval for the mean is the sample average plus or minus two standard errors.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04-Linear-Algebra-Refresher.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Linear Algebra Refresher</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05-Distances-Timeseries.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Distances and Timeseries</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-and-conditioning">Probability and Conditioning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterizing-random-variables">Characterizing Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-and-high-variability">Low and High Variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-random-variables">Important Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-binary-trials">Independent Binary Trials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometric-distribution">The Geometric Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-distribution">The Exponential Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson Distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uniform-distribution">The Uniform Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gaussian-distribution">The Gaussian Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heavy-tails">Heavy Tails</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pareto-distribution">The Pareto Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate Random Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables-as-vectors">Random Variables as Vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multivariate-gaussian">The Multivariate Gaussian</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-rule">Bayes’ Rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">Confidence Intervals for the Mean</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Crovella
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
