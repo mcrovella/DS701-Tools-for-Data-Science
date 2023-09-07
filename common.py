@@ -5,7 +5,8 @@
 ##############################
 
 # imports to make python code easier and constent
-from IPython.core.display import display, HTML, Markdown, TextDisplayObject, Javascript
+# from IPython.core.display import display, HTML, Markdown, TextDisplayObject, Javascript
+from IPython.display import display, HTML, Markdown, TextDisplayObject, Javascript
 from IPython.display import IFrame, Image
 import ipywidgets as widgets
 from ipywidgets import interact, fixed, Layout
