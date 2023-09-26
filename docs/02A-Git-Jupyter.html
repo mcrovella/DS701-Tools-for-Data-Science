@@ -722,18 +722,42 @@ $ cd cs506
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">stocks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;YELP&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TSLA</th>
+      <th>YELP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TSLA</th>
+      <td>1.000000</td>
+      <td>0.137742</td>
+    </tr>
+    <tr>
+      <th>YELP</th>
+      <td>0.137742</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Then, you visualize the results:</p>
 <div class="cell docutils container">
@@ -744,7 +768,7 @@ $ cd cs506
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e52d68a985d3b3590a2e790ba66ecf40e201ba4b96935c80506ac362d683a6b1.png" src="_images/e52d68a985d3b3590a2e790ba66ecf40e201ba4b96935c80506ac362d683a6b1.png" />
+<img alt="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" src="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" />
 </div>
 </div>
 <p>As you use the Jupyter notebook, this will become a natural cycle:</p>

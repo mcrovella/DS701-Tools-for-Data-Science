@@ -504,12 +504,12 @@ document.write(`
 <p><strong><span class="math notranslate nohighlight">\(k\)</span>-means Problem:</strong></p>
 <p>Find <span class="math notranslate nohighlight">\(k\)</span> points <span class="math notranslate nohighlight">\(c_1, \dots, c_k\)</span> (called <font color="blue"> <em>centers</em>, <em>centroids</em>,</font> or <font color = "blue"> <em>means</em>,</font> so that the cost</p>
 <div class="math notranslate nohighlight">
-\[ \sum_{i=1}^n \min_k \Vert x_i-c_j\Vert^2_2 \]</div>
+\[ \sum_{i=1}^n \min_j \Vert x_i-c_j\Vert^2_2 \]</div>
 <p>is minimized.</p>
 <p><strong>Equivalently:</strong> we can think in terms of the partition itself.</p>
 <p>Consider the set <span class="math notranslate nohighlight">\(X = \{x_1, \dots, x_n\}\)</span> where <span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^n\)</span>.</p>
 <p>Find <span class="math notranslate nohighlight">\(k\)</span> points <span class="math notranslate nohighlight">\(c_1, \dots, c_k\)</span></p>
-<p>and partition <span class="math notranslate nohighlight">\(X\)</span> into subsets <span class="math notranslate nohighlight">\(\{X_1, \dots, X_k\}\)</span> by assigning each point <span class="math notranslate nohighlight">\(x_i\)</span> in <span class="math notranslate nohighlight">\(X\)</span> to its nearst cluster center,</p>
+<p>and partition <span class="math notranslate nohighlight">\(X\)</span> into subsets <span class="math notranslate nohighlight">\(\{X_1, \dots, X_k\}\)</span> by assigning each point <span class="math notranslate nohighlight">\(x_i\)</span> in <span class="math notranslate nohighlight">\(X\)</span> to its nearest cluster center,</p>
 <p>so that the cost</p>
 <div class="math notranslate nohighlight">
 \[ \sum_{i=1}^n \min_j \Vert x_i-c_j\Vert^2_2 = \sum_{j=1}^k \sum_{x \in X_j} \Vert x - c_j \Vert^2_2 \]</div>

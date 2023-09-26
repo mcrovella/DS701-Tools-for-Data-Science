@@ -758,8 +758,8 @@ $<span class="math notranslate nohighlight">\( \mbox{RI}(T,C) = \frac{a+b}{n \ch
 <p>To “calibrate” the Rand Index this way, we use the expected Rand Index of random labelings, denoted <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span>.</p>
 <p>The Expected Rand Index considers <span class="math notranslate nohighlight">\(C\)</span> to be a clustering that has the same cluster sizes as <span class="math notranslate nohighlight">\(T\)</span>, but labels are assigned at random.</p>
 <p>Using that, we define the adjusted Rand index as a simple <strong>rescaling</strong> of RI:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-214ac4b1-f5b6-4eff-acca-86548bba07e1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-214ac4b1-f5b6-4eff-acca-86548bba07e1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cd8eb1f9-fb54-4c30-a421-f205ec75d74c">
+<span class="eqno">(1)<a class="headerlink" href="#equation-cd8eb1f9-fb54-4c30-a421-f205ec75d74c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}
 \end{equation}\]</div>
 <p>The computation of the <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span> and the <span class="math notranslate nohighlight">\(\max(\text{RI})\)</span> are simple combinatorics (we’ll omit the derivation).</p>
