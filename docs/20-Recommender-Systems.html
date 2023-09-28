@@ -1,59 +1,48 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" >
-
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Recommender Systems &#8212; Tools for Data Science</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -63,94 +52,62 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '20-Recommender-Systems';</script>
     <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction to Networks" href="21-Networks-I.html" />
     <link rel="prev" title="Regularization" href="19-Regression-III-More-Linear.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="landing-page.html">
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="_static/DS701-icon.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tools for Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -159,241 +116,510 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Preliminaries
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02B-Pandas.html">Essential Tools: Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">Probability and Statistics Refresher</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Intro-to-Python.html">
+   Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02A-Git-Jupyter.html">
+   Essential Tools: Git and Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02B-Pandas.html">
+   Essential Tools: Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Linear-Algebra-Refresher.html">
+   Linear Algebra Refresher
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">
+   Probability and Statistics Refresher
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09-Clustering-IV-GMM-EM.html">Gaussian Mixture Models</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Distances-Timeseries.html">
+   Distances and Timeseries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Clustering-I-kmeans.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Clustering-II-in-practice.html">
+   Clustering In Practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Clustering-III-hierarchical.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Clustering-IV-GMM-EM.html">
+   Gaussian Mixture Models
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Classification
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Learning-From-Data.html">
+   Learning From Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Classification-I-Decision-Trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Classification-II-kNN.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -Nearest Neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Classification-III-NB-SVM.html">
+   Naive Bayes and Support Vector Machines
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dimensionality Reduction
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Low-Rank-and-SVD.html">
+   Low Rank Approximation and the SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">
+   Dimensionality Reduction and PCA – SVD II
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regression
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Regression-I-Linear.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-Regression-II-Logistic.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-Regression-III-More-Linear.html">
+   Regularization
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected Topics
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Recommender Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="23-Gradient-Descent.html">Gradient Descent</a></li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Recommender Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-Networks-I.html">
+   Introduction to Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">
+   Network Centrality and Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23-Gradient-Descent.html">
+   Gradient Descent
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
 
-<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mcrovella/DS701-Tools-for-Data-Science/master?urlpath=tree/20-Recommender-Systems.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
   <i class="fab fa-github"></i>
   </span>
 
 </a>
 
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/20-Recommender-Systems.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/20-Recommender-Systems.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
-</li>
-      
-      
-      
+
+      </li>
       
       <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="btn__text-container">.pdf</span>
+<span class="headerbtn__text-container">.pdf</span>
 </button>
-</li>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
 >
   
 
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
   </span>
 
-</button>
-
-
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
 </label>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Recommender Systems</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-recommender-systems">
+   What are Recommender Systems?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inferring-preferences">
+   Inferring Preferences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenges">
+   Challenges
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collaborative-filtering">
+   Collaborative Filtering
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#item-item-cf">
+     Item-item CF
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#similarity">
+     Similarity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#improving-cf">
+     Improving CF
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assessing-cf">
+     Assessing CF
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrix-factorization">
+   Matrix Factorization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-matrix-factorization">
+     Solving Matrix Factorization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#als-in-practice">
+     ALS in Practice
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assessing-mf">
+     Assessing MF
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assessing-recommender-systems">
+   Assessing Recommender Systems
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Recommender Systems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-recommender-systems">
+   What are Recommender Systems?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inferring-preferences">
+   Inferring Preferences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenges">
+   Challenges
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collaborative-filtering">
+   Collaborative Filtering
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#item-item-cf">
+     Item-item CF
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#similarity">
+     Similarity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#improving-cf">
+     Improving CF
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assessing-cf">
+     Assessing CF
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrix-factorization">
+   Matrix Factorization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-matrix-factorization">
+     Solving Matrix Factorization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#als-in-practice">
+     ALS in Practice
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assessing-mf">
+     Assessing MF
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assessing-recommender-systems">
+   Assessing Recommender Systems
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
             </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-recommender-systems">What are Recommender Systems?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-preferences">Inferring Preferences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges">Challenges</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborative-filtering">Collaborative Filtering</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#item-item-cf">Item-item CF</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity">Similarity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improving-cf">Improving CF</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-cf">Assessing CF</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-factorization">Matrix Factorization</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-matrix-factorization">Solving Matrix Factorization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#als-in-practice">ALS in Practice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-mf">Assessing MF</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-recommender-systems">Assessing Recommender Systems</a></li>
-</ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-              
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+              <div>
+                
   <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
@@ -410,10 +636,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="recommender-systems">
-<h1>Recommender Systems<a class="headerlink" href="#recommender-systems" title="Permalink to this heading">#</a></h1>
+<h1>Recommender Systems<a class="headerlink" href="#recommender-systems" title="Permalink to this headline">#</a></h1>
 <p>Today, we look at a topic that has become enormously important in society: recommender systems.</p>
 <p>We will</p>
 <ul class="simple">
@@ -436,7 +661,7 @@ document.write(`
 </ul>
 </div>
 <section id="what-are-recommender-systems">
-<h2>What are Recommender Systems?<a class="headerlink" href="#what-are-recommender-systems" title="Permalink to this heading">#</a></h2>
+<h2>What are Recommender Systems?<a class="headerlink" href="#what-are-recommender-systems" title="Permalink to this headline">#</a></h2>
 <p>The concept of recommender systems emerged in the late 1990s / early 2000s as social life moved online:</p>
 <ul class="simple">
 <li><p>online purchasing and commerce</p></li>
@@ -474,7 +699,7 @@ document.write(`
 <a class="reference internal image-reference" href="_images/L20-recsys-abstractly.png"><img alt="Figure" src="_images/L20-recsys-abstractly.png" style="width: 45%;" /></a>
 </center></section>
 <section id="inferring-preferences">
-<h2>Inferring Preferences<a class="headerlink" href="#inferring-preferences" title="Permalink to this heading">#</a></h2>
+<h2>Inferring Preferences<a class="headerlink" href="#inferring-preferences" title="Permalink to this headline">#</a></h2>
 <p>Unfortunately, users generally have a hard time <strong>explaining</strong> what types of content they prefer.   Some early systems worked by interviewing users to ask what they liked.  Those systems did not work very well.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -493,7 +718,7 @@ document.write(`
 <a class="reference internal image-reference" href="_images/L20-example-data.png"><img alt="Figure" src="_images/L20-example-data.png" style="width: 55%;" /></a>
 </center></section>
 <section id="challenges">
-<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this heading">#</a></h2>
+<h2>Challenges<a class="headerlink" href="#challenges" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>The biggest issue is <strong>scalability</strong>: typical data for this problem is huge.</p>
 <ul>
@@ -515,11 +740,6 @@ document.write(`
 <p>This data is a subset of the data presented in: “From amateurs to connoisseurs: modeling the evolution of user expertise through online reviews,” by J. McAuley and J. Leskovec. WWW, 2013</p>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a 1.7 GB file, delete it after use</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
@@ -530,12 +750,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sh: kaggle: command not found
-unzip:  cannot find or open cs-506-midterm-a1-b1.zip, cs-506-midterm-a1-b1.zip.zip or cs-506-midterm-a1-b1.zip.ZIP.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading cs-506-midterm-a1-b1.zip to /Users/crovella/repos/CS506-Computational-Tools-for-Data-Science
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 650M/650M [00:13&lt;00:00, 51.1MB/s] 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archive:  cs-506-midterm-a1-b1.zip
+  inflating: sample.csv              
+  inflating: test.csv                
+  inflating: train.csv               
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -543,98 +770,14 @@ unzip:  cannot find or open cs-506-midterm-a1-b1.zip, cs-506-midterm-a1-b1.zip.z
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;train.csv&#39;</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/pandas/util/_decorators.py:211,</span> in <span class="ni">deprecate_kwarg.&lt;locals&gt;._deprecate_kwarg.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span>         <span class="n">kwargs</span><span class="p">[</span><span class="n">new_arg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_arg_value</span>
-<span class="ne">--&gt; </span><span class="mi">211</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/pandas/util/_decorators.py:331,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">_format_argument_list</span><span class="p">(</span><span class="n">allow_args</span><span class="p">)),</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">331</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py:950,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">935</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">936</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">937</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">946</span>     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">},</span>
-<span class="g g-Whitespace">    </span><span class="mi">947</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">948</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">950</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py:605,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">602</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">604</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">605</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">607</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py:1442,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1439</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1441</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1442</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py:1735,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1733</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1734</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1735</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1736</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1737</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1738</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1739</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1740</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1741</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1742</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1743</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1744</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1745</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1746</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/pandas/io/common.py:856,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">851</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">852</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">853</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">854</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">855</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">856</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">857</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">858</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">859</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">862</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;train.csv&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_users</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;UserId&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">n_movies</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ProductId&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">n_reviews</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There are </span><span class="si">{</span><span class="n">n_reviews</span><span class="si">}</span><span class="s1"> reviews, </span><span class="si">{</span><span class="n">n_movies</span><span class="si">}</span><span class="s1"> movies and </span><span class="si">{</span><span class="n">n_users</span><span class="si">}</span><span class="s1"> users.&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There are </span><span class="si">{</span><span class="n">n_users</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_movies</span><span class="si">}</span><span class="s1"> potential reviews, meaning sparsity of </span><span class="si">{</span><span class="p">(</span><span class="n">n_reviews</span><span class="o">/</span><span class="p">(</span><span class="n">n_users</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_movies</span><span class="p">))</span><span class="si">:</span><span class="s1">0.4%</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There are </span><span class="si">{</span><span class="n">n_users</span> <span class="o">*</span> <span class="n">n_movies</span><span class="si">}</span><span class="s1"> potential reviews, meaning sparsity of </span><span class="si">{</span><span class="p">(</span><span class="n">n_reviews</span><span class="o">/</span><span class="p">(</span><span class="n">n_users</span> <span class="o">*</span> <span class="n">n_movies</span><span class="p">))</span><span class="si">:</span><span class="s1">0.4%</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -644,7 +787,6 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <p><strong>Reviews are Sparse.</strong></p>
 <p>Example: A commonly used dataset for testing consists of Amazon movie reviews:</p>
@@ -656,18 +798,12 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <p>Notice that there are 6,204,445,920 <strong>potential</strong> reviews, but we only have 1,697,533 <strong>actual</strong> reviews.</p>
 <p>Only 0.02% of the reviews are available – 99.98% of the reviews are missing.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There are on average </span><span class="si">{</span><span class="n">n_reviews</span><span class="o">/</span><span class="n">n_movies</span><span class="si">:</span><span class="s1">0.1f</span><span class="si">}</span><span class="s1"> reviews per movie&#39;</span> <span class="o">+</span>
      <span class="sa">f</span><span class="s1">&#39; and </span><span class="si">{</span><span class="n">n_reviews</span><span class="o">/</span><span class="n">n_users</span><span class="si">:</span><span class="s1">0.1f</span><span class="si">}</span><span class="s1"> reviews per user&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are on average 33.9 reviews per movie and 13.7 reviews per user
 </pre></div>
@@ -677,11 +813,6 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <p><strong>Sparseness is skewed.</strong></p>
 <p>Although on average a movie receives 34 reviews, <strong>almost all movies have even fewer reviews.</strong></p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_per_movie</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ProductId&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;Id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">frac_below_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">reviews_per_movie</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n_reviews</span><span class="o">/</span><span class="n">n_movies</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">reviews_per_movie</span><span class="p">)</span>
@@ -695,18 +826,12 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/f13e267d8cbb4c3ed21df5c996a1712ef95e31ecb085686bb10ad5f4101288ad.png" src="_images/f13e267d8cbb4c3ed21df5c996a1712ef95e31ecb085686bb10ad5f4101288ad.png" />
+<img alt="_images/20-Recommender-Systems_28_0.png" src="_images/20-Recommender-Systems_28_0.png" />
 </div>
 </div>
 <p>Likewise, although the average user writes 14 reviews, almost all users write even fewer reviews.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_per_user</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;UserId&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;Id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">frac_below_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">reviews_per_user</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n_reviews</span><span class="o">/</span><span class="n">n_users</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">reviews_per_user</span><span class="p">)</span>
@@ -720,9 +845,8 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/c52f9527b74fe12b53556641311ddb142871dfb2244a89b572dac1bd182ee173.png" src="_images/c52f9527b74fe12b53556641311ddb142871dfb2244a89b572dac1bd182ee173.png" />
+<img alt="_images/20-Recommender-Systems_30_0.png" src="_images/20-Recommender-Systems_30_0.png" />
 </div>
 </div>
 <p>A typical objective function is root mean square error (RMSE)</p>
@@ -733,7 +857,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <p>The earliest method developed is called <strong>collaborative filtering.</strong></p>
 </section>
 <section id="collaborative-filtering">
-<h2>Collaborative Filtering<a class="headerlink" href="#collaborative-filtering" title="Permalink to this heading">#</a></h2>
+<h2>Collaborative Filtering<a class="headerlink" href="#collaborative-filtering" title="Permalink to this headline">#</a></h2>
 <p>The central idea of collaborative filtering is that the set of known recommendations can be considered to be a <strong>bipartite graph.</strong></p>
 <center>
 <a class="reference internal image-reference" href="_images/L20-bipartite.png"><img alt="Figure" src="_images/L20-bipartite.png" style="width: 35%;" /></a>
@@ -744,7 +868,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <a class="reference internal image-reference" href="_images/L20-cf-basic-idea.png"><img alt="Figure" src="_images/L20-cf-basic-idea.png" style="width: 60%;" /></a>
 </center><p>There are at least two ways this graph can be used.</p>
 <p>To form a rating for item <span class="math notranslate nohighlight">\((u, i)\)</span>:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Using user-user similarity:</p>
 <ul class="simple">
 <li><p>look at users that have similar item preferences to user <span class="math notranslate nohighlight">\(u\)</span></p></li>
@@ -753,7 +877,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </li>
 </ol>
 <p>Good for many users, fewer items</p>
-<ol class="arabic simple" start="2">
+<ol class="simple">
 <li><p>Using item-item similarity:</p>
 <ul class="simple">
 <li><p>look at other items that have been liked by similar users as item <span class="math notranslate nohighlight">\(i\)</span></p></li>
@@ -763,7 +887,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </ol>
 <p>Good for many items, fewer users</p>
 <section id="item-item-cf">
-<h3>Item-item CF<a class="headerlink" href="#item-item-cf" title="Permalink to this heading">#</a></h3>
+<h3>Item-item CF<a class="headerlink" href="#item-item-cf" title="Permalink to this headline">#</a></h3>
 <p>Let’s look at the item-item CF approach in detail.</p>
 <p>The questions are:</p>
 <ul class="simple">
@@ -798,7 +922,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <a class="reference internal image-reference" href="_images/L20-u-u-cf-4.png"><img alt="Figure" src="_images/L20-u-u-cf-4.png" style="width: 60%;" /></a>
 </center></section>
 <section id="similarity">
-<h3>Similarity<a class="headerlink" href="#similarity" title="Permalink to this heading">#</a></h3>
+<h3>Similarity<a class="headerlink" href="#similarity" title="Permalink to this headline">#</a></h3>
 <p>How should we assess similarity of items?</p>
 <p>A reasonable approach is to consider items similar if their ratings are <strong>correlated.</strong></p>
 <p>So we can use the Pearson correlation coefficient <span class="math notranslate nohighlight">\(r\)</span>.</p>
@@ -813,7 +937,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <p>(See the lecture on similarity measures.)</p>
 </section>
 <section id="improving-cf">
-<h3>Improving CF<a class="headerlink" href="#improving-cf" title="Permalink to this heading">#</a></h3>
+<h3>Improving CF<a class="headerlink" href="#improving-cf" title="Permalink to this headline">#</a></h3>
 <p>One problem with the story so far arises due to <strong>bias</strong>.</p>
 <ul class="simple">
 <li><p>Some items are significantly higher or lower rated</p></li>
@@ -846,7 +970,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <p>which (for each column of <span class="math notranslate nohighlight">\(R\)</span>) is a standard least squares problem (which we solve via Ridge regression).</p>
 <p>This sort of problem is called <strong>jointly convex</strong>.</p>
 <p>The strategy for solving is:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Hold <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> constant, solve for <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
 <li><p>Hold <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> constant, solve for <span class="math notranslate nohighlight">\(\beta\)</span>.</p></li>
 <li><p>Hold <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> constant, solve for <span class="math notranslate nohighlight">\(\alpha\)</span>.</p></li>
@@ -884,7 +1008,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </ul>
 </section>
 <section id="assessing-cf">
-<h3>Assessing CF<a class="headerlink" href="#assessing-cf" title="Permalink to this heading">#</a></h3>
+<h3>Assessing CF<a class="headerlink" href="#assessing-cf" title="Permalink to this headline">#</a></h3>
 <p>This completes the high level view of CF.</p>
 <p>Working with user-user similarities is analogous.</p>
 <p>Strengths:</p>
@@ -909,7 +1033,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </section>
 </section>
 <section id="matrix-factorization">
-<h2>Matrix Factorization<a class="headerlink" href="#matrix-factorization" title="Permalink to this heading">#</a></h2>
+<h2>Matrix Factorization<a class="headerlink" href="#matrix-factorization" title="Permalink to this headline">#</a></h2>
 <p>Note that standard CF forces us to consider similarity among items, <strong>or</strong> among users, but does not take into account <strong>both.</strong></p>
 <p>Can we use both kinds of similarity simultaneously?</p>
 <p>We can’t use both the rows and columns of the ratings matrix <span class="math notranslate nohighlight">\(R\)</span> at the same time – the user and item vectors live in different vector spaces.</p>
@@ -941,7 +1065,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <center>
 <a class="reference internal image-reference" href="_images/L20-mf-3.png"><img alt="Figure" src="_images/L20-mf-3.png" style="width: 60%;" /></a>
 </center><section id="solving-matrix-factorization">
-<h3>Solving Matrix Factorization<a class="headerlink" href="#solving-matrix-factorization" title="Permalink to this heading">#</a></h3>
+<h3>Solving Matrix Factorization<a class="headerlink" href="#solving-matrix-factorization" title="Permalink to this headline">#</a></h3>
 <p>Notice that in this case we’ve decided that the factorization should be rank 3, ie, low-rank.</p>
 <p>So we want something like an SVD.</p>
 <p>(Recall that SVD gives us the most-accurate-possible low-rank factorization of a matrix).</p>
@@ -958,7 +1082,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <p>Once again, this problem is <strong>jointly convex.</strong></p>
 <p>In particular, it we hold either <span class="math notranslate nohighlight">\(U\)</span> or <span class="math notranslate nohighlight">\(V\)</span> constant, then the result is a simple ridge regression.</p>
 <p>So one commonly used algorithm for this problem is called <strong>alternating least squares:</strong></p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Hold <span class="math notranslate nohighlight">\(U\)</span> constant, and solve for <span class="math notranslate nohighlight">\(V\)</span></p></li>
 <li><p>Hold <span class="math notranslate nohighlight">\(V\)</span> constant, and solve for <span class="math notranslate nohighlight">\(U\)</span></p></li>
 <li><p>If not converged, go to Step 1.</p></li>
@@ -967,7 +1091,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 <p>It’s not hard, but the details aren’t that interesting, so I will give you code instead!</p>
 </section>
 <section id="als-in-practice">
-<h3>ALS in Practice<a class="headerlink" href="#als-in-practice" title="Permalink to this heading">#</a></h3>
+<h3>ALS in Practice<a class="headerlink" href="#als-in-practice" title="Permalink to this headline">#</a></h3>
 <p>The entire Amazon reviews dataset is too large to work with easily, and it is too sparse.</p>
 <p>Hence, we will take the densest rows and columns of the matrix.</p>
 <div class="cell docutils container">
@@ -1364,17 +1488,11 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RMSE on visible entries (training data): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">R</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1384,11 +1502,6 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </div>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## todo: hold out test data, compute oos error</span>
 <span class="n">RN</span> <span class="o">=</span> <span class="o">~</span><span class="n">R</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
@@ -1398,7 +1511,6 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <p>Just for comparison’s sake, let’s check the performance of <span class="math notranslate nohighlight">\(k\)</span>-NN on this dataset.</p>
 <p>Again, this is only on the training data – so overly optimistic for sure.</p>
@@ -1417,21 +1529,15 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RMSE on visible entries (test set): </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span><span class="w"> </span><span class="n">y_hat</span><span class="p">,</span><span class="w"> </span><span class="n">squared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">False</span><span class="p">)</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RMSE on visible entries (test set): </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 </section>
 <section id="assessing-mf">
-<h3>Assessing MF<a class="headerlink" href="#assessing-mf" title="Permalink to this heading">#</a></h3>
+<h3>Assessing MF<a class="headerlink" href="#assessing-mf" title="Permalink to this headline">#</a></h3>
 <p>Matrix Factorization per se is a good idea.    However, many of the improvements we’ve discussed for CF apply to MF as well.</p>
 <p>To illustrate, we’ll look at some of the successive improvements used by the team that won the Netflix prize (“BellKor’s Pragmatic Chaos”).</p>
 <p>When the prize was announced, the Netflix supplied solution achieved an RMSE of 0.951.</p>
@@ -1464,7 +1570,7 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </section>
 </section>
 <section id="assessing-recommender-systems">
-<h2>Assessing Recommender Systems<a class="headerlink" href="#assessing-recommender-systems" title="Permalink to this heading">#</a></h2>
+<h2>Assessing Recommender Systems<a class="headerlink" href="#assessing-recommender-systems" title="Permalink to this headline">#</a></h2>
 <p>There are a number of concerns with the widespread use of recommender systems and personalization in society.</p>
 <p>First, recommender systems are accused of creating <strong>filter bubbles.</strong></p>
 <p>A filter bubble is the tendency for recommender systems to limit the variety of information presented to the user.</p>
@@ -1517,7 +1623,7 @@ Bashir Rastegarpanah, Krishna P. Gummadi and Mark Crovella
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1525,121 +1631,50 @@ Bashir Rastegarpanah, Krishna P. Gummadi and Mark Crovella
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="19-Regression-III-More-Linear.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Regularization</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="19-Regression-III-More-Linear.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Regularization</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="21-Networks-I.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="21-Networks-I.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Introduction to Networks</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-</div></div>
-  
-</div>
-
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-recommender-systems">What are Recommender Systems?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-preferences">Inferring Preferences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges">Challenges</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborative-filtering">Collaborative Filtering</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#item-item-cf">Item-item CF</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity">Similarity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improving-cf">Improving CF</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-cf">Assessing CF</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-factorization">Matrix Factorization</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-matrix-factorization">Solving Matrix Factorization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#als-in-practice">ALS in Practice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-mf">Assessing MF</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-recommender-systems">Assessing Recommender Systems</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Mark Crovella
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2023.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
     </div>
-  </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Mark Crovella<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>
