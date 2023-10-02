@@ -10,6 +10,8 @@ The setup instructions are particular to supporting the RISE package for display
 
 ### Conda Python 3.9 Installation
 
+Installing the RISE package is known to work with a Python 3.9 environment and the associated Jupyter packages so for now we will use Python 3.9.
+
 #### Install Conda
 Install [miniconda](https://docs.conda.io/en/latest/miniconda.html), if you haven't already.
 
@@ -20,7 +22,10 @@ Create a conda environment with Python 3.9:
 conda create -n my_env python=3.9
 conda activate my_env
 ```
-Once your new environment is activated, install the following:
+
+#### Package Installation
+
+Once your new environment is activated, install the following packages:
 
 ```sh
 conda install notebook
