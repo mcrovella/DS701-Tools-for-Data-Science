@@ -1,6 +1,6 @@
 # DS 701: Tools for Data Science
 
-Repository for DS 701.
+Repository for DS 701 that produces the [course notes](https://mcrovella.github.io/DS701-Tools-for-Data-Science).
 
 ## Setup and Build Instructions
 
