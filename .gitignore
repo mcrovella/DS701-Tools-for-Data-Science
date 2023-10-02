@@ -7,5 +7,4 @@ json/*
 syllabus/auto/*
 _build
 .DS_Store
-.venv/
 
