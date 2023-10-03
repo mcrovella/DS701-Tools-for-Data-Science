@@ -963,8 +963,9 @@ Cluster centroids:
 <p>Specifically:</p>
 <p>Let <span class="math notranslate nohighlight">\(a\)</span> be the number of pairs that have the same label in <span class="math notranslate nohighlight">\(T\)</span> and the same label in <span class="math notranslate nohighlight">\(C\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(b\)</span> be: the number of pairs that have different labels in <span class="math notranslate nohighlight">\(T\)</span> and different labels in <span class="math notranslate nohighlight">\(C\)</span>.</p>
-<p>Then the Rand Index is:
-$<span class="math notranslate nohighlight">\( \mbox{RI}(T,C) = \frac{a+b}{n \choose 2} \)</span>$</p>
+<p>Then the Rand Index is:</p>
+<div class="math notranslate nohighlight">
+\[ \text{RI}(T,C) = \frac{a+b}{n \choose 2} \]</div>
 <p>How do we know whether a particular Rand Index (RI) score is significant?</p>
 <p>We might compare it to the RI for a <strong>random</strong> assignment of points to labels.</p>
 <p>This leads to the <strong>Adjusted Rand Index.</strong></p>
@@ -972,8 +973,8 @@ $<span class="math notranslate nohighlight">\( \mbox{RI}(T,C) = \frac{a+b}{n \ch
 <p>To “calibrate” the Rand Index this way, we use the expected Rand Index of random labelings, denoted <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span>.</p>
 <p>The Expected Rand Index considers <span class="math notranslate nohighlight">\(C\)</span> to be a clustering that has the same cluster sizes as <span class="math notranslate nohighlight">\(T\)</span>, but labels are assigned at random.</p>
 <p>Using that, we define the adjusted Rand index as a simple <strong>rescaling</strong> of RI:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f4e61b23-a28f-4719-8f3e-9e611eafb8c3">
-<span class="eqno">(1)<a class="headerlink" href="#equation-f4e61b23-a28f-4719-8f3e-9e611eafb8c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5312695f-c38a-470c-b73f-9090a55cc094">
+<span class="eqno">(1)<a class="headerlink" href="#equation-5312695f-c38a-470c-b73f-9090a55cc094" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}
 \end{equation}\]</div>
 <p>The computation of the <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span> and the <span class="math notranslate nohighlight">\(\max(\text{RI})\)</span> are simple combinatorics (we’ll omit the derivation).</p>
@@ -1080,8 +1081,11 @@ $<span class="math notranslate nohighlight">\( \mbox{RI}(T,C) = \frac{a+b}{n \ch
 <p>Let <span class="math notranslate nohighlight">\(a\)</span> be the mean distance between a data point and all other points in the same cluster.</p>
 <p>Let <span class="math notranslate nohighlight">\(b\)</span> be the mean distance between a data point and all other points in the next nearest cluster.</p>
 <p>Then the
-<strong>Silhouette Coefficient</strong> for a clustering is:
-$<span class="math notranslate nohighlight">\(s = \frac{b-a}{\max(a, b)}\)</span>$</p>
+<strong>Silhouette Coefficient</strong> for a clustering is:</p>
+<div class="math notranslate nohighlight">
+\[ 
+s = \frac{b-a}{\max(a, b)} 
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
