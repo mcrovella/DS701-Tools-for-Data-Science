@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>\(k\)-Nearest Neighbors &#8212; Tools for Data Science</title>
+    <title>\(k\)-Nearest Neighbors and Model Selection &#8212; Tools for Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
-   -Nearest Neighbors
+   -Nearest Neighbors and Model Selection
   </a>
  </li>
  <li class="toctree-l1">
@@ -458,7 +458,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#k-nearest-neighbors">
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
@@ -491,8 +491,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#in-practice">
-   In Practice
+  <a class="reference internal nav-link" href="#in-practice-model-selection">
+   In Practice: Model Selection
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -551,7 +551,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>k-Nearest Neighbors</h1>
+                <h1>k-Nearest Neighbors and Model Selection</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -567,7 +567,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#k-nearest-neighbors">
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
@@ -600,8 +600,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#in-practice">
-   In Practice
+  <a class="reference internal nav-link" href="#in-practice-model-selection">
+   In Practice: Model Selection
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -679,8 +679,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="k-nearest-neighbors">
-<h1><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Permalink to this headline">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="k-nearest-neighbors-and-model-selection">
+<h1><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors and Model Selection<a class="headerlink" href="#k-nearest-neighbors-and-model-selection" title="Permalink to this headline">#</a></h1>
 <p>Today we’ll expand our repetoire of classification techniques.</p>
 <p>In so doing we’ll look at a first example of a new kind of model: nonparametric.</p>
 <section id="parametric-vs-nonparametric-models">
@@ -710,8 +710,8 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="id1">
-<h2><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<section id="k-nearest-neighbors">
+<h2><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Permalink to this headline">#</a></h2>
 <blockquote>
 <div><p>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.</p>
 </div></blockquote>
@@ -1104,18 +1104,21 @@ title="Print to PDF"
 <p>This makes <span class="math notranslate nohighlight">\(k\)</span>-means ineffective:  it cannot reliably tell which are the <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors, and its performance degrades.</p>
 <p><strong>What Can be Done?</strong></p>
 <p>The problem is that you simply cannot have enough data to do a good job using <span class="math notranslate nohighlight">\(k\)</span>-NN in high dimensions.</p>
-<p>If you must use <span class="math notranslate nohighlight">\(k\)</span>-NN for your task, the only option may be to <strong>reduce</strong> the dimension of your data.</p>
+<p>One approach can be to use a different dissimilarity metric, since Euclidean distance is not useful.</p>
+<p>For example, you may use cosine distance as your metric instead; this does not suffer from the same problems as Euclidean distance, but you will have to decide if it is a good metric for your problem.</p>
+<p>If you must use <span class="math notranslate nohighlight">\(k\)</span>-NN with Euclidean distance for your task, another option may be to <strong>reduce</strong> the dimension of your data.</p>
 <p>Surprisingly, this can often be done at little cost in accuracy.</p>
 <p>We will discuss dimensionality reduction techniques at length later in the course.</p>
 </section>
 </section>
-<section id="in-practice">
-<h2>In Practice<a class="headerlink" href="#in-practice" title="Permalink to this headline">#</a></h2>
+<section id="in-practice-model-selection">
+<h2>In Practice: Model Selection<a class="headerlink" href="#in-practice-model-selection" title="Permalink to this headline">#</a></h2>
 <p>Next we’ll look at two classification methods in practice:</p>
 <ul class="simple">
 <li><p>Decision Trees, and</p></li>
 <li><p>k-Nearest Neighbors.</p></li>
 </ul>
+<p>To compare them, we will need to understand methods for <strong>model selection.</strong></p>
 <p>To compare these methods, the question arises:</p>
 <section id="how-do-we-evaluate-a-classifier">
 <h3>How do we evaluate a classifier?<a class="headerlink" href="#how-do-we-evaluate-a-classifier" title="Permalink to this headline">#</a></h3>
@@ -1171,7 +1174,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_70_0.png" src="_images/15-Classification-II-kNN_70_0.png" />
+<img alt="_images/15-Classification-II-kNN_71_0.png" src="_images/15-Classification-II-kNN_71_0.png" />
 </div>
 </div>
 <p>Recall that we always want to test on data separate from our training data.</p>
@@ -1211,7 +1214,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_74_0.png" src="_images/15-Classification-II-kNN_74_0.png" />
+<img alt="_images/15-Classification-II-kNN_75_0.png" src="_images/15-Classification-II-kNN_75_0.png" />
 </div>
 </div>
 <p>For our first example, we will classify the points (in the two classes) using a k-nn classifier.</p>
@@ -1312,7 +1315,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_83_0.png" src="_images/15-Classification-II-kNN_83_0.png" />
+<img alt="_images/15-Classification-II-kNN_84_0.png" src="_images/15-Classification-II-kNN_84_0.png" />
 </div>
 </div>
 <p>Indeed, the Positive (red) points in the upper half of the test data are all classified incorrectly.</p>
@@ -1348,7 +1351,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_86_0.png" src="_images/15-Classification-II-kNN_86_0.png" />
+<img alt="_images/15-Classification-II-kNN_87_0.png" src="_images/15-Classification-II-kNN_87_0.png" />
 </div>
 </div>
 <p>For comparison purposes, let’s try <span class="math notranslate nohighlight">\(k\)</span> = 3.</p>
@@ -1375,7 +1378,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_88_0.png" src="_images/15-Classification-II-kNN_88_0.png" />
+<img alt="_images/15-Classification-II-kNN_89_0.png" src="_images/15-Classification-II-kNN_89_0.png" />
 </div>
 </div>
 <p>And let’s look at the same individual point as before:</p>
@@ -1410,7 +1413,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_90_0.png" src="_images/15-Classification-II-kNN_90_0.png" />
+<img alt="_images/15-Classification-II-kNN_91_0.png" src="_images/15-Classification-II-kNN_91_0.png" />
 </div>
 </div>
 <p>So how confident can we be that the test accuracy is 92% in general?</p>
@@ -1460,7 +1463,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_94_0.png" src="_images/15-Classification-II-kNN_94_0.png" />
+<img alt="_images/15-Classification-II-kNN_95_0.png" src="_images/15-Classification-II-kNN_95_0.png" />
 </div>
 </div>
 <p>Based on the generalization error (ie, accuracy on test (held-out) data), it looks like <span class="math notranslate nohighlight">\(k = 2\)</span> is the best choice.</p>
@@ -1512,7 +1515,7 @@ Unique labels: [0 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_98_0.png" src="_images/15-Classification-II-kNN_98_0.png" />
+<img alt="_images/15-Classification-II-kNN_99_0.png" src="_images/15-Classification-II-kNN_99_0.png" />
 </div>
 </div>
 </section>
@@ -1552,7 +1555,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_102_0.png" src="_images/15-Classification-II-kNN_102_0.png" />
+<img alt="_images/15-Classification-II-kNN_103_0.png" src="_images/15-Classification-II-kNN_103_0.png" />
 </div>
 </div>
 <p>Let’s visualize the <strong>decision boundary</strong> of the Decision Tree.</p>
@@ -1583,7 +1586,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_104_0.png" src="_images/15-Classification-II-kNN_104_0.png" />
+<img alt="_images/15-Classification-II-kNN_105_0.png" src="_images/15-Classification-II-kNN_105_0.png" />
 </div>
 </div>
 </section>
@@ -1611,7 +1614,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_108_0.png" src="_images/15-Classification-II-kNN_108_0.png" />
+<img alt="_images/15-Classification-II-kNN_109_0.png" src="_images/15-Classification-II-kNN_109_0.png" />
 </div>
 </div>
 </section>
@@ -1713,7 +1716,7 @@ DT accuracy on training data:  0.98
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max Test Accuracy at k = 13 with accuracy 0.969
 </pre></div>
 </div>
-<img alt="_images/15-Classification-II-kNN_121_1.png" src="_images/15-Classification-II-kNN_121_1.png" />
+<img alt="_images/15-Classification-II-kNN_122_1.png" src="_images/15-Classification-II-kNN_122_1.png" />
 </div>
 </div>
 <p>Now, it looks llike <span class="math notranslate nohighlight">\(k\)</span> = 13 is the best-performing value of the hyperparameter.</p>
@@ -1734,7 +1737,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_124_0.png" src="_images/15-Classification-II-kNN_124_0.png" />
+<img alt="_images/15-Classification-II-kNN_125_0.png" src="_images/15-Classification-II-kNN_125_0.png" />
 </div>
 </div>
 <p>It looks like <span class="math notranslate nohighlight">\(k\)</span> = 13 is a reasonable value,</p>
@@ -1776,7 +1779,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_126_0.png" src="_images/15-Classification-II-kNN_126_0.png" />
+<img alt="_images/15-Classification-II-kNN_127_0.png" src="_images/15-Classification-II-kNN_127_0.png" />
 </div>
 </div>
 <p>There are a few artifacts, but overall this looks like a reasonably smooth set of decision boundaries.</p>
@@ -1831,7 +1834,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_131_0.png" src="_images/15-Classification-II-kNN_131_0.png" />
+<img alt="_images/15-Classification-II-kNN_132_0.png" src="_images/15-Classification-II-kNN_132_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1846,7 +1849,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_132_0.png" src="_images/15-Classification-II-kNN_132_0.png" />
+<img alt="_images/15-Classification-II-kNN_133_0.png" src="_images/15-Classification-II-kNN_133_0.png" />
 </div>
 </div>
 <p>It looks like 9 leaf nodes is appropriate, but we would be justified to choose 4 or 13 as well.</p>
@@ -1880,7 +1883,7 @@ DT accuracy on training data:  0.98
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_135_0.png" src="_images/15-Classification-II-kNN_135_0.png" />
+<img alt="_images/15-Classification-II-kNN_136_0.png" src="_images/15-Classification-II-kNN_136_0.png" />
 </div>
 </div>
 </section>
@@ -1943,7 +1946,7 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
 </pre></div>
 </div>
-<img alt="_images/15-Classification-II-kNN_142_1.png" src="_images/15-Classification-II-kNN_142_1.png" />
+<img alt="_images/15-Classification-II-kNN_143_1.png" src="_images/15-Classification-II-kNN_143_1.png" />
 </div>
 </div>
 <p>It is easier to visualize if we blur the pixels a little bit.</p>
@@ -1957,7 +1960,7 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_144_0.png" src="_images/15-Classification-II-kNN_144_0.png" />
+<img alt="_images/15-Classification-II-kNN_145_0.png" src="_images/15-Classification-II-kNN_145_0.png" />
 </div>
 </div>
 <p>Here are some more samples from the dataset:</p>
@@ -1973,10 +1976,10 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_146_0.png" src="_images/15-Classification-II-kNN_146_0.png" />
-<img alt="_images/15-Classification-II-kNN_146_1.png" src="_images/15-Classification-II-kNN_146_1.png" />
-<img alt="_images/15-Classification-II-kNN_146_2.png" src="_images/15-Classification-II-kNN_146_2.png" />
-<img alt="_images/15-Classification-II-kNN_146_3.png" src="_images/15-Classification-II-kNN_146_3.png" />
+<img alt="_images/15-Classification-II-kNN_147_0.png" src="_images/15-Classification-II-kNN_147_0.png" />
+<img alt="_images/15-Classification-II-kNN_147_1.png" src="_images/15-Classification-II-kNN_147_1.png" />
+<img alt="_images/15-Classification-II-kNN_147_2.png" src="_images/15-Classification-II-kNN_147_2.png" />
+<img alt="_images/15-Classification-II-kNN_147_3.png" src="_images/15-Classification-II-kNN_147_3.png" />
 </div>
 </div>
 <p>Although this is an 8 <span class="math notranslate nohighlight">\(\times\)</span> 8 image, we can just treat it as a vector of length 64.</p>
@@ -2034,7 +2037,7 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_151_0.png" src="_images/15-Classification-II-kNN_151_0.png" />
+<img alt="_images/15-Classification-II-kNN_152_0.png" src="_images/15-Classification-II-kNN_152_0.png" />
 </div>
 </div>
 <p>These plots illustrate important principles:</p>
@@ -2074,9 +2077,9 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15-Classification-II-kNN_155_0.png" src="_images/15-Classification-II-kNN_155_0.png" />
-<img alt="_images/15-Classification-II-kNN_155_1.png" src="_images/15-Classification-II-kNN_155_1.png" />
-<img alt="_images/15-Classification-II-kNN_155_2.png" src="_images/15-Classification-II-kNN_155_2.png" />
+<img alt="_images/15-Classification-II-kNN_156_0.png" src="_images/15-Classification-II-kNN_156_0.png" />
+<img alt="_images/15-Classification-II-kNN_156_1.png" src="_images/15-Classification-II-kNN_156_1.png" />
+<img alt="_images/15-Classification-II-kNN_156_2.png" src="_images/15-Classification-II-kNN_156_2.png" />
 </div>
 </div>
 </section>
