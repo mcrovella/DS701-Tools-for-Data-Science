@@ -1100,8 +1100,8 @@ title="Print to PDF"
 <p>This shows that, for any test point <span class="math notranslate nohighlight">\(x\)</span>, the distance to the <strong>closest</strong> point to <span class="math notranslate nohighlight">\(x\)</span>, relatively speaking, gets closer and closer to the <strong>average</strong> distance between points.</p>
 <p>Of course, if we used a point at the average distance for classifying <span class="math notranslate nohighlight">\(x\)</span>, we’d get a very poor classifier.</p>
 <p><strong>Implications of the Curse.</strong></p>
-<p>For <span class="math notranslate nohighlight">\(k\)</span>-means, the Curse of Dimensionality means that in high dimension, most points are nearly the same distance from the test point.</p>
-<p>This makes <span class="math notranslate nohighlight">\(k\)</span>-means ineffective:  it cannot reliably tell which are the <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors, and its performance degrades.</p>
+<p>For <span class="math notranslate nohighlight">\(k\)</span>-NN, the Curse of Dimensionality means that in high dimension, most points are nearly the same distance from the test point.</p>
+<p>This makes <span class="math notranslate nohighlight">\(k\)</span>-NN ineffective:  it cannot reliably tell which are the <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors, and its performance degrades.</p>
 <p><strong>What Can be Done?</strong></p>
 <p>The problem is that you simply cannot have enough data to do a good job using <span class="math notranslate nohighlight">\(k\)</span>-NN in high dimensions.</p>
 <p>One approach can be to use a different dissimilarity metric, since Euclidean distance is not useful.</p>

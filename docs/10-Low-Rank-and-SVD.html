@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
-   -Nearest Neighbors
+   -Nearest Neighbors and Model Selection
   </a>
  </li>
  <li class="toctree-l1">
@@ -636,8 +636,8 @@ title="Print to PDF"
 <section id="models-are-simplifications">
 <h2>Models are simplifications<a class="headerlink" href="#models-are-simplifications" title="Permalink to this headline">#</a></h2>
 <p>One way of thinking about modeling or clustering is that we are building a <strong>simplification</strong> of the data.</p>
-<p>That is, a model of the data that is simpler than the data.</p>
-<p>In particular, instead of thinking of the data as thousands or millions of individual data points, we think of it in terms of a small number of clusters, or a parametric distribution, etc, etc.</p>
+<p>That is, a model is a description of the data, that is simpler than the data.</p>
+<p>In particular, instead of thinking of the data as thousands or millions of individual data points, we might think of it in terms of a small number of clusters, or a parametric distribution, etc, etc.</p>
 <p>From this simpler description, we hope to gain <strong>insight.</strong></p>
 <p>There is an interesting question here:  <strong>why</strong> does this process often lead to insight?</p>
 <p>That is, why does it happen so often that a large dataset can be described in terms of a much simpler model?</p>
@@ -1394,8 +1394,9 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">Atraf</span><span class="p">,</span> <span class="n">full_matrices</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">uframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">u</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;9/1/2003&#39;</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="s1">&#39;10min&#39;</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="mi">1008</span><span class="p">))</span>
-<span class="n">uframe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">uframe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">uframe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Column 1&#39;</span><span class="p">)</span>
+<span class="n">uframe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Column 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;First Two Columns of $U$&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
