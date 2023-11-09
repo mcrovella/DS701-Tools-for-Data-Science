@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
-   -Nearest Neighbors
+   -Nearest Neighbors and Model Selection
   </a>
  </li>
  <li class="toctree-l1">
@@ -1882,7 +1882,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='39e1c193-a29e-451d-8fe9-96e5fb95b1c6'></div></div></div>
+</script><div class="output text_html"><div id='7f3a2ea3-f6ba-4202-9999-00f0e6fcd115'></div></div></div>
 </div>
 <p><strong>Example.</strong></p>
 <p>In geography, local models of terrain are constructed from data <span class="math notranslate nohighlight">\((u_1, v_1, y_1), \dots, (u_n, v_n, y_n)\)</span> where <span class="math notranslate nohighlight">\(u_j, v_j\)</span>, and <span class="math notranslate nohighlight">\(y_j\)</span> are latitude, longitude, and altitude, respectively.</p>
@@ -2867,7 +2867,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='28049861-b0f8-4d88-b693-bec26958a6e5'></div></div></div>
+</script><div class="output text_html"><div id='b7273fc2-bf34-426b-a7d3-4f1c72d2bb8a'></div></div></div>
 </div>
 <p>This example shows that the linear model for multiple regression has the same form as the model for the simple regression in the earlier examples.</p>
 <p>We can see that there the general principle is the same across all the different kinds of linear models.</p>
@@ -2906,8 +2906,8 @@ which is called the <strong>Total Sum of Squares</strong> (TSS).</p>
 \[\text{TSS} = \text{RSS} + \text{ESS}\]</div>
 <p>Now, a good fit is one in which the model explains a large part of the variance of <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>.</p>
 <p>So the measure of fit <span class="math notranslate nohighlight">\(R^2\)</span> is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b7bf9a64-f0c1-4366-867b-22e1a4333819">
-<span class="eqno">(2)<a class="headerlink" href="#equation-b7bf9a64-f0c1-4366-867b-22e1a4333819" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-d1847f6b-b593-44a3-89f7-324759466d75">
+<span class="eqno">(2)<a class="headerlink" href="#equation-d1847f6b-b593-44a3-89f7-324759466d75" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 R^2 &amp; = &amp; \frac{\text{ESS}}{\text{TSS}} = 1-\frac{\text{RSS}}{\text{TSS}}
 \end{eqnarray}\]</div>
 <p>As a result, <span class="math notranslate nohighlight">\(0\leq R^2\leq 1\)</span>.</p>
@@ -2949,8 +2949,8 @@ R^2 &amp; = &amp; \frac{\text{ESS}}{\text{TSS}} = 1-\frac{\text{RSS}}{\text{TSS}
 Dep. Variable:                      y   R-squared (uncentered):                   0.969
 Model:                            OLS   Adj. R-squared (uncentered):              0.961
 Method:                 Least Squares   F-statistic:                              123.8
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):                    1.03e-51
-Time:                        13:31:34   Log-Likelihood:                         -468.30
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):                    1.03e-51
+Time:                        08:54:22   Log-Likelihood:                         -468.30
 No. Observations:                 100   AIC:                                      976.6
 Df Residuals:                      80   BIC:                                      1029.
 Df Model:                          20                                                  
@@ -2999,7 +2999,7 @@ Notes:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> nbagg
 <span class="n">ax</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">plotSetup3d</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 <span class="c1"># try columns of X with large coefficients, or not</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">13</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">zs</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">4</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">zs</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3958,7 +3958,10 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='4c939b95-0f1c-49ab-a7dc-b5c1507b74c6'></div></div></div>
+</script><div class="output text_html"><div id='8fc2dbac-4aee-439f-ae76-3b9b24025d3b'></div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;mpl_toolkits.mplot3d.art3d.Line3D at 0x7f81aa699100&gt;]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Note that each parameter of an independent variable has an associated confidence interval.</p>
 <p>If a coefficient is not distinguishable from zero, then we cannot assume that there is any relationship between the independent variable and the observations.</p>
@@ -4044,8 +4047,8 @@ Parameters: [ 1.25672537e+01 -3.83208841e+00 -2.41967305e+00  2.01431564e+00
 Dep. Variable:                      y   R-squared (uncentered):                   0.965
 Model:                            OLS   Adj. R-squared (uncentered):              0.963
 Method:                 Least Squares   F-statistic:                              437.1
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):                    2.38e-66
-Time:                        13:31:35   Log-Likelihood:                         -473.32
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):                    2.38e-66
+Time:                        08:54:22   Log-Likelihood:                         -473.32
 No. Observations:                 100   AIC:                                      958.6
 Df Residuals:                      94   BIC:                                      974.3
 Df Model:                           6                                                  
@@ -4245,8 +4248,8 @@ Ames, Iowa</p>
 Dep. Variable:                      y   R-squared:                       0.759
 Model:                            OLS   Adj. R-squared:                  0.757
 Method:                 Least Squares   F-statistic:                     325.5
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):          1.74e-218
-Time:                        13:31:35   Log-Likelihood:                -8746.5
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):          1.74e-218
+Time:                        08:54:22   Log-Likelihood:                -8746.5
 No. Observations:                 730   AIC:                         1.751e+04
 Df Residuals:                     722   BIC:                         1.755e+04
 Df Model:                           7                                         

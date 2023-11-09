@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
-   -Nearest Neighbors
+   -Nearest Neighbors and Model Selection
   </a>
  </li>
  <li class="toctree-l1">
@@ -833,8 +833,8 @@ and
 Dep. Variable:                 TOTEMP   R-squared:                       0.987
 Model:                            OLS   Adj. R-squared:                  0.981
 Method:                 Least Squares   F-statistic:                     156.4
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):           3.70e-09
-Time:                        13:31:50   Log-Likelihood:                -117.83
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):           3.70e-09
+Time:                        08:51:45   Log-Likelihood:                -117.83
 No. Observations:                  16   AIC:                             247.7
 Df Residuals:                      10   BIC:                             252.3
 Df Model:                           5                                         
@@ -1249,35 +1249,8 @@ a linear model and shrinking the coefficients.</p>
 <img alt="_images/19-Regression-III-More-Linear_70_0.png" src="_images/19-Regression-III-More-Linear_70_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="flexible-modeling">
-<h2>Flexible Modeling<a class="headerlink" href="#flexible-modeling" title="Permalink to this headline">#</a></h2>
-<p>To look at model selection in practice, we will consider another famous dataset.</p>
-<p>The Guerry dataset is a collection of historical data used in support of Andre-Michel Guerry’s 1833 “Essay on the Moral Statistics of France.”</p>
-<blockquote>
-<div><p>Andre-Michel Guerry’s (1833) Essai sur la Statistique Morale
-de la France was one of the foundation studies of modern social science.
-Guerry assembled data on crimes, suicides, literacy and other “moral
-statistics,” and used tables and maps to analyze a variety of social issues
-in perhaps the first comprehensive study relating such variables.</p>
-</div></blockquote>
-<p>Wikipedia</p>
-<blockquote>
-<div><p>Guerry’s results were startling for two reasons.
-First he showed that rates of crime and suicide remained
-remarkably stable over time, when broken
-down by age, sex, region of France and even season
-of the year; yet these numbers varied systematically
-across departements of France. This regularity
-of social numbers created the possibility to
-conceive, for the first time, that human actions in
-the social world were governed by social laws, just
-as inanimate objects were governed by laws of the
-physical world.</p>
-</div></blockquote>
-<p>Source: “A.-M. Guerry’s Moral Statistics of France: Challenges for Multivariable
-Spatial Analysis”, Michael Friendly.  Statistical Science 2007, Vol. 22, No. 3, 368–399.</p>
+<p>We can use another version of the module that can directly type formulas and expressions in the functions of the models.</p>
+<p>We can specify the name of the columns to be used to predict another column, remove columns, etc.</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;TOTEMP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
@@ -1299,8 +1272,8 @@ Spatial Analysis”, Michael Friendly.  Statistical Science 2007, Vol. 22, No. 3
 Dep. Variable:                 TOTEMP   R-squared:                       0.987
 Model:                            OLS   Adj. R-squared:                  0.981
 Method:                 Least Squares   F-statistic:                     156.4
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):           3.70e-09
-Time:                        13:32:39   Log-Likelihood:                -117.83
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):           3.70e-09
+Time:                        08:53:23   Log-Likelihood:                -117.83
 No. Observations:                  16   AIC:                             247.7
 Df Residuals:                      10   BIC:                             252.3
 Df Model:                           5                                         
@@ -1347,8 +1320,8 @@ strong multicollinearity or other numerical problems.
 Dep. Variable:                 TOTEMP   R-squared (uncentered):                   1.000
 Model:                            OLS   Adj. R-squared (uncentered):              1.000
 Method:                 Least Squares   F-statistic:                          1.127e+04
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):                    1.92e-22
-Time:                        13:32:39   Log-Likelihood:                         -137.20
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):                    1.92e-22
+Time:                        08:53:23   Log-Likelihood:                         -137.20
 No. Observations:                  16   AIC:                                      280.4
 Df Residuals:                      13   BIC:                                      282.7
 Df Model:                           3                                                  
@@ -1379,6 +1352,35 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="flexible-modeling">
+<h2>Flexible Modeling<a class="headerlink" href="#flexible-modeling" title="Permalink to this headline">#</a></h2>
+<p>To look at model selection in practice, we will consider another famous dataset.</p>
+<p>The Guerry dataset is a collection of historical data used in support of Andre-Michel Guerry’s 1833 “Essay on the Moral Statistics of France.”</p>
+<blockquote>
+<div><p>Andre-Michel Guerry’s (1833) Essai sur la Statistique Morale
+de la France was one of the foundation studies of modern social science.
+Guerry assembled data on crimes, suicides, literacy and other “moral
+statistics,” and used tables and maps to analyze a variety of social issues
+in perhaps the first comprehensive study relating such variables.</p>
+</div></blockquote>
+<p>Wikipedia</p>
+<blockquote>
+<div><p>Guerry’s results were startling for two reasons.
+First he showed that rates of crime and suicide remained
+remarkably stable over time, when broken
+down by age, sex, region of France and even season
+of the year; yet these numbers varied systematically
+across departements of France. This regularity
+of social numbers created the possibility to
+conceive, for the first time, that human actions in
+the social world were governed by social laws, just
+as inanimate objects were governed by laws of the
+physical world.</p>
+</div></blockquote>
+<p>Source: “A.-M. Guerry’s Moral Statistics of France: Challenges for Multivariable
+Spatial Analysis”, Michael Friendly.  Statistical Science 2007, Vol. 22, No. 3, 368–399.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lottery is per-capital wager on Royal Lottery</span>
@@ -1453,8 +1455,6 @@ strong multicollinearity or other numerical problems.
 </table>
 </div></div></div>
 </div>
-<p>We can use another version of the module that can directly type formulas and expressions in the functions of the models.</p>
-<p>We can specify the name of the columns to be used to predict another column, remove columns, etc.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;Lottery ~ Literacy + Wealth + Region&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
@@ -1469,8 +1469,8 @@ strong multicollinearity or other numerical problems.
 Dep. Variable:                Lottery   R-squared:                       0.338
 Model:                            OLS   Adj. R-squared:                  0.287
 Method:                 Least Squares   F-statistic:                     6.636
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):           1.07e-05
-Time:                        13:32:39   Log-Likelihood:                -375.30
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):           1.07e-05
+Time:                        08:53:24   Log-Likelihood:                -375.30
 No. Observations:                  85   AIC:                             764.6
 Df Residuals:                      78   BIC:                             781.7
 Df Model:                           6                                         
@@ -1514,30 +1514,26 @@ Notes:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                Lottery   R-squared:                       0.338
-Model:                            OLS   Adj. R-squared:                  0.287
-Method:                 Least Squares   F-statistic:                     6.636
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):           1.07e-05
-Time:                        13:32:39   Log-Likelihood:                -375.30
-No. Observations:                  85   AIC:                             764.6
-Df Residuals:                      78   BIC:                             781.7
-Df Model:                           6                                         
+Dep. Variable:                Lottery   R-squared:                       0.309
+Model:                            OLS   Adj. R-squared:                  0.292
+Method:                 Least Squares   F-statistic:                     18.32
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):           2.66e-07
+Time:                        08:53:39   Log-Likelihood:                -377.13
+No. Observations:                  85   AIC:                             760.3
+Df Residuals:                      82   BIC:                             767.6
+Df Model:                           2                                         
 Covariance Type:            nonrobust                                         
-================================================================================
-                   coef    std err          t      P&gt;|t|      [0.025      0.975]
---------------------------------------------------------------------------------
-C(Region)[C]    38.6517      9.456      4.087      0.000      19.826      57.478
-C(Region)[E]    23.2239     14.931      1.555      0.124      -6.501      52.949
-C(Region)[N]    28.6347     13.127      2.181      0.032       2.501      54.769
-C(Region)[S]    34.1034     10.370      3.289      0.002      13.459      54.748
-C(Region)[W]    28.5604     10.018      2.851      0.006       8.616      48.505
-Literacy        -0.1858      0.210     -0.886      0.378      -0.603       0.232
-Wealth           0.4515      0.103      4.390      0.000       0.247       0.656
 ==============================================================================
-Omnibus:                        3.049   Durbin-Watson:                   1.785
-Prob(Omnibus):                  0.218   Jarque-Bera (JB):                2.694
-Skew:                          -0.340   Prob(JB):                        0.260
-Kurtosis:                       2.454   Cond. No.                         653.
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     39.7979      7.873      5.055      0.000      24.135      55.460
+Literacy      -0.3780      0.136     -2.790      0.007      -0.648      -0.108
+Wealth         0.4138      0.094      4.398      0.000       0.227       0.601
+==============================================================================
+Omnibus:                        4.586   Durbin-Watson:                   1.951
+Prob(Omnibus):                  0.101   Jarque-Bera (JB):                3.294
+Skew:                          -0.335   Prob(JB):                        0.193
+Kurtosis:                       2.307   Cond. No.                         215.
 ==============================================================================
 
 Notes:
@@ -1561,8 +1557,8 @@ Notes:
 Dep. Variable:                Lottery   R-squared:                       0.161
 Model:                            OLS   Adj. R-squared:                  0.151
 Method:                 Least Squares   F-statistic:                     15.89
-Date:                Wed, 06 Sep 2023   Prob (F-statistic):           0.000144
-Time:                        13:32:39   Log-Likelihood:                -385.38
+Date:                Thu, 09 Nov 2023   Prob (F-statistic):           0.000144
+Time:                        08:53:24   Log-Likelihood:                -385.38
 No. Observations:                  85   AIC:                             774.8
 Df Residuals:                      83   BIC:                             779.7
 Df Model:                           1                                         
