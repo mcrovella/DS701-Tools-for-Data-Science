@@ -62,9 +62,30 @@ Aproximate outline:
     12. Then show PyTorch code...
 4. Close with Google Torch Playground?
 
+## Lecture 1: Gradient Descent and Back Propagation
 
-## Lecture 2: Multi-D Loss, Optimizers and Regularization
+1. The "Unreasonable" Effictiveness of Deep Neural Networks
+2. Loss Functions for Model Fitting
+3. Gradient Descent Intuitively
+4. Derivatives on Single Variable Functions
+5. Gradient Descent on a Linear Regression Model
+6. Challenges in Gradient Descent
+7. The Neuron and Neural Networks -- A first look
+8. Building a Computation Graph
+9. Back propagation manually, then automatically
+10. Neural Network Modules
+11. Training Loop
+12. Comparison to PyTorch
 
+## Lecture 2: Modeling Neural Nets, Regularization and Learning Rate Optimizers
+
+1. Model fitting with shallow (single layer) neural nets (UDL Chapter 3)
+2. Model fitting with deep neural networks (UDL Chapter 4)
+3. Momentum, ADAM (parts of UDL Chapter 6)
+4. Stochastic Gradient Descent, Batches and Epocs
+5. Regularization (parts of UDL Chapter 9)
 
 ## Lecture 3: CNNs
+
+UDL Chapter 10 and cs231n
 
