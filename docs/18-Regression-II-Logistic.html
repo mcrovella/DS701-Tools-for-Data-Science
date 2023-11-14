@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
-   -Nearest Neighbors
+   -Nearest Neighbors and Model Selection
   </a>
  </li>
  <li class="toctree-l1">
@@ -793,17 +793,12 @@ title="Print to PDF"
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/d9/_sfhw3kd21dgyrgz6tbt45z80000gn/T/ipykernel_11027/196177421.py:2: UserWarning: To output multiple subplots, the figure containing the passed axes is being cleared.
-  df.hist(ax = ax);
-</pre></div>
-</div>
-<img alt="_images/18-Regression-II-Logistic_12_1.png" src="_images/18-Regression-II-Logistic_12_1.png" />
+<img alt="_images/18-Regression-II-Logistic_12_0.png" src="_images/18-Regression-II-Logistic_12_0.png" />
 </div>
 </div>
 <p>Let’s look at how each independent variable affects admission probability.</p>
@@ -1050,10 +1045,10 @@ $<span class="math notranslate nohighlight">\(p(x) = P(y=1\mid x) = \frac{e^{\al
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     3</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Wed, 06 Sep 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.08107</td> 
+  <th>Date:</th>            <td>Thu, 09 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.08107</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>13:33:09</td>     <th>  Log-Likelihood:    </th> <td> -229.72</td> 
+  <th>Time:</th>                <td>08:57:21</td>     <th>  Log-Likelihood:    </th> <td> -229.72</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -249.99</td> 
@@ -1231,7 +1226,7 @@ $<span class="math notranslate nohighlight">\(\mbox{Recall} = \frac{\mbox{True P
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average Precision: 0.549, Average Recall: 0.236
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average Precision: 0.560, Average Recall: 0.245
 </pre></div>
 </div>
 </div>
@@ -1284,7 +1279,7 @@ $<span class="math notranslate nohighlight">\(\mbox{Recall} = \frac{\mbox{True P
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Precision: 0.435, Best Recall: 0.689
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Precision: 0.444, Best Recall: 0.696
 </pre></div>
 </div>
 </div>
