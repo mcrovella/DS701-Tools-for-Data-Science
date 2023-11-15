@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
-   -Nearest Neighbors
+   -Nearest Neighbors and Model Selection
   </a>
  </li>
  <li class="toctree-l1">
@@ -619,23 +619,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mp</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">HTML</span>
-
-<span class="kn">import</span> <span class="nn">laUtilities</span> <span class="k">as</span> <span class="nn">ut</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
+  <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="recommender-systems">
 <h1>Recommender Systems<a class="headerlink" href="#recommender-systems" title="Permalink to this headline">#</a></h1>
@@ -651,15 +635,15 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
 <p>This section draws heavily on</p>
 <ul class="simple">
 <li><p>These <a class="reference external" href="http://alex.smola.org/teaching/berkeley2012/slides/8_Recommender.pdf">slides</a> by Alex Smola</p></li>
 <li><p><a class="reference external" href="https://ieeexplore.ieee.org/document/5197422">Matrix Factorization Techniques for Recommender Systems,</a> by Yehuda Koren, Robert Bell, and Chris Volinsky, and</p></li>
 <li><p><a class="reference external" href="https://dl.acm.org/doi/10.1145/1557019.1557072">Collaborative Filtering with Temporal Dynamics,</a> by Yehuda Koren</p></li>
 </ul>
-</div>
+</aside>
 <section id="what-are-recommender-systems">
 <h2>What are Recommender Systems?<a class="headerlink" href="#what-are-recommender-systems" title="Permalink to this headline">#</a></h2>
 <p>The concept of recommender systems emerged in the late 1990s / early 2000s as social life moved online:</p>
@@ -701,10 +685,10 @@ title="Print to PDF"
 <section id="inferring-preferences">
 <h2>Inferring Preferences<a class="headerlink" href="#inferring-preferences" title="Permalink to this headline">#</a></h2>
 <p>Unfortunately, users generally have a hard time <strong>explaining</strong> what types of content they prefer.   Some early systems worked by interviewing users to ask what they liked.  Those systems did not work very well.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
 <p>A very interesting article about the earliest personalization systems is <a class="reference external" href="https://www.cs.utexas.edu/users/ear/CogSci.pdf">User Modeling via Stereotypes</a> by Elaine Rich, dating from 1979.</p>
-</div>
+</aside>
 <p>Instead, modern systems work by capturing user’s opinions about <strong>specific</strong> items.</p>
 <p>This can be done actively:</p>
 <ul class="simple">
@@ -735,10 +719,10 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
 <p>This data is a subset of the data presented in: “From amateurs to connoisseurs: modeling the evolution of user expertise through online reviews,” by J. McAuley and J. Leskovec. WWW, 2013</p>
-</div>
+</aside>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a 1.7 GB file, delete it after use</span>
@@ -746,20 +730,6 @@ title="Print to PDF"
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;train.csv&#39;</span><span class="p">):</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;kaggle competitions download -c cs-506-midterm-a1-b1&#39;</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;unzip cs-506-midterm-a1-b1.zip&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading cs-506-midterm-a1-b1.zip to /Users/crovella/repos/CS506-Computational-Tools-for-Data-Science
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 650M/650M [00:13&lt;00:00, 51.1MB/s] 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archive:  cs-506-midterm-a1-b1.zip
-  inflating: sample.csv              
-  inflating: test.csv                
-  inflating: train.csv               
 </pre></div>
 </div>
 </div>
@@ -812,26 +782,13 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </div>
 <p><strong>Sparseness is skewed.</strong></p>
 <p>Although on average a movie receives 34 reviews, <strong>almost all movies have even fewer reviews.</strong></p>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_per_movie</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ProductId&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;Id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">frac_below_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">reviews_per_movie</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n_reviews</span><span class="o">/</span><span class="n">n_movies</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">reviews_per_movie</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">reviews_per_movie</span><span class="p">),</span> <span class="s1">&#39;.-&#39;</span><span class="p">)</span>
-<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">n_reviews</span><span class="o">/</span><span class="n">n_movies</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Ratings&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Movie&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Amazon Movie Reviews</span><span class="se">\n</span><span class="s1">Number of Ratings Per Movie</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
-          <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">frac_below_mean</span><span class="si">:</span><span class="s1">0.0%</span><span class="si">}</span><span class="s1"> of Movies Below Average&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="_images/20-Recommender-Systems_28_0.png" src="_images/20-Recommender-Systems_28_0.png" />
 </div>
 </div>
 <p>Likewise, although the average user writes 14 reviews, almost all users write even fewer reviews.</p>
-<div class="cell tag_hide-input docutils container">
+<div class="cell tag_remnove-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_per_user</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;UserId&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;Id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">frac_below_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">reviews_per_user</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n_reviews</span><span class="o">/</span><span class="n">n_users</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">reviews_per_user</span><span class="p">)</span>
@@ -1486,10 +1443,16 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 8min 14s, sys: 2min 9s, total: 10min 23s
+Wall time: 1min 8s
+</pre></div>
 </div>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RMSE on visible entries (training data): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">R</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE on visible entries (training data): 0.343
 </pre></div>
 </div>
 </div>
@@ -1500,6 +1463,341 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ProductId</th>
+      <th>0005019281</th>
+      <th>0005119367</th>
+      <th>0307142485</th>
+      <th>0307142493</th>
+      <th>0307514161</th>
+      <th>0310263662</th>
+      <th>0310274281</th>
+      <th>0718000315</th>
+      <th>0764001035</th>
+      <th>0764003828</th>
+      <th>...</th>
+      <th>B00IKM5OCO</th>
+      <th>B00IWULQQ2</th>
+      <th>B00J4LMHMK</th>
+      <th>B00J5JSV1W</th>
+      <th>B00JA3RPAG</th>
+      <th>B00JAQJMJ0</th>
+      <th>B00JBBJJ24</th>
+      <th>B00JKPHUE0</th>
+      <th>B00K2CHVJ4</th>
+      <th>B00L4IDS4W</th>
+    </tr>
+    <tr>
+      <th>UserId</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A02755422E9NI29TCQ5W3</th>
+      <td>4.829528</td>
+      <td>5.291700</td>
+      <td>4.894401</td>
+      <td>4.639195</td>
+      <td>4.909813</td>
+      <td>3.935429</td>
+      <td>4.744772</td>
+      <td>4.110960</td>
+      <td>4.872587</td>
+      <td>4.564415</td>
+      <td>...</td>
+      <td>3.436324</td>
+      <td>5.089657</td>
+      <td>4.628777</td>
+      <td>2.579329</td>
+      <td>4.176442</td>
+      <td>4.424858</td>
+      <td>4.063830</td>
+      <td>3.133098</td>
+      <td>2.964667</td>
+      <td>4.495810</td>
+    </tr>
+    <tr>
+      <th>A100JCBNALJFAW</th>
+      <td>4.114644</td>
+      <td>4.318371</td>
+      <td>4.652237</td>
+      <td>4.082670</td>
+      <td>4.329506</td>
+      <td>2.659661</td>
+      <td>3.912704</td>
+      <td>3.110404</td>
+      <td>2.813416</td>
+      <td>3.561825</td>
+      <td>...</td>
+      <td>3.139748</td>
+      <td>4.244405</td>
+      <td>2.944293</td>
+      <td>3.139894</td>
+      <td>2.904268</td>
+      <td>3.795533</td>
+      <td>2.827684</td>
+      <td>2.370121</td>
+      <td>2.323547</td>
+      <td>2.641563</td>
+    </tr>
+    <tr>
+      <th>A10175AMUHOQC4</th>
+      <td>4.485396</td>
+      <td>5.302857</td>
+      <td>4.672847</td>
+      <td>5.497835</td>
+      <td>4.057506</td>
+      <td>5.339142</td>
+      <td>4.434440</td>
+      <td>3.707566</td>
+      <td>3.611799</td>
+      <td>5.640831</td>
+      <td>...</td>
+      <td>3.448205</td>
+      <td>4.893147</td>
+      <td>4.703348</td>
+      <td>2.634570</td>
+      <td>3.768816</td>
+      <td>4.210222</td>
+      <td>4.403217</td>
+      <td>4.545293</td>
+      <td>3.234381</td>
+      <td>4.679152</td>
+    </tr>
+    <tr>
+      <th>A103KNDW8GN92L</th>
+      <td>4.365361</td>
+      <td>4.943661</td>
+      <td>4.263153</td>
+      <td>4.604154</td>
+      <td>5.214505</td>
+      <td>3.635082</td>
+      <td>4.565919</td>
+      <td>3.754527</td>
+      <td>4.231372</td>
+      <td>4.400860</td>
+      <td>...</td>
+      <td>4.468246</td>
+      <td>4.599308</td>
+      <td>4.518040</td>
+      <td>3.116851</td>
+      <td>3.713601</td>
+      <td>5.067549</td>
+      <td>2.831701</td>
+      <td>2.722861</td>
+      <td>3.709238</td>
+      <td>4.898436</td>
+    </tr>
+    <tr>
+      <th>A106016KSI0YQ</th>
+      <td>3.516412</td>
+      <td>3.936477</td>
+      <td>3.942878</td>
+      <td>3.910154</td>
+      <td>4.216858</td>
+      <td>2.794978</td>
+      <td>3.600015</td>
+      <td>3.672199</td>
+      <td>3.721686</td>
+      <td>5.267729</td>
+      <td>...</td>
+      <td>3.748664</td>
+      <td>3.835250</td>
+      <td>4.083559</td>
+      <td>1.941428</td>
+      <td>3.413994</td>
+      <td>4.144104</td>
+      <td>4.046779</td>
+      <td>2.400719</td>
+      <td>1.878588</td>
+      <td>3.122137</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>AZUBX0AYYNTFF</th>
+      <td>3.828343</td>
+      <td>4.093437</td>
+      <td>4.205352</td>
+      <td>4.279512</td>
+      <td>4.181050</td>
+      <td>3.918984</td>
+      <td>3.760408</td>
+      <td>3.089374</td>
+      <td>3.006370</td>
+      <td>3.851920</td>
+      <td>...</td>
+      <td>2.750957</td>
+      <td>3.807990</td>
+      <td>3.043175</td>
+      <td>2.287013</td>
+      <td>2.250548</td>
+      <td>4.262020</td>
+      <td>3.630020</td>
+      <td>2.369120</td>
+      <td>1.719792</td>
+      <td>2.639736</td>
+    </tr>
+    <tr>
+      <th>AZXGPM8EKSHE9</th>
+      <td>3.671199</td>
+      <td>3.967644</td>
+      <td>2.909250</td>
+      <td>3.879929</td>
+      <td>4.737901</td>
+      <td>2.466704</td>
+      <td>3.057772</td>
+      <td>2.337199</td>
+      <td>2.863227</td>
+      <td>2.793442</td>
+      <td>...</td>
+      <td>2.324889</td>
+      <td>3.349504</td>
+      <td>3.125523</td>
+      <td>3.882825</td>
+      <td>2.102170</td>
+      <td>3.239544</td>
+      <td>2.202316</td>
+      <td>1.847395</td>
+      <td>2.838113</td>
+      <td>2.903009</td>
+    </tr>
+    <tr>
+      <th>AZXHK8IO25FL6</th>
+      <td>3.298820</td>
+      <td>4.168160</td>
+      <td>4.784003</td>
+      <td>4.911388</td>
+      <td>3.734663</td>
+      <td>1.962288</td>
+      <td>3.680044</td>
+      <td>2.229222</td>
+      <td>2.602694</td>
+      <td>4.191144</td>
+      <td>...</td>
+      <td>2.920003</td>
+      <td>3.361532</td>
+      <td>3.215035</td>
+      <td>2.144148</td>
+      <td>3.246263</td>
+      <td>4.403988</td>
+      <td>4.207952</td>
+      <td>1.360192</td>
+      <td>0.368289</td>
+      <td>3.441173</td>
+    </tr>
+    <tr>
+      <th>AZXR5HB99P936</th>
+      <td>4.351917</td>
+      <td>4.723345</td>
+      <td>4.245682</td>
+      <td>4.972561</td>
+      <td>4.774367</td>
+      <td>4.244336</td>
+      <td>4.185600</td>
+      <td>3.293305</td>
+      <td>3.870670</td>
+      <td>3.925679</td>
+      <td>...</td>
+      <td>3.182625</td>
+      <td>4.216027</td>
+      <td>3.250807</td>
+      <td>2.262442</td>
+      <td>3.286743</td>
+      <td>4.508260</td>
+      <td>4.501938</td>
+      <td>2.379096</td>
+      <td>2.238436</td>
+      <td>2.969018</td>
+    </tr>
+    <tr>
+      <th>AZZ4GD20C58ND</th>
+      <td>4.319594</td>
+      <td>4.623446</td>
+      <td>5.132355</td>
+      <td>5.033353</td>
+      <td>5.081330</td>
+      <td>4.247662</td>
+      <td>4.305182</td>
+      <td>3.667751</td>
+      <td>3.336328</td>
+      <td>3.594246</td>
+      <td>...</td>
+      <td>3.278369</td>
+      <td>4.154962</td>
+      <td>4.097241</td>
+      <td>3.549720</td>
+      <td>3.170789</td>
+      <td>5.037781</td>
+      <td>3.385402</td>
+      <td>2.179712</td>
+      <td>2.662272</td>
+      <td>2.587184</td>
+    </tr>
+  </tbody>
+</table>
+<p>3677 rows × 7244 columns</p>
+</div></div></div>
 </div>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
@@ -1527,10 +1825,16 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.29 s, sys: 24.3 ms, total: 4.32 s
+Wall time: 4.32 s
+</pre></div>
 </div>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RMSE on visible entries (test set): </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE on visible entries (test set): 0.649
 </pre></div>
 </div>
 </div>
