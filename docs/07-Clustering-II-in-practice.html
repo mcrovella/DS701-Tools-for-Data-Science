@@ -982,8 +982,8 @@ Cluster centroids:
 <p>To “calibrate” the Rand Index this way, we use the expected Rand Index of random labelings, denoted <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span>.</p>
 <p>The Expected Rand Index considers <span class="math notranslate nohighlight">\(C\)</span> to be a clustering that has the same cluster sizes as <span class="math notranslate nohighlight">\(T\)</span>, but labels are assigned at random.</p>
 <p>Using that, we define the adjusted Rand index as a simple <strong>rescaling</strong> of RI:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b63d2bfd-3c16-4c34-adec-1f478e0de9c5">
-<span class="eqno">(1)<a class="headerlink" href="#equation-b63d2bfd-3c16-4c34-adec-1f478e0de9c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da69c89e-6d4a-4cce-a02a-9b16f6709e4a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-da69c89e-6d4a-4cce-a02a-9b16f6709e4a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}
 \end{equation}\]</div>
 <p>The computation of the <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span> and the <span class="math notranslate nohighlight">\(\max(\text{RI})\)</span> are simple combinatorics (we’ll omit the derivation).</p>
