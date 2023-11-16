@@ -30,9 +30,12 @@ parts:
   - file: 17-Regression-I-Linear
   - file: 18-Regression-II-Logistic
   - file: 19-Regression-III-More-Linear
+- caption: Neural Networks
+  chapters:
+  - file: 23-NN-I-Gradient-Descent
 - caption: Selected Topics
   chapters:
   - file: 20-Recommender-Systems
   - file: 21-Networks-I
   - file: 22-Networks-II-Centrality-Clustering
-  - file: 23-Gradient-Descent
+#  - file: 23-Gradient-Descent
