@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
@@ -204,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
    <span class="math notranslate nohighlight">
     \(k\)
    </span>
-   -Nearest Neighbors
+   -Nearest Neighbors and Model Selection
   </a>
  </li>
  <li class="toctree-l1">
@@ -254,6 +256,18 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="23-NN-I-Gradient-Descent.html">
+   Neural Networks I – Gradient Descent, Neurons and Value Class
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Selected Topics
  </span>
 </p>
@@ -271,11 +285,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">
    Network Centrality and Clustering
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23-Gradient-Descent.html">
-   Gradient Descent
   </a>
  </li>
 </ul>
@@ -973,8 +982,8 @@ Cluster centroids:
 <p>To “calibrate” the Rand Index this way, we use the expected Rand Index of random labelings, denoted <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span>.</p>
 <p>The Expected Rand Index considers <span class="math notranslate nohighlight">\(C\)</span> to be a clustering that has the same cluster sizes as <span class="math notranslate nohighlight">\(T\)</span>, but labels are assigned at random.</p>
 <p>Using that, we define the adjusted Rand index as a simple <strong>rescaling</strong> of RI:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5312695f-c38a-470c-b73f-9090a55cc094">
-<span class="eqno">(1)<a class="headerlink" href="#equation-5312695f-c38a-470c-b73f-9090a55cc094" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b63d2bfd-3c16-4c34-adec-1f478e0de9c5">
+<span class="eqno">(1)<a class="headerlink" href="#equation-b63d2bfd-3c16-4c34-adec-1f478e0de9c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}
 \end{equation}\]</div>
 <p>The computation of the <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span> and the <span class="math notranslate nohighlight">\(\max(\text{RI})\)</span> are simple combinatorics (we’ll omit the derivation).</p>
@@ -1500,7 +1509,7 @@ Cluster 3:
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Mark Crovella<br/>
+    By Mark Crovella and Tom Gardos<br/>
   
       &copy; Copyright 2023.<br/>
 </p>

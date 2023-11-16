@@ -50,13 +50,15 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction to Networks" href="21-Networks-I.html" />
-    <link rel="prev" title="Regularization" href="19-Regression-III-More-Linear.html" />
+    <link rel="prev" title="Neural Networks I – Gradient Descent, Neurons and Value Class" href="23-NN-I-Gradient-Descent.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -254,6 +256,18 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="23-NN-I-Gradient-Descent.html">
+   Neural Networks I – Gradient Descent, Neurons and Value Class
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Selected Topics
  </span>
 </p>
@@ -271,11 +285,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">
    Network Centrality and Clustering
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23-Gradient-Descent.html">
-   Gradient Descent
   </a>
  </li>
 </ul>
@@ -730,6 +739,21 @@ title="Print to PDF"
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;train.csv&#39;</span><span class="p">):</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;kaggle competitions download -c cs-506-midterm-a1-b1&#39;</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;unzip cs-506-midterm-a1-b1.zip&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cs-506-midterm-a1-b1.zip: Skipping, found more recently modified local copy (use --force to force download)
+Archive:  cs-506-midterm-a1-b1.zip
+  inflating: test.csv                
+  inflating: train.csv               
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>replace sample.csv? [y]es, [n]o, [A]ll, [N]one, [r]ename:  NULL
+(EOF or read error, treating as &quot;[N]one&quot; ...)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1444,8 +1468,8 @@ There are 6204445920 potential reviews, meaning sparsity of 0.0274%
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 8min 14s, sys: 2min 9s, total: 10min 23s
-Wall time: 1min 8s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7min 51s, sys: 2min 6s, total: 9min 58s
+Wall time: 1min 2s
 </pre></div>
 </div>
 </div>
@@ -1826,8 +1850,8 @@ Wall time: 1min 8s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.29 s, sys: 24.3 ms, total: 4.32 s
-Wall time: 4.32 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.29 s, sys: 13.1 ms, total: 4.3 s
+Wall time: 4.3 s
 </pre></div>
 </div>
 </div>
@@ -1942,11 +1966,11 @@ Bashir Rastegarpanah, Krishna P. Gummadi and Mark Crovella
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="19-Regression-III-More-Linear.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="23-NN-I-Gradient-Descent.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Regularization</p>
+            <p class="prev-next-title">Neural Networks I – Gradient Descent, Neurons and Value Class</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="21-Networks-I.html" title="next page">
@@ -1963,7 +1987,7 @@ Bashir Rastegarpanah, Krishna P. Gummadi and Mark Crovella
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Mark Crovella<br/>
+    By Mark Crovella and Tom Gardos<br/>
   
       &copy; Copyright 2023.<br/>
 </p>
