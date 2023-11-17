@@ -31,7 +31,18 @@ Once your new environment is activated, install the following packages:
 conda install notebook
 pip install jupyter_contrib_nbextensions
 jupyter contrib nbextension install --user
+conda install -c conda-forge widgetsnbextension
+conda install -c conda-forge ipywidgets
+
 pip install -U RISE
 conda install -c conda-forge jupyter-book
 conda install numpy
+conda install matplotlib
+conda install scipy
+conda install pandas
+conda install -c conda-forge seaborn
+conda install -c conda-forge scikit-learn
+conda install networkx
+conda install -c conda-forge qrcode
+pip install graphviz
 ```
