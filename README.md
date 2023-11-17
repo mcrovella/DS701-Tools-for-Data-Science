@@ -33,4 +33,5 @@ pip install jupyter_contrib_nbextensions
 jupyter contrib nbextension install --user
 pip install -U RISE
 conda install -c conda-forge jupyter-book
+conda install numpy
 ```
