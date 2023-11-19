@@ -1,0 +1,22 @@
+name: ds701_dev_env
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - notebook
+  - conda-forge::widgetsnbextension
+  - conda-forge::ipywidgets
+  - conda-forge::jupyter-book
+  - numpy
+  - matplotlib
+  - scipy
+  - pandas
+  - conda-forge::seaborn
+  - conda-forge::scikit-learn
+  - networkx
+  - conda-forge::qrcode
+  - pip
+  - pip:
+    - jupyter_contrib_nbextensions
+    - RISE  
+    - graphviz
