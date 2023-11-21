@@ -33,6 +33,7 @@ parts:
 - caption: Neural Networks
   chapters:
   - file: 23-NN-I-Gradient-Descent
+  - file: 24-NN-II-Backprop
 - caption: Selected Topics
   chapters:
   - file: 20-Recommender-Systems
