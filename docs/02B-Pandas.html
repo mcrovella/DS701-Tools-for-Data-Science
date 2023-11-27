@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Essential Tools: Pandas &#8212; Tools for Data Science</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,66 +62,106 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02B-Pandas';</script>
     <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Linear Algebra Refresher" href="04-Linear-Algebra-Refresher.html" />
     <link rel="prev" title="Essential Tools: Git and Jupyter" href="02A-Git-Jupyter.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="landing-page.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/DS701-icon.jpg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Tools for Data Science</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -118,535 +170,242 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Preliminaries
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-Intro-to-Python.html">
-   Introduction to Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02A-Git-Jupyter.html">
-   Essential Tools: Git and Jupyter
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Essential Tools: Pandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-Linear-Algebra-Refresher.html">
-   Linear Algebra Refresher
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">
-   Probability and Statistics Refresher
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Essential Tools: Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">Probability and Statistics Refresher</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Clustering
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="05-Distances-Timeseries.html">
-   Distances and Timeseries
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Clustering-I-kmeans.html">
-   <span class="math notranslate nohighlight">
-    \(k\)
-   </span>
-   -means
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-Clustering-II-in-practice.html">
-   Clustering In Practice
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-Clustering-III-hierarchical.html">
-   Hierarchical Clustering
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09-Clustering-IV-GMM-EM.html">
-   Gaussian Mixture Models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-Clustering-IV-GMM-EM.html">Gaussian Mixture Models</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Classification
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="13-Learning-From-Data.html">
-   Learning From Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-Classification-I-Decision-Trees.html">
-   Decision Trees
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-Classification-II-kNN.html">
-   <span class="math notranslate nohighlight">
-    \(k\)
-   </span>
-   -Nearest Neighbors and Model Selection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-Classification-III-NB-SVM.html">
-   Naive Bayes and Support Vector Machines
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors and Model Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Dimensionality Reduction
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="10-Low-Rank-and-SVD.html">
-   Low Rank Approximation and the SVD
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">
-   Dimensionality Reduction and PCA – SVD II
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Regression
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="17-Regression-I-Linear.html">
-   Linear Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18-Regression-II-Logistic.html">
-   Logistic Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19-Regression-III-More-Linear.html">
-   Regularization
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Neural Networks
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="23-NN-I-Gradient-Descent.html">
-   Neural Networks I – Gradient Descent
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="24-NN-II-Backprop.html">
-   NN II – Compute Graph, Backprop and Training
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="23-NN-I-Gradient-Descent.html">Neural Networks I – Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24-NN-II-Backprop.html">NN II – Compute Graph, Backprop and Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25-NN-III-CNNs.html">NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Selected Topics
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="20-Recommender-Systems.html">
-   Recommender Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21-Networks-I.html">
-   Introduction to Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">
-   Network Centrality and Clustering
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="20-Recommender-Systems.html">Recommender Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mcrovella/DS701-Tools-for-Data-Science/master?urlpath=tree/02B-Pandas.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-</div>
+  
+  <div id="rtd-footer-container"></div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="bottom"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
 
 </a>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/02B-Pandas.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/02B-Pandas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
   </span>
 
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-started">
-   Getting started
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fetching-storing-and-retrieving-your-data">
-   Fetching, storing and retrieving your data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reading-to-from-a-csv-file">
-     Reading to/from a
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       .csv
-      </span>
-     </code>
-     file
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#working-with-data-columns">
-   Working with data columns
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-sampling-of-dataframe-methods">
-   A sampling of DataFrame methods.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-methods">
-     Plotting methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bulk-operations">
-     Bulk Operations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#accessing-rows-of-the-dataframe">
-     Accessing rows of the DataFrame
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#filtering">
-   Filtering
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-new-columns">
-   Creating new columns
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#grouping">
-   Grouping
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-pandas-classes">
-   Other Pandas Classes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#comparing-multiple-stocks">
-   Comparing multiple stocks
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Essential Tools: Pandas</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-started">
-   Getting started
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fetching-storing-and-retrieving-your-data">
-   Fetching, storing and retrieving your data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reading-to-from-a-csv-file">
-     Reading to/from a
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       .csv
-      </span>
-     </code>
-     file
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#working-with-data-columns">
-   Working with data columns
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-sampling-of-dataframe-methods">
-   A sampling of DataFrame methods.
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-methods">
-     Plotting methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bulk-operations">
-     Bulk Operations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#accessing-rows-of-the-dataframe">
-     Accessing rows of the DataFrame
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#filtering">
-   Filtering
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-new-columns">
-   Creating new columns
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#grouping">
-   Grouping
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-pandas-classes">
-   Other Pandas Classes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#comparing-multiple-stocks">
-   Comparing multiple stocks
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Essential Tools: Pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-storing-and-retrieving-your-data">Fetching, storing and retrieving your data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-to-from-a-csv-file">Reading to/from a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-data-columns">Working with data columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sampling-of-dataframe-methods">A sampling of DataFrame methods.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-methods">Plotting methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulk-operations">Bulk Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-rows-of-the-dataframe">Accessing rows of the DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">Filtering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-columns">Creating new columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grouping">Grouping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-pandas-classes">Other Pandas Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-multiple-stocks">Comparing multiple stocks</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="essential-tools-pandas">
-<h1>Essential Tools: Pandas<a class="headerlink" href="#essential-tools-pandas" title="Permalink to this headline">#</a></h1>
+<h1>Essential Tools: Pandas<a class="headerlink" href="#essential-tools-pandas" title="Permalink to this heading">#</a></h1>
 <p>Pandas is the Python Data Analysis Library.</p>
 <p>Pandas is an extremely versatile tool for manipulating datasets.</p>
 <p>It also produces high quality plots with matplotlib, and integrates nicely with other libraries that expect NumPy arrays.</p>
@@ -657,7 +416,7 @@ title="Print to PDF"
 <p><a class="reference external" href="http://pandas.pydata.org/pandas-docs/dev/generated/pandas.DataFrame.html">http://pandas.pydata.org/pandas-docs/dev/generated/pandas.DataFrame.html</a></p>
 <p>Get in the habit: whenever you load data, place it into a dataframe as your first step.</p>
 <section id="getting-started">
-<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h2>
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -678,7 +437,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="fetching-storing-and-retrieving-your-data">
-<h2>Fetching, storing and retrieving your data<a class="headerlink" href="#fetching-storing-and-retrieving-your-data" title="Permalink to this headline">#</a></h2>
+<h2>Fetching, storing and retrieving your data<a class="headerlink" href="#fetching-storing-and-retrieving-your-data" title="Permalink to this heading">#</a></h2>
 <p>For demonstration purposes, we’ll use a utility library that fetches data from standard online sources, such as Yahoo! Finance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -691,6 +450,12 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 Failed download:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;YELP&#39;]: Exception(&#39;%ticker%: No price data found, symbol may be delisted (1d 2015-01-01 -&gt; 2015-12-31)&#39;)
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -727,51 +492,6 @@ title="Print to PDF"
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>2015-01-02 00:00:00-05:00</th>
-      <td>55.459999</td>
-      <td>55.599998</td>
-      <td>54.240002</td>
-      <td>55.150002</td>
-      <td>55.150002</td>
-      <td>1664500</td>
-    </tr>
-    <tr>
-      <th>2015-01-05 00:00:00-05:00</th>
-      <td>54.540001</td>
-      <td>54.950001</td>
-      <td>52.330002</td>
-      <td>52.529999</td>
-      <td>52.529999</td>
-      <td>2023000</td>
-    </tr>
-    <tr>
-      <th>2015-01-06 00:00:00-05:00</th>
-      <td>52.549999</td>
-      <td>53.930000</td>
-      <td>50.750000</td>
-      <td>52.439999</td>
-      <td>52.439999</td>
-      <td>3762800</td>
-    </tr>
-    <tr>
-      <th>2015-01-07 00:00:00-05:00</th>
-      <td>53.320000</td>
-      <td>53.750000</td>
-      <td>51.759998</td>
-      <td>52.209999</td>
-      <td>52.209999</td>
-      <td>1548200</td>
-    </tr>
-    <tr>
-      <th>2015-01-08 00:00:00-05:00</th>
-      <td>52.590000</td>
-      <td>54.139999</td>
-      <td>51.759998</td>
-      <td>53.830002</td>
-      <td>53.830002</td>
-      <td>2015300</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -788,24 +508,24 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-DatetimeIndex: 251 entries, 2015-01-02 00:00:00-05:00 to 2015-12-30 00:00:00-05:00
+Index: 0 entries
 Data columns (total 6 columns):
  #   Column     Non-Null Count  Dtype  
 ---  ------     --------------  -----  
- 0   Open       251 non-null    float64
- 1   High       251 non-null    float64
- 2   Low        251 non-null    float64
- 3   Close      251 non-null    float64
- 4   Adj Close  251 non-null    float64
- 5   Volume     251 non-null    int64  
-dtypes: float64(5), int64(1)
-memory usage: 13.7 KB
+ 0   Open       0 non-null      float64
+ 1   High       0 non-null      float64
+ 2   Low        0 non-null      float64
+ 3   Close      0 non-null      float64
+ 4   Adj Close  0 non-null      float64
+ 5   Volume     0 non-null      float64
+dtypes: float64(6)
+memory usage: 0.0+ bytes
 </pre></div>
 </div>
 </div>
 </div>
 <section id="reading-to-from-a-csv-file">
-<h3>Reading to/from a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file<a class="headerlink" href="#reading-to-from-a-csv-file" title="Permalink to this headline">#</a></h3>
+<h3>Reading to/from a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file<a class="headerlink" href="#reading-to-from-a-csv-file" title="Permalink to this heading">#</a></h3>
 <p>Continuing to explore methods, let’s write the dataframe out to a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -816,21 +536,12 @@ memory usage: 13.7 KB
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head yahoo_data.csv
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>yahoo_data.csv
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date,Open,High,Low,Close,Adj Close,Volume
-2015-01-02 00:00:00-05:00,55.459999084472656,55.599998474121094,54.2400016784668,55.150001525878906,55.150001525878906,1664500
-2015-01-05 00:00:00-05:00,54.540000915527344,54.95000076293945,52.33000183105469,52.529998779296875,52.529998779296875,2023000
-2015-01-06 00:00:00-05:00,52.54999923706055,53.93000030517578,50.75,52.439998626708984,52.439998626708984,3762800
-2015-01-07 00:00:00-05:00,53.31999969482422,53.75,51.7599983215332,52.209999084472656,52.209999084472656,1548200
-2015-01-08 00:00:00-05:00,52.59000015258789,54.13999938964844,51.7599983215332,53.83000183105469,53.83000183105469,2015300
-2015-01-09 00:00:00-05:00,55.959999084472656,56.9900016784668,54.720001220703125,56.06999969482422,56.06999969482422,6224200
-2015-01-12 00:00:00-05:00,56.0,56.060001373291016,53.43000030517578,54.02000045776367,54.02000045776367,2407700
-2015-01-13 00:00:00-05:00,54.470001220703125,54.79999923706055,52.52000045776367,53.18000030517578,53.18000030517578,1958400
-2015-01-14 00:00:00-05:00,52.79999923706055,53.68000030517578,51.459999084472656,52.20000076293945,52.20000076293945,1854600
 </pre></div>
 </div>
 </div>
@@ -872,56 +583,6 @@ memory usage: 13.7 KB
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>2015-01-02 00:00:00-05:00</td>
-      <td>55.459999</td>
-      <td>55.599998</td>
-      <td>54.240002</td>
-      <td>55.150002</td>
-      <td>55.150002</td>
-      <td>1664500</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2015-01-05 00:00:00-05:00</td>
-      <td>54.540001</td>
-      <td>54.950001</td>
-      <td>52.330002</td>
-      <td>52.529999</td>
-      <td>52.529999</td>
-      <td>2023000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2015-01-06 00:00:00-05:00</td>
-      <td>52.549999</td>
-      <td>53.930000</td>
-      <td>50.750000</td>
-      <td>52.439999</td>
-      <td>52.439999</td>
-      <td>3762800</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2015-01-07 00:00:00-05:00</td>
-      <td>53.320000</td>
-      <td>53.750000</td>
-      <td>51.759998</td>
-      <td>52.209999</td>
-      <td>52.209999</td>
-      <td>1548200</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2015-01-08 00:00:00-05:00</td>
-      <td>52.590000</td>
-      <td>54.139999</td>
-      <td>51.759998</td>
-      <td>53.830002</td>
-      <td>53.830002</td>
-      <td>2015300</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -929,7 +590,7 @@ memory usage: 13.7 KB
 </section>
 </section>
 <section id="working-with-data-columns">
-<h2>Working with data columns<a class="headerlink" href="#working-with-data-columns" title="Permalink to this headline">#</a></h2>
+<h2>Working with data columns<a class="headerlink" href="#working-with-data-columns" title="Permalink to this heading">#</a></h2>
 <p>In general, we’ll usually organize things so that rows in the dataframe are <strong>items</strong> and columns are <strong>features</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -951,18 +612,7 @@ memory usage: 13.7 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      55.459999
-1      54.540001
-2      52.549999
-3      53.320000
-4      52.590000
-         ...    
-246    27.950001
-247    28.270000
-248    28.120001
-249    27.950001
-250    28.580000
-Name: Open, Length: 251, dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Open, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -976,18 +626,7 @@ Name: Open, Length: 251, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      55.459999
-1      54.540001
-2      52.549999
-3      53.320000
-4      52.590000
-         ...    
-246    27.950001
-247    28.270000
-248    28.120001
-249    27.950001
-250    28.580000
-Name: Open, Length: 251, dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Open, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -1023,31 +662,6 @@ Name: Open, Length: 251, dtype: float64
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>55.459999</td>
-      <td>55.150002</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>54.540001</td>
-      <td>52.529999</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>52.549999</td>
-      <td>52.439999</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>53.320000</td>
-      <td>52.209999</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>52.590000</td>
-      <td>53.830002</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -1060,17 +674,7 @@ Name: Open, Length: 251, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    2015-01-02 00:00:00-05:00
-1    2015-01-05 00:00:00-05:00
-2    2015-01-06 00:00:00-05:00
-3    2015-01-07 00:00:00-05:00
-4    2015-01-08 00:00:00-05:00
-5    2015-01-09 00:00:00-05:00
-6    2015-01-12 00:00:00-05:00
-7    2015-01-13 00:00:00-05:00
-8    2015-01-14 00:00:00-05:00
-9    2015-01-15 00:00:00-05:00
-Name: Date, dtype: object
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Date, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -1082,17 +686,7 @@ Name: Date, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>241    2015-12-16 00:00:00-05:00
-242    2015-12-17 00:00:00-05:00
-243    2015-12-18 00:00:00-05:00
-244    2015-12-21 00:00:00-05:00
-245    2015-12-22 00:00:00-05:00
-246    2015-12-23 00:00:00-05:00
-247    2015-12-24 00:00:00-05:00
-248    2015-12-28 00:00:00-05:00
-249    2015-12-29 00:00:00-05:00
-250    2015-12-30 00:00:00-05:00
-Name: Date, dtype: object
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Date, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -1109,19 +703,19 @@ Name: Date, dtype: object
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 251 entries, 0 to 250
+RangeIndex: 0 entries
 Data columns (total 7 columns):
- #   Column     Non-Null Count  Dtype  
----  ------     --------------  -----  
- 0   date       251 non-null    object 
- 1   open       251 non-null    float64
- 2   high       251 non-null    float64
- 3   low        251 non-null    float64
- 4   close      251 non-null    float64
- 5   adj_close  251 non-null    float64
- 6   volume     251 non-null    int64  
-dtypes: float64(5), int64(1), object(1)
-memory usage: 13.9+ KB
+ #   Column     Non-Null Count  Dtype 
+---  ------     --------------  ----- 
+ 0   date       0 non-null      object
+ 1   open       0 non-null      object
+ 2   high       0 non-null      object
+ 3   low        0 non-null      object
+ 4   close      0 non-null      object
+ 5   adj_close  0 non-null      object
+ 6   volume     0 non-null      object
+dtypes: object(7)
+memory usage: 124.0+ bytes
 </pre></div>
 </div>
 </div>
@@ -1135,19 +729,14 @@ memory usage: 13.9+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    55.150002
-1    52.529999
-2    52.439999
-3    52.209999
-4    53.830002
-Name: adj_close, dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: adj_close, dtype: object)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="a-sampling-of-dataframe-methods">
-<h2>A sampling of DataFrame methods.<a class="headerlink" href="#a-sampling-of-dataframe-methods" title="Permalink to this headline">#</a></h2>
+<h2>A sampling of DataFrame methods.<a class="headerlink" href="#a-sampling-of-dataframe-methods" title="Permalink to this heading">#</a></h2>
 <p>A dataframe object has many useful methods.</p>
 <p>Familiarize yourself with dataframe methods – they are very useful.</p>
 <p>These should be self-explanatory.</p>
@@ -1158,13 +747,13 @@ Name: adj_close, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         3.809084e+01
-low          3.659777e+01
-open         3.732426e+01
-close        3.733303e+01
-volume       3.501135e+06
-adj_close    3.733303e+01
-dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         NaN
+low          NaN
+open         NaN
+close        NaN
+volume       NaN
+adj_close    NaN
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -1176,13 +765,13 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         1.138931e+01
-low          1.114006e+01
-open         1.128846e+01
-close        1.126194e+01
-volume       4.152341e+06
-adj_close    1.126194e+01
-dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         NaN
+low          NaN
+open         NaN
+close        NaN
+volume       NaN
+adj_close    NaN
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -1194,13 +783,13 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         3.909000e+01
-low          3.665000e+01
-open         3.822000e+01
-close        3.818000e+01
-volume       2.356000e+06
-adj_close    3.818000e+01
-dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         NaN
+low          NaN
+open         NaN
+close        NaN
+volume       NaN
+adj_close    NaN
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -1212,7 +801,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37.3242629229785
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
 </pre></div>
 </div>
 </div>
@@ -1224,13 +813,13 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.09083672633684
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
 </pre></div>
 </div>
 </div>
 </div>
 <section id="plotting-methods">
-<h3>Plotting methods<a class="headerlink" href="#plotting-methods" title="Permalink to this headline">#</a></h3>
+<h3>Plotting methods<a class="headerlink" href="#plotting-methods" title="Permalink to this heading">#</a></h3>
 <p>Pandas has an extensive library of plotting functions, and they are very easy to use.</p>
 <p>These are your “first look” functions.</p>
 <p>(Later you will use specialized graphics packages for more sophisticated visualizations.)</p>
@@ -1245,7 +834,41 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_44_0.png" src="_images/02B-Pandas_44_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">high</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;High&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">df</span><span class="o">.</span><span class="n">low</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Low&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;YELP Stock Price&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_core.py:1031,</span> in <span class="ni">PlotAccessor.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1028</span>             <span class="n">label_name</span> <span class="o">=</span> <span class="n">label_kw</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+<span class="g g-Whitespace">   </span><span class="mi">1029</span>             <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">label_name</span>
+<span class="ne">-&gt; </span><span class="mi">1031</span> <span class="k">return</span> <span class="n">plot_backend</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_matplotlib/__init__.py:71,</span> in <span class="ni">plot</span><span class="nt">(data, kind, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ax&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s2">&quot;left_ax&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="n">plot_obj</span> <span class="o">=</span> <span class="n">PLOT_CLASSES</span><span class="p">[</span><span class="n">kind</span><span class="p">](</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">71</span> <span class="n">plot_obj</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="n">plot_obj</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">return</span> <span class="n">plot_obj</span><span class="o">.</span><span class="n">result</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_matplotlib/core.py:451,</span> in <span class="ni">MPLPlot.generate</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">449</span> <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_args_adjust</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">451</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_compute_plot_data</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_setup_subplots</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_make_plot</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_matplotlib/core.py:636,</span> in <span class="ni">MPLPlot._compute_plot_data</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span> <span class="c1"># no non-numeric frames or series allowed</span>
+<span class="g g-Whitespace">    </span><span class="mi">635</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">636</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;no numeric data to plot&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">numeric_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_to_ndarray</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: no numeric data to plot
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1258,12 +881,12 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_45_0.png" src="_images/02B-Pandas_45_0.png" />
+<img alt="_images/35ec8461fc88f64c4f89fe6a33a0b6c81592a60004774886c6962e1ede57b84b.png" src="_images/35ec8461fc88f64c4f89fe6a33a0b6c81592a60004774886c6962e1ede57b84b.png" />
 </div>
 </div>
 </section>
 <section id="bulk-operations">
-<h3>Bulk Operations<a class="headerlink" href="#bulk-operations" title="Permalink to this headline">#</a></h3>
+<h3>Bulk Operations<a class="headerlink" href="#bulk-operations" title="Permalink to this heading">#</a></h3>
 <p>Methods like <code class="docutils literal notranslate"><span class="pre">sum()</span></code> and <code class="docutils literal notranslate"><span class="pre">std()</span></code> work on entire columns.</p>
 <p>We can run our own functions across all values in a column (or row) using <code class="docutils literal notranslate"><span class="pre">apply()</span></code>.</p>
 <p>As an example, let’s go back to this plot:</p>
@@ -1278,7 +901,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_49_0.png" src="_images/02B-Pandas_49_0.png" />
+<img alt="_images/32ea0100910636826e2fb2cda7ce824300ea12fd01a41762cc9da40b14859886.png" src="_images/32ea0100910636826e2fb2cda7ce824300ea12fd01a41762cc9da40b14859886.png" />
 </div>
 </div>
 <p>It’s <strong>almost</strong> perfect.  The only problem is the <span class="math notranslate nohighlight">\(x\)</span>-axis: it should show time.</p>
@@ -1291,11 +914,11 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    2015-01-02 00:00:00-05:00
-1    2015-01-05 00:00:00-05:00
-2    2015-01-06 00:00:00-05:00
-3    2015-01-07 00:00:00-05:00
-4    2015-01-08 00:00:00-05:00
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    2015-01-02
+1    2015-01-05
+2    2015-01-06
+3    2015-01-07
+4    2015-01-08
 Name: date, dtype: object
 </pre></div>
 </div>
@@ -1530,12 +1153,12 @@ Name: date, dtype: datetime64[ns]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_61_0.png" src="_images/02B-Pandas_61_0.png" />
+<img alt="_images/a39f5c385d6e934469bd0efdc9f6a615c192668b3a0a0bc7e35945e38cf8e4e1.png" src="_images/a39f5c385d6e934469bd0efdc9f6a615c192668b3a0a0bc7e35945e38cf8e4e1.png" />
 </div>
 </div>
 </section>
 <section id="accessing-rows-of-the-dataframe">
-<h3>Accessing rows of the DataFrame<a class="headerlink" href="#accessing-rows-of-the-dataframe" title="Permalink to this headline">#</a></h3>
+<h3>Accessing rows of the DataFrame<a class="headerlink" href="#accessing-rows-of-the-dataframe" title="Permalink to this heading">#</a></h3>
 <p>So far we’ve seen how to access a column of the DataFrame.  To access a row we use a different notation.</p>
 <p>To access a row by its index value, use the <strong><code class="docutils literal notranslate"><span class="pre">.loc()</span></code></strong> method.</p>
 <div class="cell docutils container">
@@ -1596,7 +1219,7 @@ Name: 2015-01-02 00:00:00, dtype: float64
 </section>
 </section>
 <section id="filtering">
-<h2>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">#</a></h2>
+<h2>Filtering<a class="headerlink" href="#filtering" title="Permalink to this heading">#</a></h2>
 <p>It is easy to select interesting rows from the data.</p>
 <p>All the operations below return a new DataFrame, which itself can be treated the same way as all DataFrames we have seen so far.</p>
 <div class="cell docutils container">
@@ -1931,7 +1554,7 @@ Name: high, dtype: bool
 </div>
 </section>
 <section id="creating-new-columns">
-<h2>Creating new columns<a class="headerlink" href="#creating-new-columns" title="Permalink to this headline">#</a></h2>
+<h2>Creating new columns<a class="headerlink" href="#creating-new-columns" title="Permalink to this heading">#</a></h2>
 <p>To create a new column, simply assign values to it.  Think of the columns as a dictionary:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2457,7 +2080,7 @@ Name: high, dtype: bool
 </div>
 </section>
 <section id="grouping">
-<h2>Grouping<a class="headerlink" href="#grouping" title="Permalink to this headline">#</a></h2>
+<h2>Grouping<a class="headerlink" href="#grouping" title="Permalink to this heading">#</a></h2>
 <p>An <strong>extremely</strong> powerful DataFrame method is <strong><code class="docutils literal notranslate"><span class="pre">groupby()</span></code></strong>.</p>
 <p>This is entirely analagous to <strong><code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code></strong> in SQL.</p>
 <p>It will group the rows of a DataFrame by the values in one (or more) columns, and let you iterate through each group.</p>
@@ -2567,7 +2190,7 @@ The average closing value for the small_gain group is 36.53367346160266
 </div>
 </section>
 <section id="other-pandas-classes">
-<h2>Other Pandas Classes<a class="headerlink" href="#other-pandas-classes" title="Permalink to this headline">#</a></h2>
+<h2>Other Pandas Classes<a class="headerlink" href="#other-pandas-classes" title="Permalink to this heading">#</a></h2>
 <p>A DataFrame is essentially an annotated 2-D array.</p>
 <p>Pandas also has annotated versions of 1-D and 3-D arrays.</p>
 <p>A 1-D array in Pandas is called a <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
@@ -2575,7 +2198,7 @@ The average closing value for the small_gain group is 36.53367346160266
 <p>To use these, read the documentation!</p>
 </section>
 <section id="comparing-multiple-stocks">
-<h2>Comparing multiple stocks<a class="headerlink" href="#comparing-multiple-stocks" title="Permalink to this headline">#</a></h2>
+<h2>Comparing multiple stocks<a class="headerlink" href="#comparing-multiple-stocks" title="Permalink to this heading">#</a></h2>
 <p>As a last task, we will use the experience we obtained so far – and learn some new things – in order to compare the performance of different stocks we obtained from Yahoo finance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2623,7 +2246,7 @@ The average closing value for the small_gain group is 36.53367346160266
   </thead>
   <tbody>
     <tr>
-      <th>2014-01-02 00:00:00-05:00</th>
+      <th>2014-01-02</th>
       <td>37.840000</td>
       <td>10.006667</td>
       <td>177.370941</td>
@@ -2631,7 +2254,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>37.160000</td>
     </tr>
     <tr>
-      <th>2014-01-03 00:00:00-05:00</th>
+      <th>2014-01-03</th>
       <td>37.619999</td>
       <td>9.970667</td>
       <td>178.432129</td>
@@ -2639,7 +2262,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>36.910000</td>
     </tr>
     <tr>
-      <th>2014-01-06 00:00:00-05:00</th>
+      <th>2014-01-06</th>
       <td>37.470001</td>
       <td>9.800000</td>
       <td>177.820267</td>
@@ -2647,7 +2270,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>36.130001</td>
     </tr>
     <tr>
-      <th>2014-01-07 00:00:00-05:00</th>
+      <th>2014-01-07</th>
       <td>37.849998</td>
       <td>9.957333</td>
       <td>181.367111</td>
@@ -2655,7 +2278,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>36.410000</td>
     </tr>
     <tr>
-      <th>2014-01-08 00:00:00-05:00</th>
+      <th>2014-01-08</th>
       <td>37.720001</td>
       <td>10.085333</td>
       <td>179.703629</td>
@@ -2673,7 +2296,7 @@ The average closing value for the small_gain group is 36.53367346160266
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_100_0.png" src="_images/02B-Pandas_100_0.png" />
+<img alt="_images/e154867c67ed856817eeeb050d89f4802c945d6616086508d87a708110a0d91a.png" src="_images/e154867c67ed856817eeeb050d89f4802c945d6616086508d87a708110a0d91a.png" />
 </div>
 </div>
 <p>Next, we will calculate returns over a period of length <span class="math notranslate nohighlight">\(T,\)</span> defined as:</p>
@@ -2723,7 +2346,7 @@ The average closing value for the small_gain group is 36.53367346160266
   </thead>
   <tbody>
     <tr>
-      <th>2014-02-07 00:00:00-05:00</th>
+      <th>2014-02-07</th>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -2731,7 +2354,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2014-02-10 00:00:00-05:00</th>
+      <th>2014-02-10</th>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -2739,7 +2362,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2014-02-11 00:00:00-05:00</th>
+      <th>2014-02-11</th>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -2747,7 +2370,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2014-02-12 00:00:00-05:00</th>
+      <th>2014-02-12</th>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -2755,7 +2378,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2014-02-13 00:00:00-05:00</th>
+      <th>2014-02-13</th>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -2763,7 +2386,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2014-02-14 00:00:00-05:00</th>
+      <th>2014-02-14</th>
       <td>0.003700</td>
       <td>0.320653</td>
       <td>-0.009918</td>
@@ -2771,7 +2394,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>0.012379</td>
     </tr>
     <tr>
-      <th>2014-02-18 00:00:00-05:00</th>
+      <th>2014-02-18</th>
       <td>0.009304</td>
       <td>0.361995</td>
       <td>-0.018485</td>
@@ -2779,7 +2402,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>0.013817</td>
     </tr>
     <tr>
-      <th>2014-02-19 00:00:00-05:00</th>
+      <th>2014-02-19</th>
       <td>0.010675</td>
       <td>0.317279</td>
       <td>-0.016398</td>
@@ -2787,7 +2410,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>0.038195</td>
     </tr>
     <tr>
-      <th>2014-02-20 00:00:00-05:00</th>
+      <th>2014-02-20</th>
       <td>0.011096</td>
       <td>0.405798</td>
       <td>-0.028728</td>
@@ -2795,7 +2418,7 @@ The average closing value for the small_gain group is 36.53367346160266
       <td>0.036803</td>
     </tr>
     <tr>
-      <th>2014-02-21 00:00:00-05:00</th>
+      <th>2014-02-21</th>
       <td>0.010074</td>
       <td>0.385510</td>
       <td>-0.027558</td>
@@ -2815,7 +2438,7 @@ The average closing value for the small_gain group is 36.53367346160266
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_105_0.png" src="_images/02B-Pandas_105_0.png" />
+<img alt="_images/6b36dd35f5f7f66a5d8600ae1f0c0732df24177581c8be3516a20ffa5fc1023e.png" src="_images/6b36dd35f5f7f66a5d8600ae1f0c0732df24177581c8be3516a20ffa5fc1023e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2827,7 +2450,7 @@ The average closing value for the small_gain group is 36.53367346160266
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_106_0.png" src="_images/02B-Pandas_106_0.png" />
+<img alt="_images/27f083d0adb013b42c2f5197155dca5ea7765b67653522383d9743e81d592f21.png" src="_images/27f083d0adb013b42c2f5197155dca5ea7765b67653522383d9743e81d592f21.png" />
 </div>
 </div>
 <p>There appears to be some (fairly strong) correlation between the movement of TSLA and YELP stocks.  Let’s measure this.</p>
@@ -2922,7 +2545,7 @@ The average closing value for the small_gain group is 36.53367346160266
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_111_0.png" src="_images/02B-Pandas_111_0.png" />
+<img alt="_images/734b13b0c632caf6c81005ca5a91be433ce0a00e15f423b6e9a88aa801680e94.png" src="_images/734b13b0c632caf6c81005ca5a91be433ce0a00e15f423b6e9a88aa801680e94.png" />
 </div>
 </div>
 <p>Finally, it is important to know that the plotting performed by Pandas is just a layer on top of <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> (i.e., the <code class="docutils literal notranslate"><span class="pre">plt</span></code> package).</p>
@@ -2947,7 +2570,7 @@ The average closing value for the small_gain group is 36.53367346160266
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02B-Pandas_114_0.png" src="_images/02B-Pandas_114_0.png" />
+<img alt="_images/26d1bc3889f0ace9b14130be6d894b78f098f2229bac7c0be9ab5fa7a29919af.png" src="_images/26d1bc3889f0ace9b14130be6d894b78f098f2229bac7c0be9ab5fa7a29919af.png" />
 </div>
 </div>
 <p>To understand what these functions are doing, (especially the <code class="docutils literal notranslate"><span class="pre">annotate</span></code> function), you will need to consult the online documentation for matplotlib.  Just use Google to find it.</p>
@@ -2966,7 +2589,7 @@ The average closing value for the small_gain group is 36.53367346160266
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2974,50 +2597,117 @@ The average closing value for the small_gain group is 36.53367346160266
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02A-Git-Jupyter.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Essential Tools: Git and Jupyter</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02A-Git-Jupyter.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Essential Tools: Git and Jupyter</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="04-Linear-Algebra-Refresher.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="04-Linear-Algebra-Refresher.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Linear Algebra Refresher</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-storing-and-retrieving-your-data">Fetching, storing and retrieving your data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-to-from-a-csv-file">Reading to/from a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-data-columns">Working with data columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sampling-of-dataframe-methods">A sampling of DataFrame methods.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-methods">Plotting methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulk-operations">Bulk Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-rows-of-the-dataframe">Accessing rows of the DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">Filtering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-columns">Creating new columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grouping">Grouping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-pandas-classes">Other Pandas Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-multiple-stocks">Comparing multiple stocks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Mark Crovella and Tom Gardos<br/>
-  
-      &copy; Copyright 2023.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Mark Crovella and Tom Gardos
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
