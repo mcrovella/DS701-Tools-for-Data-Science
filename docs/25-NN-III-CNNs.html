@@ -1,0 +1,1738 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks &#8212; Tools for Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '25-NN-III-CNNs';</script>
+    <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Recommender Systems" href="20-Recommender-Systems.html" />
+    <link rel="prev" title="NN II – Compute Graph, Backprop and Training" href="24-NN-II-Backprop.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="landing-page.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="landing-page.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02B-Pandas.html">Essential Tools: Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">Probability and Statistics Refresher</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-Clustering-IV-GMM-EM.html">Gaussian Mixture Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors and Model Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="23-NN-I-Gradient-Descent.html">Neural Networks I – Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24-NN-II-Backprop.html">NN II – Compute Graph, Backprop and Training</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20-Recommender-Systems.html">Recommender Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/25-NN-III-CNNs.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches-and-stochastic-gradient-descent">Batches and Stochastic Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-stochastic-gradient-descent">Advantages of Stochastic Gradient Descent</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-an-image-dataset-in-batches-in-pytorch">Load an Image Dataset in Batches in PyTorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-scale-mnist">1. Load and Scale MNIST</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-network-applications">Convolutional Network Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional Neural Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-1-d-input-data">Example with 1-D Input Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolution">2D Convolution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-convolutional-neural-network-in-pytorch">Define a Convolutional Neural Network in PyTorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-loss-function-and-optimizer">3. Define a Loss function and optimizer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-loss">Cross Entropy Loss</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-network">4. Train the network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dig-deeper">To Dig Deeper</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nn-iii-stochastic-gradient-descent-batches-and-convolutional-neural-networks">
+<h1>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks<a class="headerlink" href="#nn-iii-stochastic-gradient-descent-batches-and-convolutional-neural-networks" title="Permalink to this heading">#</a></h1>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this heading">#</a></h2>
+<p>So far we covered</p>
+<ul class="simple">
+<li><p>Gradients, gradient descent and back propagation</p></li>
+<li><p>Fully connected neural networks (Multi-Layer Perceptron)</p></li>
+<li><p>Training of MLPs using back propagation</p></li>
+</ul>
+<p>Today, we’ll cover</p>
+<ul class="simple">
+<li><p><em>Stochastic</em> gradient descent (SGD)</p></li>
+<li><p>Convolutional Neural Networks (CNNs)</p></li>
+<li><p>Training a CNN with SGD</p></li>
+</ul>
+</section>
+<section id="batches-and-stochastic-gradient-descent">
+<h2>Batches and Stochastic Gradient Descent<a class="headerlink" href="#batches-and-stochastic-gradient-descent" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Compute the gradient (e.g. forward pass and backward pass) with only a <em>random subset</em>
+of the input data.</p></li>
+</ul>
+<blockquote>
+<div><p>We call the subset a <em>batch</em>.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Work through the dataset by <em>randomly sampling without replacement</em>. This is the <em>stochastic</em> part.</p></li>
+<li><p>One pass through the data is called an <em>epoch</em>.</p></li>
+</ul>
+<p>For squared error loss with <span class="math notranslate nohighlight">\(N\)</span> input samples, the loss for (full-batch) gradient descent was</p>
+<div class="math notranslate nohighlight">
+\[
+L = \sum_{i=0}^{N-1} \ell_i = \sum_{i=0}^{N-1} \left( y - \hat{y}  \right)^2
+\]</div>
+<p>For <em>Stochastic Gradient Descent</em>, we calculate the loss only on a <em>batch</em> at as time.
+For every time <span class="math notranslate nohighlight">\(t\)</span>, let’s denote the batch as <span class="math notranslate nohighlight">\(\mathcal{B}_t\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - \hat{y}  \right)^2
+\]</div>
+<p>Let’s look at an example.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Generate 12 evenly spaced x values between 1 and 4</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Add normally distributed noise to the x values</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Calculate the corresponding y values for the line y = 2x</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="c1"># Add normally distributed noise to the y values</span>
+<span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Shuffle the points and split them into 3 groups of 4</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot each group of points with a different color and label</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Display the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/2b0d1835c469bd37fd10079f6c42eca08d11859822708cc9f4c298bb0fb924fd.png" src="_images/2b0d1835c469bd37fd10079f6c42eca08d11859822708cc9f4c298bb0fb924fd.png" />
+</div>
+</div>
+<p>Say we have a training data set of 12 points and we want to use a <em>batch size</em> of 3.</p>
+<p>Divide the 12 points into batches of 3 by randomlly selecting points without replacement.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shuffle the points and split them into 3 groups of 4</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot each group of points with a different color and label</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Display the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/63a50f12a75a89201290db01cca408cfc526f4c3c1e3fb62ff600bde6877a43e.png" src="_images/63a50f12a75a89201290db01cca408cfc526f4c3c1e3fb62ff600bde6877a43e.png" />
+</div>
+</div>
+<p>We can resample again to create a different set of batches.</p>
+<p>Optionally, you can shuffle after every epoch.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot each group of points with a different color and label</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Display the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/e0d92dadb6a87ccb8d634853c543bc79dbb5d29175657a73ab45a52ac9f8dc4b.png" src="_images/e0d92dadb6a87ccb8d634853c543bc79dbb5d29175657a73ab45a52ac9f8dc4b.png" />
+</div>
+</div>
+<p>Then for every training iteration, you calculate the forward pass and backward pass loss with only the data from the batch.</p>
+<p>Above, we use data from the 1st batch.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot each group of points with a different color and label</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Display the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ddbcaa5bc15f9af8db6d6e0dfe374a5b60ca0405cae62365cdfccb8c698e26f4.png" src="_images/ddbcaa5bc15f9af8db6d6e0dfe374a5b60ca0405cae62365cdfccb8c698e26f4.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot each group of points with a different color and label</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Display the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ac7d4f8b12d6b3faac42a4d3a1183049c66b429a6684379dff34c52e6b3ac113.png" src="_images/ac7d4f8b12d6b3faac42a4d3a1183049c66b429a6684379dff34c52e6b3ac113.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot each group of points with a different color and label</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Display the legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/e32158c63725c965bd6a1430de0264acf01fc42cb17016bd28460c4c1c616e78.png" src="_images/e32158c63725c965bd6a1430de0264acf01fc42cb17016bd28460c4c1c616e78.png" />
+</div>
+</div>
+<section id="advantages-of-stochastic-gradient-descent">
+<h3>Advantages of Stochastic Gradient Descent<a class="headerlink" href="#advantages-of-stochastic-gradient-descent" title="Permalink to this heading">#</a></h3>
+<p>There are two main advantages to <em>Stochastic Gradient Descent</em>.</p>
+<ol class="arabic simple">
+<li><p>You don’t read and compute on every input data sample for every training iteration,</p>
+<ul class="simple">
+<li><p>Speeds up iteration while still making optimization progress</p></li>
+<li><p>This works better with limited GPU memory and CPU cache. Not slowing down by thrashing limited memory.</p></li>
+</ul>
+</li>
+<li><p>Improves training convergence by adding <em>noise</em> to the weight updates.</p>
+<ul class="simple">
+<li><p>Can avoid getting stuck in a local minima.</p></li>
+</ul>
+</li>
+</ol>
+<p>An example</p>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>    
+<img src="figs/NN-figs/L25-GD-vs-SGD.png" height="50%">
+</center> 
+<p>This a contour plot showing a loss surface for a model with only 2 parameters.</p>
+<p>For full-batch gradient descent, starting points 1 and 3 still end up at the
+global minimum, but starting point 2 get stuck in a local minimum.</p>
+<p>For stochastic gradient descent, starting point 1 still ends up at the global
+minimum, but now starting point 2 also avoids the local minimum and ends up at
+the global minimum.</p>
+</section>
+</section>
+<section id="load-an-image-dataset-in-batches-in-pytorch">
+<h2>Load an Image Dataset in Batches in PyTorch<a class="headerlink" href="#load-an-image-dataset-in-batches-in-pytorch" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-and-scale-mnist">
+<h3>1. Load and Scale MNIST<a class="headerlink" href="#load-and-scale-mnist" title="Permalink to this heading">#</a></h3>
+<p>Load MNIST handwritten digit dataset with 60K training samples and 10K test samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a transform to scale the pixel values from [0, 255] to [-1, 1]</span>
+<span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+                                <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,))])</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="c1"># Download and load the training data</span>
+<span class="n">trainset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s1">&#39;./data/MNIST_data/&#39;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">trainloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">trainset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> 
+                                          <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Download and load the test data</span>
+<span class="n">testset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s1">&#39;./data/MNIST_data/&#39;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">testloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">testset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> 
+                                         <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">torchvision.dataset.MNIST</span></code> is a convenience class which inherits from
+<code class="docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> (see <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset">doc</a>)
+that wraps a particular dataset and overwrites a <code class="docutils literal notranslate"><span class="pre">__getitem__()</span></code> method which retrieves a data sample given an
+index or a key.</p>
+<p>If we give the argument <code class="docutils literal notranslate"><span class="pre">train=True</span></code>, it returns the training set, while the
+argument <code class="docutils literal notranslate"><span class="pre">train=False</span></code> returns the test set.</p>
+<p><code class="docutils literal notranslate"><span class="pre">torch.utils.data.DataLoader()</span></code> takes a dataset as in the previous line and
+returns a python <em>iterable</em> which lets you loop through the data.</p>
+<p>We give <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code> the <em>batch size</em>, and it will return a batch of data samples
+on each iteration.</p>
+<p>By passing <code class="docutils literal notranslate"><span class="pre">shuffle=True</span></code>, we are telling the data loader to shuffle the batches
+after every epoch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No. of training images: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">trainset</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No. of test images: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">testset</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The dataset classes are:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trainset</span><span class="o">.</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No. of training images: 60000
+No. of test images: 10000
+The dataset classes are:
+[&#39;0 - zero&#39;, &#39;1 - one&#39;, &#39;2 - two&#39;, &#39;3 - three&#39;, &#39;4 - four&#39;, &#39;5 - five&#39;, &#39;6 - six&#39;, &#39;7 - seven&#39;, &#39;8 - eight&#39;, &#39;9 - nine&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the data loader, <code class="docutils literal notranslate"><span class="pre">trainloader</span></code> in action in the code below to
+get a batch and visualize it.</p>
+<p>Everytime we rerun the cell we will get a different batch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span>     <span class="c1"># unnormalize</span>
+    <span class="n">npimg</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">npimg</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># get some random training images</span>
+<span class="n">dataiter</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">trainloader</span><span class="p">)</span>
+<span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">dataiter</span><span class="p">)</span>
+
+<span class="c1"># show images</span>
+<span class="n">imshow</span><span class="p">(</span><span class="n">torchvision</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_grid</span><span class="p">(</span><span class="n">images</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6920a7a851e6475e1bf800d0c2ece97405194efcb24d1324f6bd578be114064b.png" src="_images/6920a7a851e6475e1bf800d0c2ece97405194efcb24d1324f6bd578be114064b.png" />
+</div>
+</div>
+<p>We can display the training labels for the image as well.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="c1"># Assuming batch_size is 64 and images are displayed in an 8x8 grid</span>
+<span class="n">labels_grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">trainset</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
+<span class="n">labels_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels_grid</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">labels_grid</span><span class="p">)</span>
+
+<span class="c1"># Generate HTML representation of DataFrame with border</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9 - nine</td>
+      <td>1 - one</td>
+      <td>5 - five</td>
+      <td>3 - three</td>
+      <td>2 - two</td>
+      <td>8 - eight</td>
+      <td>6 - six</td>
+      <td>8 - eight</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1 - one</td>
+      <td>1 - one</td>
+      <td>5 - five</td>
+      <td>4 - four</td>
+      <td>8 - eight</td>
+      <td>3 - three</td>
+      <td>8 - eight</td>
+      <td>7 - seven</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0 - zero</td>
+      <td>9 - nine</td>
+      <td>4 - four</td>
+      <td>6 - six</td>
+      <td>6 - six</td>
+      <td>9 - nine</td>
+      <td>6 - six</td>
+      <td>3 - three</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3 - three</td>
+      <td>7 - seven</td>
+      <td>2 - two</td>
+      <td>4 - four</td>
+      <td>7 - seven</td>
+      <td>4 - four</td>
+      <td>5 - five</td>
+      <td>1 - one</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0 - zero</td>
+      <td>0 - zero</td>
+      <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>0 - zero</td>
+      <td>6 - six</td>
+      <td>7 - seven</td>
+      <td>0 - zero</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>4 - four</td>
+      <td>5 - five</td>
+      <td>2 - two</td>
+      <td>5 - five</td>
+      <td>8 - eight</td>
+      <td>9 - nine</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7 - seven</td>
+      <td>6 - six</td>
+      <td>7 - seven</td>
+      <td>8 - eight</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
+      <td>8 - eight</td>
+      <td>2 - two</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2 - two</td>
+      <td>1 - one</td>
+      <td>5 - five</td>
+      <td>9 - nine</td>
+      <td>6 - six</td>
+      <td>0 - zero</td>
+      <td>4 - four</td>
+      <td>7 - seven</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+</section>
+</section>
+<section id="convolutional-network-applications">
+<h2>Convolutional Network Applications<a class="headerlink" href="#convolutional-network-applications" title="Permalink to this heading">#</a></h2>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>    
+<img src="figs/NN-figs/L25-img-class.svg" height="50%">
+</center> 
+<ul class="simple">
+<li><p>Multi-class classification problem ( &gt;2 possible classes)</p></li>
+<li><p>Convolutional network with classification output</p></li>
+</ul>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>    
+<img src="figs/NN-figs/L25-obj-det.png" height="50%">
+</center> 
+<ul class="simple">
+<li><p>Localize and classify objects in an image</p></li>
+<li><p>Convolutional network with classification <em>and</em> regression output</p></li>
+</ul>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>    
+<img src="figs/NN-figs/L25-img-seg.png" height="50%">
+</center> 
+<ul class="simple">
+<li><p>Classify each pixel in an image to 2 or more classes</p></li>
+<li><p>Convolutional encoder-decoder network with a classification values for each pixel.</p></li>
+</ul>
+</section>
+<section id="convolutional-neural-networks">
+<h2>Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this heading">#</a></h2>
+<p>Problems with fully-connected networks</p>
+<ul class="simple">
+<li><p>Size</p>
+<ul>
+<li><p>224x224 RGB image = 150,528 dimensions</p></li>
+<li><p>Hidden layers generally larger than inputs</p></li>
+<li><p>One hidden layer = 150,520x150,528 weights – 22 billion</p></li>
+</ul>
+</li>
+<li><p>Nearby pixels statistically related</p>
+<ul>
+<li><p>But fully connected network doesn’t exploit spatial correlation</p></li>
+</ul>
+</li>
+<li><p>Should be stable under transformations</p>
+<ul>
+<li><p>Don’t want to re-learn appearance at different parts of image</p></li>
+</ul>
+</li>
+</ul>
+<p>Solution: Convolutional Neural Networks</p>
+<ul class="simple">
+<li><p>Parameters only look at local data regions</p></li>
+<li><p>Shares parameters across image or signal</p></li>
+</ul>
+<section id="example-with-1-d-input-data">
+<h3>Example with 1-D Input Data<a class="headerlink" href="#example-with-1-d-input-data" title="Permalink to this heading">#</a></h3>
+<p>In <em>convolutional neural networks</em>, we define a set of weights that we move across
+the input data.</p>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>
+<img src="figs/NN-figs/L25-conv04.png" height="75%">
+</center> 
+<p>Example with 3 weights and input of length 6.</p>
+<p>For figure (a), we calculate</p>
+<div class="math notranslate nohighlight">
+\[ z_2 = \omega_1 x_1 + \omega_2 x_2 + \omega_3 x_3 \]</div>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>    
+<img src="figs/NN-figs/L25-conv05.png" height="75%">
+</center> 
+<p>To calculate <span class="math notranslate nohighlight">\(z_2\)</span>, we shift the weights over 1 place (figure (b)) and then
+weight and sum the inputs. We can generalize the equation slightly.</p>
+<div class="math notranslate nohighlight">
+\[ z_i = \omega_1 x_{i - 1} + \omega_2 x_i + \omega_3 x_{i+1} \]</div>
+<p>But what do we do about <span class="math notranslate nohighlight">\(z_1\)</span>?</p>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>
+<img src="figs/NN-figs/L25-conv06.png" height="75%">
+</center> 
+<p>We can calculate <span class="math notranslate nohighlight">\(z_1\)</span> by <em>padding</em> our input data. In figure (c), we
+simply add <span class="math notranslate nohighlight">\(0\)</span>, which means we can now calculate <span class="math notranslate nohighlight">\(z_1\)</span>.</p>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>    
+<img src="figs/NN-figs/L25-conv07.png" height="75%">
+</center> 
+<p>Alternatively, we can just reduce the size of the output, by only calculating where
+we have <em>valid</em> input data, as in figure (d).</p>
+<p>For 1-D data, this reduces the output size by 1 at the beginning and end of the
+data, so by 2 overall for length-3 filter.</p>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<center>    
+<img src="figs/NN-figs/L25-conv-fig10-3.png" height="75%">
+</center> <p>There are a few design choices one can make with convolution layers, such as:</p>
+<ol class="arabic simple">
+<li><p><em>filter length</em>, e.g. size 3 in figures (a) and (b)</p></li>
+<li><p><em>stride</em>, which is how much you shift to calculate the next output. Common values are</p>
+<ol class="arabic simple">
+<li><p><em>stride 1</em> as we saw in the previous examples and in figures (c) and (d)</p></li>
+<li><p><em>stride 2</em>, where you shift by 2 instead of 1, an effectively halve the size of the output as in figures (a) and (b)</p></li>
+</ol>
+</li>
+<li><p><em>dilation</em>, where you expand the filter as in figure (d)</p></li>
+</ol>
+</section>
+<section id="d-convolution">
+<h3>2D Convolution<a class="headerlink" href="#d-convolution" title="Permalink to this heading">#</a></h3>
+<p>For images and video frames we use a two-dimensional convolution
+(called <code class="docutils literal notranslate"><span class="pre">conv2d</span></code> in PyTorch) which is an extension of the 1-D
+convolution as shown in the following illustration.</p>
+<!-- Image Credit "https://cs231n.github.io/convolutional-networks/"-->
+<center>    
+<img src="figs/NN-figs/L25-conv-2d.png" height="50%">
+</center> 
+<hr class="docutils" />
+<p><a class="reference external" href="https://cs231n.github.io/convolutional-networks/">cs231n</a></p>
+<p>To see this figure animated, clone the class repo and click on the file <code class="docutils literal notranslate"><span class="pre">./conv-demo/index.html</span></code>.</p>
+</section>
+</section>
+<section id="define-a-convolutional-neural-network-in-pytorch">
+<h2>Define a Convolutional Neural Network in PyTorch<a class="headerlink" href="#define-a-convolutional-neural-network-in-pytorch" title="Permalink to this heading">#</a></h2>
+<p>We will do the following steps in order:</p>
+<ol class="arabic simple">
+<li><p>We already loaded and scaled the MNIST training and test datasets using
+<code class="docutils literal notranslate"><span class="pre">torchvision</span></code></p></li>
+<li><p>Define a Convolutional Neural Network</p></li>
+<li><p>Define a loss function</p></li>
+<li><p>Train the network on the training data</p></li>
+<li><p>Test the network on the test data</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># network for MNIST</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">9216</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="define-a-loss-function-and-optimizer">
+<h3>3. Define a Loss function and optimizer<a class="headerlink" href="#define-a-loss-function-and-optimizer" title="Permalink to this heading">#</a></h3>
+<p>We’ll use a Classification Cross-Entropy loss and SGD with momentum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="cross-entropy-loss">
+<h4>Cross Entropy Loss<a class="headerlink" href="#cross-entropy-loss" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Popular loss function for multi-class classification that measures the <em>dissimilarity</em> between the predicted class log probability <span class="math notranslate nohighlight">\(\log(p_i)\)</span> and the true class <span class="math notranslate nohighlight">\(y_i\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ - \sum_i y_i \log(p_i)) \]</div>
+<p>See for example <a class="reference external" href="https://machinelearningmastery.com/cross-entropy-for-machine-learning/">here</a> for more information.</p>
+</section>
+<section id="momentum">
+<h4>Momentum<a class="headerlink" href="#momentum" title="Permalink to this heading">#</a></h4>
+<p>Momentum is a technique used in optimizing neural networks that helps accelerate gradients vectors in the right directions, leading to faster convergence. It is inspired by physical laws of motion where the optimizer uses ‘momentum’ to push over hilly terrain and valleys to find the global minimum.</p>
+<p>In gradient descent, the weight update rule with momentum is given by:</p>
+<div class="math notranslate nohighlight">
+\[ 
+m_{t+1} = \beta m_t + (1 - \beta) \nabla J(w)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+w_{t+1} = w_t - \alpha m_{t+1}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m_t\)</span> is the momentum (which drives the update at iteration <span class="math notranslate nohighlight">\(t\)</span>),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta \in [0, 1)\)</span>, typically 0.9, controls the degree to which the gradient is smoothed over time, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is the learning rate.</p></li>
+</ul>
+<p>See <em>Understanding Deep Learning</em>, Section 6.3 to learn more.</p>
+</section>
+</section>
+<section id="train-the-network">
+<h3>4. Train the network<a class="headerlink" href="#train-the-network" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Epoch #, Iteration #] loss&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>  <span class="c1"># loop over the dataset multiple times</span>
+
+    <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">trainloader</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># get the inputs; data is a list of [inputs, labels]</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="c1"># zero the parameter gradients</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c1"># forward + backward + optimize</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># print statistics</span>
+        <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>    <span class="c1"># print every 2000 mini-batches</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s1">5d</span><span class="si">}</span><span class="s1">] loss: </span><span class="si">{</span><span class="n">running_loss</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2000</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished Training&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Epoch #, Iteration #] loss
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   100] loss: 0.110
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   200] loss: 0.073
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   300] loss: 0.029
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   400] loss: 0.022
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   500] loss: 0.019
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   600] loss: 0.017
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   700] loss: 0.016
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   800] loss: 0.016
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   900] loss: 0.013
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   100] loss: 0.012
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   200] loss: 0.011
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   300] loss: 0.012
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   400] loss: 0.010
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   500] loss: 0.010
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   600] loss: 0.010
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   700] loss: 0.009
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   800] loss: 0.008
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   900] loss: 0.008
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished Training
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not necessary, but we save the network to storage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;./cifar_net.pth&#39;</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Display some of the images from the test set with the ground truth labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataiter</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">testloader</span><span class="p">)</span>
+<span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">dataiter</span><span class="p">)</span>
+
+<span class="c1"># print images</span>
+<span class="n">imshow</span><span class="p">(</span><span class="n">torchvision</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_grid</span><span class="p">(</span><span class="n">images</span><span class="p">))</span>
+<span class="c1">#print(&#39;GroundTruth: &#39;, &#39; &#39;.join(f&#39;{testset.classes[labels[j]]:5s}&#39; for j in range(4)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5e8d13a8cf725473c8602d9ed29d7b0d96031911075d94a3d08c82add3ae22e4.png" src="_images/5e8d13a8cf725473c8602d9ed29d7b0d96031911075d94a3d08c82add3ae22e4.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="c1"># Assuming batch_size is 64 and images are displayed in an 8x8 grid</span>
+<span class="n">labels_grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">testset</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
+<span class="n">labels_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels_grid</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">labels_grid</span><span class="p">)</span>
+
+<span class="c1"># Generate HTML representation of DataFrame with border</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7 - seven</td>
+      <td>8 - eight</td>
+      <td>7 - seven</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>0 - zero</td>
+      <td>6 - six</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>3 - three</td>
+      <td>6 - six</td>
+      <td>8 - eight</td>
+      <td>2 - two</td>
+      <td>5 - five</td>
+      <td>4 - four</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8 - eight</td>
+      <td>9 - nine</td>
+      <td>9 - nine</td>
+      <td>4 - four</td>
+      <td>9 - nine</td>
+      <td>3 - three</td>
+      <td>6 - six</td>
+      <td>1 - one</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6 - six</td>
+      <td>5 - five</td>
+      <td>2 - two</td>
+      <td>5 - five</td>
+      <td>0 - zero</td>
+      <td>7 - seven</td>
+      <td>0 - zero</td>
+      <td>3 - three</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2 - two</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>6 - six</td>
+      <td>8 - eight</td>
+      <td>6 - six</td>
+      <td>2 - two</td>
+      <td>0 - zero</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6 - six</td>
+      <td>0 - zero</td>
+      <td>3 - three</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
+      <td>3 - three</td>
+      <td>8 - eight</td>
+      <td>9 - nine</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7 - seven</td>
+      <td>3 - three</td>
+      <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9 - nine</td>
+      <td>5 - five</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>0 - zero</td>
+      <td>9 - nine</td>
+      <td>0 - zero</td>
+      <td>0 - zero</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<p>We’ll load the model back from storage, which is not strictly necessary since it
+is still in memory, but for illustration purposes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">PATH</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;All keys matched successfully&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s run inference (forward pass) on the model to get numeric outputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Get the index of the element with highest value and print the label
+associated with that index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#print(&#39;Predicted: &#39;, &#39; &#39;.join(f&#39;{testset.classes[predicted[j]]:5s}&#39;</span>
+<span class="c1">#                              for j in range(4)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming batch_size is 64 and images are displayed in an 8x8 grid</span>
+<span class="n">labels_grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">testset</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">predicted</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
+<span class="n">labels_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels_grid</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">labels_grid</span><span class="p">)</span>
+
+<span class="c1"># Generate HTML representation of DataFrame with border</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7 - seven</td>
+      <td>0 - zero</td>
+      <td>7 - seven</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>0 - zero</td>
+      <td>1 - one</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>3 - three</td>
+      <td>6 - six</td>
+      <td>8 - eight</td>
+      <td>2 - two</td>
+      <td>5 - five</td>
+      <td>4 - four</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8 - eight</td>
+      <td>9 - nine</td>
+      <td>9 - nine</td>
+      <td>4 - four</td>
+      <td>9 - nine</td>
+      <td>3 - three</td>
+      <td>6 - six</td>
+      <td>2 - two</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6 - six</td>
+      <td>5 - five</td>
+      <td>2 - two</td>
+      <td>5 - five</td>
+      <td>0 - zero</td>
+      <td>7 - seven</td>
+      <td>0 - zero</td>
+      <td>3 - three</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2 - two</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>6 - six</td>
+      <td>8 - eight</td>
+      <td>6 - six</td>
+      <td>2 - two</td>
+      <td>0 - zero</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6 - six</td>
+      <td>0 - zero</td>
+      <td>3 - three</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
+      <td>3 - three</td>
+      <td>8 - eight</td>
+      <td>9 - nine</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7 - seven</td>
+      <td>3 - three</td>
+      <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>4 - four</td>
+      <td>5 - five</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>0 - zero</td>
+      <td>9 - nine</td>
+      <td>0 - zero</td>
+      <td>0 - zero</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<p>Evaluate over the entire test set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># since we&#39;re not training, we don&#39;t need to calculate the gradients for our outputs</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">testloader</span><span class="p">:</span>
+        <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="c1"># calculate outputs by running images through the network</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+        <span class="c1"># the class with the highest energy is what we choose as prediction</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy of the network on the 10000 test images: </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">correct</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">total</span><span class="si">}</span><span class="s1"> %&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of the network on the 10000 test images: 96 %
+</pre></div>
+</div>
+</div>
+</div>
+<p>Evaluate the performance per class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prepare to count predictions for each class</span>
+<span class="n">correct_pred</span> <span class="o">=</span> <span class="p">{</span><span class="n">classname</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">classname</span> <span class="ow">in</span> <span class="n">testset</span><span class="o">.</span><span class="n">classes</span><span class="p">}</span>
+<span class="n">total_pred</span> <span class="o">=</span> <span class="p">{</span><span class="n">classname</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">classname</span> <span class="ow">in</span> <span class="n">testset</span><span class="o">.</span><span class="n">classes</span><span class="p">}</span>
+
+<span class="c1"># again no gradients needed</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">testloader</span><span class="p">:</span>
+        <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># collect the correct predictions for each class</span>
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="n">prediction</span><span class="p">:</span>
+                <span class="n">correct_pred</span><span class="p">[</span><span class="n">testset</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">label</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">total_pred</span><span class="p">[</span><span class="n">testset</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">label</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="c1"># print accuracy for each class</span>
+<span class="k">for</span> <span class="n">classname</span><span class="p">,</span> <span class="n">correct_count</span> <span class="ow">in</span> <span class="n">correct_pred</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">correct_count</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_pred</span><span class="p">[</span><span class="n">classname</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy for class: </span><span class="si">{</span><span class="n">classname</span><span class="si">:</span><span class="s1">5s</span><span class="si">}</span><span class="s1"> is </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for class: 0 - zero is 98.7 %
+Accuracy for class: 1 - one is 98.5 %
+Accuracy for class: 2 - two is 96.7 %
+Accuracy for class: 3 - three is 94.5 %
+Accuracy for class: 4 - four is 95.7 %
+Accuracy for class: 5 - five is 96.2 %
+Accuracy for class: 6 - six is 98.3 %
+Accuracy for class: 7 - seven is 95.7 %
+Accuracy for class: 8 - eight is 92.9 %
+Accuracy for class: 9 - nine is 94.0 %
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="to-dig-deeper">
+<h3>To Dig Deeper<a class="headerlink" href="#to-dig-deeper" title="Permalink to this heading">#</a></h3>
+<p>Look at common CNN network architectures.</p>
+<p>For example in <em>Understanding Deep Learning</em> section 10.5.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="24-NN-II-Backprop.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">NN II – Compute Graph, Backprop and Training</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20-Recommender-Systems.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Recommender Systems</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches-and-stochastic-gradient-descent">Batches and Stochastic Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-stochastic-gradient-descent">Advantages of Stochastic Gradient Descent</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-an-image-dataset-in-batches-in-pytorch">Load an Image Dataset in Batches in PyTorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-scale-mnist">1. Load and Scale MNIST</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-network-applications">Convolutional Network Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional Neural Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-1-d-input-data">Example with 1-D Input Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolution">2D Convolution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-convolutional-neural-network-in-pytorch">Define a Convolutional Neural Network in PyTorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-loss-function-and-optimizer">3. Define a Loss function and optimizer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-loss">Cross Entropy Loss</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-network">4. Train the network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dig-deeper">To Dig Deeper</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Crovella and Tom Gardos
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
