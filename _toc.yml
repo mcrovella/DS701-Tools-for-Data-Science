@@ -34,6 +34,7 @@ parts:
   chapters:
   - file: 23-NN-I-Gradient-Descent
   - file: 24-NN-II-Backprop
+  - file: 25-NN-III-CNNs
 - caption: Selected Topics
   chapters:
   - file: 20-Recommender-Systems
