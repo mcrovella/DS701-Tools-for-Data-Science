@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
   
   
 </a></div>
@@ -327,10 +338,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -338,7 +349,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -439,6 +450,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 Failed download:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;YELP&#39;]: Exception(&#39;%ticker%: No price data found, symbol may be delisted (1d 2015-01-01 -&gt; 2015-12-31)&#39;)
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -475,51 +492,6 @@ document.write(`
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>2015-01-02</th>
-      <td>55.459999</td>
-      <td>55.599998</td>
-      <td>54.240002</td>
-      <td>55.150002</td>
-      <td>55.150002</td>
-      <td>1664500</td>
-    </tr>
-    <tr>
-      <th>2015-01-05</th>
-      <td>54.540001</td>
-      <td>54.950001</td>
-      <td>52.330002</td>
-      <td>52.529999</td>
-      <td>52.529999</td>
-      <td>2023000</td>
-    </tr>
-    <tr>
-      <th>2015-01-06</th>
-      <td>52.549999</td>
-      <td>53.930000</td>
-      <td>50.750000</td>
-      <td>52.439999</td>
-      <td>52.439999</td>
-      <td>3762800</td>
-    </tr>
-    <tr>
-      <th>2015-01-07</th>
-      <td>53.320000</td>
-      <td>53.750000</td>
-      <td>51.759998</td>
-      <td>52.209999</td>
-      <td>52.209999</td>
-      <td>1548200</td>
-    </tr>
-    <tr>
-      <th>2015-01-08</th>
-      <td>52.590000</td>
-      <td>54.139999</td>
-      <td>51.759998</td>
-      <td>53.830002</td>
-      <td>53.830002</td>
-      <td>2015300</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -536,18 +508,18 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-DatetimeIndex: 251 entries, 2015-01-02 to 2015-12-30
+Index: 0 entries
 Data columns (total 6 columns):
  #   Column     Non-Null Count  Dtype  
 ---  ------     --------------  -----  
- 0   Open       251 non-null    float64
- 1   High       251 non-null    float64
- 2   Low        251 non-null    float64
- 3   Close      251 non-null    float64
- 4   Adj Close  251 non-null    float64
- 5   Volume     251 non-null    int64  
-dtypes: float64(5), int64(1)
-memory usage: 13.7 KB
+ 0   Open       0 non-null      float64
+ 1   High       0 non-null      float64
+ 2   Low        0 non-null      float64
+ 3   Close      0 non-null      float64
+ 4   Adj Close  0 non-null      float64
+ 5   Volume     0 non-null      float64
+dtypes: float64(6)
+memory usage: 0.0+ bytes
 </pre></div>
 </div>
 </div>
@@ -570,15 +542,6 @@ memory usage: 13.7 KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date,Open,High,Low,Close,Adj Close,Volume
-2015-01-02,55.459999084472656,55.599998474121094,54.2400016784668,55.150001525878906,55.150001525878906,1664500
-2015-01-05,54.540000915527344,54.95000076293945,52.33000183105469,52.529998779296875,52.529998779296875,2023000
-2015-01-06,52.54999923706055,53.93000030517578,50.75,52.439998626708984,52.439998626708984,3762800
-2015-01-07,53.31999969482422,53.75,51.7599983215332,52.209999084472656,52.209999084472656,1548200
-2015-01-08,52.59000015258789,54.13999938964844,51.7599983215332,53.83000183105469,53.83000183105469,2015300
-2015-01-09,55.959999084472656,56.9900016784668,54.720001220703125,56.06999969482422,56.06999969482422,6224200
-2015-01-12,56.0,56.060001373291016,53.43000030517578,54.02000045776367,54.02000045776367,2407700
-2015-01-13,54.470001220703125,54.79999923706055,52.52000045776367,53.18000030517578,53.18000030517578,1958400
-2015-01-14,52.79999923706055,53.68000030517578,51.459999084472656,52.20000076293945,52.20000076293945,1854600
 </pre></div>
 </div>
 </div>
@@ -620,56 +583,6 @@ memory usage: 13.7 KB
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>2015-01-02</td>
-      <td>55.459999</td>
-      <td>55.599998</td>
-      <td>54.240002</td>
-      <td>55.150002</td>
-      <td>55.150002</td>
-      <td>1664500</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2015-01-05</td>
-      <td>54.540001</td>
-      <td>54.950001</td>
-      <td>52.330002</td>
-      <td>52.529999</td>
-      <td>52.529999</td>
-      <td>2023000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2015-01-06</td>
-      <td>52.549999</td>
-      <td>53.930000</td>
-      <td>50.750000</td>
-      <td>52.439999</td>
-      <td>52.439999</td>
-      <td>3762800</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2015-01-07</td>
-      <td>53.320000</td>
-      <td>53.750000</td>
-      <td>51.759998</td>
-      <td>52.209999</td>
-      <td>52.209999</td>
-      <td>1548200</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2015-01-08</td>
-      <td>52.590000</td>
-      <td>54.139999</td>
-      <td>51.759998</td>
-      <td>53.830002</td>
-      <td>53.830002</td>
-      <td>2015300</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -699,18 +612,7 @@ memory usage: 13.7 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      55.459999
-1      54.540001
-2      52.549999
-3      53.320000
-4      52.590000
-         ...    
-246    27.950001
-247    28.270000
-248    28.120001
-249    27.950001
-250    28.580000
-Name: Open, Length: 251, dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Open, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -724,18 +626,7 @@ Name: Open, Length: 251, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      55.459999
-1      54.540001
-2      52.549999
-3      53.320000
-4      52.590000
-         ...    
-246    27.950001
-247    28.270000
-248    28.120001
-249    27.950001
-250    28.580000
-Name: Open, Length: 251, dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Open, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -771,31 +662,6 @@ Name: Open, Length: 251, dtype: float64
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>55.459999</td>
-      <td>55.150002</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>54.540001</td>
-      <td>52.529999</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>52.549999</td>
-      <td>52.439999</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>53.320000</td>
-      <td>52.209999</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>52.590000</td>
-      <td>53.830002</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -808,17 +674,7 @@ Name: Open, Length: 251, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    2015-01-02
-1    2015-01-05
-2    2015-01-06
-3    2015-01-07
-4    2015-01-08
-5    2015-01-09
-6    2015-01-12
-7    2015-01-13
-8    2015-01-14
-9    2015-01-15
-Name: Date, dtype: object
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Date, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -830,17 +686,7 @@ Name: Date, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>241    2015-12-16
-242    2015-12-17
-243    2015-12-18
-244    2015-12-21
-245    2015-12-22
-246    2015-12-23
-247    2015-12-24
-248    2015-12-28
-249    2015-12-29
-250    2015-12-30
-Name: Date, dtype: object
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: Date, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -857,19 +703,19 @@ Name: Date, dtype: object
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 251 entries, 0 to 250
+RangeIndex: 0 entries
 Data columns (total 7 columns):
- #   Column     Non-Null Count  Dtype  
----  ------     --------------  -----  
- 0   date       251 non-null    object 
- 1   open       251 non-null    float64
- 2   high       251 non-null    float64
- 3   low        251 non-null    float64
- 4   close      251 non-null    float64
- 5   adj_close  251 non-null    float64
- 6   volume     251 non-null    int64  
-dtypes: float64(5), int64(1), object(1)
-memory usage: 13.9+ KB
+ #   Column     Non-Null Count  Dtype 
+---  ------     --------------  ----- 
+ 0   date       0 non-null      object
+ 1   open       0 non-null      object
+ 2   high       0 non-null      object
+ 3   low        0 non-null      object
+ 4   close      0 non-null      object
+ 5   adj_close  0 non-null      object
+ 6   volume     0 non-null      object
+dtypes: object(7)
+memory usage: 124.0+ bytes
 </pre></div>
 </div>
 </div>
@@ -883,12 +729,7 @@ memory usage: 13.9+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    55.150002
-1    52.529999
-2    52.439999
-3    52.209999
-4    53.830002
-Name: adj_close, dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], Name: adj_close, dtype: object)
 </pre></div>
 </div>
 </div>
@@ -906,13 +747,13 @@ Name: adj_close, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         3.809084e+01
-low          3.659777e+01
-open         3.732426e+01
-close        3.733303e+01
-volume       3.501135e+06
-adj_close    3.733303e+01
-dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         NaN
+low          NaN
+open         NaN
+close        NaN
+volume       NaN
+adj_close    NaN
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -924,13 +765,13 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         1.138931e+01
-low          1.114006e+01
-open         1.128846e+01
-close        1.126194e+01
-volume       4.152341e+06
-adj_close    1.126194e+01
-dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         NaN
+low          NaN
+open         NaN
+close        NaN
+volume       NaN
+adj_close    NaN
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -942,13 +783,13 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         3.909000e+01
-low          3.665000e+01
-open         3.822000e+01
-close        3.818000e+01
-volume       2.356000e+06
-adj_close    3.818000e+01
-dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high         NaN
+low          NaN
+open         NaN
+close        NaN
+volume       NaN
+adj_close    NaN
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -960,7 +801,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37.3242629229785
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
 </pre></div>
 </div>
 </div>
@@ -972,7 +813,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.09083672633684
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
 </pre></div>
 </div>
 </div>
@@ -993,7 +834,41 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/32ea0100910636826e2fb2cda7ce824300ea12fd01a41762cc9da40b14859886.png" src="_images/32ea0100910636826e2fb2cda7ce824300ea12fd01a41762cc9da40b14859886.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">high</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;High&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">df</span><span class="o">.</span><span class="n">low</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Low&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;YELP Stock Price&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_core.py:1031,</span> in <span class="ni">PlotAccessor.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1028</span>             <span class="n">label_name</span> <span class="o">=</span> <span class="n">label_kw</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+<span class="g g-Whitespace">   </span><span class="mi">1029</span>             <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">label_name</span>
+<span class="ne">-&gt; </span><span class="mi">1031</span> <span class="k">return</span> <span class="n">plot_backend</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_matplotlib/__init__.py:71,</span> in <span class="ni">plot</span><span class="nt">(data, kind, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ax&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s2">&quot;left_ax&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="n">plot_obj</span> <span class="o">=</span> <span class="n">PLOT_CLASSES</span><span class="p">[</span><span class="n">kind</span><span class="p">](</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">71</span> <span class="n">plot_obj</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="n">plot_obj</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">return</span> <span class="n">plot_obj</span><span class="o">.</span><span class="n">result</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_matplotlib/core.py:451,</span> in <span class="ni">MPLPlot.generate</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">449</span> <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_args_adjust</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">451</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_compute_plot_data</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_setup_subplots</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_make_plot</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/plotting/_matplotlib/core.py:636,</span> in <span class="ni">MPLPlot._compute_plot_data</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span> <span class="c1"># no non-numeric frames or series allowed</span>
+<span class="g g-Whitespace">    </span><span class="mi">635</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">636</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;no numeric data to plot&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">numeric_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_to_ndarray</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: no numeric data to plot
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -2727,11 +2602,10 @@ The average closing value for the small_gain group is 36.53367346160266
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="02A-Git-Jupyter.html"
@@ -2751,10 +2625,7 @@ The average closing value for the small_gain group is 36.53367346160266
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -2833,8 +2704,8 @@ By Mark Crovella and Tom Gardos
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
   
   
 </a></div>
@@ -327,10 +338,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -338,7 +349,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -438,7 +449,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/be370f3f53ae5c2cd0f7ea39f0cec21642cd737681128baa36de0cd4265b6412.png" src="_images/be370f3f53ae5c2cd0f7ea39f0cec21642cd737681128baa36de0cd4265b6412.png" />
+<img alt="_images/4fd039478d686af728f1879bbbd2d82967938905c50dbe80fa8d1bb93a54ba20.png" src="_images/4fd039478d686af728f1879bbbd2d82967938905c50dbe80fa8d1bb93a54ba20.png" />
 </div>
 </div>
 <p>That plot shows all the data.</p>
@@ -509,11 +520,11 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/crovella/miniconda3/lib/python3.9/site-packages/sklearn/manifold/_mds.py:299: FutureWarning: The default value of `normalized_stress` will change to `&#39;auto&#39;` in version 1.4. To suppress this warning, manually set the value of `normalized_stress`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/manifold/_mds.py:299: FutureWarning: The default value of `normalized_stress` will change to `&#39;auto&#39;` in version 1.4. To suppress this warning, manually set the value of `normalized_stress`.
   warnings.warn(
 </pre></div>
 </div>
-<img alt="_images/b4dc5c2383b56d07bec0f17be3cad1ef6facbc6b30fb7a5fa4268380846a8daf.png" src="_images/b4dc5c2383b56d07bec0f17be3cad1ef6facbc6b30fb7a5fa4268380846a8daf.png" />
+<img alt="_images/1e6d207cf31f6f0e809d7c0fb435a4298dcadaac8c06704b58090e9eb85c531f.png" src="_images/1e6d207cf31f6f0e809d7c0fb435a4298dcadaac8c06704b58090e9eb85c531f.png" />
 </div>
 </div>
 <p>So we can see that, although the data lives in 30 dimensions, we can get a sense of how the points are clustered by approximately placing the points into two dimensions.</p>
@@ -526,7 +537,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bc17c385af8e44d139a1182b56c178c159c2ec51101527812e4cfd5561b10f32.png" src="_images/bc17c385af8e44d139a1182b56c178c159c2ec51101527812e4cfd5561b10f32.png" />
+<img alt="_images/4bd626aad5ddcb89e3be09dbd31b97833283c147fc49a8e587b3ef5b56e6c0b8.png" src="_images/4bd626aad5ddcb89e3be09dbd31b97833283c147fc49a8e587b3ef5b56e6c0b8.png" />
 </div>
 </div>
 </section>
@@ -637,7 +648,7 @@ Cluster centroids:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/c5c18b8adab66e0c193fa5e6eaaf3c1048be2e438df108779231db27b47ebcb9.png" src="_images/c5c18b8adab66e0c193fa5e6eaaf3c1048be2e438df108779231db27b47ebcb9.png" />
+<img alt="_images/c0f379b970af1cac43883a1be4d82be8fb027eed93ba0f2691fb3f89c89b408f.png" src="_images/c0f379b970af1cac43883a1be4d82be8fb027eed93ba0f2691fb3f89c89b408f.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -654,7 +665,7 @@ Cluster centroids:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/c19607626e7a4cb4923d466f0d3700ddbff3cee5a66ee49e63d19c138dca0a28.png" src="_images/c19607626e7a4cb4923d466f0d3700ddbff3cee5a66ee49e63d19c138dca0a28.png" />
+<img alt="_images/ed7ea189beeb8227ed77f441e4ea19861f574d43b17ba563945912469fcc512e.png" src="_images/ed7ea189beeb8227ed77f441e4ea19861f574d43b17ba563945912469fcc512e.png" />
 </div>
 </div>
 </section>
@@ -684,7 +695,15 @@ Cluster centroids:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/7fdfcc6c79ec7cbda3ca2b5778ba8e4e5f2f28ed3a6b592bde8fd0d52bed42c4.png" src="_images/7fdfcc6c79ec7cbda3ca2b5778ba8e4e5f2f28ed3a6b592bde8fd0d52bed42c4.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:767: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if not hasattr(array, &quot;sparse&quot;) and array.dtypes.apply(is_sparse).any():
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:605: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:614: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype) or not is_extension_array_dtype(pd_dtype):
+</pre></div>
+</div>
+<img alt="_images/343b4b5b5a1131742d0fb314d2ce042812045839f701ed34e69ec3d4207b8e24.png" src="_images/343b4b5b5a1131742d0fb314d2ce042812045839f701ed34e69ec3d4207b8e24.png" />
 </div>
 </div>
 <p>In fact, this dataset was generated using uniform random numbers for the coordinates.</p>
@@ -725,6 +744,16 @@ Cluster centroids:
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:767: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if not hasattr(array, &quot;sparse&quot;) and array.dtypes.apply(is_sparse).any():
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:605: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:614: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype) or not is_extension_array_dtype(pd_dtype):
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -747,7 +776,7 @@ Cluster centroids:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/fa94aa6d0df44d8c3996db4d77bc75c82b95236d35f1ecd449899663b43551a8.png" src="_images/fa94aa6d0df44d8c3996db4d77bc75c82b95236d35f1ecd449899663b43551a8.png" />
+<img alt="_images/efa2b5701fbd8c5b97bfdf83ee4f993ed42e371e44f35d5b389dbc6883ed4699.png" src="_images/efa2b5701fbd8c5b97bfdf83ee4f993ed42e371e44f35d5b389dbc6883ed4699.png" />
 </div>
 </div>
 <p>Intuitively, the idea behind Rand Index is to consider <strong>pairs</strong> of points, and ask whether pairs that fall into the same cluster in <span class="math notranslate nohighlight">\(T\)</span> also fall into the same cluster in <span class="math notranslate nohighlight">\(C\)</span>.</p>
@@ -764,8 +793,8 @@ Cluster centroids:
 <p>To “calibrate” the Rand Index this way, we use the expected Rand Index of random labelings, denoted <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span>.</p>
 <p>The Expected Rand Index considers <span class="math notranslate nohighlight">\(C\)</span> to be a clustering that has the same cluster sizes as <span class="math notranslate nohighlight">\(T\)</span>, but labels are assigned at random.</p>
 <p>Using that, we define the adjusted Rand index as a simple <strong>rescaling</strong> of RI:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8a7940c9-42df-41d6-b3f7-c5cdc59d75fe">
-<span class="eqno">(1)<a class="headerlink" href="#equation-8a7940c9-42df-41d6-b3f7-c5cdc59d75fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3010e712-fce1-47aa-ad1e-9f01b981a28f">
+<span class="eqno">(1)<a class="headerlink" href="#equation-3010e712-fce1-47aa-ad1e-9f01b981a28f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}
 \end{equation}\]</div>
 <p>The computation of the <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span> and the <span class="math notranslate nohighlight">\(\max(\text{RI})\)</span> are simple combinatorics (we’ll omit the derivation).</p>
@@ -778,7 +807,7 @@ Cluster centroids:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c5c18b8adab66e0c193fa5e6eaaf3c1048be2e438df108779231db27b47ebcb9.png" src="_images/c5c18b8adab66e0c193fa5e6eaaf3c1048be2e438df108779231db27b47ebcb9.png" />
+<img alt="_images/c0f379b970af1cac43883a1be4d82be8fb027eed93ba0f2691fb3f89c89b408f.png" src="_images/c0f379b970af1cac43883a1be4d82be8fb027eed93ba0f2691fb3f89c89b408f.png" />
 </div>
 </div>
 <p>Here is the adjusted Rand Index, when using <span class="math notranslate nohighlight">\(k\)</span>-means to cluster this dataset for 1 to 10 clusters:</p>
@@ -808,7 +837,7 @@ Cluster centroids:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/6b26bd5aad79b5d3031b1f80057ce912d675fe0bed75e437338728b2a9115031.png" src="_images/6b26bd5aad79b5d3031b1f80057ce912d675fe0bed75e437338728b2a9115031.png" />
+<img alt="_images/88d8eaa93fc3c3310f7afb58ad0d64ebb02622447091def3059b5d259329683e.png" src="_images/88d8eaa93fc3c3310f7afb58ad0d64ebb02622447091def3059b5d259329683e.png" />
 </div>
 </div>
 </section>
@@ -856,7 +885,7 @@ Cluster centroids:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/79baa80d3ed521fda6e6f24df1748ccf2d12155e63897f7c00ebac7bdaea6288.png" src="_images/79baa80d3ed521fda6e6f24df1748ccf2d12155e63897f7c00ebac7bdaea6288.png" />
+<img alt="_images/9760cbcff3daca6391889090c2789b20b4c0b1c6d790ce744379e1ab0bcb06ac.png" src="_images/9760cbcff3daca6391889090c2789b20b4c0b1c6d790ce744379e1ab0bcb06ac.png" />
 </div>
 </div>
 <p><strong>Warning</strong>: This synthetic data is not at all typical.   You will almost never see such a sharp change in the error function as we see here.</p>
@@ -941,7 +970,7 @@ s = \frac{b-a}{\max(a, b)}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/7e48e93688d2155c9abd69496413733175b50c86731b5feaad1def952d9455c0.png" src="_images/7e48e93688d2155c9abd69496413733175b50c86731b5feaad1def952d9455c0.png" />
+<img alt="_images/3bb173d55cc79f5eede330d6d9229521710ceffadd8398e281d84a70f7256e09.png" src="_images/3bb173d55cc79f5eede330d6d9229521710ceffadd8398e281d84a70f7256e09.png" />
 </div>
 </div>
 <p>Again, these results are more perfect than typical.</p>
@@ -1077,7 +1106,7 @@ s = \frac{b-a}{\max(a, b)}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/94ff51ecbdaa6f1959152fae0cc7dee5f30763029eff72add2a6c1f6bb4ae93e.png" src="_images/94ff51ecbdaa6f1959152fae0cc7dee5f30763029eff72add2a6c1f6bb4ae93e.png" />
+<img alt="_images/170d2e4d835707227785642da15af385f00ea449ccd682939690627d5e9dc835.png" src="_images/170d2e4d835707227785642da15af385f00ea449ccd682939690627d5e9dc835.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1114,7 +1143,7 @@ s = \frac{b-a}{\max(a, b)}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/eddf69525e288e77b658c55873dba467e1e7815e458c1507ea768bd68420ebba.png" src="_images/eddf69525e288e77b658c55873dba467e1e7815e458c1507ea768bd68420ebba.png" />
+<img alt="_images/f5475f6907840854554c561a0f198864b1f2ba98bdf9971dacc84969f585af95.png" src="_images/f5475f6907840854554c561a0f198864b1f2ba98bdf9971dacc84969f585af95.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1134,7 +1163,7 @@ s = \frac{b-a}{\max(a, b)}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/b74fcc37957ef7ab4df746eb84a4fa5e092a388dbb90257250b19a5db7a7afed.png" src="_images/b74fcc37957ef7ab4df746eb84a4fa5e092a388dbb90257250b19a5db7a7afed.png" />
+<img alt="_images/1dc3a4601b1d33e35554feed1489073b2b48cfa4be6f815e5c1d9ea8b0d262ca.png" src="_images/1dc3a4601b1d33e35554feed1489073b2b48cfa4be6f815e5c1d9ea8b0d262ca.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1154,7 +1183,7 @@ s = \frac{b-a}{\max(a, b)}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/61f10bac58f562e55a0ec97ea9bfc30f8b52e29ca2872be5cdbbd0701c0da941.png" src="_images/61f10bac58f562e55a0ec97ea9bfc30f8b52e29ca2872be5cdbbd0701c0da941.png" />
+<img alt="_images/2474d61876fa49ef2327adde26ba91b6624592c7eb38fca6100f391f74babb0e.png" src="_images/2474d61876fa49ef2327adde26ba91b6624592c7eb38fca6100f391f74babb0e.png" />
 </div>
 </div>
 </section>
@@ -1259,7 +1288,7 @@ Cluster 3:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/dc1d2b20d065c7da2fec0e6802b2126468ede4e08bfb553d4e43ad848e70c102.png" src="_images/dc1d2b20d065c7da2fec0e6802b2126468ede4e08bfb553d4e43ad848e70c102.png" />
+<img alt="_images/0fcde9f2690415c2cde1a462265593f6afbfc781081d695f58e807a25a40d0dd.png" src="_images/0fcde9f2690415c2cde1a462265593f6afbfc781081d695f58e807a25a40d0dd.png" />
 </div>
 </div>
 <p>Let’s visualize with MDS.   Note that MDS is a slow algorithm and we can’t do all 1700+ data points quickly, so we will take a random sample.</p>
@@ -1281,7 +1310,7 @@ Cluster 3:
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/crovella/miniconda3/lib/python3.9/site-packages/sklearn/manifold/_mds.py:299: FutureWarning: The default value of `normalized_stress` will change to `&#39;auto&#39;` in version 1.4. To suppress this warning, manually set the value of `normalized_stress`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/manifold/_mds.py:299: FutureWarning: The default value of `normalized_stress` will change to `&#39;auto&#39;` in version 1.4. To suppress this warning, manually set the value of `normalized_stress`.
   warnings.warn(
 </pre></div>
 </div>
@@ -1314,7 +1343,7 @@ Cluster 3:
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/370bec5ac2c0c4831f76964f36195c5a279c4b4b3946d93bb0c3e08029af12db.png" src="_images/370bec5ac2c0c4831f76964f36195c5a279c4b4b3946d93bb0c3e08029af12db.png" />
+<img alt="_images/4bb9fce1bd68f24005e19fa3ee1044a36f471bc549245a7c6d9f8783ca23ee79.png" src="_images/4bb9fce1bd68f24005e19fa3ee1044a36f471bc549245a7c6d9f8783ca23ee79.png" />
 </div>
 </div>
 </section>
@@ -1346,11 +1375,10 @@ Cluster 3:
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="06-Clustering-I-kmeans.html"
@@ -1370,10 +1398,7 @@ Cluster 3:
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1459,8 +1484,8 @@ By Mark Crovella and Tom Gardos
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>

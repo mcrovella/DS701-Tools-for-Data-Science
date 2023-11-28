@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
   
   
 </a></div>
@@ -327,10 +338,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -338,7 +349,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -653,8 +664,8 @@ and
 Dep. Variable:                 TOTEMP   R-squared:                       0.987
 Model:                            OLS   Adj. R-squared:                  0.981
 Method:                 Least Squares   F-statistic:                     156.4
-Date:                Mon, 27 Nov 2023   Prob (F-statistic):           3.70e-09
-Time:                        10:47:11   Log-Likelihood:                -117.83
+Date:                Sat, 18 Nov 2023   Prob (F-statistic):           3.70e-09
+Time:                        20:21:22   Log-Likelihood:                -117.83
 No. Observations:                  16   AIC:                             247.7
 Df Residuals:                      10   BIC:                             252.3
 Df Model:                           5                                         
@@ -762,7 +773,7 @@ with multicollinearity.</p></li>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/fd57ffb305eb7204bb43752979e970e5ac7d97c111d1c1008d334f1ffdaca893.png" src="_images/fd57ffb305eb7204bb43752979e970e5ac7d97c111d1c1008d334f1ffdaca893.png" />
+<img alt="_images/50b7c25d61297fbfddb20297f0373fb798c48cbdbcc8ad1caaa3eac9ff1b02f2.png" src="_images/50b7c25d61297fbfddb20297f0373fb798c48cbdbcc8ad1caaa3eac9ff1b02f2.png" />
 </div>
 </div>
 <p>We can see <strong>very</strong> strong linear relationships between, eg, <strong>GNP Deflator</strong>, <strong>GNP</strong>, and <strong>Population.</strong></p>
@@ -806,7 +817,7 @@ with multicollinearity.</p></li>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/9e377cf0d291bb0e5ffceca19e743617563ec3605dd52768855cfd951107b691.png" src="_images/9e377cf0d291bb0e5ffceca19e743617563ec3605dd52768855cfd951107b691.png" />
+<img alt="_images/813367cd587f0ff086543dc3d69e0cc29a12dccbaae3632a4f0a3756c195f2d7.png" src="_images/813367cd587f0ff086543dc3d69e0cc29a12dccbaae3632a4f0a3756c195f2d7.png" />
 </div>
 </div>
 <p>Via least-squares, we determine the coefficients <span class="math notranslate nohighlight">\(\beta_1\)</span> and <span class="math notranslate nohighlight">\(\beta_2\)</span>:</p>
@@ -843,7 +854,7 @@ with multicollinearity.</p></li>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/f309d8d21cd93737314821d1d0f7e22e73729db746222df05a06325d49486800.png" src="_images/f309d8d21cd93737314821d1d0f7e22e73729db746222df05a06325d49486800.png" />
+<img alt="_images/04b924244553c2948780cdda2bd2912182731b67a931d348b9e06cd89a168aa6.png" src="_images/04b924244553c2948780cdda2bd2912182731b67a931d348b9e06cd89a168aa6.png" />
 </div>
 </div>
 <p>Now consider if the columns of <span class="math notranslate nohighlight">\(X\)</span> are <strong>nearly dependent</strong>: ie, they are almost in the same direction:</p>
@@ -870,7 +881,7 @@ with multicollinearity.</p></li>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/6e48e9dc72f6bb56551e810ac192c82bc89c1798a53e616999bd142263aa007c.png" src="_images/6e48e9dc72f6bb56551e810ac192c82bc89c1798a53e616999bd142263aa007c.png" />
+<img alt="_images/02b1cdb96e264faec78735effb92b786174e57604e7c1255ca035b6ecd18d623.png" src="_images/02b1cdb96e264faec78735effb92b786174e57604e7c1255ca035b6ecd18d623.png" />
 </div>
 </div>
 <p>If you imagine the values of <span class="math notranslate nohighlight">\(\beta_1\)</span> and <span class="math notranslate nohighlight">\(\beta_2\)</span> necessary to create <span class="math notranslate nohighlight">\(\mathbf{y} = \beta_1{\bf u}\)</span>+<span class="math notranslate nohighlight">\(\beta_2{\bf v}\)</span>, you can see that <span class="math notranslate nohighlight">\(\beta_1\)</span> and <span class="math notranslate nohighlight">\(\beta_2\)</span> will be <strong>very large</strong> in magnitude.</p>
@@ -944,6 +955,22 @@ a linear model and shrinking the coefficients.</p>
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:767: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if not hasattr(array, &quot;sparse&quot;) and array.dtypes.apply(is_sparse).any():
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:605: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:614: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype) or not is_extension_array_dtype(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:767: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if not hasattr(array, &quot;sparse&quot;) and array.dtypes.apply(is_sparse).any():
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:605: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:614: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype) or not is_extension_array_dtype(pd_dtype):
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -973,7 +1000,7 @@ a linear model and shrinking the coefficients.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/01504417a0bc765dc412b5bebaa7e3785f130df8fcf09cd0f81d03a84c91d437.png" src="_images/01504417a0bc765dc412b5bebaa7e3785f130df8fcf09cd0f81d03a84c91d437.png" />
+<img alt="_images/df35a75962b18958791e77466eae69f2c3565ee7bcf5bba8e7a7d2570133e95a.png" src="_images/df35a75962b18958791e77466eae69f2c3565ee7bcf5bba8e7a7d2570133e95a.png" />
 </div>
 </div>
 <p>To sum up the idea behind Ridge regression:</p>
@@ -1059,6 +1086,22 @@ a linear model and shrinking the coefficients.</p>
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:767: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if not hasattr(array, &quot;sparse&quot;) and array.dtypes.apply(is_sparse).any():
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:605: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:614: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype) or not is_extension_array_dtype(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:767: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if not hasattr(array, &quot;sparse&quot;) and array.dtypes.apply(is_sparse).any():
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:605: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype):
+/Users/tomg/miniconda3/envs/py39_jb/lib/python3.9/site-packages/sklearn/utils/validation.py:614: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(pd_dtype) or not is_extension_array_dtype(pd_dtype):
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1089,7 +1132,7 @@ a linear model and shrinking the coefficients.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/663632da7e3a1a6fcf446ba9273e7af15670ad9757ac796a1b505f9b82f85f4f.png" src="_images/663632da7e3a1a6fcf446ba9273e7af15670ad9757ac796a1b505f9b82f85f4f.png" />
+<img alt="_images/d18e75b48a67c8203e459a2af717fbe1241e666fc707abb978118837df0eb93e.png" src="_images/d18e75b48a67c8203e459a2af717fbe1241e666fc707abb978118837df0eb93e.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1122,7 +1165,7 @@ a linear model and shrinking the coefficients.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/03cc94ef54585df96a5d62bb327ea9250e3c1f418e33649f15411b8ea726c29b.png" src="_images/03cc94ef54585df96a5d62bb327ea9250e3c1f418e33649f15411b8ea726c29b.png" />
+<img alt="_images/ded2135a175180bfdecfe716495f421646a6050c35571c029e85de8fab4bb572.png" src="_images/ded2135a175180bfdecfe716495f421646a6050c35571c029e85de8fab4bb572.png" />
 </div>
 </div>
 <p>We can use another version of the module that can directly type formulas and expressions in the functions of the models.</p>
@@ -1161,8 +1204,8 @@ a linear model and shrinking the coefficients.</p>
 Dep. Variable:                 TOTEMP   R-squared:                       0.987
 Model:                            OLS   Adj. R-squared:                  0.981
 Method:                 Least Squares   F-statistic:                     156.4
-Date:                Mon, 27 Nov 2023   Prob (F-statistic):           3.70e-09
-Time:                        10:47:34   Log-Likelihood:                -117.83
+Date:                Sat, 18 Nov 2023   Prob (F-statistic):           3.70e-09
+Time:                        20:21:47   Log-Likelihood:                -117.83
 No. Observations:                  16   AIC:                             247.7
 Df Residuals:                      10   BIC:                             252.3
 Df Model:                           5                                         
@@ -1213,8 +1256,8 @@ strong multicollinearity or other numerical problems.
 Dep. Variable:                 TOTEMP   R-squared (uncentered):                   1.000
 Model:                            OLS   Adj. R-squared (uncentered):              1.000
 Method:                 Least Squares   F-statistic:                          1.127e+04
-Date:                Mon, 27 Nov 2023   Prob (F-statistic):                    1.92e-22
-Time:                        10:47:34   Log-Likelihood:                         -137.20
+Date:                Sat, 18 Nov 2023   Prob (F-statistic):                    1.92e-22
+Time:                        20:21:47   Log-Likelihood:                         -137.20
 No. Observations:                  16   AIC:                                      280.4
 Df Residuals:                      13   BIC:                                      282.7
 Df Model:                           3                                                  
@@ -1359,8 +1402,8 @@ Spatial Analysis”, Michael Friendly.  Statistical Science 2007, Vol. 22, No. 3
 Dep. Variable:                Lottery   R-squared:                       0.338
 Model:                            OLS   Adj. R-squared:                  0.287
 Method:                 Least Squares   F-statistic:                     6.636
-Date:                Mon, 27 Nov 2023   Prob (F-statistic):           1.07e-05
-Time:                        10:47:34   Log-Likelihood:                -375.30
+Date:                Sat, 18 Nov 2023   Prob (F-statistic):           1.07e-05
+Time:                        20:21:48   Log-Likelihood:                -375.30
 No. Observations:                  85   AIC:                             764.6
 Df Residuals:                      78   BIC:                             781.7
 Df Model:                           6                                         
@@ -1407,8 +1450,8 @@ Notes:
 Dep. Variable:                Lottery   R-squared:                       0.338
 Model:                            OLS   Adj. R-squared:                  0.287
 Method:                 Least Squares   F-statistic:                     6.636
-Date:                Mon, 27 Nov 2023   Prob (F-statistic):           1.07e-05
-Time:                        10:47:34   Log-Likelihood:                -375.30
+Date:                Sat, 18 Nov 2023   Prob (F-statistic):           1.07e-05
+Time:                        20:21:48   Log-Likelihood:                -375.30
 No. Observations:                  85   AIC:                             764.6
 Df Residuals:                      78   BIC:                             781.7
 Df Model:                           6                                         
@@ -1451,8 +1494,8 @@ Notes:
 Dep. Variable:                Lottery   R-squared:                       0.161
 Model:                            OLS   Adj. R-squared:                  0.151
 Method:                 Least Squares   F-statistic:                     15.89
-Date:                Mon, 27 Nov 2023   Prob (F-statistic):           0.000144
-Time:                        10:47:34   Log-Likelihood:                -385.38
+Date:                Sat, 18 Nov 2023   Prob (F-statistic):           0.000144
+Time:                        20:21:48   Log-Likelihood:                -385.38
 No. Observations:                  85   AIC:                             774.8
 Df Residuals:                      83   BIC:                             779.7
 Df Model:                           1                                         
@@ -1503,11 +1546,10 @@ Notes:
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="18-Regression-II-Logistic.html"
@@ -1527,10 +1569,7 @@ Notes:
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1605,8 +1644,8 @@ By Mark Crovella and Tom Gardos
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>
