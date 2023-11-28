@@ -1,60 +1,48 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" >
-
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>NN II – Compute Graph, Backprop and Training &#8212; Tools for Data Science</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -62,106 +50,66 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '24-NN-II-Backprop';</script>
     <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks" href="25-NN-III-CNNs.html" />
     <link rel="prev" title="Neural Networks I – Gradient Descent" href="23-NN-I-Gradient-Descent.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
+    
+    <div class="container-fluid" id="banner"></div>
 
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    
 
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="landing-page.html">
-  
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="_static/DS701-icon.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tools for Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -170,269 +118,782 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Preliminaries
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02B-Pandas.html">Essential Tools: Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">Probability and Statistics Refresher</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Intro-to-Python.html">
+   Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02A-Git-Jupyter.html">
+   Essential Tools: Git and Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02B-Pandas.html">
+   Essential Tools: Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Linear-Algebra-Refresher.html">
+   Linear Algebra Refresher
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">
+   Probability and Statistics Refresher
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09-Clustering-IV-GMM-EM.html">Gaussian Mixture Models</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Distances-Timeseries.html">
+   Distances and Timeseries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Clustering-I-kmeans.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Clustering-II-in-practice.html">
+   Clustering In Practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Clustering-III-hierarchical.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Clustering-IV-GMM-EM.html">
+   Gaussian Mixture Models
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Classification
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors and Model Selection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Learning-From-Data.html">
+   Learning From Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Classification-I-Decision-Trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Classification-II-kNN.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -Nearest Neighbors and Model Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Classification-III-NB-SVM.html">
+   Naive Bayes and Support Vector Machines
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dimensionality Reduction
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Low-Rank-and-SVD.html">
+   Low Rank Approximation and the SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">
+   Dimensionality Reduction and PCA – SVD II
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regression
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Regression-I-Linear.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-Regression-II-Logistic.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-Regression-III-More-Linear.html">
+   Regularization
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural Networks
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="23-NN-I-Gradient-Descent.html">Neural Networks I – Gradient Descent</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">NN II – Compute Graph, Backprop and Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="25-NN-III-CNNs.html">NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23-NN-I-Gradient-Descent.html">
+   Neural Networks I – Gradient Descent
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   NN II – Compute Graph, Backprop and Training
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25-NN-III-CNNs.html">
+   NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected Topics
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="20-Recommender-Systems.html">Recommender Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-Recommender-Systems.html">
+   Recommender Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-Networks-I.html">
+   Introduction to Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">
+   Network Centrality and Clustering
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
 
-<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mcrovella/DS701-Tools-for-Data-Science/master?urlpath=tree/24-NN-II-Backprop.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
   <i class="fab fa-github"></i>
   </span>
 
 </a>
 
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/24-NN-II-Backprop.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/24-NN-II-Backprop.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
-</li>
-      
-      
-      
+
+      </li>
       
       <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="btn__text-container">.pdf</span>
+<span class="headerbtn__text-container">.pdf</span>
 </button>
-</li>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
 >
   
 
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
   </span>
 
-</button>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
 </label>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>NN II – Compute Graph, Backprop and Training</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neuron-and-neural-networks-recap">
+   Neuron and Neural Networks (Recap)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#artificial-neuron">
+     Artificial Neuron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relating-back-to-earlier-lectures">
+     Relating Back to Earlier Lectures
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relating-back-to-another-earlier-lecture">
+     Relating Back to
+     <em>
+      Another
+     </em>
+     Earlier Lecture
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-layer-perceptron-mlp-or-fully-connected-network-fcn">
+     Multi-Layer Perceptron (MLP) or Fully Connected Network (FCN)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computation-graph">
+   Computation Graph
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-the-value-class">
+     Building the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Value
+      </span>
+     </code>
+     Class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-addition">
+     Implementing Addition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-more-operations">
+     Implementing More Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#child-nodes">
+     Child Nodes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#child-operations">
+     Child Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-compute-graph">
+     The Compute Graph
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recap">
+     Recap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-gradients">
+   Calculating Gradients
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manual-gradient-calculation">
+     Manual Gradient Calculation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagating-back">
+     Propagating Back
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#question">
+     Question
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-chain-rule">
+     The Chain Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagating-back-again">
+     Propagating Back Again
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Recap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-step-in-optimization">
+   A Step in Optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-single-neuron">
+   A Single Neuron
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coding-backpropagation">
+   Coding Backpropagation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accumulating-the-gradients">
+     Accumulating the Gradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhancements-to-value-class">
+   Enhancements to
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Value
+    </span>
+   </code>
+   Class
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-to-pytorch">
+   Comparing to PyTorch
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-network-modules">
+   Neural Network Modules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialize-and-evaluate-a-neuron">
+     Initialize and Evaluate a Neuron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialize-and-evaluate-a-layer-of-neurons">
+     Initialize and Evaluate a Layer of Neurons
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialize-and-evaluate-an-mlp">
+     Initialize and Evaluate an MLP
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-loop">
+   Training Loop
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-and-train-the-equivalent-mlp-in-pytorch">
+   Build and Train the Equivalent MLP in PyTorch
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#to-dig-a-little-deeper">
+   To Dig a Little Deeper
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>NN II – Compute Graph, Backprop and Training</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neuron-and-neural-networks-recap">
+   Neuron and Neural Networks (Recap)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#artificial-neuron">
+     Artificial Neuron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relating-back-to-earlier-lectures">
+     Relating Back to Earlier Lectures
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relating-back-to-another-earlier-lecture">
+     Relating Back to
+     <em>
+      Another
+     </em>
+     Earlier Lecture
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-layer-perceptron-mlp-or-fully-connected-network-fcn">
+     Multi-Layer Perceptron (MLP) or Fully Connected Network (FCN)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computation-graph">
+   Computation Graph
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-the-value-class">
+     Building the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Value
+      </span>
+     </code>
+     Class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-addition">
+     Implementing Addition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-more-operations">
+     Implementing More Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#child-nodes">
+     Child Nodes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#child-operations">
+     Child Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-compute-graph">
+     The Compute Graph
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recap">
+     Recap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-gradients">
+   Calculating Gradients
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manual-gradient-calculation">
+     Manual Gradient Calculation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagating-back">
+     Propagating Back
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#question">
+     Question
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-chain-rule">
+     The Chain Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagating-back-again">
+     Propagating Back Again
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Recap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-step-in-optimization">
+   A Step in Optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-single-neuron">
+   A Single Neuron
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coding-backpropagation">
+   Coding Backpropagation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accumulating-the-gradients">
+     Accumulating the Gradients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhancements-to-value-class">
+   Enhancements to
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Value
+    </span>
+   </code>
+   Class
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-to-pytorch">
+   Comparing to PyTorch
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-network-modules">
+   Neural Network Modules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialize-and-evaluate-a-neuron">
+     Initialize and Evaluate a Neuron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialize-and-evaluate-a-layer-of-neurons">
+     Initialize and Evaluate a Layer of Neurons
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialize-and-evaluate-an-mlp">
+     Initialize and Evaluate an MLP
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-loop">
+   Training Loop
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-and-train-the-equivalent-mlp-in-pytorch">
+   Build and Train the Equivalent MLP in PyTorch
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#to-dig-a-little-deeper">
+   To Dig a Little Deeper
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
             </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-and-neural-networks-recap">Neuron and Neural Networks (Recap)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artificial-neuron">Artificial Neuron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relating-back-to-earlier-lectures">Relating Back to Earlier Lectures</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relating-back-to-another-earlier-lecture">Relating Back to <em>Another</em> Earlier Lecture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron-mlp-or-fully-connected-network-fcn">Multi-Layer Perceptron (MLP) or Fully Connected Network (FCN)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-graph">Computation Graph</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-value-class">Building the <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-addition">Implementing Addition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-more-operations">Implementing More Operations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#child-nodes">Child Nodes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#child-operations">Child Operations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-compute-graph">The Compute Graph</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-gradients">Calculating Gradients</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-gradient-calculation">Manual Gradient Calculation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagating-back">Propagating Back</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question">Question</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule">The Chain Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagating-back-again">Propagating Back Again</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Recap</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-step-in-optimization">A Step in Optimization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-neuron">A Single Neuron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-backpropagation">Coding Backpropagation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accumulating-the-gradients">Accumulating the Gradients</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enhancements-to-value-class">Enhancements to <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-to-pytorch">Comparing to PyTorch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-modules">Neural Network Modules</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-and-evaluate-a-neuron">Initialize and Evaluate a Neuron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-and-evaluate-a-layer-of-neurons">Initialize and Evaluate a Layer of Neurons</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-and-evaluate-an-mlp">Initialize and Evaluate an MLP</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop">Training Loop</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-and-train-the-equivalent-mlp-in-pytorch">Build and Train the Equivalent MLP in PyTorch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dig-a-little-deeper">To Dig a Little Deeper</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-</ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-              
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+              <div>
+                
   <section class="tex2jax_ignore mathjax_ignore" id="nn-ii-compute-graph-backprop-and-training">
-<h1>NN II – Compute Graph, Backprop and Training<a class="headerlink" href="#nn-ii-compute-graph-backprop-and-training" title="Permalink to this heading">#</a></h1>
+<h1>NN II – Compute Graph, Backprop and Training<a class="headerlink" href="#nn-ii-compute-graph-backprop-and-training" title="Permalink to this headline">#</a></h1>
 <p>In this lecture we’ll gradually build out a light weight neural network training framework reminiscent of PyTorch.</p>
 <p>We build:</p>
 <ul class="simple">
@@ -447,7 +908,7 @@ document.write(`
 <hr class="docutils" />
 <p>The code is based on Andrej Karpathy’s <a class="reference external" href="https://github.com/karpathy/micrograd">micrograd</a>.</p>
 <section id="neuron-and-neural-networks-recap">
-<h2>Neuron and Neural Networks (Recap)<a class="headerlink" href="#neuron-and-neural-networks-recap" title="Permalink to this heading">#</a></h2>
+<h2>Neuron and Neural Networks (Recap)<a class="headerlink" href="#neuron-and-neural-networks-recap" title="Permalink to this headline">#</a></h2>
 <p>Now let’s switch gears a bit to define an <em>artificial neuron</em>. For better or worse
 it is named after and loosely modeled on a biological neuron.</p>
 <!-- Image Credit "https://cs231n.github.io/neural-networks-1/"-->
@@ -463,7 +924,7 @@ it is named after and loosely modeled on a biological neuron.</p>
 <p>See for example <a class="reference external" href="https://en.wikipedia.org/wiki/Neuromorphic_engineering">Neuromorphic Computing</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Spiking_neural_network">Spiking Neural Network</a></p>
 <p>Some examples of companies and projects are Intel’s <a class="reference external" href="https://www.intel.com/content/www/us/en/research/neuromorphic-computing-loihi-2-technology-brief.html">Loihi</a> and startups such as GrAI Matter Labs <a class="reference external" href="https://www.graimatterlabs.ai/product">VIP processor</a>.</p>
 <section id="artificial-neuron">
-<h3>Artificial Neuron<a class="headerlink" href="#artificial-neuron" title="Permalink to this heading">#</a></h3>
+<h3>Artificial Neuron<a class="headerlink" href="#artificial-neuron" title="Permalink to this headline">#</a></h3>
 <!-- Image Credit "https://cs231n.github.io/neural-networks-1/"-->
 <center>
 <a class="reference internal image-reference" href="_images/neuron_model.jpeg"><img alt="_images/neuron_model.jpeg" src="_images/neuron_model.jpeg" style="width: 75%;" /></a>
@@ -479,7 +940,7 @@ it is named after and loosely modeled on a biological neuron.</p>
 </ul>
 </section>
 <section id="relating-back-to-earlier-lectures">
-<h3>Relating Back to Earlier Lectures<a class="headerlink" href="#relating-back-to-earlier-lectures" title="Permalink to this heading">#</a></h3>
+<h3>Relating Back to Earlier Lectures<a class="headerlink" href="#relating-back-to-earlier-lectures" title="Permalink to this headline">#</a></h3>
 <p><strong>Question</strong></p>
 <p>What does</p>
 <div class="math notranslate nohighlight">
@@ -495,11 +956,6 @@ it is named after and loosely modeled on a biological neuron.</p>
 </div></blockquote>
 <p>Activation function is typically some nonlinear function that compresses the input in some way. Historically, it’s been the sigmoid and <span class="math notranslate nohighlight">\(\tanh()\)</span> functions. See for example <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperbolic_functions#Tanh">Hyperbolic Functions</a>.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -519,18 +975,12 @@ it is named after and loosely modeled on a biological neuron.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/097855c2cfb675ea430599a0c59d0d3bb563f7c5175c103b8d3a3591eff78cd7.png" src="_images/097855c2cfb675ea430599a0c59d0d3bb563f7c5175c103b8d3a3591eff78cd7.png" />
+<img alt="_images/24-NN-II-Backprop_13_0.png" src="_images/24-NN-II-Backprop_13_0.png" />
 </div>
 </div>
 <p>The hyperbolic tangent, <span class="math notranslate nohighlight">\(\tanh\)</span>, is basically the sigmoid function shifted and scaled to a range of [-1,1].</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;tanh(x)&#39;</span><span class="p">)</span>
@@ -540,20 +990,14 @@ it is named after and loosely modeled on a biological neuron.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/f4ae910a2cba84f6a8db54f0074958b9283efd3c039cdaf1a27d847bb2ec0cca.png" src="_images/f4ae910a2cba84f6a8db54f0074958b9283efd3c039cdaf1a27d847bb2ec0cca.png" />
+<img alt="_images/24-NN-II-Backprop_15_0.png" src="_images/24-NN-II-Backprop_15_0.png" />
 </div>
 </div>
 <p>A more common activation function these days and that is more efficient to implement is the <em>Rectified Linear Unit</em> or <em>ReLU</em>.</p>
 <div class="math notranslate nohighlight">
 \[ \textrm{ReLU}(x) = \mathrm{max}(0, x) \]</div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ReLU(x)&#39;</span><span class="p">)</span>
@@ -563,15 +1007,14 @@ it is named after and loosely modeled on a biological neuron.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/8518659a4721d1ff0db73361f9353fe2ec00d3845c3538c0e175a30d59ba3370.png" src="_images/8518659a4721d1ff0db73361f9353fe2ec00d3845c3538c0e175a30d59ba3370.png" />
+<img alt="_images/24-NN-II-Backprop_17_0.png" src="_images/24-NN-II-Backprop_17_0.png" />
 </div>
 </div>
 <p>There are many other variations. See for example <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity">PyTorch Non-linear Activations</a></p>
 </section>
 <section id="relating-back-to-another-earlier-lecture">
-<h3>Relating Back to <em>Another</em> Earlier Lecture<a class="headerlink" href="#relating-back-to-another-earlier-lecture" title="Permalink to this heading">#</a></h3>
+<h3>Relating Back to <em>Another</em> Earlier Lecture<a class="headerlink" href="#relating-back-to-another-earlier-lecture" title="Permalink to this headline">#</a></h3>
 <p><strong>Question</strong></p>
 <p>What does</p>
 <div class="math notranslate nohighlight">
@@ -596,11 +1039,6 @@ doing binary classification to output the probabilities.</p>
 <div><p>So Logistic Regression is similar to one neuron with a sigmoid activation function.</p>
 </div></blockquote>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
@@ -622,14 +1060,13 @@ doing binary classification to output the probabilities.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/a055a164e73869a14305a0747b81a82b57e4dcc2146bf0c4f027a5ea45aac350.png" src="_images/a055a164e73869a14305a0747b81a82b57e4dcc2146bf0c4f027a5ea45aac350.png" />
+<img alt="_images/24-NN-II-Backprop_21_0.png" src="_images/24-NN-II-Backprop_21_0.png" />
 </div>
 </div>
 </section>
 <section id="multi-layer-perceptron-mlp-or-fully-connected-network-fcn">
-<h3>Multi-Layer Perceptron (MLP) or Fully Connected Network (FCN)<a class="headerlink" href="#multi-layer-perceptron-mlp-or-fully-connected-network-fcn" title="Permalink to this heading">#</a></h3>
+<h3>Multi-Layer Perceptron (MLP) or Fully Connected Network (FCN)<a class="headerlink" href="#multi-layer-perceptron-mlp-or-fully-connected-network-fcn" title="Permalink to this headline">#</a></h3>
 <center>
 <a class="reference internal image-reference" href="_images/neural_net2.jpeg"><img alt="_images/neural_net2.jpeg" src="_images/neural_net2.jpeg" style="width: 75%;" /></a>
 </center>
@@ -643,11 +1080,11 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
 </section>
 </section>
 <section id="computation-graph">
-<h2>Computation Graph<a class="headerlink" href="#computation-graph" title="Permalink to this heading">#</a></h2>
+<h2>Computation Graph<a class="headerlink" href="#computation-graph" title="Permalink to this headline">#</a></h2>
 <p>The way we are going to differentiate more complex functions is to first build a “computation graph” to apply our operations on. We’ll see that it breaks down the process into simple steps that easily scale to large networks.</p>
 <p>It’s the concept employed by TensorFlow and PyTorch, and in fact we’ll follow PyTorch interface definition.</p>
 <section id="building-the-value-class">
-<h3>Building the <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class<a class="headerlink" href="#building-the-value-class" title="Permalink to this heading">#</a></h3>
+<h3>Building the <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class<a class="headerlink" href="#building-the-value-class" title="Permalink to this headline">#</a></h3>
 <p>To do that we will build a data wrapper as a <code class="docutils literal notranslate"><span class="pre">class</span></code> called <code class="docutils literal notranslate"><span class="pre">Value</span></code> and gradually build in on all the functionality we need to define a Multi-Layer Neural Network (a.k.a. Multi-Layer Perceptron) and train it.</p>
 <p>First, the class has only a simple initialization method and a representation method.</p>
 <div class="cell docutils container">
@@ -659,7 +1096,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">)&quot;</span>
 </pre></div>
 </div>
@@ -679,14 +1116,14 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
 </div>
 </div>
 <p>If you are not familiar with <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">python classes</a>, there are a few things to note here.</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>The property <code class="docutils literal notranslate"><span class="pre">self</span></code> is just a pointer to the object itself.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method is called when you initialize a class object</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> method is how you represent the class object</p></li>
 </ol>
 </section>
 <section id="implementing-addition">
-<h3>Implementing Addition<a class="headerlink" href="#implementing-addition" title="Permalink to this heading">#</a></h3>
+<h3>Implementing Addition<a class="headerlink" href="#implementing-addition" title="Permalink to this headline">#</a></h3>
 <p>So the Value object doesn’t do much yet except for taking a value and printing it. We’d also like to do things like addition and other operations with them, but…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -719,7 +1156,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -765,7 +1202,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
 </div>
 </section>
 <section id="implementing-more-operations">
-<h3>Implementing More Operations<a class="headerlink" href="#implementing-more-operations" title="Permalink to this heading">#</a></h3>
+<h3>Implementing More Operations<a class="headerlink" href="#implementing-more-operations" title="Permalink to this headline">#</a></h3>
 <p>Similarly we can support multiplication and implement a ReLU function as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -778,7 +1215,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> <span class="c1"># self + other</span>
@@ -842,7 +1279,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
 </div>
 </section>
 <section id="child-nodes">
-<h3>Child Nodes<a class="headerlink" href="#child-nodes" title="Permalink to this heading">#</a></h3>
+<h3>Child Nodes<a class="headerlink" href="#child-nodes" title="Permalink to this headline">#</a></h3>
 <p>In order to calculate the gradients, we will need to capture the computation graphs. To do that, we’ll need to store pointers to the operands of each operation.</p>
 <p>To start with, we’ll accept a tuple of child nodes in the initializer and store that as a set in the object.</p>
 <div class="cell docutils container">
@@ -855,7 +1292,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prev</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_children</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -914,7 +1351,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
 </div>
 </section>
 <section id="child-operations">
-<h3>Child Operations<a class="headerlink" href="#child-operations" title="Permalink to this heading">#</a></h3>
+<h3>Child Operations<a class="headerlink" href="#child-operations" title="Permalink to this headline">#</a></h3>
 <p>Now we’ve recorded pointers to the child nodes. It would be helpful to also record the operator used.</p>
 <p>We’ll also add labels for convenience.</p>
 <div class="cell docutils container">
@@ -929,7 +1366,7 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="c1"># label for the node</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -989,16 +1426,11 @@ with 4 neurons, followed by one layer that produces a single value output.</p>
 </div>
 </section>
 <section id="the-compute-graph">
-<h3>The Compute Graph<a class="headerlink" href="#the-compute-graph" title="Permalink to this heading">#</a></h3>
+<h3>The Compute Graph<a class="headerlink" href="#the-compute-graph" title="Permalink to this headline">#</a></h3>
 <p>We now have enough information stored about the compute graph to visualize it.</p>
 <p>These are two functions to walk the graph and build sets of all nodes and edges (<code class="docutils literal notranslate"><span class="pre">trace</span></code>) and then draw them as a
 directed graph (<code class="docutils literal notranslate"><span class="pre">draw_dot</span></code>).</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw_dot version 1</span>
 <span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Digraph</span>
@@ -1037,7 +1469,6 @@ directed graph (<code class="docutils literal notranslate"><span class="pre">dra
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1058,7 +1489,7 @@ directed graph (<code class="docutils literal notranslate"><span class="pre">dra
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/34fca75b252e1308b6df7ec59d49b880515158193ed935d09ca5b479f3aaa9de.svg" src="_images/34fca75b252e1308b6df7ec59d49b880515158193ed935d09ca5b479f3aaa9de.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_62_0.svg" src="_images/24-NN-II-Backprop_62_0.svg" /></div>
 </div>
 <p>Note that every value object becomes a node in the graph. The operators are also represented as a kind of fake node so they can be visualized too.</p>
 <div class="cell docutils container">
@@ -1070,8 +1501,8 @@ directed graph (<code class="docutils literal notranslate"><span class="pre">dra
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nodes:  {Value(data=4.0), Value(data=-3.0), Value(data=-4.0), Value(data=-12.0), Value(data=8.0)}
-Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12.0)), (Value(data=-12.0), Value(data=-4.0)), (Value(data=8.0), Value(data=-4.0))}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nodes:  {Value(data=-3.0), Value(data=-4.0), Value(data=-12.0), Value(data=8.0), Value(data=4.0)}
+Edges:  {(Value(data=4.0), Value(data=-12.0)), (Value(data=-12.0), Value(data=-4.0)), (Value(data=8.0), Value(data=-4.0)), (Value(data=-3.0), Value(data=-12.0))}
 </pre></div>
 </div>
 </div>
@@ -1094,18 +1525,18 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ab5495d2bd92c2ad30e4b5bc367b64c93f5bd47b9cf50e7f72605b9183d48a9b.svg" src="_images/ab5495d2bd92c2ad30e4b5bc367b64c93f5bd47b9cf50e7f72605b9183d48a9b.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_66_0.svg" src="_images/24-NN-II-Backprop_66_0.svg" /></div>
 </div>
 </section>
 <section id="recap">
-<h3>Recap<a class="headerlink" href="#recap" title="Permalink to this heading">#</a></h3>
+<h3>Recap<a class="headerlink" href="#recap" title="Permalink to this headline">#</a></h3>
 <p>So far we’ve built a Value class and associated data structures to capture a computational graph and calculate the output based on the inputs and operations. We’ll call this the <strong>forward pass</strong>.</p>
 <p>But now, we’re interested in calculating the gradients with respect to some of the parameters with respect to <span class="math notranslate nohighlight">\(L\)</span>.</p>
 <p>So next we’ll update our Value class to capture the partial derivative at each node relative to L.</p>
 </section>
 </section>
 <section id="calculating-gradients">
-<h2>Calculating Gradients<a class="headerlink" href="#calculating-gradients" title="Permalink to this heading">#</a></h2>
+<h2>Calculating Gradients<a class="headerlink" href="#calculating-gradients" title="Permalink to this headline">#</a></h2>
 <p>Add a gradient member variable, <code class="docutils literal notranslate"><span class="pre">grad</span></code>, to our class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1120,7 +1551,7 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="c1"># label for the node</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -1201,10 +1632,10 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cd8e155cf53d06a6b6338b5901297abfa7fba0eda2ad4c128a13f30cf0cb6b11.svg" src="_images/cd8e155cf53d06a6b6338b5901297abfa7fba0eda2ad4c128a13f30cf0cb6b11.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_74_0.svg" src="_images/24-NN-II-Backprop_74_0.svg" /></div>
 </div>
 <section id="manual-gradient-calculation">
-<h3>Manual Gradient Calculation<a class="headerlink" href="#manual-gradient-calculation" title="Permalink to this heading">#</a></h3>
+<h3>Manual Gradient Calculation<a class="headerlink" href="#manual-gradient-calculation" title="Permalink to this headline">#</a></h3>
 <p>Before we start implementing backpropagation, it is helpful to manually calculate some gradients to better understand the procedure.</p>
 <p>For the node <span class="math notranslate nohighlight">\(L\)</span>, we trivially calculate <span class="math notranslate nohighlight">\(\frac{dL}{dL} = 1\)</span>.</p>
 <p>From limit ratio perspective,</p>
@@ -1248,7 +1679,7 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/87f7e18e45868daab1e1332180482879cf8b6ace02b14be0e06bcd3f0e22dd5b.svg" src="_images/87f7e18e45868daab1e1332180482879cf8b6ace02b14be0e06bcd3f0e22dd5b.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_83_0.svg" src="_images/24-NN-II-Backprop_83_0.svg" /></div>
 </div>
 <p>How do the parameters <span class="math notranslate nohighlight">\(e\)</span> and <span class="math notranslate nohighlight">\(f\)</span> influence <span class="math notranslate nohighlight">\(L\)</span>?</p>
 <div class="cell docutils container">
@@ -1298,7 +1729,7 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </section>
 <section id="propagating-back">
-<h3>Propagating Back<a class="headerlink" href="#propagating-back" title="Permalink to this heading">#</a></h3>
+<h3>Propagating Back<a class="headerlink" href="#propagating-back" title="Permalink to this headline">#</a></h3>
 <p>Now we want to calculate</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial{L}}{\partial{c}}\]</div>
@@ -1311,14 +1742,14 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 \[ \frac{\partial{e}}{\partial{c}} = \frac{\partial{}}{\partial{c}} (d + c) = 1\]</div>
 </section>
 <section id="question">
-<h3>Question<a class="headerlink" href="#question" title="Permalink to this heading">#</a></h3>
+<h3>Question<a class="headerlink" href="#question" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ c \rightarrow e \rightarrow L \]</div>
 <p>So now we know <span class="math notranslate nohighlight">\(\partial{L}/\partial{e}\)</span> and we also know <span class="math notranslate nohighlight">\(\partial{e}/\partial{c}\)</span>,</p>
 <p>How do we get <span class="math notranslate nohighlight">\(\partial{L}/\partial{c}\)</span>?</p>
 </section>
 <section id="the-chain-rule">
-<h3>The Chain Rule<a class="headerlink" href="#the-chain-rule" title="Permalink to this heading">#</a></h3>
+<h3>The Chain Rule<a class="headerlink" href="#the-chain-rule" title="Permalink to this headline">#</a></h3>
 <p>To paraphrase from the Wikipedia page on <a class="reference external" href="https://en.wikipedia.org/wiki/Chain_rule">Chain rule</a>, if a variable <span class="math notranslate nohighlight">\(L\)</span> depends on the variable <span class="math notranslate nohighlight">\(e\)</span>, which itself depends on the variable <span class="math notranslate nohighlight">\(c\)</span> (that is, <span class="math notranslate nohighlight">\(e\)</span> and <span class="math notranslate nohighlight">\(L\)</span> are dependent variables), then <span class="math notranslate nohighlight">\(L\)</span> depends on <span class="math notranslate nohighlight">\(c\)</span> as well, via the intermediate variable <span class="math notranslate nohighlight">\(e\)</span>. In this case, the chain rule is expressed as</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial L}{\partial c} = \frac{\partial L}{\partial e} \cdot \frac{\partial e}{\partial c},\]</div>
@@ -1352,7 +1783,7 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9c563fdd23a833bb4034139970a8eefb2d363931dbe2c4c39d0dd7a682bfe23f.svg" src="_images/9c563fdd23a833bb4034139970a8eefb2d363931dbe2c4c39d0dd7a682bfe23f.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_95_0.svg" src="_images/24-NN-II-Backprop_95_0.svg" /></div>
 </div>
 <p>How does <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> influence <span class="math notranslate nohighlight">\(L\)</span>?</p>
 <div class="cell docutils container">
@@ -1403,7 +1834,7 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </section>
 <section id="propagating-back-again">
-<h3>Propagating Back Again<a class="headerlink" href="#propagating-back-again" title="Permalink to this heading">#</a></h3>
+<h3>Propagating Back Again<a class="headerlink" href="#propagating-back-again" title="Permalink to this headline">#</a></h3>
 <p>Now we want to calculate</p>
 <div class="math notranslate nohighlight">
 \[ \frac{\partial{L}}{\partial{b}} \hspace{10pt} \textrm{and} \hspace{10pt} \frac{\partial{L}}{\partial{a}}\]</div>
@@ -1427,7 +1858,7 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dbd9d936392024a1539df196cdf55244a2727a839a97579a55afcc747637e287.svg" src="_images/dbd9d936392024a1539df196cdf55244a2727a839a97579a55afcc747637e287.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_101_0.svg" src="_images/24-NN-II-Backprop_101_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1477,14 +1908,14 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </section>
 <section id="id1">
-<h3>Recap<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Recap<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>As you saw, we recursively went backwards through the computation graph and applied the local gradients to the gradients calculated so far to get the partial gradients. Put another we propagated this calculations backwards through the graph.</p>
 <p>Of course, in practice, we will only need the gradients on the parameters, not the inputs, so we won’t bother calculating them on inputs.</p>
 <p><em>That is the essence of Back Propagation.</em></p>
 </section>
 </section>
 <section id="a-step-in-optimization">
-<h2>A Step in Optimization<a class="headerlink" href="#a-step-in-optimization" title="Permalink to this heading">#</a></h2>
+<h2>A Step in Optimization<a class="headerlink" href="#a-step-in-optimization" title="Permalink to this headline">#</a></h2>
 <p>Let’s take a look at the graph again. Assume we want the value of L to <em>decrease</em>. We are free to change the values of the leaf nodes – all the other nodes are derived from children and leaf nodes.</p>
 <p>The leaf nodes are <span class="math notranslate nohighlight">\(a, b, c\)</span> and <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <blockquote>
@@ -1497,7 +1928,7 @@ Edges:  {(Value(data=-3.0), Value(data=-12.0)), (Value(data=4.0), Value(data=-12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dbd9d936392024a1539df196cdf55244a2727a839a97579a55afcc747637e287.svg" src="_images/dbd9d936392024a1539df196cdf55244a2727a839a97579a55afcc747637e287.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_108_0.svg" src="_images/24-NN-II-Backprop_108_0.svg" /></div>
 </div>
 <p>Let’s check the current value of L.</p>
 <div class="cell docutils container">
@@ -1545,7 +1976,7 @@ of the gradient, multiplied by a step size, <span class="math notranslate nohigh
 </div>
 </section>
 <section id="a-single-neuron">
-<h2>A Single Neuron<a class="headerlink" href="#a-single-neuron" title="Permalink to this heading">#</a></h2>
+<h2>A Single Neuron<a class="headerlink" href="#a-single-neuron" title="Permalink to this headline">#</a></h2>
 <p>Let’s now programmatically define a single neuron with</p>
 <ul class="simple">
 <li><p>two inputs</p></li>
@@ -1584,7 +2015,7 @@ of the gradient, multiplied by a step size, <span class="math notranslate nohigh
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9b693ee9b0b29bf8e9c4020113b38ec263de90021e7ecad14ad41277c5f59e31.svg" src="_images/9b693ee9b0b29bf8e9c4020113b38ec263de90021e7ecad14ad41277c5f59e31.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_116_0.svg" src="_images/24-NN-II-Backprop_116_0.svg" /></div>
 </div>
 <p>The only new operation we’ve added is the ReLU, so let’s take a quick look at how we
 differentiate the ReLU.</p>
@@ -1612,7 +2043,7 @@ derivative as 0 when <span class="math notranslate nohighlight">\( \le 0\)</span
 </div>
 </section>
 <section id="coding-backpropagation">
-<h2>Coding Backpropagation<a class="headerlink" href="#coding-backpropagation" title="Permalink to this heading">#</a></h2>
+<h2>Coding Backpropagation<a class="headerlink" href="#coding-backpropagation" title="Permalink to this headline">#</a></h2>
 <p>Now we’ll update our <code class="docutils literal notranslate"><span class="pre">Value</span></code> class once more to support the backward pass.</p>
 <p>There’s a</p>
 <ul class="simple">
@@ -1634,7 +2065,7 @@ step of the chain rule, and</p></li>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">, grad=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -1723,7 +2154,7 @@ step of the chain rule, and</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b4b99f145d8f4adfab41741fcf69a708d070dacae7da83a32fde69952af581f7.svg" src="_images/b4b99f145d8f4adfab41741fcf69a708d070dacae7da83a32fde69952af581f7.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_126_0.svg" src="_images/24-NN-II-Backprop_126_0.svg" /></div>
 </div>
 <p>Now, all we have to do is call the <code class="docutils literal notranslate"><span class="pre">backward()</span></code> method of the last node…</p>
 <div class="cell docutils container">
@@ -1741,10 +2172,10 @@ step of the chain rule, and</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/768a3a116a6bd27a41ef791e84dfc761a4ce34107e0fa8b6723dd06afe5fc58c.svg" src="_images/768a3a116a6bd27a41ef791e84dfc761a4ce34107e0fa8b6723dd06afe5fc58c.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_130_0.svg" src="_images/24-NN-II-Backprop_130_0.svg" /></div>
 </div>
 <section id="accumulating-the-gradients">
-<h3>Accumulating the Gradients<a class="headerlink" href="#accumulating-the-gradients" title="Permalink to this heading">#</a></h3>
+<h3>Accumulating the Gradients<a class="headerlink" href="#accumulating-the-gradients" title="Permalink to this headline">#</a></h3>
 <p>The observant viewer will notice that we are accumulating the gradients.</p>
 <p>That is to handle cases like where a <code class="docutils literal notranslate"><span class="pre">Value</span></code> object is on both sides of the operand like</p>
 <div class="cell docutils container">
@@ -1777,7 +2208,7 @@ step of the chain rule, and</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/05e7ec0d603dcc732997517b7cd9a55d8ea90a34d28f81bf2a66ea38d5df88b5.svg" src="_images/05e7ec0d603dcc732997517b7cd9a55d8ea90a34d28f81bf2a66ea38d5df88b5.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_135_0.svg" src="_images/24-NN-II-Backprop_135_0.svg" /></div>
 </div>
 <p>You can see analytical verification of the above result in the note in the online book.</p>
 <p>The risk now is that if you don’t zero the gradients for the next update iteration, you will have incorrect gradients.</p>
@@ -1812,7 +2243,7 @@ $<span class="math notranslate nohighlight">\(\begin{aligned}
 </section>
 </section>
 <section id="enhancements-to-value-class">
-<h2>Enhancements to <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class<a class="headerlink" href="#enhancements-to-value-class" title="Permalink to this heading">#</a></h2>
+<h2>Enhancements to <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class<a class="headerlink" href="#enhancements-to-value-class" title="Permalink to this headline">#</a></h2>
 <p>There are still some useful operations that <code class="docutils literal notranslate"><span class="pre">Value</span></code> doesn’t support, so to be more
 complete we have the final version of the <code class="docutils literal notranslate"><span class="pre">Value</span></code> class below.</p>
 <p>We added:</p>
@@ -1858,7 +2289,7 @@ complete we have the final version of the <code class="docutils literal notransl
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adding support for ** operator, which we&#39;ll need for the </span>
+        <span class="sd">&quot;&quot;&quot;Adding support for ** operator, which we&#39;ll need for the </span>
 <span class="sd">        squared loss function&quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)),</span> <span class="s2">&quot;only supporting int/float powers for now&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">Value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">**</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="p">,),</span> <span class="sa">f</span><span class="s1">&#39;**</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1919,7 +2350,7 @@ complete we have the final version of the <code class="docutils literal notransl
             <span class="n">v</span><span class="o">.</span><span class="n">_backward</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a string representation of the object for display&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Value(data=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">, grad=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">)&quot;</span>
 </pre></div>
 </div>
@@ -1927,7 +2358,7 @@ complete we have the final version of the <code class="docutils literal notransl
 </div>
 </section>
 <section id="comparing-to-pytorch">
-<h2>Comparing to PyTorch<a class="headerlink" href="#comparing-to-pytorch" title="Permalink to this heading">#</a></h2>
+<h2>Comparing to PyTorch<a class="headerlink" href="#comparing-to-pytorch" title="Permalink to this headline">#</a></h2>
 <p>We’re using a class implementation that resembles the PyTorch implementation, and in fact we can compare our implementation with PyTorch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1971,7 +2402,7 @@ w1.grad 2.0
 <p>By default, tensors don’t store gradients and so won’t support backprop, so we explicitly set <code class="docutils literal notranslate"><span class="pre">requires_grad</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
 </section>
 <section id="neural-network-modules">
-<h2>Neural Network Modules<a class="headerlink" href="#neural-network-modules" title="Permalink to this heading">#</a></h2>
+<h2>Neural Network Modules<a class="headerlink" href="#neural-network-modules" title="Permalink to this headline">#</a></h2>
 <p>Now we’ll define some classes which help us build out a small neural network.</p>
 <p><strong>Module</strong> – A base class</p>
 <p><strong>Neuron</strong> – Implement a single linear or nonlinear neuron with <code class="docutils literal notranslate"><span class="pre">nin</span></code> inputs.</p>
@@ -1984,10 +2415,10 @@ w1.grad 2.0
 <span class="c1"># we assume that Value class is already defined</span>
 
 <span class="k">class</span> <span class="nc">Module</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a Neural Network Module base class &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Define a Neural Network Module base class &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">zero_grad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;When we run in a training loop, we&#39;ll need to zero out all the gradients</span>
+        <span class="sd">&quot;&quot;&quot;When we run in a training loop, we&#39;ll need to zero out all the gradients</span>
 <span class="sd">        since they are defined to accumulate in the backwards passes.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
             <span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1996,16 +2427,16 @@ w1.grad 2.0
         <span class="k">return</span> <span class="p">[]</span>
 
 <span class="k">class</span> <span class="nc">Neuron</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a Neuron as a subclass of Module&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Define a Neuron as a subclass of Module&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nin</span><span class="p">,</span> <span class="n">nonlin</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Randomly initialize a set of weights, one for each input, and initialize the bias to zero.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Randomly initialize a set of weights, one for each input, and initialize the bias to zero.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="n">Value</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nin</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">Value</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nonlin</span> <span class="o">=</span> <span class="n">nonlin</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Implement the forward pass of the neuron&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the forward pass of the neuron&quot;&quot;&quot;</span>
         <span class="n">act</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">wi</span><span class="o">*</span><span class="n">xi</span> <span class="k">for</span> <span class="n">wi</span><span class="p">,</span><span class="n">xi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">act</span><span class="o">.</span><span class="n">relu</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nonlin</span> <span class="k">else</span> <span class="n">act</span>
 
@@ -2013,17 +2444,17 @@ w1.grad 2.0
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;ReLU&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">nonlin</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Linear&#39;</span><span class="si">}</span><span class="s2">Neuron(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;ReLU&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nonlin</span> <span class="k">else</span> <span class="s1">&#39;Linear&#39;</span><span class="si">}</span><span class="s2">Neuron(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
 
 <span class="k">class</span> <span class="nc">Layer</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a Layer of Network as a subclass of Module&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Define a Layer of Network as a subclass of Module&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nin</span><span class="p">,</span> <span class="n">nout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize nout Neurons, each with nin inputs&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Initialize nout Neurons, each with nin inputs&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="p">[</span><span class="n">Neuron</span><span class="p">(</span><span class="n">nin</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nout</span><span class="p">)]</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward pass each neuron in the layer&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Forward pass each neuron in the layer&quot;&quot;&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">out</span>
 
@@ -2031,13 +2462,13 @@ w1.grad 2.0
         <span class="k">return</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">parameters</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Layer of [</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">neurons</span><span class="p">)</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Layer of [</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span><span class="p">)</span><span class="si">}</span><span class="s2">]&quot;</span>
 
 <span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a Multi-Layer Perceptron&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Define a Multi-Layer Perceptron&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nin</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nouts</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the Multi-Layer Perceptron, by initializing each layer</span>
 <span class="sd">        then initializing each neuron of each layer.</span>
 
@@ -2053,17 +2484,17 @@ w1.grad 2.0
         <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Layer</span><span class="p">(</span><span class="n">sz</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sz</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">nonlin</span><span class="o">=</span><span class="n">i</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="n">nouts</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nouts</span><span class="p">))]</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward pass through the MLP&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Forward pass through the MLP&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
 
     <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recursively retrieve the parameters of the MLP&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Recursively retrieve the parameters of the MLP&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">parameters</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;MLP of [</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">)</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;MLP of [</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span> <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">)</span><span class="si">}</span><span class="s2">]&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -2080,7 +2511,7 @@ w1.grad 2.0
 </div>
 </div>
 <section id="initialize-and-evaluate-a-neuron">
-<h3>Initialize and Evaluate a Neuron<a class="headerlink" href="#initialize-and-evaluate-a-neuron" title="Permalink to this heading">#</a></h3>
+<h3>Initialize and Evaluate a Neuron<a class="headerlink" href="#initialize-and-evaluate-a-neuron" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2 inputs</span>
@@ -2095,7 +2526,7 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value(data=-0.06787937157518575, grad=0.0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value(data=2.351314740082261, grad=0.0)
 </pre></div>
 </div>
 </div>
@@ -2120,8 +2551,8 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=0.8078361682947837, grad=0.0),
- Value(data=-0.5611839027215844, grad=0.0),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=0.5226748811016748, grad=0.0),
+ Value(data=0.4353216592929705, grad=0.0),
  Value(data=0.0, grad=0.0)]
 </pre></div>
 </div>
@@ -2129,7 +2560,7 @@ w1.grad 2.0
 </div>
 </section>
 <section id="initialize-and-evaluate-a-layer-of-neurons">
-<h3>Initialize and Evaluate a Layer of Neurons<a class="headerlink" href="#initialize-and-evaluate-a-layer-of-neurons" title="Permalink to this heading">#</a></h3>
+<h3>Initialize and Evaluate a Layer of Neurons<a class="headerlink" href="#initialize-and-evaluate-a-layer-of-neurons" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># same 2 inputs again</span>
@@ -2144,9 +2575,9 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=-3.9257626137320827, grad=0.0),
- Value(data=3.0200247760683743, grad=0.0),
- Value(data=-1.9218817300133384, grad=0.0)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=0.7525061164928648, grad=0.0),
+ Value(data=-3.245347683871597, grad=0.0),
+ Value(data=0.4281765105075186, grad=0.0)]
 </pre></div>
 </div>
 </div>
@@ -2170,14 +2601,14 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=-0.6915678463595973, grad=0.0),
- Value(data=-0.847542307004296, grad=0.0),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=0.34599955314939446, grad=0.0),
+ Value(data=0.020169003398025298, grad=0.0),
  Value(data=0.0, grad=0.0),
- Value(data=0.7868930865531618, grad=0.0),
- Value(data=0.4820795343206836, grad=0.0),
+ Value(data=-0.15415728894929637, grad=0.0),
+ Value(data=-0.9790110353243346, grad=0.0),
  Value(data=0.0, grad=0.0),
- Value(data=-0.7040443406866776, grad=0.0),
- Value(data=-0.17126434954666103, grad=0.0),
+ Value(data=-0.06169429508650448, grad=0.0),
+ Value(data=0.18385503356017585, grad=0.0),
  Value(data=0.0, grad=0.0)]
 </pre></div>
 </div>
@@ -2185,10 +2616,10 @@ w1.grad 2.0
 </div>
 </section>
 <section id="initialize-and-evaluate-an-mlp">
-<h3>Initialize and Evaluate an MLP<a class="headerlink" href="#initialize-and-evaluate-an-mlp" title="Permalink to this heading">#</a></h3>
+<h3>Initialize and Evaluate an MLP<a class="headerlink" href="#initialize-and-evaluate-an-mlp" title="Permalink to this headline">#</a></h3>
 <p>We’ll instantiate an MLP like the picture below.</p>
 <center>
-<img src="figs/NN-figs/neural_net2.jpeg" width="75%">
+<a class="reference internal image-reference" href="_images/neural_net2.jpeg"><img alt="_images/neural_net2.jpeg" src="_images/neural_net2.jpeg" style="width: 75%;" /></a>
 </center>
 <p>From <a class="reference external" href="https://cs231n.github.io/convolutional-networks/">cs231n</a></p>
 <div class="cell docutils container">
@@ -2200,7 +2631,7 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value(data=0.0, grad=0.0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value(data=-0.018605982977735535, grad=0.0)
 </pre></div>
 </div>
 </div>
@@ -2231,12 +2662,12 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7ee79a1c5d5d0fa05b2d6c4b50006ea86d7b7955d63f42c4ae22a7ce52e08178.svg" src="_images/7ee79a1c5d5d0fa05b2d6c4b50006ea86d7b7955d63f42c4ae22a7ce52e08178.svg" /></div>
+<img alt="_images/24-NN-II-Backprop_161_0.svg" src="_images/24-NN-II-Backprop_161_0.svg" /></div>
 </div>
 </section>
 </section>
 <section id="training-loop">
-<h2>Training Loop<a class="headerlink" href="#training-loop" title="Permalink to this heading">#</a></h2>
+<h2>Training Loop<a class="headerlink" href="#training-loop" title="Permalink to this headline">#</a></h2>
 <p>So after manually iterating, we put it all together in a training loop. We can repeatedly execute the next cell to continue training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2297,13 +2728,13 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final Loss:  0.00040121534431541923
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final Loss:  0.005576204735206388
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Loss Per Iteration&#39;)
 </pre></div>
 </div>
-<img alt="_images/4c6fbd6b744d344f50e5576a6b06932a5439ba93f50bf7cfe79be3053fa7158e.png" src="_images/4c6fbd6b744d344f50e5576a6b06932a5439ba93f50bf7cfe79be3053fa7158e.png" />
+<img alt="_images/24-NN-II-Backprop_164_2.png" src="_images/24-NN-II-Backprop_164_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2313,17 +2744,17 @@ w1.grad 2.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=0.9905904618448763, grad=-0.018819076310247373),
- Value(data=0.014971101631289285, grad=0.02994220326257857),
- Value(data=-5.141668571156943e-05, grad=-0.00010283337142313886),
- Value(data=0.9905904618448763, grad=-0.018819076310247373)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Value(data=1.0366133797239414, grad=0.07322675944788282),
+ Value(data=0.00698935172551762, grad=0.01397870345103524),
+ Value(data=0.028369351100668988, grad=0.056738702201337976),
+ Value(data=0.9418450858397948, grad=-0.11630982832041048)]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="build-and-train-the-equivalent-mlp-in-pytorch">
-<h2>Build and Train the Equivalent MLP in PyTorch<a class="headerlink" href="#build-and-train-the-equivalent-mlp-in-pytorch" title="Permalink to this heading">#</a></h2>
+<h2>Build and Train the Equivalent MLP in PyTorch<a class="headerlink" href="#build-and-train-the-equivalent-mlp-in-pytorch" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -2430,7 +2861,7 @@ w1.grad 2.0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Loss Per Iteration&#39;)
 </pre></div>
 </div>
-<img alt="_images/11b524295f07d22a7127f913782af565cc44dd187978d2d4c85ec637bd0804f4.png" src="_images/11b524295f07d22a7127f913782af565cc44dd187978d2d4c85ec637bd0804f4.png" />
+<img alt="_images/24-NN-II-Backprop_169_2.png" src="_images/24-NN-II-Backprop_169_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2450,12 +2881,12 @@ w1.grad 2.0
 </div>
 </section>
 <section id="to-dig-a-little-deeper">
-<h2>To Dig a Little Deeper<a class="headerlink" href="#to-dig-a-little-deeper" title="Permalink to this heading">#</a></h2>
+<h2>To Dig a Little Deeper<a class="headerlink" href="#to-dig-a-little-deeper" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/intro.html">PyTorch Quick Start Tutorial</a></p>
-<p><a class="reference external" href="https://playground.tensorflow.org/#activation=relu&amp;batchSize=30&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.01&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,4&amp;seed=0.75152&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">TensorFlow Playground</a></p>
+<p><a class="reference external" href="https://playground.tensorflow.org/#activation=relu&amp;batchSize=30&amp;dataset=gauss%C2%AEDataset=reg-plane&amp;learningRate=0.01%C2%AEularizationRate=0&amp;noise=0&amp;networkShape=4,4&amp;seed=0.75152&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">TensorFlow Playground</a></p>
 </section>
 <section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>So today we…</p>
 <ul class="simple">
 <li><p>got a glimpse of the wide applications of neural networks</p></li>
@@ -2483,7 +2914,7 @@ w1.grad 2.0
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2491,144 +2922,50 @@ w1.grad 2.0
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="23-NN-I-Gradient-Descent.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Neural Networks I – Gradient Descent</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="23-NN-I-Gradient-Descent.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Neural Networks I – Gradient Descent</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="25-NN-III-CNNs.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="25-NN-III-CNNs.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-and-neural-networks-recap">Neuron and Neural Networks (Recap)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artificial-neuron">Artificial Neuron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relating-back-to-earlier-lectures">Relating Back to Earlier Lectures</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relating-back-to-another-earlier-lecture">Relating Back to <em>Another</em> Earlier Lecture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron-mlp-or-fully-connected-network-fcn">Multi-Layer Perceptron (MLP) or Fully Connected Network (FCN)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-graph">Computation Graph</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-value-class">Building the <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-addition">Implementing Addition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-more-operations">Implementing More Operations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#child-nodes">Child Nodes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#child-operations">Child Operations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-compute-graph">The Compute Graph</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-gradients">Calculating Gradients</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-gradient-calculation">Manual Gradient Calculation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagating-back">Propagating Back</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question">Question</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule">The Chain Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagating-back-again">Propagating Back Again</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Recap</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-step-in-optimization">A Step in Optimization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-neuron">A Single Neuron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-backpropagation">Coding Backpropagation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accumulating-the-gradients">Accumulating the Gradients</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enhancements-to-value-class">Enhancements to <code class="docutils literal notranslate"><span class="pre">Value</span></code> Class</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-to-pytorch">Comparing to PyTorch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-modules">Neural Network Modules</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-and-evaluate-a-neuron">Initialize and Evaluate a Neuron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-and-evaluate-a-layer-of-neurons">Initialize and Evaluate a Layer of Neurons</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-and-evaluate-an-mlp">Initialize and Evaluate an MLP</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop">Training Loop</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-and-train-the-equivalent-mlp-in-pytorch">Build and Train the Equivalent MLP in PyTorch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dig-a-little-deeper">To Dig a Little Deeper</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Mark Crovella and Tom Gardos
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2023.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Mark Crovella and Tom Gardos<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>

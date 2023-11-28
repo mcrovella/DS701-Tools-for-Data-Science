@@ -1,60 +1,48 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" >
-
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Probability and Statistics Refresher &#8212; Tools for Data Science</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -62,106 +50,66 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '03-Probability-and-Statistics-Refresher';</script>
     <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Distances and Timeseries" href="05-Distances-Timeseries.html" />
     <link rel="prev" title="Linear Algebra Refresher" href="04-Linear-Algebra-Refresher.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
+    
+    <div class="container-fluid" id="banner"></div>
 
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    
 
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="landing-page.html">
-  
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="_static/DS701-icon.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tools for Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -170,258 +118,615 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Preliminaries
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02B-Pandas.html">Essential Tools: Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability and Statistics Refresher</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Intro-to-Python.html">
+   Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02A-Git-Jupyter.html">
+   Essential Tools: Git and Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02B-Pandas.html">
+   Essential Tools: Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Linear-Algebra-Refresher.html">
+   Linear Algebra Refresher
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Probability and Statistics Refresher
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09-Clustering-IV-GMM-EM.html">Gaussian Mixture Models</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Distances-Timeseries.html">
+   Distances and Timeseries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Clustering-I-kmeans.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Clustering-II-in-practice.html">
+   Clustering In Practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Clustering-III-hierarchical.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Clustering-IV-GMM-EM.html">
+   Gaussian Mixture Models
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Classification
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors and Model Selection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Learning-From-Data.html">
+   Learning From Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Classification-I-Decision-Trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Classification-II-kNN.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -Nearest Neighbors and Model Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Classification-III-NB-SVM.html">
+   Naive Bayes and Support Vector Machines
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dimensionality Reduction
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Low-Rank-and-SVD.html">
+   Low Rank Approximation and the SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">
+   Dimensionality Reduction and PCA – SVD II
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regression
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Regression-I-Linear.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-Regression-II-Logistic.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-Regression-III-More-Linear.html">
+   Regularization
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural Networks
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="23-NN-I-Gradient-Descent.html">Neural Networks I – Gradient Descent</a></li>
-<li class="toctree-l1"><a class="reference internal" href="24-NN-II-Backprop.html">NN II – Compute Graph, Backprop and Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="25-NN-III-CNNs.html">NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23-NN-I-Gradient-Descent.html">
+   Neural Networks I – Gradient Descent
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24-NN-II-Backprop.html">
+   NN II – Compute Graph, Backprop and Training
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25-NN-III-CNNs.html">
+   NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected Topics
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="20-Recommender-Systems.html">Recommender Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-Recommender-Systems.html">
+   Recommender Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-Networks-I.html">
+   Introduction to Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">
+   Network Centrality and Clustering
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
 
-<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mcrovella/DS701-Tools-for-Data-Science/master?urlpath=tree/03-Probability-and-Statistics-Refresher.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
   <i class="fab fa-github"></i>
   </span>
 
 </a>
 
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/03-Probability-and-Statistics-Refresher.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/03-Probability-and-Statistics-Refresher.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
-</li>
-      
-      
-      
+
+      </li>
       
       <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="btn__text-container">.pdf</span>
+<span class="headerbtn__text-container">.pdf</span>
 </button>
-</li>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
 >
   
 
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
   </span>
 
-</button>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
 </label>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Probability and Statistics Refresher</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability">
+   Probability
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-and-conditioning">
+     Probability and Conditioning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-variables">
+   Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characterizing-random-variables">
+   Characterizing Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-and-high-variability">
+   Low and High Variability
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#important-random-variables">
+   Important Random Variables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#independent-binary-trials">
+     Independent Binary Trials
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-geometric-distribution">
+       The Geometric Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-binomial-distribution">
+       The Binomial Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-exponential-distribution">
+       The Exponential Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-poisson-distribution">
+       The Poisson Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-uniform-distribution">
+       The Uniform Distribution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gaussian-distribution">
+     The Gaussian Distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#heavy-tails">
+     Heavy Tails
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-pareto-distribution">
+       The Pareto Distribution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multivariate-random-variables">
+     Multivariate Random Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-variables-as-vectors">
+     Random Variables as Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-multivariate-gaussian">
+     The Multivariate Gaussian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayes-rule">
+     Bayes’ Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confidence-intervals">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">
+     Confidence Intervals for the Mean
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Probability and Statistics Refresher</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability">
+   Probability
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-and-conditioning">
+     Probability and Conditioning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-variables">
+   Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characterizing-random-variables">
+   Characterizing Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#low-and-high-variability">
+   Low and High Variability
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#important-random-variables">
+   Important Random Variables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#independent-binary-trials">
+     Independent Binary Trials
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-geometric-distribution">
+       The Geometric Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-binomial-distribution">
+       The Binomial Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-exponential-distribution">
+       The Exponential Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-poisson-distribution">
+       The Poisson Distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-uniform-distribution">
+       The Uniform Distribution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gaussian-distribution">
+     The Gaussian Distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#heavy-tails">
+     Heavy Tails
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-pareto-distribution">
+       The Pareto Distribution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multivariate-random-variables">
+     Multivariate Random Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-variables-as-vectors">
+     Random Variables as Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-multivariate-gaussian">
+     The Multivariate Gaussian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayes-rule">
+     Bayes’ Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confidence-intervals">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">
+     Confidence Intervals for the Mean
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
             </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-and-conditioning">Probability and Conditioning</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterizing-random-variables">Characterizing Random Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-and-high-variability">Low and High Variability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-random-variables">Important Random Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-binary-trials">Independent Binary Trials</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometric-distribution">The Geometric Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-distribution">The Exponential Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uniform-distribution">The Uniform Distribution</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gaussian-distribution">The Gaussian Distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heavy-tails">Heavy Tails</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pareto-distribution">The Pareto Distribution</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate Random Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables-as-vectors">Random Variables as Vectors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multivariate-gaussian">The Multivariate Gaussian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-rule">Bayes’ Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">Confidence Intervals for the Mean</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-              
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+              <div>
+                
   <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="o">%</span><span class="k">config</span> InlineBackend.figure_format=&#39;retina&#39;
@@ -433,13 +738,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="probability-and-statistics-refresher">
-<h1>Probability and Statistics Refresher<a class="headerlink" href="#probability-and-statistics-refresher" title="Permalink to this heading">#</a></h1>
+<h1>Probability and Statistics Refresher<a class="headerlink" href="#probability-and-statistics-refresher" title="Permalink to this headline">#</a></h1>
 <p>Today we’ll review the essentials of probability and statistics that we’ll need for this course.</p>
 <section id="probability">
-<h2>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h2>
+<h2>Probability<a class="headerlink" href="#probability" title="Permalink to this headline">#</a></h2>
 <p>What is probability?</p>
 <p>We all have a general sense of what is meant by probability.</p>
 <p>However, when we look closely, we see that there are at least two different ways to interpret the notion of “the probability of an event.”</p>
@@ -494,12 +798,12 @@ It is, as I shall put it, both aleatory and epistemological.</p>
 <a class="reference internal image-reference" href="_images/Bayes-Frequentism.png"><img alt="_images/Bayes-Frequentism.png" src="_images/Bayes-Frequentism.png" style="width: 500px;" /></a>
 </center><p>So, now, let’s talk about rules for computing probabilities.</p>
 <section id="probability-and-conditioning">
-<h3>Probability and Conditioning<a class="headerlink" href="#probability-and-conditioning" title="Permalink to this heading">#</a></h3>
+<h3>Probability and Conditioning<a class="headerlink" href="#probability-and-conditioning" title="Permalink to this headline">#</a></h3>
 <p><strong>Definition.</strong>  Consider a set <span class="math notranslate nohighlight">\(\Omega\)</span>, referred to as the
 <em>sample space.</em>  A <em>probability
 measure</em> on <span class="math notranslate nohighlight">\(\Omega\)</span> is a function <span class="math notranslate nohighlight">\(P[\cdot]\)</span> defined on all the subsets of <span class="math notranslate nohighlight">\(\Omega\)</span> (the
 <em>events</em>) such that:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(P[\Omega] = 1\)</span></p></li>
 <li><p>For any event <span class="math notranslate nohighlight">\(A \subset \Omega\)</span>, <span class="math notranslate nohighlight">\(P[A] \geq 0.\)</span></p></li>
 <li><p>For any events <span class="math notranslate nohighlight">\(A, B \subset \Omega\)</span> where <span class="math notranslate nohighlight">\(A \cap B =
@@ -523,7 +827,7 @@ event <span class="math notranslate nohighlight">\(B\)</span> (having positive p
 </section>
 </section>
 <section id="random-variables">
-<h2>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
+<h2>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this headline">#</a></h2>
 <p>We are usually interested in numeric values associated with events.</p>
 <p>When a random event has a numeric value we refer to it as a random variable.</p>
 <p>Notationally, we use CAPITAL LETTERS for random variables and lowercase for non-random quantities.</p>
@@ -535,11 +839,6 @@ less than or equal to <span class="math notranslate nohighlight">\(x\)</span>, t
 <p><strong>Example.</strong>  Consider the roll of a single die.  The random variable here is the number of points showing.  What is the CDF?</p>
 <a class="reference internal image-reference" href="_images/single-die.png"><img alt="Die" src="_images/single-die.png" style="width: 100px;" /></a>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
@@ -555,18 +854,12 @@ less than or equal to <span class="math notranslate nohighlight">\(x\)</span>, t
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/e359a7f0bc4062bf811c361b9b0b7b6253728ebc22b704f4be6a7609d5abf68a.png" src="_images/e359a7f0bc4062bf811c361b9b0b7b6253728ebc22b704f4be6a7609d5abf68a.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_32_0.png" src="_images/03-Probability-and-Statistics-Refresher_32_0.png" />
 </div>
 </div>
 <p>Now, consider this CDF of some random variable:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -578,9 +871,8 @@ less than or equal to <span class="math notranslate nohighlight">\(x\)</span>, t
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/bd06519be45309556533a2d6ec9c0df14d3458ed5eaec730068c159e257ce747.png" src="_images/bd06519be45309556533a2d6ec9c0df14d3458ed5eaec730068c159e257ce747.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_34_0.png" src="_images/03-Probability-and-Statistics-Refresher_34_0.png" />
 </div>
 </div>
 <p>What does it mean when the slope is steeper for some <span class="math notranslate nohighlight">\(x\)</span> values?</p>
@@ -605,11 +897,6 @@ each value.  That is, we plot <span class="math notranslate nohighlight">\(P[X =
 points of discontinuity of the CDF.</p>
 <p>For our example of the single die:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
@@ -622,14 +909,13 @@ points of discontinuity of the CDF.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/93c4cd22761db5c21b7a6063c684293d3f559acc48e3bb674037dd302fe582c0.png" src="_images/93c4cd22761db5c21b7a6063c684293d3f559acc48e3bb674037dd302fe582c0.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_41_0.png" src="_images/03-Probability-and-Statistics-Refresher_41_0.png" />
 </div>
 </div>
 </section>
 <section id="characterizing-random-variables">
-<h2>Characterizing Random Variables<a class="headerlink" href="#characterizing-random-variables" title="Permalink to this heading">#</a></h2>
+<h2>Characterizing Random Variables<a class="headerlink" href="#characterizing-random-variables" title="Permalink to this headline">#</a></h2>
 <p><strong>Definition.</strong> The <em>expected value</em> <span class="math notranslate nohighlight">\(E[X]\)</span> of a random
 variable <span class="math notranslate nohighlight">\(X\)</span> is the probability-weighted sum or integral of all possible values of
 the R.V.</p>
@@ -667,11 +953,6 @@ observations are highly variable.</p>
 <p>This is called the <strong>standard deviation</strong> and is denoted <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <p>Next, let’s recall the case of the Tesla and Yelp returns from the last lecture:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
@@ -687,66 +968,8 @@ observations are highly variable.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 Failed download:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;TSLA&#39;]: Exception(&#39;%ticker%: No price data found, symbol may be delisted (1d 2014-01-01 -&gt; 2014-12-31)&#39;)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 Failed download:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;YELP&#39;]: Exception(&#39;%ticker%: No price data found, symbol may be delisted (1d 2014-01-01 -&gt; 2014-12-31)&#39;)
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">stocks</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">df</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2014-01-01&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;2014-12-31&#39;</span><span class="p">,</span> <span class="n">progress</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">rets</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">rets</span><span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;YELP&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/pandas/core/generic.py:11698,</span> in <span class="ni">NDFrame.pct_change</span><span class="nt">(self, periods, fill_method, limit, freq, **kwargs)</span>
-<span class="g g-Whitespace">  </span><span class="mi">11696</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
-<span class="g g-Whitespace">  </span><span class="mi">11697</span>     <span class="n">mask</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="ne">&gt; </span><span class="mi">11698</span>     <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">~</span><span class="n">mask</span><span class="p">)</span> <span class="p">:]</span>
-<span class="g g-Whitespace">  </span><span class="mi">11699</span>     <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-<span class="g g-Whitespace">  </span><span class="mi">11700</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-<span class="g g-Whitespace">  </span><span class="mi">11701</span>             <span class="s2">&quot;The default fill_method=&#39;pad&#39; in &quot;</span>
-<span class="g g-Whitespace">  </span><span class="mi">11702</span>             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.pct_change is deprecated and will be &quot;</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">  </span><span class="mi">11707</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
-<span class="g g-Whitespace">  </span><span class="mi">11708</span>         <span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/numpy/core/fromnumeric.py:1229,</span> in <span class="ni">argmax</span><span class="nt">(a, axis, out, keepdims)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1142</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1143</span><span class="sd"> Returns the indices of the maximum values along an axis.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1144</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1226</span><span class="sd"> (2, 1, 4)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1227</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1228</span> <span class="n">kwds</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;keepdims&#39;</span><span class="p">:</span> <span class="n">keepdims</span><span class="p">}</span> <span class="k">if</span> <span class="n">keepdims</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">_NoValue</span> <span class="k">else</span> <span class="p">{}</span>
-<span class="ne">-&gt; </span><span class="mi">1229</span> <span class="k">return</span> <span class="n">_wrapfunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;argmax&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/numpy/core/fromnumeric.py:59,</span> in <span class="ni">_wrapfunc</span><span class="nt">(obj, method, *args, **kwds)</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">59</span>     <span class="k">return</span> <span class="n">bound</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="c1"># A TypeError occurs if the object does have such a method in its</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="c1"># class, but its signature is not identical to that of NumPy&#39;s. This</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="c1"># Call _wrapit from within the except clause to ensure a potential</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="c1"># exception has a traceback chain.</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-
-<span class="ne">ValueError</span>: attempt to get argmax of an empty sequence
-</pre></div>
-</div>
+<img alt="_images/03-Probability-and-Statistics-Refresher_52_0.png" src="_images/03-Probability-and-Statistics-Refresher_52_0.png" />
 </div>
 </div>
 <p>Treating these two timeseries as random variables, we are interested in how they vary <strong>together</strong>.</p>
@@ -765,11 +988,6 @@ observations are highly variable.</p>
 <p><span class="math notranslate nohighlight">\(\rho\)</span> is sometimes called “Pearson <span class="math notranslate nohighlight">\(r\)</span>” after Karl Pearson who popularized it.</p>
 <p>Let’s look at our example again:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rets</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">rets</span><span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;YELP&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -777,9 +995,8 @@ observations are highly variable.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" src="_images/705e0e7d08dfc1307c7edca63c0f7957489d8ce33fa467653fc89af1409fd2b9.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_59_0.png" src="_images/03-Probability-and-Statistics-Refresher_59_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -880,7 +1097,7 @@ observations are highly variable.</p>
 <p>Apparently, not a big number!</p>
 </section>
 <section id="low-and-high-variability">
-<h2>Low and High Variability<a class="headerlink" href="#low-and-high-variability" title="Permalink to this heading">#</a></h2>
+<h2>Low and High Variability<a class="headerlink" href="#low-and-high-variability" title="Permalink to this headline">#</a></h2>
 <p>Historically, most sources of random variation that have concerned
 statisticians are instances of low variability.</p>
 <p>The original roots of
@@ -922,10 +1139,10 @@ About 99% of the variation over the 20 years occurs in a single day
 (the day the European Monetary System collapsed).</p>
 </section>
 <section id="important-random-variables">
-<h2>Important Random Variables<a class="headerlink" href="#important-random-variables" title="Permalink to this heading">#</a></h2>
+<h2>Important Random Variables<a class="headerlink" href="#important-random-variables" title="Permalink to this headline">#</a></h2>
 <p>Now we will review certain random variables that come up over and over again in typical situations.</p>
 <section id="independent-binary-trials">
-<h3>Independent Binary Trials<a class="headerlink" href="#independent-binary-trials" title="Permalink to this heading">#</a></h3>
+<h3>Independent Binary Trials<a class="headerlink" href="#independent-binary-trials" title="Permalink to this headline">#</a></h3>
 <p>Here is our canonical experiment: flipping a weighted coin.</p>
 <p>The coin
 comes up “heads” (aka “success”) with probability <span class="math notranslate nohighlight">\(p\)</span>.</p>
@@ -962,34 +1179,34 @@ equal to <span class="math notranslate nohighlight">\(p\)</span> per second.</p>
 <li><p>and in continuous time (with success rate <span class="math notranslate nohighlight">\(\lambda\)</span>)</p></li>
 </ul>
 <p>For each of these two cases (discrete and continuous time) there are two questions we can ask:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Given that an event has just occured, how long until the next
 success?</p></li>
 <li><p>In a fixed number of trials or amount of time, how many events
 occur?</p></li>
 </ol>
 <p>These four cases define four commonly-used random variables.</p>
-<table class="table">
+<table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
-<th class="head text-center"><p># Trials or Time Until Event</p></th>
-<th class="head text-center"><p>Number of Events in Fixed Time</p></th>
+<th class="text-align:center head"><p># Trials or Time Until Event</p></th>
+<th class="text-align:center head"><p>Number of Events in Fixed Time</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Discrete Trials</strong></p></td>
-<td class="text-center"><p>Geometric</p></td>
-<td class="text-center"><p>Binomial</p></td>
+<td class="text-align:center"><p>Geometric</p></td>
+<td class="text-align:center"><p>Binomial</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Continuous Rate</strong></p></td>
-<td class="text-center"><p>Exponential</p></td>
-<td class="text-center"><p>Poisson</p></td>
+<td class="text-align:center"><p>Exponential</p></td>
+<td class="text-align:center"><p>Poisson</p></td>
 </tr>
 </tbody>
 </table>
 <p>Each one has an associated distribution.</p>
 <section id="the-geometric-distribution">
-<h4>The Geometric Distribution<a class="headerlink" href="#the-geometric-distribution" title="Permalink to this heading">#</a></h4>
+<h4>The Geometric Distribution<a class="headerlink" href="#the-geometric-distribution" title="Permalink to this headline">#</a></h4>
 <p>The geometric distribution concerns Bernoulli trials.</p>
 <p>It answers the question: “what is the probability it takes <span class="math notranslate nohighlight">\(k\)</span> trials to obtain the first success?”</p>
 <p>Its PDF is given by:</p>
@@ -998,11 +1215,6 @@ occur?</p></li>
 <p>Its mean is <span class="math notranslate nohighlight">\(\mu = \frac{1}{p}\)</span> and its variance is <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1-p}{p^2}\)</span>.</p>
 <p>Its pdf looks like:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">geom</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
@@ -1017,14 +1229,13 @@ occur?</p></li>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/f368328824e5bc78c4441fe8cfecfe1a81f357bc661c83844e0cda281d7b0f3b.png" src="_images/f368328824e5bc78c4441fe8cfecfe1a81f357bc661c83844e0cda281d7b0f3b.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_85_0.png" src="_images/03-Probability-and-Statistics-Refresher_85_0.png" />
 </div>
 </div>
 </section>
 <section id="the-binomial-distribution">
-<h4>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this heading">#</a></h4>
+<h4>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Permalink to this headline">#</a></h4>
 <p>The Binomial also concerns Bernoulli trials.</p>
 <p>In this experiment there are precisely <span class="math notranslate nohighlight">\(N\)</span> coin flips, and <span class="math notranslate nohighlight">\(p\)</span> is still
 the probability of a success.</p>
@@ -1035,11 +1246,6 @@ will be <span class="math notranslate nohighlight">\(k\)</span> successes?</p>
 <p>So this distribution is <span class="math notranslate nohighlight">\(P[X=k] = \binom{N}{k}\; p^k\; (1-p)^{N-k}.\)</span></p>
 <p>Its mean is <span class="math notranslate nohighlight">\(pN\)</span>, and its variance is <span class="math notranslate nohighlight">\(pqN\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
@@ -1054,14 +1260,13 @@ will be <span class="math notranslate nohighlight">\(k\)</span> successes?</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/b03ff12701dd23c1d0462cf924ad912722a7c358ae3935c5577baba041cd5ba9.png" src="_images/b03ff12701dd23c1d0462cf924ad912722a7c358ae3935c5577baba041cd5ba9.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_90_0.png" src="_images/03-Probability-and-Statistics-Refresher_90_0.png" />
 </div>
 </div>
 </section>
 <section id="the-exponential-distribution">
-<h4>The Exponential Distribution<a class="headerlink" href="#the-exponential-distribution" title="Permalink to this heading">#</a></h4>
+<h4>The Exponential Distribution<a class="headerlink" href="#the-exponential-distribution" title="Permalink to this headline">#</a></h4>
 <p>Now we shift to a situation where successes occur at a fixed <strong>rate.</strong></p>
 <p>The Exponential random variable is the analog of the geometric in the continuous case,
 <em>i.e.,</em> the situation in which a success happens at some rate
@@ -1072,11 +1277,6 @@ will be <span class="math notranslate nohighlight">\(k\)</span> successes?</p>
 \[ p(x) = \lambda e^{- \lambda x}\]</div>
 <p>The mean is <span class="math notranslate nohighlight">\(1/\lambda\)</span>, and the variance is <span class="math notranslate nohighlight">\(1/\lambda^2\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
@@ -1090,18 +1290,12 @@ will be <span class="math notranslate nohighlight">\(k\)</span> successes?</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/5c5f89f23ad14bfeb86faa604b0968f78a44cefba84f667cb276c432b7d9f178.png" src="_images/5c5f89f23ad14bfeb86faa604b0968f78a44cefba84f667cb276c432b7d9f178.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_94_0.png" src="_images/03-Probability-and-Statistics-Refresher_94_0.png" />
 </div>
 </div>
 <p>Notice how the Exponential is the <strong>continuous analog</strong> of the Geometric:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span> 
 <span class="n">lam</span> <span class="o">=</span> <span class="mf">0.3</span>
@@ -1120,14 +1314,13 @@ will be <span class="math notranslate nohighlight">\(k\)</span> successes?</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/54937bb4d83e35c88a6eb0f7ac38e251f41f263ad9c340e5a3c6e1c777f9d06c.png" src="_images/54937bb4d83e35c88a6eb0f7ac38e251f41f263ad9c340e5a3c6e1c777f9d06c.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_96_0.png" src="_images/03-Probability-and-Statistics-Refresher_96_0.png" />
 </div>
 </div>
 </section>
 <section id="the-poisson-distribution">
-<h4>The Poisson Distribution<a class="headerlink" href="#the-poisson-distribution" title="Permalink to this heading">#</a></h4>
+<h4>The Poisson Distribution<a class="headerlink" href="#the-poisson-distribution" title="Permalink to this headline">#</a></h4>
 <p>When we ask the question</p>
 <p>“How many successes occur in a fixed amount of time?”,</p>
 <p>…we get the Poisson distribution.</p>
@@ -1138,11 +1331,6 @@ number of trials goes to infinity, happening at some rate <span class="math notr
 <p>It answers the question: when events happen indepdently at some fixed rate, how many will occur in a given fixed interval?</p>
 <p>Its mean is <span class="math notranslate nohighlight">\(\lambda T\)</span> and its variance is <span class="math notranslate nohighlight">\(\lambda T\)</span> as well.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="mi">3</span>
@@ -1158,9 +1346,8 @@ number of trials goes to infinity, happening at some rate <span class="math notr
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/1f89ed03d2fda95197740dbffff521b43bbb9dbc85066715291647ed57954e60.png" src="_images/1f89ed03d2fda95197740dbffff521b43bbb9dbc85066715291647ed57954e60.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_100_0.png" src="_images/03-Probability-and-Statistics-Refresher_100_0.png" />
 </div>
 </div>
 <p>The Poisson distribution has an interesting role in our perception of randomness (which you can read more about <a class="reference external" href="http://www.empiricalzeal.com/2012/12/21/what-does-randomness-look-like/#more-2450">here</a>).</p>
@@ -1172,11 +1359,6 @@ there were sometimes 4 such deaths in a single year. Was this just coincidence?<
 </div></blockquote>
 <p>To assess whether horse-kicks were random (not following any pattern) Bortkiewicz simply compared the number per year to what would be predicted by the Poisson distribution.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note that this data is available in &#39;data/HorseKicks.txt&#39;</span>
 <span class="n">horse_kicks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -1193,7 +1375,6 @@ there were sometimes 4 such deaths in a single year. Was this just coincidence?<
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -1266,11 +1447,6 @@ there were sometimes 4 such deaths in a single year. Was this just coincidence?<
 </div></div></div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">horse_kicks</span><span class="p">[[</span><span class="s2">&quot;Predicted Instances (Poisson)&quot;</span><span class="p">,</span><span class="s2">&quot;Observed Instances&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Deaths Per Year&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
@@ -1278,9 +1454,8 @@ there were sometimes 4 such deaths in a single year. Was this just coincidence?<
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/05e192828e845e0a311541d4ace8d4432ac19dcdba7ef22919ca72c7455a174a.png" src="_images/05e192828e845e0a311541d4ace8d4432ac19dcdba7ef22919ca72c7455a174a.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_103_0.png" src="_images/03-Probability-and-Statistics-Refresher_103_0.png" />
 </div>
 </div>
 <p>The message here is that when events occur at random, we actually tend to perceive them as clustered.</p>
@@ -1291,16 +1466,11 @@ there were sometimes 4 such deaths in a single year. Was this just coincidence?<
 <p>In the left figure, the number of dots falling into regions of a given size follows the Poisson distribution.</p>
 </section>
 <section id="the-uniform-distribution">
-<h4>The Uniform Distribution<a class="headerlink" href="#the-uniform-distribution" title="Permalink to this heading">#</a></h4>
+<h4>The Uniform Distribution<a class="headerlink" href="#the-uniform-distribution" title="Permalink to this headline">#</a></h4>
 <p>The uniform distribution models the case in which all outcomes are equally probable.</p>
 <p>It can be a discrete or continuous distribution.</p>
 <p>We have already seen the uniform distribution in the case of rolls of a fair die:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
@@ -1313,9 +1483,8 @@ there were sometimes 4 such deaths in a single year. Was this just coincidence?<
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/aa74e2468f1a07926d535197e3eeac59ac5d9bfb4bf733a74caba8536f3ae4fb.png" src="_images/aa74e2468f1a07926d535197e3eeac59ac5d9bfb4bf733a74caba8536f3ae4fb.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_109_0.png" src="_images/03-Probability-and-Statistics-Refresher_109_0.png" />
 </div>
 </div>
 <p>There is an important relationship between the uniform and Poisson distributions.</p>
@@ -1326,7 +1495,7 @@ there were sometimes 4 such deaths in a single year. Was this just coincidence?<
 </section>
 </section>
 <section id="the-gaussian-distribution">
-<h3>The Gaussian Distribution<a class="headerlink" href="#the-gaussian-distribution" title="Permalink to this heading">#</a></h3>
+<h3>The Gaussian Distribution<a class="headerlink" href="#the-gaussian-distribution" title="Permalink to this headline">#</a></h3>
 <p>The Gaussian Distribution is also called the Normal Distribution.</p>
 <p>We will make <strong>extensive</strong> use of Gaussian distribution, for a number of reasons.</p>
 <center>
@@ -1359,11 +1528,6 @@ of 1.   The pdf of the standard Gaussian is:</p>
 <div class="math notranslate nohighlight">
 \[ p(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2/2}. \]</div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -1375,17 +1539,11 @@ of 1.   The pdf of the standard Gaussian is:</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/e3d303a1e6a0f7add3b48f21ef837535a009c40ba659c6d11bb8f6dd4915c30f.png" src="_images/e3d303a1e6a0f7add3b48f21ef837535a009c40ba659c6d11bb8f6dd4915c30f.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_119_0.png" src="_images/03-Probability-and-Statistics-Refresher_119_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
@@ -1396,9 +1554,8 @@ of 1.   The pdf of the standard Gaussian is:</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/c32d8574a95f59799edadc319e2dfc1dba9e762598d82a8cd9db8b1e19baeee1.png" src="_images/c32d8574a95f59799edadc319e2dfc1dba9e762598d82a8cd9db8b1e19baeee1.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_120_0.png" src="_images/03-Probability-and-Statistics-Refresher_120_0.png" />
 </div>
 </div>
 <p>For an arbitrary Gaussian distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance
@@ -1408,7 +1565,7 @@ have its center at <span class="math notranslate nohighlight">\(\mu\)</span> and
 \[ p_{\mu,\sigma}(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}. \]</div>
 </section>
 <section id="heavy-tails">
-<h3>Heavy Tails<a class="headerlink" href="#heavy-tails" title="Permalink to this heading">#</a></h3>
+<h3>Heavy Tails<a class="headerlink" href="#heavy-tails" title="Permalink to this headline">#</a></h3>
 <p>Earlier we discussed high- and low-variability.</p>
 <p>All of the distributions we have discussed so far have “light tails”, meaning that they show low variability.</p>
 <p>In other words, extremely large observations are essentially impossible.</p>
@@ -1427,7 +1584,7 @@ a few large observations.</p>
 are small, but most of the contribution to the sample mean or variance
 comes from the rare, large observations.</p>
 <section id="the-pareto-distribution">
-<h4>The Pareto Distribution<a class="headerlink" href="#the-pareto-distribution" title="Permalink to this heading">#</a></h4>
+<h4>The Pareto Distribution<a class="headerlink" href="#the-pareto-distribution" title="Permalink to this headline">#</a></h4>
 <p>The Pareto distribution is the simplest continuous heavy-tailed
 distribution.</p>
 <p>Pareto was an Italian economist who studied income distributions.
@@ -1438,11 +1595,6 @@ distribution.</p>
 \leq 2. \]</div>
 <p>It takes on values in the range <span class="math notranslate nohighlight">\([k, \infty]\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pareto</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.3</span>
@@ -1454,9 +1606,8 @@ distribution.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/c0302353c43eb1c5f3ebad69906caef48847671b05121c412cd57201e58ec113.png" src="_images/c0302353c43eb1c5f3ebad69906caef48847671b05121c412cd57201e58ec113.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_127_0.png" src="_images/03-Probability-and-Statistics-Refresher_127_0.png" />
 </div>
 </div>
 <p>The variance of the Pareto distribution is infinite.  (The corresponding
@@ -1478,7 +1629,7 @@ statistic in this case.</p>
 </section>
 </section>
 <section id="multivariate-random-variables">
-<h3>Multivariate Random Variables<a class="headerlink" href="#multivariate-random-variables" title="Permalink to this heading">#</a></h3>
+<h3>Multivariate Random Variables<a class="headerlink" href="#multivariate-random-variables" title="Permalink to this headline">#</a></h3>
 <p>A <strong>multivariate random variable</strong> is a vector of random variables.</p>
 <p>We often simply say a “random vector”.</p>
 <p>That is,</p>
@@ -1497,13 +1648,13 @@ statistic in this case.</p>
 \text{Cov}[X_n,X_1] &amp; \text{Cov}[X_n, X_2] &amp; \dots &amp; \text{Var}[X_n]\\
 \end{array}\right] \end{split}\]</div>
 <p>A couple things to note about a covariance matrix.</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>The covariance matrix is symmetric (because <span class="math notranslate nohighlight">\(\text{Cov}(X_i, X_j) = \text{Cov}(X_j, X_i)\)</span>)</p></li>
 <li><p>The covariance matrix is <strong>positive semidefinite</strong>.</p></li>
 </ol>
 </section>
 <section id="random-variables-as-vectors">
-<h3>Random Variables as Vectors<a class="headerlink" href="#random-variables-as-vectors" title="Permalink to this heading">#</a></h3>
+<h3>Random Variables as Vectors<a class="headerlink" href="#random-variables-as-vectors" title="Permalink to this headline">#</a></h3>
 <p>When working with data, we will often treat multiple observations of some feature as samples of a random variable.</p>
 <p>We will also typically organize the observations into a vector.</p>
 <p>For example, consider our stock data:</p>
@@ -1543,27 +1694,27 @@ statistic in this case.</p>
   </thead>
   <tbody>
     <tr>
-      <th>2014-01-02</th>
+      <th>2014-01-02 00:00:00-05:00</th>
       <td>10.006667</td>
       <td>67.919998</td>
     </tr>
     <tr>
-      <th>2014-01-03</th>
+      <th>2014-01-03 00:00:00-05:00</th>
       <td>9.970667</td>
       <td>67.660004</td>
     </tr>
     <tr>
-      <th>2014-01-06</th>
+      <th>2014-01-06 00:00:00-05:00</th>
       <td>9.800000</td>
       <td>71.720001</td>
     </tr>
     <tr>
-      <th>2014-01-07</th>
+      <th>2014-01-07 00:00:00-05:00</th>
       <td>9.957333</td>
       <td>72.660004</td>
     </tr>
     <tr>
-      <th>2014-01-08</th>
+      <th>2014-01-08 00:00:00-05:00</th>
       <td>10.085333</td>
       <td>78.419998</td>
     </tr>
@@ -1573,27 +1724,27 @@ statistic in this case.</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>2014-12-23</th>
+      <th>2014-12-23 00:00:00-05:00</th>
       <td>14.731333</td>
       <td>53.360001</td>
     </tr>
     <tr>
-      <th>2014-12-24</th>
+      <th>2014-12-24 00:00:00-05:00</th>
       <td>14.817333</td>
       <td>53.000000</td>
     </tr>
     <tr>
-      <th>2014-12-26</th>
+      <th>2014-12-26 00:00:00-05:00</th>
       <td>15.188000</td>
       <td>52.939999</td>
     </tr>
     <tr>
-      <th>2014-12-29</th>
+      <th>2014-12-29 00:00:00-05:00</th>
       <td>15.047333</td>
       <td>53.009998</td>
     </tr>
     <tr>
-      <th>2014-12-30</th>
+      <th>2014-12-30 00:00:00-05:00</th>
       <td>14.815333</td>
       <td>54.240002</td>
     </tr>
@@ -1624,7 +1775,7 @@ statistic in this case.</p>
 <p>This shows that <strong>covariance is actually an inner product</strong> between normalized observation vectors.</p>
 </section>
 <section id="the-multivariate-gaussian">
-<h3>The Multivariate Gaussian<a class="headerlink" href="#the-multivariate-gaussian" title="Permalink to this heading">#</a></h3>
+<h3>The Multivariate Gaussian<a class="headerlink" href="#the-multivariate-gaussian" title="Permalink to this headline">#</a></h3>
 <p>The most common multivariate distribution we will work with is the multivariate Gaussian.</p>
 <p>The multivariate normal distribution of a random vector <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, \dots, X_k)^T\)</span> is denoted:</p>
 <div class="math notranslate nohighlight">
@@ -1642,11 +1793,6 @@ statistic in this case.</p>
 <p>However the covariances are zero – the components are uncorrelated.</p>
 <p>We will take 600 samples from this distribution.</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -1655,14 +1801,8 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1672,17 +1812,11 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/0357933c52f34720ff727f2c43dcba96b9c6da5bde2deeac3e5601a0adeb9959.png" src="_images/0357933c52f34720ff727f2c43dcba96b9c6da5bde2deeac3e5601a0adeb9959.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_147_0.png" src="_images/03-Probability-and-Statistics-Refresher_147_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1692,17 +1826,11 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/0a870146c0f8dd982d1fd9ca19cf7b662a98d1c26b73972aeb60bf370e4f74cc.png" src="_images/0a870146c0f8dd982d1fd9ca19cf7b662a98d1c26b73972aeb60bf370e4f74cc.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_148_0.png" src="_images/03-Probability-and-Statistics-Refresher_148_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span> 
@@ -1711,7 +1839,6 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <p>Next, we look at the case:</p>
 <div class="math notranslate nohighlight">
@@ -1720,11 +1847,6 @@ statistic in this case.</p>
 <p>We say that the components are <strong>positively correlated.</strong></p>
 <p>Nonetheless, <strong>the marginals are still Gaussian.</strong></p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1734,17 +1856,11 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/396b2f9a132bf31f871d1187b684efc536f585df115e341dc9681c0fceb4a125.png" src="_images/396b2f9a132bf31f871d1187b684efc536f585df115e341dc9681c0fceb4a125.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_151_0.png" src="_images/03-Probability-and-Statistics-Refresher_151_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1754,17 +1870,11 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/6b3de9f36c3392fe075a73dba39cbcda79097fabbb73506cd298d8ee01c0b60b.png" src="_images/6b3de9f36c3392fe075a73dba39cbcda79097fabbb73506cd298d8ee01c0b60b.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_152_0.png" src="_images/03-Probability-and-Statistics-Refresher_152_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span> 
@@ -1773,18 +1883,12 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <p>Next, we look at the case:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \mathbf{\mu} = \begin{bmatrix}1\\1\end{bmatrix}\;\;\;\;\Sigma = \begin{bmatrix}1 &amp; -0.8\\-0.8 &amp; 1\end{bmatrix} \end{split}\]</div>
 <p>Notice that <span class="math notranslate nohighlight">\(\text{Cov}(X_1, X_2) = -0.8\)</span>.   We say that the components are <strong>negatively correlated</strong> or <strong>anticorrelated.</strong></p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1794,17 +1898,11 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/6200265cff88269c77efb73736dd016cedee87f89ea9f5704f412645b49d88ed.png" src="_images/6200265cff88269c77efb73736dd016cedee87f89ea9f5704f412645b49d88ed.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_155_0.png" src="_images/03-Probability-and-Statistics-Refresher_155_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1814,18 +1912,12 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/38402ef821d37a6600648c0dc176f46eea6ce388ebdccac49748743675f63f9d.png" src="_images/38402ef821d37a6600648c0dc176f46eea6ce388ebdccac49748743675f63f9d.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_156_0.png" src="_images/03-Probability-and-Statistics-Refresher_156_0.png" />
 </div>
 </div>
 <p>Finally, let’s look at our stock data:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;YELP&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1833,17 +1925,11 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/6b44375d6b65ba3f708a6d67ca70b346a70792b2c4e639cfe04e6864ac30f614.png" src="_images/6b44375d6b65ba3f708a6d67ca70b346a70792b2c4e639cfe04e6864ac30f614.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_158_0.png" src="_images/03-Probability-and-Statistics-Refresher_158_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;YELP&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">)</span>
@@ -1851,16 +1937,15 @@ statistic in this case.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/0edcb54b49baccf23bfcc3c4312430d062e98a564b0cc29f395b2f613be7cdf4.png" src="_images/0edcb54b49baccf23bfcc3c4312430d062e98a564b0cc29f395b2f613be7cdf4.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_159_0.png" src="_images/03-Probability-and-Statistics-Refresher_159_0.png" />
 </div>
 </div>
 <p>Recall that the correlation between these two stocks was about 0.137.</p>
 <p>That is, the stocks are positively correlated, but not highly so.</p>
 </section>
 <section id="bayes-rule">
-<h3>Bayes’ Rule<a class="headerlink" href="#bayes-rule" title="Permalink to this heading">#</a></h3>
+<h3>Bayes’ Rule<a class="headerlink" href="#bayes-rule" title="Permalink to this headline">#</a></h3>
 <p>Bayes’ Rule is a simple way of manipulating conditional probabilities in a way that can be very useful.</p>
 <p>Start with a situation in which we are interested in two events, <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span>.</p>
 <p>These are exhaustive, meaning that in any experiment either <span class="math notranslate nohighlight">\(A_1\)</span> or <span class="math notranslate nohighlight">\(A_2\)</span> must occur.   (That is, they form a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>.)</p>
@@ -1922,7 +2007,7 @@ of twins, about 1/3 are identical:</p>
 <p>We did this in a way that used quantities that were relatively easy to obtain or measure.</p>
 </section>
 <section id="confidence-intervals">
-<h3>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h3>
+<h3>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this headline">#</a></h3>
 <p>Say you are concerned with some data that we take as coming from a random process.</p>
 <p>You want to characterize it as accurately as possible.   You measure it, yielding a
 single value.</p>
@@ -1948,7 +2033,7 @@ data, which (by assumption) are random.</p>
 <p><img alt="" src="_images/confidence-intervals.png" /></p>
 </section>
 <section id="confidence-intervals-for-the-mean">
-<h3>Confidence Intervals for the Mean<a class="headerlink" href="#confidence-intervals-for-the-mean" title="Permalink to this heading">#</a></h3>
+<h3>Confidence Intervals for the Mean<a class="headerlink" href="#confidence-intervals-for-the-mean" title="Permalink to this headline">#</a></h3>
 <p>Imagine we have a set of <span class="math notranslate nohighlight">\(n\)</span> samples of a random variable,
 <span class="math notranslate nohighlight">\(x_1, x_2, ..., x_n\)</span> Let’s assume that the random variable has mean
 <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
@@ -1990,11 +2075,6 @@ unit normal.  That is,</p>
 <p>So to form a 90% probability interval for <span class="math notranslate nohighlight">\(S\)</span> (centered on
 zero) we choose <span class="math notranslate nohighlight">\(k = z_{0.95}\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -2008,9 +2088,8 @@ zero) we choose <span class="math notranslate nohighlight">\(k = z_{0.95}\)</spa
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/432b2dfc7808e4a4de89f8e4e1fe6a92cccb4ae10cf683f8135d52632cde14e8.png" src="_images/432b2dfc7808e4a4de89f8e4e1fe6a92cccb4ae10cf683f8135d52632cde14e8.png" />
+<img alt="_images/03-Probability-and-Statistics-Refresher_190_0.png" src="_images/03-Probability-and-Statistics-Refresher_190_0.png" />
 </div>
 </div>
 <p>Turning back to <span class="math notranslate nohighlight">\(\bar{x}\)</span>, the
@@ -2056,7 +2135,7 @@ confidence interval for the population mean is given by</p>
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2064,129 +2143,50 @@ confidence interval for the population mean is given by</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="04-Linear-Algebra-Refresher.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Linear Algebra Refresher</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="04-Linear-Algebra-Refresher.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linear Algebra Refresher</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="05-Distances-Timeseries.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="05-Distances-Timeseries.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Distances and Timeseries</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-and-conditioning">Probability and Conditioning</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterizing-random-variables">Characterizing Random Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-and-high-variability">Low and High Variability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-random-variables">Important Random Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-binary-trials">Independent Binary Trials</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometric-distribution">The Geometric Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exponential-distribution">The Exponential Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson Distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uniform-distribution">The Uniform Distribution</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gaussian-distribution">The Gaussian Distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heavy-tails">Heavy Tails</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pareto-distribution">The Pareto Distribution</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate Random Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables-as-vectors">Random Variables as Vectors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multivariate-gaussian">The Multivariate Gaussian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-rule">Bayes’ Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">Confidence Intervals for the Mean</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Mark Crovella and Tom Gardos
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2023.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Mark Crovella and Tom Gardos<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>

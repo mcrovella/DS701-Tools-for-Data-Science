@@ -1,60 +1,48 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" >
-
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks &#8212; Tools for Data Science</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -62,106 +50,66 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '25-NN-III-CNNs';</script>
     <link rel="shortcut icon" href="_static/DS701-icon.jpg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Recommender Systems" href="20-Recommender-Systems.html" />
     <link rel="prev" title="NN II – Compute Graph, Backprop and Training" href="24-NN-II-Backprop.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
+    
+    <div class="container-fluid" id="banner"></div>
 
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    
 
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="landing-page.html">
-  
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="_static/DS701-icon.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tools for Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -170,254 +118,582 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminaries</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Preliminaries
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-Intro-to-Python.html">Introduction to Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02A-Git-Jupyter.html">Essential Tools: Git and Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02B-Pandas.html">Essential Tools: Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-Linear-Algebra-Refresher.html">Linear Algebra Refresher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">Probability and Statistics Refresher</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Intro-to-Python.html">
+   Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02A-Git-Jupyter.html">
+   Essential Tools: Git and Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02B-Pandas.html">
+   Essential Tools: Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Linear-Algebra-Refresher.html">
+   Linear Algebra Refresher
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Probability-and-Statistics-Refresher.html">
+   Probability and Statistics Refresher
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Clustering</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="05-Distances-Timeseries.html">Distances and Timeseries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06-Clustering-I-kmeans.html"><span class="math notranslate nohighlight">\(k\)</span>-means</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07-Clustering-II-in-practice.html">Clustering In Practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08-Clustering-III-hierarchical.html">Hierarchical Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09-Clustering-IV-GMM-EM.html">Gaussian Mixture Models</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Distances-Timeseries.html">
+   Distances and Timeseries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Clustering-I-kmeans.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Clustering-II-in-practice.html">
+   Clustering In Practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Clustering-III-hierarchical.html">
+   Hierarchical Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Clustering-IV-GMM-EM.html">
+   Gaussian Mixture Models
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Classification
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="13-Learning-From-Data.html">Learning From Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14-Classification-I-Decision-Trees.html">Decision Trees</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15-Classification-II-kNN.html"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors and Model Selection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16-Classification-III-NB-SVM.html">Naive Bayes and Support Vector Machines</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Learning-From-Data.html">
+   Learning From Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Classification-I-Decision-Trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Classification-II-kNN.html">
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -Nearest Neighbors and Model Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Classification-III-NB-SVM.html">
+   Naive Bayes and Support Vector Machines
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dimensionality Reduction
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="10-Low-Rank-and-SVD.html">Low Rank Approximation and the SVD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">Dimensionality Reduction and PCA – SVD II</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Low-Rank-and-SVD.html">
+   Low Rank Approximation and the SVD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Dimensionality-Reduction-SVD-II.html">
+   Dimensionality Reduction and PCA – SVD II
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regression
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="17-Regression-I-Linear.html">Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18-Regression-II-Logistic.html">Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="19-Regression-III-More-Linear.html">Regularization</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Regression-I-Linear.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18-Regression-II-Logistic.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19-Regression-III-More-Linear.html">
+   Regularization
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural Networks
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="23-NN-I-Gradient-Descent.html">Neural Networks I – Gradient Descent</a></li>
-<li class="toctree-l1"><a class="reference internal" href="24-NN-II-Backprop.html">NN II – Compute Graph, Backprop and Training</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23-NN-I-Gradient-Descent.html">
+   Neural Networks I – Gradient Descent
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24-NN-II-Backprop.html">
+   NN II – Compute Graph, Backprop and Training
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Topics</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Selected Topics
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="20-Recommender-Systems.html">Recommender Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="21-Networks-I.html">Introduction to Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">Network Centrality and Clustering</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20-Recommender-Systems.html">
+   Recommender Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21-Networks-I.html">
+   Introduction to Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22-Networks-II-Centrality-Clustering.html">
+   Network Centrality and Clustering
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
 
-<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mcrovella/DS701-Tools-for-Data-Science/master?urlpath=tree/25-NN-III-CNNs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/mcrovella/DS701-Tools-for-Data-Science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
   <i class="fab fa-github"></i>
   </span>
 
 </a>
 
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/25-NN-III-CNNs.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/25-NN-III-CNNs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
-</li>
-      
-      
-      
+
+      </li>
       
       <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="btn__text-container">.pdf</span>
+<span class="headerbtn__text-container">.pdf</span>
 </button>
-</li>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
 >
   
 
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
   </span>
 
-</button>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
 </label>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#batches-and-stochastic-gradient-descent">
+   Batches and Stochastic Gradient Descent
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advantages-of-stochastic-gradient-descent">
+     Advantages of Stochastic Gradient Descent
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-an-image-dataset-in-batches-in-pytorch">
+   Load an Image Dataset in Batches in PyTorch
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-and-scale-mnist">
+     1. Load and Scale MNIST
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-network-applications">
+   Convolutional Network Applications
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-neural-networks">
+   Convolutional Neural Networks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classification-invariant-to-shift">
+     Classification Invariant to Shift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-segmentation-invariant-to-shift">
+     Image Segmentation Invariant to Shift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-with-1-d-input-data">
+     Example with 1-D Input Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-convolution">
+     2D Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-a-convolutional-neural-network-in-pytorch">
+   Define a Convolutional Neural Network in PyTorch
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-loss-function-and-optimizer">
+     3. Define a Loss function and optimizer
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cross-entropy-loss">
+       Cross Entropy Loss
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#momentum">
+       Momentum
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-the-network">
+     4. Train the network
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#to-dig-deeper">
+     To Dig Deeper
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#batches-and-stochastic-gradient-descent">
+   Batches and Stochastic Gradient Descent
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advantages-of-stochastic-gradient-descent">
+     Advantages of Stochastic Gradient Descent
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-an-image-dataset-in-batches-in-pytorch">
+   Load an Image Dataset in Batches in PyTorch
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-and-scale-mnist">
+     1. Load and Scale MNIST
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-network-applications">
+   Convolutional Network Applications
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-neural-networks">
+   Convolutional Neural Networks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classification-invariant-to-shift">
+     Classification Invariant to Shift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-segmentation-invariant-to-shift">
+     Image Segmentation Invariant to Shift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-with-1-d-input-data">
+     Example with 1-D Input Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-convolution">
+     2D Convolution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-a-convolutional-neural-network-in-pytorch">
+   Define a Convolutional Neural Network in PyTorch
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-loss-function-and-optimizer">
+     3. Define a Loss function and optimizer
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cross-entropy-loss">
+       Cross Entropy Loss
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#momentum">
+       Momentum
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-the-network">
+     4. Train the network
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#to-dig-deeper">
+     To Dig Deeper
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
             </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches-and-stochastic-gradient-descent">Batches and Stochastic Gradient Descent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-stochastic-gradient-descent">Advantages of Stochastic Gradient Descent</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-an-image-dataset-in-batches-in-pytorch">Load an Image Dataset in Batches in PyTorch</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-scale-mnist">1. Load and Scale MNIST</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-network-applications">Convolutional Network Applications</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional Neural Networks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-invariant-to-shift">Classification Invariant to Shift</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-segmentation-invariant-to-shift">Image Segmentation Invariant to Shift</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-1-d-input-data">Example with 1-D Input Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolution">2D Convolution</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-convolutional-neural-network-in-pytorch">Define a Convolutional Neural Network in PyTorch</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-loss-function-and-optimizer">3. Define a Loss function and optimizer</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-loss">Cross Entropy Loss</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-network">4. Train the network</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dig-deeper">To Dig Deeper</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-              
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+              <div>
+                
   <section class="tex2jax_ignore mathjax_ignore" id="nn-iii-stochastic-gradient-descent-batches-and-convolutional-neural-networks">
-<h1>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks<a class="headerlink" href="#nn-iii-stochastic-gradient-descent-batches-and-convolutional-neural-networks" title="Permalink to this heading">#</a></h1>
+<h1>NN III – Stochastic Gradient Descent, Batches and Convolutional Neural Networks<a class="headerlink" href="#nn-iii-stochastic-gradient-descent-batches-and-convolutional-neural-networks" title="Permalink to this headline">#</a></h1>
 <section id="recap">
-<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this heading">#</a></h2>
+<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this headline">#</a></h2>
 <p>So far we covered</p>
 <ul class="simple">
 <li><p>Gradients, gradient descent and back propagation</p></li>
@@ -432,7 +708,7 @@ document.write(`
 </ul>
 </section>
 <section id="batches-and-stochastic-gradient-descent">
-<h2>Batches and Stochastic Gradient Descent<a class="headerlink" href="#batches-and-stochastic-gradient-descent" title="Permalink to this heading">#</a></h2>
+<h2>Batches and Stochastic Gradient Descent<a class="headerlink" href="#batches-and-stochastic-gradient-descent" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Compute the gradient (e.g. forward pass and backward pass) with only a <em>random subset</em>
 of the input data.</p></li>
@@ -457,11 +733,6 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 \]</div>
 <p>Let’s look at an example.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -494,19 +765,13 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/02442bf075ba58ca2e74125c1709597015ea10b3abe493209ecb564ae9ab9d87.png" src="_images/02442bf075ba58ca2e74125c1709597015ea10b3abe493209ecb564ae9ab9d87.png" />
+<img alt="_images/25-NN-III-CNNs_8_0.png" src="_images/25-NN-III-CNNs_8_0.png" />
 </div>
 </div>
 <p>Say we have a training data set of 12 points and we want to use a <em>batch size</em> of 3.</p>
 <p>Divide the 12 points into batches of 3 by randomlly selecting points without replacement.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shuffle the points and split them into 3 groups of 4</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
@@ -524,19 +789,13 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/efe8394b157733e80e6294c6ccde78ae6aee01115cb0ef43cbe5b26857b45155.png" src="_images/efe8394b157733e80e6294c6ccde78ae6aee01115cb0ef43cbe5b26857b45155.png" />
+<img alt="_images/25-NN-III-CNNs_10_0.png" src="_images/25-NN-III-CNNs_10_0.png" />
 </div>
 </div>
 <p>We can resample again to create a different set of batches.</p>
 <p>Optionally, you can shuffle after every epoch.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
@@ -552,19 +811,13 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/1acabf5b2f22b61616e252d91e447c6cff6ab4e84d6e3db01df8184a1646b8f9.png" src="_images/1acabf5b2f22b61616e252d91e447c6cff6ab4e84d6e3db01df8184a1646b8f9.png" />
+<img alt="_images/25-NN-III-CNNs_12_0.png" src="_images/25-NN-III-CNNs_12_0.png" />
 </div>
 </div>
 <p>Then for every training iteration, you calculate the forward pass and backward pass loss with only the data from the batch.</p>
 <p>Above, we use data from the 1st batch.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
@@ -580,17 +833,11 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/b88b74efaa7e3c984552c83e4100b7c791998ac6d74ab0168dfe78fafb495535.png" src="_images/b88b74efaa7e3c984552c83e4100b7c791998ac6d74ab0168dfe78fafb495535.png" />
+<img alt="_images/25-NN-III-CNNs_14_0.png" src="_images/25-NN-III-CNNs_14_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
@@ -606,17 +853,11 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/9c0737cf04e332a77cff1f0d7e6ea319a15920c5819bd7d292d90f02f238b3c0.png" src="_images/9c0737cf04e332a77cff1f0d7e6ea319a15920c5819bd7d292d90f02f238b3c0.png" />
+<img alt="_images/25-NN-III-CNNs_15_0.png" src="_images/25-NN-III-CNNs_15_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch 1&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 2&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 3&#39;</span><span class="p">,</span> <span class="s1">&#39;batch 4&#39;</span><span class="p">]</span>
@@ -632,15 +873,14 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="_images/7077df3617442209ac3047a7ed0d3f07c01f552694129976b59a94748ab7d4a4.png" src="_images/7077df3617442209ac3047a7ed0d3f07c01f552694129976b59a94748ab7d4a4.png" />
+<img alt="_images/25-NN-III-CNNs_16_0.png" src="_images/25-NN-III-CNNs_16_0.png" />
 </div>
 </div>
 <section id="advantages-of-stochastic-gradient-descent">
-<h3>Advantages of Stochastic Gradient Descent<a class="headerlink" href="#advantages-of-stochastic-gradient-descent" title="Permalink to this heading">#</a></h3>
+<h3>Advantages of Stochastic Gradient Descent<a class="headerlink" href="#advantages-of-stochastic-gradient-descent" title="Permalink to this headline">#</a></h3>
 <p>There are two main advantages to <em>Stochastic Gradient Descent</em>.</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>You don’t read and compute on every input data sample for every training iteration,</p>
 <ul class="simple">
 <li><p>Speeds up iteration while still making optimization progress</p></li>
@@ -667,7 +907,7 @@ the global minimum.</p>
 </section>
 </section>
 <section id="load-an-image-dataset-in-batches-in-pytorch">
-<h2>Load an Image Dataset in Batches in PyTorch<a class="headerlink" href="#load-an-image-dataset-in-batches-in-pytorch" title="Permalink to this heading">#</a></h2>
+<h2>Load an Image Dataset in Batches in PyTorch<a class="headerlink" href="#load-an-image-dataset-in-batches-in-pytorch" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -685,7 +925,7 @@ the global minimum.</p>
 </div>
 </div>
 <section id="load-and-scale-mnist">
-<h3>1. Load and Scale MNIST<a class="headerlink" href="#load-and-scale-mnist" title="Permalink to this heading">#</a></h3>
+<h3>1. Load and Scale MNIST<a class="headerlink" href="#load-and-scale-mnist" title="Permalink to this headline">#</a></h3>
 <p>Load MNIST handwritten digit dataset with 60K training samples and 10K test samples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -706,6 +946,48 @@ the global minimum.</p>
                                     <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
 <span class="n">testloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">testset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> 
                                          <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to ./data/MNIST_data/MNIST/raw/train-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████| 9912422/9912422 [00:00&lt;00:00, 63641975.04it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting ./data/MNIST_data/MNIST/raw/train-images-idx3-ubyte.gz to ./data/MNIST_data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to ./data/MNIST_data/MNIST/raw/train-labels-idx1-ubyte.gz
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████| 28881/28881 [00:00&lt;00:00, 46501226.04it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting ./data/MNIST_data/MNIST/raw/train-labels-idx1-ubyte.gz to ./data/MNIST_data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to ./data/MNIST_data/MNIST/raw/t10k-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████| 1648877/1648877 [00:00&lt;00:00, 28857335.86it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting ./data/MNIST_data/MNIST/raw/t10k-images-idx3-ubyte.gz to ./data/MNIST_data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to ./data/MNIST_data/MNIST/raw/t10k-labels-idx1-ubyte.gz
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████| 4542/4542 [00:00&lt;00:00, 4837615.23it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting ./data/MNIST_data/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./data/MNIST_data/MNIST/raw
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -764,16 +1046,11 @@ get a batch and visualize it.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/243c1e473889797457a0d8460da3da79128afad242bd16e62fcc91db7d823986.png" src="_images/243c1e473889797457a0d8460da3da79128afad242bd16e62fcc91db7d823986.png" />
+<img alt="_images/25-NN-III-CNNs_29_0.png" src="_images/25-NN-III-CNNs_29_0.png" />
 </div>
 </div>
 <p>We can display the training labels for the image as well.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 
@@ -791,7 +1068,6 @@ get a batch and visualize it.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><table border="1" class="dataframe">
   <thead>
@@ -810,91 +1086,91 @@ get a batch and visualize it.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1 - one</td>
-      <td>1 - one</td>
-      <td>0 - zero</td>
-      <td>6 - six</td>
-      <td>3 - three</td>
-      <td>0 - zero</td>
+      <td>8 - eight</td>
+      <td>4 - four</td>
       <td>2 - two</td>
+      <td>0 - zero</td>
+      <td>0 - zero</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
       <td>3 - three</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>7 - seven</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
+      <td>9 - nine</td>
+      <td>7 - seven</td>
+      <td>9 - nine</td>
+      <td>6 - six</td>
       <td>8 - eight</td>
-      <td>0 - zero</td>
-      <td>5 - five</td>
-      <td>9 - nine</td>
-      <td>9 - nine</td>
-      <td>8 - eight</td>
-      <td>9 - nine</td>
-      <td>0 - zero</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>9 - nine</td>
-      <td>2 - two</td>
-      <td>1 - one</td>
       <td>0 - zero</td>
       <td>8 - eight</td>
-      <td>2 - two</td>
-      <td>2 - two</td>
+      <td>4 - four</td>
+      <td>3 - three</td>
+      <td>8 - eight</td>
       <td>5 - five</td>
+      <td>5 - five</td>
+      <td>7 - seven</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0 - zero</td>
-      <td>0 - zero</td>
+      <td>2 - two</td>
       <td>7 - seven</td>
+      <td>7 - seven</td>
+      <td>7 - seven</td>
+      <td>0 - zero</td>
       <td>5 - five</td>
-      <td>0 - zero</td>
-      <td>4 - four</td>
       <td>7 - seven</td>
-      <td>4 - four</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>2 - two</td>
+      <td>2 - two</td>
       <td>7 - seven</td>
-      <td>3 - three</td>
-      <td>2 - two</td>
+      <td>6 - six</td>
       <td>8 - eight</td>
-      <td>4 - four</td>
-      <td>0 - zero</td>
-      <td>2 - two</td>
-      <td>0 - zero</td>
+      <td>1 - one</td>
+      <td>3 - three</td>
+      <td>8 - eight</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0 - zero</td>
-      <td>1 - one</td>
-      <td>7 - seven</td>
       <td>3 - three</td>
-      <td>2 - two</td>
-      <td>5 - five</td>
       <td>1 - one</td>
-      <td>6 - six</td>
+      <td>9 - nine</td>
+      <td>8 - eight</td>
+      <td>7 - seven</td>
+      <td>5 - five</td>
+      <td>7 - seven</td>
+      <td>5 - five</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>5 - five</td>
-      <td>4 - four</td>
       <td>0 - zero</td>
-      <td>7 - seven</td>
-      <td>9 - nine</td>
-      <td>4 - four</td>
       <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
+      <td>8 - eight</td>
+      <td>4 - four</td>
       <td>0 - zero</td>
     </tr>
     <tr>
       <th>7</th>
       <td>6 - six</td>
       <td>9 - nine</td>
-      <td>2 - two</td>
-      <td>9 - nine</td>
-      <td>1 - one</td>
+      <td>7 - seven</td>
       <td>5 - five</td>
-      <td>9 - nine</td>
+      <td>5 - five</td>
       <td>2 - two</td>
+      <td>5 - five</td>
+      <td>5 - five</td>
     </tr>
   </tbody>
 </table></div></div>
@@ -902,7 +1178,7 @@ get a batch and visualize it.</p>
 </section>
 </section>
 <section id="convolutional-network-applications">
-<h2>Convolutional Network Applications<a class="headerlink" href="#convolutional-network-applications" title="Permalink to this heading">#</a></h2>
+<h2>Convolutional Network Applications<a class="headerlink" href="#convolutional-network-applications" title="Permalink to this headline">#</a></h2>
 <!-- Image Credit "https://udlbook.github.io/udlbook/"-->
 <center>    
 <img alt="_images/L25-img-class.svg" src="_images/L25-img-class.svg" /></center> 
@@ -928,7 +1204,7 @@ get a batch and visualize it.</p>
 </ul>
 </section>
 <section id="convolutional-neural-networks">
-<h2>Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this heading">#</a></h2>
+<h2>Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this headline">#</a></h2>
 <p>Problems with fully-connected networks</p>
 <ul class="simple">
 <li><p>Size</p>
@@ -951,13 +1227,13 @@ get a batch and visualize it.</p>
 </ul>
 <!-- Image Credit "https://udlbook.github.io/udlbook/"-->
 <section id="classification-invariant-to-shift">
-<h3>Classification Invariant to Shift<a class="headerlink" href="#classification-invariant-to-shift" title="Permalink to this heading">#</a></h3>
+<h3>Classification Invariant to Shift<a class="headerlink" href="#classification-invariant-to-shift" title="Permalink to this headline">#</a></h3>
 <center>    
 <img alt="_images/L25-shift-img-class.png" src="_images/L25-shift-img-class.png" />
 </center> <!-- Image Credit "https://udlbook.github.io/udlbook/"-->
 </section>
 <section id="image-segmentation-invariant-to-shift">
-<h3>Image Segmentation Invariant to Shift<a class="headerlink" href="#image-segmentation-invariant-to-shift" title="Permalink to this heading">#</a></h3>
+<h3>Image Segmentation Invariant to Shift<a class="headerlink" href="#image-segmentation-invariant-to-shift" title="Permalink to this headline">#</a></h3>
 <center>    
 <img alt="_images/L25-shift-seg.png" src="_images/L25-shift-seg.png" />
 </center> <p>Solution: Convolutional Neural Networks</p>
@@ -967,7 +1243,7 @@ get a batch and visualize it.</p>
 </ul>
 </section>
 <section id="example-with-1-d-input-data">
-<h3>Example with 1-D Input Data<a class="headerlink" href="#example-with-1-d-input-data" title="Permalink to this heading">#</a></h3>
+<h3>Example with 1-D Input Data<a class="headerlink" href="#example-with-1-d-input-data" title="Permalink to this headline">#</a></h3>
 <p>In <em>convolutional neural networks</em>, we define a set of weights that we move across
 the input data.</p>
 <!-- Image Credit "https://udlbook.github.io/udlbook/"-->
@@ -1005,10 +1281,10 @@ data, so by 2 overall for length-3 filter.</p>
 <center>    
 <img alt="_images/L25-conv-fig10-3.png" src="_images/L25-conv-fig10-3.png" />
 </center> <p>There are a few design choices one can make with convolution layers, such as:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p><em>filter length</em>, e.g. size 3 in figures (a) and (b)</p></li>
 <li><p><em>stride</em>, which is how much you shift to calculate the next output. Common values are</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p><em>stride 1</em> as we saw in the previous examples and in figures (c) and (d)</p></li>
 <li><p><em>stride 2</em>, where you shift by 2 instead of 1, an effectively halve the size of the output as in figures (a) and (b)</p></li>
 </ol>
@@ -1017,7 +1293,7 @@ data, so by 2 overall for length-3 filter.</p>
 </ol>
 </section>
 <section id="d-convolution">
-<h3>2D Convolution<a class="headerlink" href="#d-convolution" title="Permalink to this heading">#</a></h3>
+<h3>2D Convolution<a class="headerlink" href="#d-convolution" title="Permalink to this headline">#</a></h3>
 <p>For images and video frames we use a two-dimensional convolution
 (called <code class="docutils literal notranslate"><span class="pre">conv2d</span></code> in PyTorch) which is an extension of the 1-D
 convolution as shown in the following illustration.</p>
@@ -1031,9 +1307,9 @@ convolution as shown in the following illustration.</p>
 </section>
 </section>
 <section id="define-a-convolutional-neural-network-in-pytorch">
-<h2>Define a Convolutional Neural Network in PyTorch<a class="headerlink" href="#define-a-convolutional-neural-network-in-pytorch" title="Permalink to this heading">#</a></h2>
+<h2>Define a Convolutional Neural Network in PyTorch<a class="headerlink" href="#define-a-convolutional-neural-network-in-pytorch" title="Permalink to this headline">#</a></h2>
 <p>We will do the following steps in order:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>We already loaded and scaled the MNIST training and test datasets using
 <code class="docutils literal notranslate"><span class="pre">torchvision</span></code></p></li>
 <li><p>Define a Convolutional Neural Network</p></li>
@@ -1078,7 +1354,7 @@ convolution as shown in the following illustration.</p>
                       <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding_mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
-<table class="table">
+<table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Layer</p></th>
 <th class="head"><p>Kernel Size</p></th>
@@ -1154,7 +1430,7 @@ convolution as shown in the following illustration.</p>
 <hr class="docutils" />
 <p><a class="reference external" href="https://alexlenail.me/NN-SVG/AlexNet.html">NN-SVG</a></p>
 <section id="define-a-loss-function-and-optimizer">
-<h3>3. Define a Loss function and optimizer<a class="headerlink" href="#define-a-loss-function-and-optimizer" title="Permalink to this heading">#</a></h3>
+<h3>3. Define a Loss function and optimizer<a class="headerlink" href="#define-a-loss-function-and-optimizer" title="Permalink to this headline">#</a></h3>
 <p>We’ll use a Classification Cross-Entropy loss and SGD with momentum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1167,7 +1443,7 @@ convolution as shown in the following illustration.</p>
 </div>
 </div>
 <section id="cross-entropy-loss">
-<h4>Cross Entropy Loss<a class="headerlink" href="#cross-entropy-loss" title="Permalink to this heading">#</a></h4>
+<h4>Cross Entropy Loss<a class="headerlink" href="#cross-entropy-loss" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Popular loss function for multi-class classification that measures the <em>dissimilarity</em> between the predicted class log probability <span class="math notranslate nohighlight">\(\log(p_i)\)</span> and the true class <span class="math notranslate nohighlight">\(y_i\)</span>.</p></li>
 </ul>
@@ -1176,7 +1452,7 @@ convolution as shown in the following illustration.</p>
 <p>See for example <a class="reference external" href="https://machinelearningmastery.com/cross-entropy-for-machine-learning/">here</a> for more information.</p>
 </section>
 <section id="momentum">
-<h4>Momentum<a class="headerlink" href="#momentum" title="Permalink to this heading">#</a></h4>
+<h4>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">#</a></h4>
 <p>Momentum is a technique used in optimizing neural networks that helps accelerate gradients vectors in the right directions, leading to faster convergence. It is inspired by physical laws of motion where the optimizer uses ‘momentum’ to push over hilly terrain and valleys to find the global minimum.</p>
 <p>In gradient descent, the weight update rule with momentum is given by:</p>
 <div class="math notranslate nohighlight">
@@ -1197,7 +1473,7 @@ w_{t+1} = w_t - \alpha m_{t+1}
 </section>
 </section>
 <section id="train-the-network">
-<h3>4. Train the network<a class="headerlink" href="#train-the-network" title="Permalink to this heading">#</a></h3>
+<h3>4. Train the network<a class="headerlink" href="#train-the-network" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Epoch #, Iteration #] loss&quot;</span><span class="p">)</span>
@@ -1223,7 +1499,7 @@ w_{t+1} = w_t - \alpha m_{t+1}
         <span class="c1"># print statistics</span>
         <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>    <span class="c1"># print every 2000 mini-batches</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s1">5d</span><span class="si">}</span><span class="s1">] loss: </span><span class="si">{</span><span class="n">running_loss</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2000</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">:</span><span class="s1">5d</span><span class="si">}</span><span class="s1">] loss: </span><span class="si">{</span><span class="n">running_loss</span> <span class="o">/</span> <span class="mi">2000</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished Training&#39;</span><span class="p">)</span>
@@ -1232,36 +1508,25 @@ w_{t+1} = w_t - \alpha m_{t+1}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Epoch #, Iteration #] loss
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   100] loss: 0.109
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   200] loss: 0.067
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   300] loss: 0.028
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   400] loss: 0.021
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   500] loss: 0.018
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   600] loss: 0.018
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   700] loss: 0.016
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   800] loss: 0.014
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   900] loss: 0.014
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished Training
+[1,   100] loss: 0.108
+[1,   200] loss: 0.056
+[1,   300] loss: 0.024
+[1,   400] loss: 0.019
+[1,   500] loss: 0.017
+[1,   600] loss: 0.015
+[1,   700] loss: 0.014
+[1,   800] loss: 0.013
+[1,   900] loss: 0.014
+[2,   100] loss: 0.011
+[2,   200] loss: 0.011
+[2,   300] loss: 0.010
+[2,   400] loss: 0.009
+[2,   500] loss: 0.009
+[2,   600] loss: 0.008
+[2,   700] loss: 0.008
+[2,   800] loss: 0.008
+[2,   900] loss: 0.008
+Finished Training
 </pre></div>
 </div>
 </div>
@@ -1279,15 +1544,10 @@ w_{t+1} = w_t - \alpha m_{t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fb253f95a62a08c8502c42a7d34a71738841e0431769c17d0c5d25803d6a448c.png" src="_images/fb253f95a62a08c8502c42a7d34a71738841e0431769c17d0c5d25803d6a448c.png" />
+<img alt="_images/25-NN-III-CNNs_70_0.png" src="_images/25-NN-III-CNNs_70_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 
@@ -1305,7 +1565,6 @@ w_{t+1} = w_t - \alpha m_{t+1}
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><table border="1" class="dataframe">
   <thead>
@@ -1324,91 +1583,91 @@ w_{t+1} = w_t - \alpha m_{t+1}
   <tbody>
     <tr>
       <th>0</th>
-      <td>0 - zero</td>
+      <td>6 - six</td>
+      <td>4 - four</td>
+      <td>7 - seven</td>
+      <td>4 - four</td>
       <td>5 - five</td>
-      <td>8 - eight</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>7 - seven</td>
+      <td>5 - five</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>8 - eight</td>
+      <td>0 - zero</td>
+      <td>4 - four</td>
+      <td>9 - nine</td>
+      <td>0 - zero</td>
       <td>7 - seven</td>
-      <td>6 - six</td>
-      <td>6 - six</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>2 - two</td>
-      <td>6 - six</td>
-      <td>2 - two</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>8 - eight</td>
-      <td>6 - six</td>
+      <td>1 - one</td>
       <td>9 - nine</td>
       <td>7 - seven</td>
-      <td>0 - zero</td>
-      <td>8 - eight</td>
-      <td>8 - eight</td>
+      <td>3 - three</td>
+      <td>3 - three</td>
+      <td>5 - five</td>
+      <td>1 - one</td>
       <td>2 - two</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>9 - nine</td>
       <td>2 - two</td>
       <td>7 - seven</td>
-      <td>3 - three</td>
-      <td>0 - zero</td>
-      <td>0 - zero</td>
       <td>2 - two</td>
-      <td>3 - three</td>
-      <td>8 - eight</td>
+      <td>7 - seven</td>
+      <td>2 - two</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5 - five</td>
-      <td>1 - one</td>
-      <td>9 - nine</td>
-      <td>6 - six</td>
       <td>4 - four</td>
-      <td>7 - seven</td>
+      <td>3 - three</td>
+      <td>5 - five</td>
+      <td>2 - two</td>
       <td>0 - zero</td>
-      <td>9 - nine</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0 - zero</td>
-      <td>3 - three</td>
-      <td>1 - one</td>
-      <td>7 - seven</td>
-      <td>5 - five</td>
-      <td>1 - one</td>
-      <td>6 - six</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
       <td>9 - nine</td>
+      <td>5 - five</td>
+      <td>7 - seven</td>
+      <td>6 - six</td>
+      <td>1 - one</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>6 - six</td>
+      <td>5 - five</td>
+      <td>5 - five</td>
+      <td>4 - four</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
       <td>9 - nine</td>
       <td>2 - two</td>
-      <td>0 - zero</td>
-      <td>2 - two</td>
-      <td>1 - one</td>
-      <td>2 - two</td>
-      <td>4 - four</td>
+      <td>8 - eight</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>1 - one</td>
-      <td>4 - four</td>
-      <td>8 - eight</td>
       <td>5 - five</td>
       <td>0 - zero</td>
-      <td>9 - nine</td>
-      <td>8 - eight</td>
-      <td>7 - seven</td>
+      <td>4 - four</td>
+      <td>6 - six</td>
+      <td>4 - four</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
+      <td>6 - six</td>
     </tr>
   </tbody>
 </table></div></div>
@@ -1434,11 +1693,6 @@ associated with that index.</p>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming batch_size is 64 and images are displayed in an 8x8 grid</span>
 <span class="n">labels_grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">testset</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">predicted</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
@@ -1454,7 +1708,6 @@ associated with that index.</p>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><table border="1" class="dataframe">
   <thead>
@@ -1473,91 +1726,91 @@ associated with that index.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0 - zero</td>
+      <td>6 - six</td>
+      <td>4 - four</td>
+      <td>7 - seven</td>
+      <td>4 - four</td>
       <td>5 - five</td>
-      <td>8 - eight</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>7 - seven</td>
+      <td>5 - five</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>8 - eight</td>
+      <td>0 - zero</td>
+      <td>4 - four</td>
+      <td>9 - nine</td>
+      <td>0 - zero</td>
       <td>7 - seven</td>
-      <td>6 - six</td>
-      <td>6 - six</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>3 - three</td>
-      <td>6 - six</td>
-      <td>2 - two</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4 - four</td>
-      <td>6 - six</td>
-      <td>9 - nine</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
       <td>7 - seven</td>
-      <td>0 - zero</td>
-      <td>8 - eight</td>
-      <td>8 - eight</td>
+      <td>3 - three</td>
+      <td>3 - three</td>
+      <td>5 - five</td>
+      <td>1 - one</td>
       <td>2 - two</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>9 - nine</td>
       <td>2 - two</td>
       <td>7 - seven</td>
-      <td>3 - three</td>
-      <td>0 - zero</td>
-      <td>0 - zero</td>
       <td>2 - two</td>
-      <td>3 - three</td>
-      <td>8 - eight</td>
+      <td>7 - seven</td>
+      <td>2 - two</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5 - five</td>
-      <td>1 - one</td>
-      <td>9 - nine</td>
-      <td>6 - six</td>
       <td>4 - four</td>
-      <td>7 - seven</td>
-      <td>0 - zero</td>
+      <td>3 - three</td>
       <td>5 - five</td>
+      <td>2 - two</td>
+      <td>0 - zero</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0 - zero</td>
-      <td>3 - three</td>
-      <td>1 - one</td>
-      <td>7 - seven</td>
-      <td>5 - five</td>
-      <td>1 - one</td>
-      <td>6 - six</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
       <td>9 - nine</td>
+      <td>5 - five</td>
+      <td>7 - seven</td>
+      <td>6 - six</td>
+      <td>1 - one</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>6 - six</td>
+      <td>5 - five</td>
+      <td>5 - five</td>
+      <td>4 - four</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
       <td>9 - nine</td>
       <td>2 - two</td>
-      <td>0 - zero</td>
-      <td>2 - two</td>
-      <td>1 - one</td>
-      <td>2 - two</td>
-      <td>4 - four</td>
+      <td>8 - eight</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>1 - one</td>
-      <td>4 - four</td>
-      <td>8 - eight</td>
       <td>5 - five</td>
       <td>0 - zero</td>
-      <td>9 - nine</td>
-      <td>8 - eight</td>
-      <td>7 - seven</td>
+      <td>4 - four</td>
+      <td>6 - six</td>
+      <td>4 - four</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
+      <td>6 - six</td>
     </tr>
   </tbody>
 </table></div></div>
@@ -1578,12 +1831,12 @@ associated with that index.</p>
         <span class="n">total</span> <span class="o">+=</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy of the network on the 10000 test images: </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">correct</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">total</span><span class="si">}</span><span class="s1"> %&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy of the network on the 10000 test images: </span><span class="si">{</span><span class="mi">100</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">//</span> <span class="n">total</span><span class="si">}</span><span class="s1"> %&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of the network on the 10000 test images: 92 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of the network on the 10000 test images: 96 %
 </pre></div>
 </div>
 </div>
@@ -1616,23 +1869,23 @@ associated with that index.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for class: 0 - zero is 97.7 %
-Accuracy for class: 1 - one is 97.1 %
-Accuracy for class: 2 - two is 88.6 %
-Accuracy for class: 3 - three is 95.5 %
-Accuracy for class: 4 - four is 89.5 %
-Accuracy for class: 5 - five is 78.3 %
-Accuracy for class: 6 - six is 96.8 %
-Accuracy for class: 7 - seven is 91.8 %
-Accuracy for class: 8 - eight is 91.5 %
-Accuracy for class: 9 - nine is 94.2 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for class: 0 - zero is 98.2 %
+Accuracy for class: 1 - one is 98.9 %
+Accuracy for class: 2 - two is 94.7 %
+Accuracy for class: 3 - three is 98.1 %
+Accuracy for class: 4 - four is 97.5 %
+Accuracy for class: 5 - five is 96.0 %
+Accuracy for class: 6 - six is 97.8 %
+Accuracy for class: 7 - seven is 96.0 %
+Accuracy for class: 8 - eight is 94.3 %
+Accuracy for class: 9 - nine is 94.0 %
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="to-dig-deeper">
-<h3>To Dig Deeper<a class="headerlink" href="#to-dig-deeper" title="Permalink to this heading">#</a></h3>
+<h3>To Dig Deeper<a class="headerlink" href="#to-dig-deeper" title="Permalink to this headline">#</a></h3>
 <p>Look at common CNN network architectures.</p>
 <p>For example in <em>Understanding Deep Learning</em> section 10.5.</p>
 </section>
@@ -1651,7 +1904,7 @@ Accuracy for class: 9 - nine is 94.2 %
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1659,127 +1912,50 @@ Accuracy for class: 9 - nine is 94.2 %
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-              
-              
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="24-NN-II-Backprop.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">NN II – Compute Graph, Backprop and Training</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="24-NN-II-Backprop.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">NN II – Compute Graph, Backprop and Training</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="20-Recommender-Systems.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="20-Recommender-Systems.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Recommender Systems</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batches-and-stochastic-gradient-descent">Batches and Stochastic Gradient Descent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-stochastic-gradient-descent">Advantages of Stochastic Gradient Descent</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-an-image-dataset-in-batches-in-pytorch">Load an Image Dataset in Batches in PyTorch</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-scale-mnist">1. Load and Scale MNIST</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-network-applications">Convolutional Network Applications</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional Neural Networks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-invariant-to-shift">Classification Invariant to Shift</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-segmentation-invariant-to-shift">Image Segmentation Invariant to Shift</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-1-d-input-data">Example with 1-D Input Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolution">2D Convolution</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-convolutional-neural-network-in-pytorch">Define a Convolutional Neural Network in PyTorch</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-loss-function-and-optimizer">3. Define a Loss function and optimizer</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-loss">Cross Entropy Loss</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-network">4. Train the network</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-dig-deeper">To Dig Deeper</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Mark Crovella and Tom Gardos
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2023.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Mark Crovella and Tom Gardos<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>
