@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
   
   
 </a></div>
@@ -327,10 +338,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -338,7 +349,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -486,7 +497,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/7e1a3c1561d426d05681d84e4a9ecfd77b90958ac6db5bc067a5f55cd90f6981.png" src="_images/7e1a3c1561d426d05681d84e4a9ecfd77b90958ac6db5bc067a5f55cd90f6981.png" />
+<img alt="_images/d8629c7b473ce0ad2bc66a0a1fa38cc466a8f954d26bd2fe609586eaa0d2ad4e.png" src="_images/d8629c7b473ce0ad2bc66a0a1fa38cc466a8f954d26bd2fe609586eaa0d2ad4e.png" />
 </div>
 </div>
 <p>The idea of the <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors classifier is that, at test time, it simply “looks at” the <span class="math notranslate nohighlight">\(k\)</span> points in the training set that are nearest to the test input <span class="math notranslate nohighlight">\(x\)</span>, and makes a decision based on the labels on those points.</p>
@@ -511,7 +522,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/af47e9602b7964b34a599fc8d8042d814bb962af653fd58c769c4e5bc9498a65.png" src="_images/af47e9602b7964b34a599fc8d8042d814bb962af653fd58c769c4e5bc9498a65.png" />
+<img alt="_images/dadf6989797f6495fa6d2d856a5a57e38c12e51bc338bb1456682174751cef3e.png" src="_images/dadf6989797f6495fa6d2d856a5a57e38c12e51bc338bb1456682174751cef3e.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -534,7 +545,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/deb333da0dfbc23af3eb83d2ea2dd3a3d25afbc40b07aedb6fc2a79346ecbfc1.png" src="_images/deb333da0dfbc23af3eb83d2ea2dd3a3d25afbc40b07aedb6fc2a79346ecbfc1.png" />
+<img alt="_images/d7be210f3e280f76c86ec3d8f7d297dcf489ece52cc522cec34c6b64907addb6.png" src="_images/d7be210f3e280f76c86ec3d8f7d297dcf489ece52cc522cec34c6b64907addb6.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -559,7 +570,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/86f0da6589c6af5e50fc17b31f07f2e8537bcbb0b85ac34f269c77800e5e1bbe.png" src="_images/86f0da6589c6af5e50fc17b31f07f2e8537bcbb0b85ac34f269c77800e5e1bbe.png" />
+<img alt="_images/86d28bc7f098839e52f45cb9dd27f596a982a7df8da74e9d288bf4c45f310e0f.png" src="_images/86d28bc7f098839e52f45cb9dd27f596a982a7df8da74e9d288bf4c45f310e0f.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -585,7 +596,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/6c06e4be33f20b26df67c3f8a2256d89948ef1c18015d046dc54d004a7ac196c.png" src="_images/6c06e4be33f20b26df67c3f8a2256d89948ef1c18015d046dc54d004a7ac196c.png" />
+<img alt="_images/946426dae630e27802e89545377eedb4e2d94ab63394abfc013f6566b5319eca.png" src="_images/946426dae630e27802e89545377eedb4e2d94ab63394abfc013f6566b5319eca.png" />
 </div>
 </div>
 <p>Note that <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors can do either <strong>hard</strong> or <strong>soft</strong> classification.</p>
@@ -624,7 +635,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/cafb6a02ec859bdbc40e6a34d050d4899fd22902b4d3b63e6d0db3d713ff37bb.png" src="_images/cafb6a02ec859bdbc40e6a34d050d4899fd22902b4d3b63e6d0db3d713ff37bb.png" />
+<img alt="_images/c0b0775f91165c0859603148e9e72691e93cc42f32586bbbfe0345b685294db7.png" src="_images/c0b0775f91165c0859603148e9e72691e93cc42f32586bbbfe0345b685294db7.png" />
 </div>
 </div>
 <p>Let’s observe how the complexity of the resulting model changes as we vary <span class="math notranslate nohighlight">\(k\)</span>.</p>
@@ -670,7 +681,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/f9fb5536589de32c89b869c928153c54215e86eb9d0f11052594109822ef5c0b.png" src="_images/f9fb5536589de32c89b869c928153c54215e86eb9d0f11052594109822ef5c0b.png" />
+<img alt="_images/0f2d6e36a1fd8eecbaac62482f0f10a41d6d5c0fe9d580a6a5691dcd689a0b4b.png" src="_images/0f2d6e36a1fd8eecbaac62482f0f10a41d6d5c0fe9d580a6a5691dcd689a0b4b.png" />
 </div>
 </div>
 <p>Notice how increasing <span class="math notranslate nohighlight">\(k\)</span> results in smoother decision boundaries.</p>
@@ -760,7 +771,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/cedb9f720b21a65f3356fe6bc4609fd181c0fa1fc700694687c48ddb6188ff69.png" src="_images/cedb9f720b21a65f3356fe6bc4609fd181c0fa1fc700694687c48ddb6188ff69.png" />
+<img alt="_images/986d204964e12936f6949be4ab4ca75eaf4f93083c5fb613486de338dcda9dce.png" src="_images/986d204964e12936f6949be4ab4ca75eaf4f93083c5fb613486de338dcda9dce.png" />
 </div>
 </div>
 <p>Let’s also ask how many points are within a slightly smaller distance, let’s say 0.99.</p>
@@ -802,7 +813,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/9faf73e7f18be607c6a19f22fdac8083a17e0cb85b4371aab2efd2a51b0c71d4.png" src="_images/9faf73e7f18be607c6a19f22fdac8083a17e0cb85b4371aab2efd2a51b0c71d4.png" />
+<img alt="_images/d005acf142b7691d4df53686bdea17fd73b428eb698e8676ff36383ad4e860c2.png" src="_images/d005acf142b7691d4df53686bdea17fd73b428eb698e8676ff36383ad4e860c2.png" />
 </div>
 </div>
 <p>Now, <span class="math notranslate nohighlight">\((1-\epsilon)^d\)</span> goes to 0 as <span class="math notranslate nohighlight">\(d \rightarrow \infty\)</span>.</p>
@@ -839,7 +850,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/5f70b5adda7c3744ec3db89b94296226b684d901eb4f1e7aea3d3a33a7d7aa23.png" src="_images/5f70b5adda7c3744ec3db89b94296226b684d901eb4f1e7aea3d3a33a7d7aa23.png" />
+<img alt="_images/72410821252b15d54cd1bb0f86390bdeb4ff727ce6a718874385dfe242a21a7c.png" src="_images/72410821252b15d54cd1bb0f86390bdeb4ff727ce6a718874385dfe242a21a7c.png" />
 </div>
 </div>
 <aside class="margin sidebar">
@@ -902,7 +913,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/75a07eb93ae89cc524c381c627e6cdec016c9d5d8227b23ee8ca48e39950f21d.png" src="_images/75a07eb93ae89cc524c381c627e6cdec016c9d5d8227b23ee8ca48e39950f21d.png" />
+<img alt="_images/a81989924ec347581b04cf795a8ae21ceeaa5d6c406e8150612d8c889aa9abb1.png" src="_images/a81989924ec347581b04cf795a8ae21ceeaa5d6c406e8150612d8c889aa9abb1.png" />
 </div>
 </div>
 <p>The average distance between points grows, but it seems that the minimum distance between points grows about as fast.</p>
@@ -924,7 +935,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/da8f7ace0024ab05593cd2e7748ae02f0ab957e8149cc01da20dbf5e27acad4d.png" src="_images/da8f7ace0024ab05593cd2e7748ae02f0ab957e8149cc01da20dbf5e27acad4d.png" />
+<img alt="_images/8b80e778b499f53b8cf680cb29d77a925ec184aacb8e3b7e97810df4a2f9bc6c.png" src="_images/8b80e778b499f53b8cf680cb29d77a925ec184aacb8e3b7e97810df4a2f9bc6c.png" />
 </div>
 </div>
 <p>This shows that, for any test point <span class="math notranslate nohighlight">\(x\)</span>, the distance to the <strong>closest</strong> point to <span class="math notranslate nohighlight">\(x\)</span>, relatively speaking, gets closer and closer to the <strong>average</strong> distance between points.</p>
@@ -1010,7 +1021,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/037db81e67dccaa672c2de750cd5694b6f463d99e4035f9301f19c70c3b0a702.png" src="_images/037db81e67dccaa672c2de750cd5694b6f463d99e4035f9301f19c70c3b0a702.png" />
+<img alt="_images/653c89d6bdbea239e42d6255bc2687bd9e87b7b9dd59389a5f584a024596c377.png" src="_images/653c89d6bdbea239e42d6255bc2687bd9e87b7b9dd59389a5f584a024596c377.png" />
 </div>
 </div>
 <p>Recall that we always want to test on data separate from our training data.</p>
@@ -1062,7 +1073,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/f54571f5ed3be4ce4fc3db66fdc06088dd23581dc8122b33f50d6279e984985b.png" src="_images/f54571f5ed3be4ce4fc3db66fdc06088dd23581dc8122b33f50d6279e984985b.png" />
+<img alt="_images/df288f342bfa09bebf87826f27d68e252aeea5999b9ce14653f22d9df95d51b3.png" src="_images/df288f342bfa09bebf87826f27d68e252aeea5999b9ce14653f22d9df95d51b3.png" />
 </div>
 </div>
 <p>For our first example, we will classify the points (in the two classes) using a k-nn classifier.</p>
@@ -1175,7 +1186,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/48a46cc694669d9738b5db1ca59a7714f514b53bcd3a73a2a983fd54a9bc6319.png" src="_images/48a46cc694669d9738b5db1ca59a7714f514b53bcd3a73a2a983fd54a9bc6319.png" />
+<img alt="_images/103438e670ce5cc5317c232eb7b06d97285a870e41e507cf7d92eb0ed38363f7.png" src="_images/103438e670ce5cc5317c232eb7b06d97285a870e41e507cf7d92eb0ed38363f7.png" />
 </div>
 </div>
 <p>Indeed, the Positive (red) points in the upper half of the test data are all classified incorrectly.</p>
@@ -1217,7 +1228,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/36dc80526e94072f5a7b83e9cfd95f92f76adb9be1990998bb1699210aa647e8.png" src="_images/36dc80526e94072f5a7b83e9cfd95f92f76adb9be1990998bb1699210aa647e8.png" />
+<img alt="_images/76b11f0b79fc49e83e2bee1999449920fb047254ac4168ca13c8e860e1cdd9d0.png" src="_images/76b11f0b79fc49e83e2bee1999449920fb047254ac4168ca13c8e860e1cdd9d0.png" />
 </div>
 </div>
 <p>For comparison purposes, let’s try <span class="math notranslate nohighlight">\(k\)</span> = 3.</p>
@@ -1250,7 +1261,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/15f2fb64dd7811ad14fc4ce7b2a1ee2eb3b4e79b085a1d4d54383b81176e7c80.png" src="_images/15f2fb64dd7811ad14fc4ce7b2a1ee2eb3b4e79b085a1d4d54383b81176e7c80.png" />
+<img alt="_images/af53a6b52e0295cfceaa5b48f0a4cb120517e22aa926456425b071a5b97ceb22.png" src="_images/af53a6b52e0295cfceaa5b48f0a4cb120517e22aa926456425b071a5b97ceb22.png" />
 </div>
 </div>
 <p>And let’s look at the same individual point as before:</p>
@@ -1291,7 +1302,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/8be09c5a5253847bc2a96d72e5e366359f751a8fabb3d9093652524b3556113a.png" src="_images/8be09c5a5253847bc2a96d72e5e366359f751a8fabb3d9093652524b3556113a.png" />
+<img alt="_images/eb2c63d109e2519c28acd9a8b11b35658b6fb753094783537decf102bafac700.png" src="_images/eb2c63d109e2519c28acd9a8b11b35658b6fb753094783537decf102bafac700.png" />
 </div>
 </div>
 <p>So how confident can we be that the test accuracy is 92% in general?</p>
@@ -1347,7 +1358,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/2a3f9b88b52caeb51fa241d41759ef3d24fc20aee321a381a628fb490e84184e.png" src="_images/2a3f9b88b52caeb51fa241d41759ef3d24fc20aee321a381a628fb490e84184e.png" />
+<img alt="_images/350df170077fe62dc34c734d2d854bcba35fcbe63a6f1598b32ba653c19756a6.png" src="_images/350df170077fe62dc34c734d2d854bcba35fcbe63a6f1598b32ba653c19756a6.png" />
 </div>
 </div>
 <p>Based on the generalization error (ie, accuracy on test (held-out) data), it looks like <span class="math notranslate nohighlight">\(k = 2\)</span> is the best choice.</p>
@@ -1411,7 +1422,7 @@ Unique labels: [0 1]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/cd4ca0ad0fb103394e236fcf8cefed0292557b85596658ffc2acbb2a6d6621db.png" src="_images/cd4ca0ad0fb103394e236fcf8cefed0292557b85596658ffc2acbb2a6d6621db.png" />
+<img alt="_images/cb0dd2b633363a852ab95070bab381a1f8d0eb9d69cb82dbd858709dac86f28a.png" src="_images/cb0dd2b633363a852ab95070bab381a1f8d0eb9d69cb82dbd858709dac86f28a.png" />
 </div>
 </div>
 </section>
@@ -1457,7 +1468,7 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/8617966da275f4ca783feeadd09005da574d4421009e25789007b1cf7a7b42dd.png" src="_images/8617966da275f4ca783feeadd09005da574d4421009e25789007b1cf7a7b42dd.png" />
+<img alt="_images/4093ce66bf79a968e4cbd537ba49e5409e9c9635c70bdf09b8f4f7fa6eafba72.png" src="_images/4093ce66bf79a968e4cbd537ba49e5409e9c9635c70bdf09b8f4f7fa6eafba72.png" />
 </div>
 </div>
 <p>Let’s visualize the <strong>decision boundary</strong> of the Decision Tree.</p>
@@ -1494,7 +1505,7 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/d423e7b4a0e979026fb95afad3c69d76a0e47458fa5aee5112940e834f185faf.png" src="_images/d423e7b4a0e979026fb95afad3c69d76a0e47458fa5aee5112940e834f185faf.png" />
+<img alt="_images/c23b9499e6c8889c26edf7bfb9e710fbb6e97645e00585efd218193f9fffd2c5.png" src="_images/c23b9499e6c8889c26edf7bfb9e710fbb6e97645e00585efd218193f9fffd2c5.png" />
 </div>
 </div>
 </section>
@@ -1528,7 +1539,21 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/e30ca63cfc2fabcdef35479f05d85520861b25b361c58f69fb903991f917211c.png" src="_images/e30ca63cfc2fabcdef35479f05d85520861b25b361c58f69fb903991f917211c.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">dot_data</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">dtc</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>                          <span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>                          <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span><span class="s1">&#39;Green&#39;</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>                          <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                          <span class="n">special_characters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">pydotplus</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">pydotplus</span><span class="o">.</span><span class="n">graph_from_dot_data</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># graph.write_pdf(&quot;dt.pdf&quot;) </span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pydotplus&#39;
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -1636,7 +1661,7 @@ DT accuracy on training data:  0.98
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max Test Accuracy at k = 13 with accuracy 0.969
 </pre></div>
 </div>
-<img alt="_images/0882afa462eeb3befa3c4296ec1cf066208752699e7c11139dd4ee6e16f75814.png" src="_images/0882afa462eeb3befa3c4296ec1cf066208752699e7c11139dd4ee6e16f75814.png" />
+<img alt="_images/610c909686fd459c46b7c50ccbaf982dec0e8c1c413a8f35d7367f2391f7cf30.png" src="_images/610c909686fd459c46b7c50ccbaf982dec0e8c1c413a8f35d7367f2391f7cf30.png" />
 </div>
 </div>
 <p>Now, it looks llike <span class="math notranslate nohighlight">\(k\)</span> = 13 is the best-performing value of the hyperparameter.</p>
@@ -1663,7 +1688,7 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/35201d51a722bc401742959d2929e7ee6bc918fa6de29d44e0cf42706e627090.png" src="_images/35201d51a722bc401742959d2929e7ee6bc918fa6de29d44e0cf42706e627090.png" />
+<img alt="_images/325a5f0b7f98598adf8a30969154e2ac59ad44541313d8ff9af1b525d66b9216.png" src="_images/325a5f0b7f98598adf8a30969154e2ac59ad44541313d8ff9af1b525d66b9216.png" />
 </div>
 </div>
 <p>It looks like <span class="math notranslate nohighlight">\(k\)</span> = 13 is a reasonable value,</p>
@@ -1711,7 +1736,7 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/09a3ea6a5d4e3dbc9e3095b8a830dd7289f5d9f91cb80f12e60f582dc1561960.png" src="_images/09a3ea6a5d4e3dbc9e3095b8a830dd7289f5d9f91cb80f12e60f582dc1561960.png" />
+<img alt="_images/c3ecad0f89babb910ae7f4a36c4fdea2a6a6729717ce672da697b15495647075.png" src="_images/c3ecad0f89babb910ae7f4a36c4fdea2a6a6729717ce672da697b15495647075.png" />
 </div>
 </div>
 <p>There are a few artifacts, but overall this looks like a reasonably smooth set of decision boundaries.</p>
@@ -1784,7 +1809,7 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/de9bc71c77ee1afd0c83b9ce89c6fa50ce60b8c7d39976a448f17795641f8d95.png" src="_images/de9bc71c77ee1afd0c83b9ce89c6fa50ce60b8c7d39976a448f17795641f8d95.png" />
+<img alt="_images/e24628128cfaf47ac76749af2f171d2a0dc400246cbec70d7b24464c3b950503.png" src="_images/e24628128cfaf47ac76749af2f171d2a0dc400246cbec70d7b24464c3b950503.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1805,7 +1830,7 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/ae49bdd31fc2a6143a29e3542812c01906158f4dd3bb6b7ea9b5a4c8ecf11ac4.png" src="_images/ae49bdd31fc2a6143a29e3542812c01906158f4dd3bb6b7ea9b5a4c8ecf11ac4.png" />
+<img alt="_images/60c012261abb11b038de0f0ffb602fef2c56ce44ceed1ac21f884d802e36a289.png" src="_images/60c012261abb11b038de0f0ffb602fef2c56ce44ceed1ac21f884d802e36a289.png" />
 </div>
 </div>
 <p>It looks like 9 leaf nodes is appropriate, but we would be justified to choose 4 or 13 as well.</p>
@@ -1845,7 +1870,7 @@ DT accuracy on training data:  0.98
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/20e8b0d5ecac2338671dc6f3f22e76f1717fc478aa170635c2e2a29de0817a24.png" src="_images/20e8b0d5ecac2338671dc6f3f22e76f1717fc478aa170635c2e2a29de0817a24.png" />
+<img alt="_images/68ddda02ab1acfb3943ee84f893542317308d4e99bb3604d2ba75b3f785817bc.png" src="_images/68ddda02ab1acfb3943ee84f893542317308d4e99bb3604d2ba75b3f785817bc.png" />
 </div>
 </div>
 </section>
@@ -1911,10 +1936,10 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
 </pre></div>
 </div>
-<img alt="_images/bcb947dd09c3d2691eb1d28dacb0edd310120529734164a296f64fb20eb85b87.png" src="_images/bcb947dd09c3d2691eb1d28dacb0edd310120529734164a296f64fb20eb85b87.png" />
+<img alt="_images/2cf5fa8c7953087d20ccfd157b8c666bb1ce035d20939905c93c434cceb13c93.png" src="_images/2cf5fa8c7953087d20ccfd157b8c666bb1ce035d20939905c93c434cceb13c93.png" />
 </div>
 </div>
 <p>It is easier to visualize if we blur the pixels a little bit.</p>
@@ -1934,7 +1959,7 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/549dfae8cfd04142bc024d8822c29d5bd7b7a55150c441fa79449d1e642739bc.png" src="_images/549dfae8cfd04142bc024d8822c29d5bd7b7a55150c441fa79449d1e642739bc.png" />
+<img alt="_images/cdea55d84fc6ea16944e7c604b279a448b576ac4600017abfb4bfa2c46e85bec.png" src="_images/cdea55d84fc6ea16944e7c604b279a448b576ac4600017abfb4bfa2c46e85bec.png" />
 </div>
 </div>
 <p>Here are some more samples from the dataset:</p>
@@ -1956,10 +1981,10 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/219c953497ffcaea0fb3484973f943015ee4895ad453eab47a86c04325565e07.png" src="_images/219c953497ffcaea0fb3484973f943015ee4895ad453eab47a86c04325565e07.png" />
-<img alt="_images/d3fa2db197ea2b852a6fbb992dc6bfcf61b84b4123233f3bcf54fa860bf9a18b.png" src="_images/d3fa2db197ea2b852a6fbb992dc6bfcf61b84b4123233f3bcf54fa860bf9a18b.png" />
-<img alt="_images/aef4e9d7b89f6aab0f01be9f8562268f104df6be07206db665691704bcf34736.png" src="_images/aef4e9d7b89f6aab0f01be9f8562268f104df6be07206db665691704bcf34736.png" />
-<img alt="_images/be006775ac6999d67c2c1c730263e831ad24b2f1e934d282c38aff635bf8dd97.png" src="_images/be006775ac6999d67c2c1c730263e831ad24b2f1e934d282c38aff635bf8dd97.png" />
+<img alt="_images/8e43b511163ec5b849b0fe82a8879bb113a88ba58fae2ef8c794ee6818b7e9f7.png" src="_images/8e43b511163ec5b849b0fe82a8879bb113a88ba58fae2ef8c794ee6818b7e9f7.png" />
+<img alt="_images/e2e31257beefd02f1d88379b39d7eb660c2629cd8305f6bc7b24a6bce0dbbc94.png" src="_images/e2e31257beefd02f1d88379b39d7eb660c2629cd8305f6bc7b24a6bce0dbbc94.png" />
+<img alt="_images/47cf33a695df6e5542b426707eaf6259a4a0fbd74eb696220540a056cae498a7.png" src="_images/47cf33a695df6e5542b426707eaf6259a4a0fbd74eb696220540a056cae498a7.png" />
+<img alt="_images/af071f75b37b8a41cd1e74e21ebf1604eef913284603ac13b8ed8024a192e941.png" src="_images/af071f75b37b8a41cd1e74e21ebf1604eef913284603ac13b8ed8024a192e941.png" />
 </div>
 </div>
 <p>Although this is an 8 <span class="math notranslate nohighlight">\(\times\)</span> 8 image, we can just treat it as a vector of length 64.</p>
@@ -2023,7 +2048,7 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/883e302b0d1be2aba9ef56f139e0e40311163cc8625e9d533850c0b75dea1c7f.png" src="_images/883e302b0d1be2aba9ef56f139e0e40311163cc8625e9d533850c0b75dea1c7f.png" />
+<img alt="_images/39893d9c8e093c942522259d04d497f49d2c9946bd8139bb6d576282de0b4cca.png" src="_images/39893d9c8e093c942522259d04d497f49d2c9946bd8139bb6d576282de0b4cca.png" />
 </div>
 </div>
 <p>These plots illustrate important principles:</p>
@@ -2075,9 +2100,9 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/859c76a639c4bd1893b9a3cebe5af73990199b293a7ffa183e353d5e2d08706e.png" src="_images/859c76a639c4bd1893b9a3cebe5af73990199b293a7ffa183e353d5e2d08706e.png" />
-<img alt="_images/ecc4e18b72c1b9ce2e3f4e020bcba3fb9fbc6fd3f3f8fee264f1d852eca91f01.png" src="_images/ecc4e18b72c1b9ce2e3f4e020bcba3fb9fbc6fd3f3f8fee264f1d852eca91f01.png" />
-<img alt="_images/eb78ba886e4b68d43673e688481f44ce9358552ed782bd9bdb2ea699449497d8.png" src="_images/eb78ba886e4b68d43673e688481f44ce9358552ed782bd9bdb2ea699449497d8.png" />
+<img alt="_images/0ec179ef2568c32ab12844344c55415bdddcb0dbabc504c7d7be5f31d703df8c.png" src="_images/0ec179ef2568c32ab12844344c55415bdddcb0dbabc504c7d7be5f31d703df8c.png" />
+<img alt="_images/fc68f55815d10dd2562ac825bb89f5347e687fb766b4dcde071213d00504a891.png" src="_images/fc68f55815d10dd2562ac825bb89f5347e687fb766b4dcde071213d00504a891.png" />
+<img alt="_images/9aca7048f6fab56b257531c9d5d4329bbb3ce962c9581cbd7fa9237b79a2fb06.png" src="_images/9aca7048f6fab56b257531c9d5d4329bbb3ce962c9581cbd7fa9237b79a2fb06.png" />
 </div>
 </div>
 </section>
@@ -2109,11 +2134,10 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="14-Classification-I-Decision-Trees.html"
@@ -2133,10 +2157,7 @@ Unique labels: [0 1 2 3 4 5 6 7 8 9]
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -2217,8 +2238,8 @@ By Mark Crovella and Tom Gardos
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>

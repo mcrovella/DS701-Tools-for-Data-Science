@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/DS701-icon.jpg" class="logo__image only-light" alt="Tools for Data Science - Home"/>
+    <script>document.write(`<img src="_static/DS701-icon.jpg" class="logo__image only-dark" alt="Tools for Data Science - Home"/>`);</script>
   
   
 </a></div>
@@ -327,10 +338,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -338,7 +349,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -376,6 +387,8 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-network-applications">Convolutional Network Applications</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional Neural Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-invariant-to-shift">Classification Invariant to Shift</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-segmentation-invariant-to-shift">Image Segmentation Invariant to Shift</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-1-d-input-data">Example with 1-D Input Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolution">2D Convolution</a></li>
 </ul>
@@ -483,7 +496,7 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/32a21aa18bea69068fa564b9f072c12888571566da256af03bfe2b7f96f7df78.png" src="_images/32a21aa18bea69068fa564b9f072c12888571566da256af03bfe2b7f96f7df78.png" />
+<img alt="_images/014bfbd7d80ababe653adde102b4f3f372cd7b7fe8618732ca8af84ae0d5a639.png" src="_images/014bfbd7d80ababe653adde102b4f3f372cd7b7fe8618732ca8af84ae0d5a639.png" />
 </div>
 </div>
 <p>Say we have a training data set of 12 points and we want to use a <em>batch size</em> of 3.</p>
@@ -513,7 +526,7 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/133e453c4296bc7708eb417f5253f694e2a31c3034b67b6af9b3765175218638.png" src="_images/133e453c4296bc7708eb417f5253f694e2a31c3034b67b6af9b3765175218638.png" />
+<img alt="_images/819e1b8fe50b4b226f726b6e7f27204c13d22004b551169c6bd6336fc7e74b03.png" src="_images/819e1b8fe50b4b226f726b6e7f27204c13d22004b551169c6bd6336fc7e74b03.png" />
 </div>
 </div>
 <p>We can resample again to create a different set of batches.</p>
@@ -541,7 +554,7 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/11507b54b3cdfeef35ae5c191063f320921673efb54c8f12d51e2fbeee73ff8e.png" src="_images/11507b54b3cdfeef35ae5c191063f320921673efb54c8f12d51e2fbeee73ff8e.png" />
+<img alt="_images/9f3cbbf1b857f7008adaedec53960a9fe5b47525730eda81bc054266b3a1305d.png" src="_images/9f3cbbf1b857f7008adaedec53960a9fe5b47525730eda81bc054266b3a1305d.png" />
 </div>
 </div>
 <p>Then for every training iteration, you calculate the forward pass and backward pass loss with only the data from the batch.</p>
@@ -569,7 +582,7 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/eb7313da4329f94e76a3a32aad37e4883da7eba117eaf9984c28f58582017155.png" src="_images/eb7313da4329f94e76a3a32aad37e4883da7eba117eaf9984c28f58582017155.png" />
+<img alt="_images/d1474d4a3cdec5289c0e9fcbc068abcdba99751b3a49ae09b69849f4b55db2f1.png" src="_images/d1474d4a3cdec5289c0e9fcbc068abcdba99751b3a49ae09b69849f4b55db2f1.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -595,7 +608,7 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/d94220924af6ec7a1182d2704b650af0c0eaf3804c8de5e3f3c3cda0780bba2a.png" src="_images/d94220924af6ec7a1182d2704b650af0c0eaf3804c8de5e3f3c3cda0780bba2a.png" />
+<img alt="_images/309a85dc37b37aa7d0ebf8a118c53a66b3aa93d6632c3ceb759aa94f31b68cfa.png" src="_images/309a85dc37b37aa7d0ebf8a118c53a66b3aa93d6632c3ceb759aa94f31b68cfa.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -621,7 +634,7 @@ L_t = \sum_{i \in \mathcal{B}_t} \ell_i = \sum_{i \in \mathcal{B}_t} \left( y - 
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/2238ee8219d0e59808cb998917fbd5826ccc540c43c57fc24fc5cd8e7b6da680.png" src="_images/2238ee8219d0e59808cb998917fbd5826ccc540c43c57fc24fc5cd8e7b6da680.png" />
+<img alt="_images/7e1409b676eb6d0b0ffb0a7693549d7e92c9d14d32feb85d592d05a04a728399.png" src="_images/7e1409b676eb6d0b0ffb0a7693549d7e92c9d14d32feb85d592d05a04a728399.png" />
 </div>
 </div>
 <section id="advantages-of-stochastic-gradient-descent">
@@ -751,7 +764,7 @@ get a batch and visualize it.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7de675063a2630973823f4a814ad2f99e0788edf7087add00a60257780c8516f.png" src="_images/7de675063a2630973823f4a814ad2f99e0788edf7087add00a60257780c8516f.png" />
+<img alt="_images/aa8c103d2e8ac115021b01c33887ef2bfc1721d7bb48545b1482be09c479f678.png" src="_images/aa8c103d2e8ac115021b01c33887ef2bfc1721d7bb48545b1482be09c479f678.png" />
 </div>
 </div>
 <p>We can display the training labels for the image as well.</p>
@@ -797,91 +810,91 @@ get a batch and visualize it.</p>
   <tbody>
     <tr>
       <th>0</th>
+      <td>4 - four</td>
       <td>0 - zero</td>
-      <td>6 - six</td>
-      <td>7 - seven</td>
       <td>1 - one</td>
-      <td>5 - five</td>
-      <td>5 - five</td>
-      <td>2 - two</td>
+      <td>9 - nine</td>
+      <td>7 - seven</td>
+      <td>9 - nine</td>
       <td>6 - six</td>
+      <td>2 - two</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>6 - six</td>
-      <td>9 - nine</td>
-      <td>7 - seven</td>
-      <td>3 - three</td>
-      <td>9 - nine</td>
-      <td>0 - zero</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
       <td>5 - five</td>
       <td>2 - two</td>
+      <td>4 - four</td>
+      <td>9 - nine</td>
+      <td>5 - five</td>
+      <td>0 - zero</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>5 - five</td>
       <td>3 - three</td>
-      <td>5 - five</td>
-      <td>4 - four</td>
+      <td>2 - two</td>
       <td>5 - five</td>
       <td>7 - seven</td>
-      <td>8 - eight</td>
-      <td>7 - seven</td>
-      <td>6 - six</td>
+      <td>3 - three</td>
+      <td>1 - one</td>
+      <td>5 - five</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>8 - eight</td>
-      <td>1 - one</td>
-      <td>1 - one</td>
-      <td>3 - three</td>
       <td>5 - five</td>
-      <td>0 - zero</td>
-      <td>0 - zero</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
+      <td>8 - eight</td>
       <td>7 - seven</td>
+      <td>8 - eight</td>
+      <td>5 - five</td>
+      <td>8 - eight</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5 - five</td>
+      <td>1 - one</td>
       <td>2 - two</td>
-      <td>7 - seven</td>
-      <td>7 - seven</td>
-      <td>8 - eight</td>
-      <td>6 - six</td>
-      <td>7 - seven</td>
+      <td>9 - nine</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
       <td>5 - five</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
     </tr>
     <tr>
       <th>5</th>
+      <td>0 - zero</td>
+      <td>9 - nine</td>
       <td>7 - seven</td>
-      <td>6 - six</td>
-      <td>3 - three</td>
-      <td>2 - two</td>
-      <td>6 - six</td>
-      <td>7 - seven</td>
-      <td>3 - three</td>
       <td>5 - five</td>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>9 - nine</td>
+      <td>0 - zero</td>
     </tr>
     <tr>
       <th>6</th>
+      <td>1 - one</td>
+      <td>9 - nine</td>
       <td>4 - four</td>
-      <td>3 - three</td>
-      <td>7 - seven</td>
-      <td>6 - six</td>
-      <td>4 - four</td>
-      <td>3 - three</td>
       <td>0 - zero</td>
-      <td>5 - five</td>
+      <td>3 - three</td>
+      <td>9 - nine</td>
+      <td>2 - two</td>
+      <td>7 - seven</td>
     </tr>
     <tr>
       <th>7</th>
+      <td>5 - five</td>
+      <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>7 - seven</td>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>3 - three</td>
       <td>0 - zero</td>
-      <td>5 - five</td>
-      <td>2 - two</td>
-      <td>9 - nine</td>
-      <td>9 - nine</td>
-      <td>9 - nine</td>
-      <td>5 - five</td>
-      <td>9 - nine</td>
     </tr>
   </tbody>
 </table></div></div>
@@ -936,11 +949,23 @@ get a batch and visualize it.</p>
 </ul>
 </li>
 </ul>
-<p>Solution: Convolutional Neural Networks</p>
+<!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+<section id="classification-invariant-to-shift">
+<h3>Classification Invariant to Shift<a class="headerlink" href="#classification-invariant-to-shift" title="Permalink to this heading">#</a></h3>
+<center>    
+<img alt="_images/L25-shift-img-class.png" src="_images/L25-shift-img-class.png" />
+</center> <!-- Image Credit "https://udlbook.github.io/udlbook/"-->
+</section>
+<section id="image-segmentation-invariant-to-shift">
+<h3>Image Segmentation Invariant to Shift<a class="headerlink" href="#image-segmentation-invariant-to-shift" title="Permalink to this heading">#</a></h3>
+<center>    
+<img alt="_images/L25-shift-seg.png" src="_images/L25-shift-seg.png" />
+</center> <p>Solution: Convolutional Neural Networks</p>
 <ul class="simple">
 <li><p>Parameters only look at local data regions</p></li>
 <li><p>Shares parameters across image or signal</p></li>
 </ul>
+</section>
 <section id="example-with-1-d-input-data">
 <h3>Example with 1-D Input Data<a class="headerlink" href="#example-with-1-d-input-data" title="Permalink to this heading">#</a></h3>
 <p>In <em>convolutional neural networks</em>, we define a set of weights that we move across
@@ -1048,6 +1073,86 @@ convolution as shown in the following illustration.</p>
 </div>
 </div>
 </div>
+<p>Where</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CLASS</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> 
+                      <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding_mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Layer</p></th>
+<th class="head"><p>Kernel Size</p></th>
+<th class="head"><p>Stride</p></th>
+<th class="head"><p>Input Shape</p></th>
+<th class="head"><p>Input Channels</p></th>
+<th class="head"><p>Output Channels</p></th>
+<th class="head"><p>Output Shape</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Conv2D/ReLU</p></td>
+<td><p>(3x3)</p></td>
+<td><p>1</p></td>
+<td><p>28x28</p></td>
+<td><p>1</p></td>
+<td><p>32</p></td>
+<td><p>26x26</p></td>
+</tr>
+<tr class="row-odd"><td><p>Conv2D/ReLU</p></td>
+<td><p>(3x3)</p></td>
+<td><p>1</p></td>
+<td><p>26x26</p></td>
+<td><p>32</p></td>
+<td><p>64</p></td>
+<td><p>24x24</p></td>
+</tr>
+<tr class="row-even"><td><p>Max_pool2d</p></td>
+<td><p>(2x2)</p></td>
+<td><p>2</p></td>
+<td><p>24x24</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>12x12</p></td>
+</tr>
+<tr class="row-odd"><td><p>Flatten</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>12x12</p></td>
+<td><p>64</p></td>
+<td><p>1</p></td>
+<td><p>9216x1</p></td>
+</tr>
+<tr class="row-even"><td><p>FC/ReLU</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>9216x1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>128x1</p></td>
+</tr>
+<tr class="row-odd"><td><p>FC Linear</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>128x1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>10x1</p></td>
+</tr>
+<tr class="row-even"><td><p>Soft Max</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>10x1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>10x1</p></td>
+</tr>
+</tbody>
+</table>
+<!-- Image Credit "https://alexlenail.me/NN-SVG/AlexNet.html"-->
+<center>    
+<img alt="_images/L25-mnist-cnn2.svg" src="_images/L25-mnist-cnn2.svg" /></center> 
+<hr class="docutils" />
+<p><a class="reference external" href="https://alexlenail.me/NN-SVG/AlexNet.html">NN-SVG</a></p>
 <section id="define-a-loss-function-and-optimizer">
 <h3>3. Define a Loss function and optimizer<a class="headerlink" href="#define-a-loss-function-and-optimizer" title="Permalink to this heading">#</a></h3>
 <p>We’ll use a Classification Cross-Entropy loss and SGD with momentum.</p>
@@ -1067,7 +1172,7 @@ convolution as shown in the following illustration.</p>
 <li><p>Popular loss function for multi-class classification that measures the <em>dissimilarity</em> between the predicted class log probability <span class="math notranslate nohighlight">\(\log(p_i)\)</span> and the true class <span class="math notranslate nohighlight">\(y_i\)</span>.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[ - \sum_i y_i \log(p_i)) \]</div>
+\[ - \sum_i y_i \log(p_i) \]</div>
 <p>See for example <a class="reference external" href="https://machinelearningmastery.com/cross-entropy-for-machine-learning/">here</a> for more information.</p>
 </section>
 <section id="momentum">
@@ -1126,16 +1231,16 @@ w_{t+1} = w_t - \alpha m_{t+1}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Epoch #, Iteration #] loss
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   100] loss: 0.112
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   100] loss: 0.109
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   200] loss: 0.083
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   200] loss: 0.064
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   300] loss: 0.034
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   300] loss: 0.025
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   400] loss: 0.023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   400] loss: 0.021
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   500] loss: 0.020
@@ -1144,7 +1249,7 @@ w_{t+1} = w_t - \alpha m_{t+1}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   600] loss: 0.018
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   700] loss: 0.018
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   700] loss: 0.016
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1,   800] loss: 0.015
@@ -1159,37 +1264,37 @@ w_{t+1} = w_t - \alpha m_{t+1}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   200] loss: 0.013
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   300] loss: 0.013
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   400] loss: 0.012
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   500] loss: 0.010
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   600] loss: 0.011
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   700] loss: 0.010
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   800] loss: 0.010
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2,   900] loss: 0.009
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished Training
-</pre></div>
-</div>
-</div>
-</div>
-<p>Not necessary, but we save the network to storage.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;./cifar_net.pth&#39;</span>
-<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">PATH</span><span class="p">)</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="c1"># print statistics</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/torch/_tensor.py:487,</span> in <span class="ni">Tensor.backward</span><span class="nt">(self, gradient, retain_graph, create_graph, inputs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="k">if</span> <span class="n">has_torch_function_unary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">479</span>         <span class="n">Tensor</span><span class="o">.</span><span class="n">backward</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span>         <span class="p">(</span><span class="bp">self</span><span class="p">,),</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span>         <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">486</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">487</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">488</span>     <span class="bp">self</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="n">retain_graph</span><span class="p">,</span> <span class="n">create_graph</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span>
+<span class="g g-Whitespace">    </span><span class="mi">489</span> <span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/py39_jb/lib/python3.9/site-packages/torch/autograd/__init__.py:200,</span> in <span class="ni">backward</span><span class="nt">(tensors, grad_tensors, retain_graph, create_graph, grad_variables, inputs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span>     <span class="n">retain_graph</span> <span class="o">=</span> <span class="n">create_graph</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="c1"># The reason we repeat same the comment below is that</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span> <span class="c1"># some Python versions print out the first line of a multi-line function</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span> <span class="c1"># calls in the traceback and some print out the last line</span>
+<span class="ne">--&gt; </span><span class="mi">200</span> <span class="n">Variable</span><span class="o">.</span><span class="n">_execution_engine</span><span class="o">.</span><span class="n">run_backward</span><span class="p">(</span>  <span class="c1"># Calls into the C++ engine to run the backward pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>     <span class="n">tensors</span><span class="p">,</span> <span class="n">grad_tensors_</span><span class="p">,</span> <span class="n">retain_graph</span><span class="p">,</span> <span class="n">create_graph</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span>     <span class="n">allow_unreachable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">accumulate_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -1207,7 +1312,7 @@ w_{t+1} = w_t - \alpha m_{t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4d72428646665e1876449d7d1715ce3049fbe707720bffe699137a69a614fca9.png" src="_images/4d72428646665e1876449d7d1715ce3049fbe707720bffe699137a69a614fca9.png" />
+<img alt="_images/2c418243ad0fa20b3bd7406643360aeb476fd3d1b7bc5ab312df067a332955cf.png" src="_images/2c418243ad0fa20b3bd7406643360aeb476fd3d1b7bc5ab312df067a332955cf.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1252,109 +1357,94 @@ w_{t+1} = w_t - \alpha m_{t+1}
   <tbody>
     <tr>
       <th>0</th>
-      <td>8 - eight</td>
+      <td>6 - six</td>
+      <td>4 - four</td>
+      <td>7 - seven</td>
+      <td>4 - four</td>
+      <td>5 - five</td>
+      <td>7 - seven</td>
       <td>7 - seven</td>
       <td>5 - five</td>
-      <td>9 - nine</td>
-      <td>2 - two</td>
-      <td>9 - nine</td>
-      <td>0 - zero</td>
-      <td>1 - one</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>1 - one</td>
       <td>9 - nine</td>
-      <td>1 - one</td>
-      <td>1 - one</td>
+      <td>8 - eight</td>
+      <td>0 - zero</td>
+      <td>4 - four</td>
+      <td>9 - nine</td>
+      <td>0 - zero</td>
       <td>7 - seven</td>
-      <td>4 - four</td>
-      <td>6 - six</td>
-      <td>3 - three</td>
-      <td>4 - four</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>8 - eight</td>
-      <td>6 - six</td>
-      <td>4 - four</td>
-      <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>7 - seven</td>
+      <td>3 - three</td>
       <td>3 - three</td>
       <td>5 - five</td>
-      <td>7 - seven</td>
-      <td>6 - six</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0 - zero</td>
-      <td>1 - one</td>
-      <td>1 - one</td>
-      <td>1 - one</td>
-      <td>6 - six</td>
-      <td>2 - two</td>
-      <td>1 - one</td>
       <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>2 - two</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3 - three</td>
-      <td>6 - six</td>
       <td>4 - four</td>
-      <td>6 - six</td>
+      <td>3 - three</td>
+      <td>5 - five</td>
+      <td>2 - two</td>
       <td>0 - zero</td>
-      <td>7 - seven</td>
-      <td>8 - eight</td>
-      <td>0 - zero</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>1 - one</td>
-      <td>0 - zero</td>
       <td>2 - two</td>
-      <td>0 - zero</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
+      <td>9 - nine</td>
+      <td>5 - five</td>
       <td>7 - seven</td>
+      <td>6 - six</td>
       <td>1 - one</td>
-      <td>8 - eight</td>
-      <td>8 - eight</td>
     </tr>
     <tr>
       <th>6</th>
+      <td>5 - five</td>
+      <td>5 - five</td>
+      <td>4 - four</td>
+      <td>1 - one</td>
       <td>1 - one</td>
       <td>9 - nine</td>
-      <td>3 - three</td>
+      <td>2 - two</td>
       <td>8 - eight</td>
-      <td>5 - five</td>
-      <td>5 - five</td>
-      <td>4 - four</td>
-      <td>4 - four</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>9 - nine</td>
-      <td>9 - nine</td>
-      <td>3 - three</td>
-      <td>9 - nine</td>
-      <td>8 - eight</td>
-      <td>8 - eight</td>
+      <td>5 - five</td>
+      <td>0 - zero</td>
+      <td>4 - four</td>
+      <td>6 - six</td>
+      <td>4 - four</td>
+      <td>2 - two</td>
       <td>1 - one</td>
-      <td>8 - eight</td>
+      <td>6 - six</td>
     </tr>
   </tbody>
 </table></div></div>
-</div>
-<p>We’ll load the model back from storage, which is not strictly necessary since it
-is still in memory, but for illustration purposes.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
-<span class="n">net</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">PATH</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;All keys matched successfully&gt;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Let’s run inference (forward pass) on the model to get numeric outputs.</p>
 <div class="cell docutils container">
@@ -1417,90 +1507,90 @@ associated with that index.</p>
     <tr>
       <th>0</th>
       <td>6 - six</td>
-      <td>1 - one</td>
+      <td>4 - four</td>
+      <td>7 - seven</td>
+      <td>4 - four</td>
       <td>5 - five</td>
-      <td>9 - nine</td>
-      <td>2 - two</td>
-      <td>9 - nine</td>
+      <td>7 - seven</td>
+      <td>7 - seven</td>
       <td>5 - five</td>
-      <td>1 - one</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>1 - one</td>
       <td>9 - nine</td>
-      <td>1 - one</td>
-      <td>1 - one</td>
+      <td>8 - eight</td>
+      <td>0 - zero</td>
+      <td>4 - four</td>
+      <td>9 - nine</td>
+      <td>0 - zero</td>
       <td>7 - seven</td>
-      <td>4 - four</td>
-      <td>6 - six</td>
-      <td>3 - three</td>
-      <td>4 - four</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>8 - eight</td>
-      <td>6 - six</td>
-      <td>4 - four</td>
-      <td>6 - six</td>
+      <td>1 - one</td>
+      <td>1 - one</td>
+      <td>7 - seven</td>
+      <td>3 - three</td>
       <td>3 - three</td>
       <td>5 - five</td>
-      <td>7 - seven</td>
-      <td>6 - six</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>3 - three</td>
-      <td>1 - one</td>
-      <td>1 - one</td>
-      <td>1 - one</td>
-      <td>6 - six</td>
-      <td>2 - two</td>
-      <td>1 - one</td>
       <td>8 - eight</td>
+      <td>1 - one</td>
+      <td>9 - nine</td>
+      <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>2 - two</td>
+      <td>7 - seven</td>
+      <td>2 - two</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3 - three</td>
-      <td>6 - six</td>
       <td>4 - four</td>
-      <td>6 - six</td>
+      <td>3 - three</td>
+      <td>5 - five</td>
+      <td>2 - two</td>
       <td>0 - zero</td>
-      <td>7 - seven</td>
-      <td>8 - eight</td>
-      <td>0 - zero</td>
+      <td>1 - one</td>
+      <td>2 - two</td>
+      <td>1 - one</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>1 - one</td>
-      <td>0 - zero</td>
       <td>2 - two</td>
-      <td>0 - zero</td>
+      <td>2 - two</td>
+      <td>2 - two</td>
+      <td>9 - nine</td>
+      <td>5 - five</td>
       <td>7 - seven</td>
+      <td>6 - six</td>
       <td>1 - one</td>
-      <td>8 - eight</td>
-      <td>8 - eight</td>
     </tr>
     <tr>
       <th>6</th>
+      <td>5 - five</td>
+      <td>5 - five</td>
+      <td>4 - four</td>
+      <td>1 - one</td>
       <td>1 - one</td>
       <td>9 - nine</td>
-      <td>3 - three</td>
+      <td>2 - two</td>
       <td>8 - eight</td>
-      <td>5 - five</td>
-      <td>5 - five</td>
-      <td>4 - four</td>
-      <td>4 - four</td>
     </tr>
     <tr>
       <th>7</th>
+      <td>5 - five</td>
+      <td>0 - zero</td>
       <td>4 - four</td>
-      <td>9 - nine</td>
-      <td>3 - three</td>
-      <td>9 - nine</td>
-      <td>8 - eight</td>
-      <td>8 - eight</td>
+      <td>6 - six</td>
+      <td>4 - four</td>
+      <td>2 - two</td>
       <td>1 - one</td>
-      <td>8 - eight</td>
+      <td>6 - six</td>
     </tr>
   </tbody>
 </table></div></div>
@@ -1526,7 +1616,7 @@ associated with that index.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of the network on the 10000 test images: 95 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of the network on the 10000 test images: 96 %
 </pre></div>
 </div>
 </div>
@@ -1559,16 +1649,16 @@ associated with that index.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for class: 0 - zero is 97.8 %
-Accuracy for class: 1 - one is 98.3 %
-Accuracy for class: 2 - two is 94.5 %
-Accuracy for class: 3 - three is 94.7 %
-Accuracy for class: 4 - four is 97.7 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for class: 0 - zero is 98.2 %
+Accuracy for class: 1 - one is 98.9 %
+Accuracy for class: 2 - two is 94.7 %
+Accuracy for class: 3 - three is 98.1 %
+Accuracy for class: 4 - four is 97.5 %
 Accuracy for class: 5 - five is 96.0 %
-Accuracy for class: 6 - six is 96.0 %
-Accuracy for class: 7 - seven is 91.4 %
-Accuracy for class: 8 - eight is 92.2 %
-Accuracy for class: 9 - nine is 94.6 %
+Accuracy for class: 6 - six is 97.8 %
+Accuracy for class: 7 - seven is 96.0 %
+Accuracy for class: 8 - eight is 94.3 %
+Accuracy for class: 9 - nine is 94.0 %
 </pre></div>
 </div>
 </div>
@@ -1607,11 +1697,10 @@ Accuracy for class: 9 - nine is 94.6 %
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="24-NN-II-Backprop.html"
@@ -1631,10 +1720,7 @@ Accuracy for class: 9 - nine is 94.6 %
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1660,6 +1746,8 @@ Accuracy for class: 9 - nine is 94.6 %
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-network-applications">Convolutional Network Applications</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional Neural Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-invariant-to-shift">Classification Invariant to Shift</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-segmentation-invariant-to-shift">Image Segmentation Invariant to Shift</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-1-d-input-data">Example with 1-D Input Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolution">2D Convolution</a></li>
 </ul>
@@ -1721,8 +1809,8 @@ By Mark Crovella and Tom Gardos
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>
