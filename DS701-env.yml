@@ -1,0 +1,21 @@
+name: DS701-env
+channels:
+  - defaults
+dependencies:
+  - python
+  - notebook
+  - conda-forge::widgetsnbextension
+  - conda-forge::ipywidgets
+  - conda-forge::jupyter-book
+  - numpy
+  - matplotlib
+  - scipy
+  - pandas
+  - conda-forge::seaborn
+  - conda-forge::scikit-learn
+  - networkx
+  - conda-forge::qrcode
+  - pip
+  - pip:
+    - jupyterlab-rise
+    - jupyterlab-hidecell
